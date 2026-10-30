@@ -145,7 +145,6 @@ vite.config.ts.timestamp-*
 # Astro generated types
 .astro/
 
-# Generated Pages upload. The root index is built, not committed.
 /site/
 /.site.build/
 
