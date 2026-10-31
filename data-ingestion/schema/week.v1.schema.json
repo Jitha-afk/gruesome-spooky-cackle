@@ -195,7 +195,7 @@
         "rank": {
           "type": "integer",
           "minimum": 1,
-          "description": "1 is the most covered. Keep ranks unique. The checker warns on a repeat."
+          "description": "1 is the most covered. Number the themes 1 to n, once each. The page numbers them by position, so a gap or a repeat still renders 1 to n. The checker warns."
         },
         "key": {
           "type": "string",

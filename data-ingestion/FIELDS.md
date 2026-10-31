@@ -24,6 +24,11 @@ Unknown fields are allowed and ignored, so the pipeline can capture a field befo
 - **Counts are JSON numbers:** whole numbers, 0 or more.
   - A string like `"1,234"` or `"1.2K"` fails the build.
   - A negative count is a warning, and charts treat it as 0.
+  - A fraction, like `12.5`, is a warning. The page prints it as written.
+  - Headline numbers of 100,000 or more print short, for example `1.2M`.
+- **Characters are counted as a reader sees them.** An emoji or an accented letter is one character, and a cut label never splits one.
+- **Long words.** A word longer than 40 characters, usually a raw URL, breaks mid-word on phones. The checker warns. Put links in `url` or `advisory_url` instead of the text.
+- **Encoding.** Save files as UTF-8 without a byte-order mark. The build skips a mark, and the checker warns about it.
 - **Times are IST.**
   - The window looks like `2026-10-23 00:00 IST`. The `date_ist` fields look like `2026-10-23 07:59`.
   - A day that does not exist, like `2026-02-30`, fails the build when it is in the window or the folder name. Anywhere else, the day is skipped.
@@ -80,7 +85,7 @@ Each funnel stage must be no larger than the stage before it. A stage that grows
 
 | Field | Need | Shows in | Notes |
 | --- | --- | --- | --- |
-| `rank` | required | Everywhere themes are listed | A whole number from 1, and 1 is the most covered. The page sorts by rank. A repeated rank is a warning. |
+| `rank` | required | Everywhere themes are listed | A whole number from 1, and 1 is the most covered. Number the themes 1 to n. The page sorts by rank and prints positions, so a gap or a repeat still shows 1, 2, 3. Both are warnings. |
 | `key` | required | `#theme-<key>` links, week-over-week arrows | Letters, digits, `-` or `_`, unique in the week. **Keep the same key for the same storyline every week.** See [Keys](#keys-and-week-over-week). |
 | `name` | required | Theme row, tooltips | The full headline. |
 | `short_name` | optional | Side menu, charts, top-3 cards, index | Unique in the week. Without it, `name` is cut at 11 characters with "…". |
@@ -183,17 +188,26 @@ Past a limit the page still renders, but not as designed. `pnpm check:week` warn
 | `meta.method_steps[].title` | 60 characters | `step_title` | Step titles should be one line. |
 | `meta.method_steps[].detail` | 300 characters | `step_detail` | Step details should be short. |
 | `themes` | 12 themes | `themes` | The board gets long. Move the tail to `ranking`. |
+| `themes[].cves` | 20 CVEs | `cves` | The theme's CVE list gets long. Keep the CVEs that matter most. |
+| `cve_details[].basis` | 300 characters | `basis` | The CVE row gets tall. Put the link in `advisory_url`. |
+| `sources` | 200 rows | `sources` | Every row is in the page, so it gets heavy on phones. |
 
 The checker also warns about these:
 
 - repeated ranks, short names, cluster labels or key posts
-- a CVE that is listed in two themes, or that is missing from `cves` or `cve_details`
+- ranks with a gap, like 1, 2, 4
+- counts that are negative or not whole numbers
+- a word longer than 40 characters
+- a CVE that is listed in two themes. Both themes list it, and the totals and the CVE table count it once.
+- a CVE that is missing from `cves` or `cve_details`
 - an exploited CVE in a theme whose flag is not `true`
 - sentiment totals that disagree with the clusters
 - a theme with no `ranking` row, a ranking out of order, or `accounts` that differ from `distinct_accounts`
 - a source dated outside the window, a key post from another theme, or a `theme` that is not a key
 - `x_posts` or `youtube_videos` that differ from `sources`
 - a new or misspelled platform or type
+- more new platforms or types than spare colours: 3 platforms and 2 types. Past that, new values share a colour.
+- a byte-order mark at the start of the file
 
 ## Keys and week-over-week
 

@@ -2,8 +2,9 @@
 import { spawnSync } from "node:child_process"
 import fs from "node:fs"
 import path from "node:path"
-import { loadWeeks, reportsRoot } from "../lib/brief.mjs"
+import { BuildError, loadWeeks, reportsRoot } from "../lib/brief.mjs"
 import { accentBoot } from "../lib/accent.mjs"
+import { checkWeek } from "../lib/check.mjs"
 
 const root = path.resolve(import.meta.dirname, "..")
 const outDir = path.join(root, "out")
@@ -29,7 +30,29 @@ function inject(html) {
   return html.replace("</head>", `${THEME_BOOT}</head>`).replace("</body>", `${SITE_JS}</body>`)
 }
 
-const weeks = loadWeeks(reportsRoot())
+let weeks
+try {
+  weeks = loadWeeks(reportsRoot())
+} catch (error) {
+  if (!(error instanceof BuildError)) throw error
+  console.error(`Build stopped. ${error.message}\nRun: pnpm check:week for every rule.`)
+  process.exit(1)
+}
+
+// The errors that fail `pnpm check:week` also stop a local build, so no build publishes a week CI rejects.
+const stops = []
+for (const week of weeks) {
+  if (week.kind !== "data") continue
+  const file = path.join(reportsRoot(), week.name, "data.json")
+  const raw = JSON.parse(fs.readFileSync(file, "utf8").replace(/^\uFEFF/, ""))
+  for (const item of checkWeek(raw, week.name)) {
+    if (item.level === "error") stops.push(`${path.relative(root, file)}: ${item.path ? `${item.path} ` : ""}${item.message}`)
+  }
+}
+if (stops.length > 0) {
+  console.error(`Build stopped.\n${stops.join("\n")}\nRun: pnpm check:week for every rule.`)
+  process.exit(1)
+}
 run("pnpm", ["exec", "next", "build"])
 run("python3", ["scripts/strip-js.py", outDir, siteDir])
 

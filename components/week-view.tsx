@@ -13,6 +13,7 @@ import {
   alsoObserved,
   cveTableRows,
   formatCount,
+  formatKpi,
   funnelModel,
   headlineStats,
   heroLead,
@@ -51,15 +52,15 @@ function Kpis({ data, rows, delta }: { data: WeekData; rows: ThemeRow[]; delta: 
   const sentiment = sentimentTotals(data)
   const moods: Part[] = SENTIMENT.map((entry) => ({ label: entry.key, tone: entry.tone, value: sentiment[entry.key] }))
   const read = moods.reduce((sum, part) => sum + part.value, 0)
-  const accounts = rows.reduce((sum, row) => sum + row.accounts, 0)
+  // A negative count is a warned data error. Count it as 0 so the share stays within 0 to 100%.
+  const counted = (row: ThemeRow) => Math.max(0, row.accounts)
+  const accounts = rows.reduce((sum, row) => sum + counted(row), 0)
   const lead = rows.slice(0, 3)
-  const leadShare = percent(
-    lead.reduce((sum, row) => sum + row.accounts, 0),
-    accounts,
-  )
+  const leadAccounts = lead.reduce((sum, row) => sum + counted(row), 0)
+  const leadShare = percent(leadAccounts, accounts)
   const concentration: Part[] = [
-    ...lead.map((row, index) => ({ label: row.label, tone: (["a", "b", "m"] as const)[index], value: row.accounts })),
-    { label: "rest", tone: "f", value: accounts - lead.reduce((sum, row) => sum + row.accounts, 0) },
+    ...lead.map((row, index) => ({ label: row.label, tone: (["a", "b", "m"] as const)[index], value: counted(row) })),
+    { label: "rest", tone: "f", value: accounts - leadAccounts },
   ]
   const describe = (parts: Part[]) => parts.map((part) => `${part.value} ${part.label}`).join(", ")
   return (
@@ -68,14 +69,16 @@ function Kpis({ data, rows, delta }: { data: WeekData; rows: ThemeRow[]; delta: 
         <div className="kpi">
           <dt>themes</dt>
           <dd className="kpi-value">
-            <span className="num">{formatCount(stats.themes)}</span>
+            <span className="num">{formatKpi(stats.themes)}</span>
             {delta ? <Delta unit="themes" value={delta.totals.themes} /> : null}
           </dd>
           <dd className="kpi-viz">
             <Split label={`Accounts by theme: ${describe(concentration)}.`} parts={concentration} />
           </dd>
           <dd className="kpi-note">
-            {lead.length > 1 ? (
+            {accounts <= 0 ? (
+              "no accounts counted"
+            ) : lead.length > 1 ? (
               <>
                 <span className="num">{leadShare}%</span> in the top {lead.length}
               </>
@@ -87,7 +90,7 @@ function Kpis({ data, rows, delta }: { data: WeekData; rows: ThemeRow[]; delta: 
         <div className="kpi">
           <dt>sources</dt>
           <dd className="kpi-value">
-            <span className="num">{formatCount(stats.sources)}</span>
+            <span className="num">{formatKpi(stats.sources)}</span>
             {delta ? <Delta unit="sources" value={delta.totals.sources} /> : null}
           </dd>
           <dd className="kpi-viz">
@@ -107,7 +110,7 @@ function Kpis({ data, rows, delta }: { data: WeekData; rows: ThemeRow[]; delta: 
         <div className="kpi">
           <dt>comments</dt>
           <dd className="kpi-value">
-            <span className="num">{formatCount(stats.comments)}</span>
+            <span className="num">{formatKpi(stats.comments)}</span>
             {delta ? <Delta unit="comments" value={delta.totals.comments} /> : null}
           </dd>
           <dd className="kpi-viz">
@@ -131,12 +134,17 @@ function Kpis({ data, rows, delta }: { data: WeekData; rows: ThemeRow[]; delta: 
         <div className="kpi kpi-hot">
           <dt>exploited</dt>
           <dd className="kpi-value">
-            <span className="num">{formatCount(stats.exploited)}</span>
-            <span className="kpi-of num">/{formatCount(stats.cves)}</span>
+            <span className="num">{formatKpi(stats.exploited)}</span>
+            <span className="kpi-of num">/{formatKpi(stats.cves)}</span>
             {delta ? <Delta invert unit="exploited CVEs" value={delta.totals.exploited} /> : null}
           </dd>
           <dd className="kpi-viz">
-            <Meter hot={stats.exploited} label={`${stats.exploited} of ${stats.cves} CVEs exploited.`} total={stats.cves} />
+            <Meter
+              hot={stats.exploited}
+              label={`${stats.exploited} of ${stats.cves} CVEs exploited.`}
+              max={12}
+              total={stats.cves}
+            />
           </dd>
           <dd className="kpi-note">
             {stats.cves === 0
@@ -430,7 +438,12 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
             {cves.length > 0 ? (
               <Frame className="cve-frame" title="exploitation">
                 <div className="cve-meter">
-                  <Meter hot={exploited} label={`${exploited} of ${cves.length} CVEs exploited.`} total={cves.length} />
+                  <Meter
+                    hot={exploited}
+                    label={`${exploited} of ${cves.length} CVEs exploited.`}
+                    max={20}
+                    total={cves.length}
+                  />
                   <Legend
                     parts={(
                       [

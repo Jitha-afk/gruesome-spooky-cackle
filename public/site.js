@@ -236,16 +236,25 @@
     return found
   }
 
+  var side = d.querySelector(".side")
+
   function spy() {
     var bottom = innerHeight + scrollY >= root.scrollHeight - 4
     var top = bottom ? tops[tops.length - 1] : last(tops) || tops[0]
     var sub = top ? last(subs) : null
     if (sub && !top.contains(sub)) sub = null
+    var on
     links.forEach(function (link) {
       var id = link.getAttribute("href").slice(1)
-      if ((top && top.id === id) || (sub && sub.id === id)) link.setAttribute("aria-current", "location")
-      else link.removeAttribute("aria-current")
+      if ((top && top.id === id) || (sub && sub.id === id)) {
+        link.setAttribute("aria-current", "location")
+        if (side && side.contains(link)) on = link
+      } else link.removeAttribute("aria-current")
     })
+    if (!on) return
+    var b = side.getBoundingClientRect()
+    var a = on.getBoundingClientRect()
+    if (a.top < b.top || a.bottom > b.bottom) side.scrollTop += a.top - b.top - b.height / 3
   }
 
   var queued = false

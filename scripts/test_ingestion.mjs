@@ -11,7 +11,9 @@ import {
   commentModel,
   cveTableRows,
   cveViews,
+  formatKpi,
   funnelModel,
+  graphemes,
   headlineStats,
   indexRow,
   loadWeeks,
@@ -21,6 +23,7 @@ import {
   previousDataWeek,
   rankRows,
   sentimentTotals,
+  shortLabel,
   sourceFacets,
   sourceRows,
   sparkSummary,
@@ -33,6 +36,7 @@ import {
   whyText,
   windowDays,
   windowLabel,
+  withPositionalRanks,
 } from "../lib/brief.mjs"
 import { LIMITS, checkWeek } from "../lib/check.mjs"
 import { loadSchema, schemaErrors } from "../lib/schema.mjs"
@@ -355,6 +359,111 @@ test("negative counts warn and still render", () => {
     assert.ok(paths.includes(where), where)
   }
   assertFinite(renderModels(data))
+})
+
+test("labels and headline numbers stay short without splitting a character", () => {
+  const coder = "👩‍💻"
+  assert.equal(graphemes(`${coder}e\u0301a`).length, 3)
+  assert.equal(shortLabel(coder.repeat(12)), coder.repeat(12))
+  assert.equal(shortLabel(coder.repeat(13)), `${coder.repeat(11)}…`)
+  assert.equal(shortLabel("Café au lait outbreak"), "Café au lai…")
+  assert.deepEqual([0, 99999, 100000, 1234567, -250000].map(formatKpi), ["0", "99,999", "100K", "1.2M", "-250K"])
+  const named = structuredClone(COMPLETE)
+  delete named.themes[0].short_name
+  named.themes[0].name = coder.repeat(20)
+  const finding = checkWeek(named).find((item) => item.path === "themes[0].short_name")
+  assert.ok(finding && finding.message.includes(`"${coder.repeat(11)}…"`), JSON.stringify(finding))
+})
+
+test("ranks print as positions, so a gap or a repeat only warns", () => {
+  assert.equal(withPositionalRanks(COMPLETE), COMPLETE)
+  const gaps = structuredClone(COMPLETE)
+  gaps.themes.forEach((theme, index) => (theme.rank = index * 2 + 1))
+  const findings = checkWeek(gaps)
+  assert.deepEqual(findings.filter((item) => item.level === "error"), [])
+  assert.ok(findings.some((item) => item.path === "themes[].rank"))
+  assert.deepEqual(
+    withPositionalRanks(gaps).themes.map((theme) => [theme.key, theme.rank]),
+    COMPLETE.themes.map((theme) => [theme.key, theme.rank]),
+  )
+  const ties = structuredClone(COMPLETE)
+  ties.themes.forEach((theme) => (theme.rank = 1))
+  assert.ok(checkWeek(ties).some((item) => item.level === "warn" && item.path === "themes[1].rank"))
+  const tied = withPositionalRanks(ties)
+  const byKey = [...ties.themes].map((theme) => theme.key).sort()
+  assert.deepEqual(themesByRank(tied).map((theme) => [theme.key, theme.rank]), byKey.map((key, index) => [key, index + 1]))
+  assertFinite(renderModels(tied))
+})
+
+test("a CVE in two themes counts once, and exploited wins", () => {
+  const data = structuredClone(COMPLETE)
+  const [lead, , last] = data.themes
+  const shared = lead.cve_details.find((entry) => entry.exploited_in_wild === null).id
+  last.cves.push(shared)
+  last.cve_details.push({ id: shared, exploited_in_wild: true, basis: "Vendor advisory (Contoso)." })
+  last.exploited_in_wild = true
+  const rows = cveTableRows(data).filter((row) => row.id === shared)
+  assert.deepEqual(rows.map((row) => [row.key, row.flag]), [[last.key, true]])
+  const stats = headlineStats(data)
+  assert.equal(stats.cves, cveTableRows(data).length)
+  assert.equal(stats.cves, new Set(data.themes.flatMap((theme) => theme.cves)).size)
+  assert.equal(stats.exploited, cveTableRows(data).filter((row) => row.flag === true).length)
+  assert.equal(themeRows(data).find((row) => row.key === lead.key).cves, lead.cves.length)
+  const findings = checkWeek(data)
+  assert.deepEqual(findings.filter((item) => item.level === "error"), [])
+  assert.ok(findings.some((item) => item.path === `themes[2].cves[${last.cves.length - 1}]` && /count it once/.test(item.message)))
+})
+
+test("an empty ranking falls back to the themes", () => {
+  const data = structuredClone(COMPLETE)
+  data.ranking = []
+  assert.deepEqual(gateErrors(data), [])
+  assert.deepEqual(
+    rankRows(data).map((row) => [row.key, row.accounts]),
+    themesByRank(data).map((theme) => [theme.key, theme.distinct_accounts]),
+  )
+  assertFinite(renderModels(data))
+})
+
+test("fractions, long words and long evidence warn", () => {
+  const data = structuredClone(COMPLETE)
+  data.themes[0].distinct_accounts = 12.5
+  data.themes[0].comments.clusters[0].sentiment_counts.neutral = 0.5
+  data.themes[0].summary += ` See https://example.com/${"a".repeat(60)} for more.`
+  data.themes[0].cve_details[0].basis = "Seen in the wild. ".repeat(20)
+  data.sources = [...data.sources, ...Array.from({ length: LIMITS.sources }, (_, index) => ({ ...data.sources[0], id: `extra${index}` }))]
+  const findings = checkWeek(data)
+  assert.deepEqual(findings.filter((item) => item.level === "error"), [])
+  const at = (where, rule) => findings.some((item) => item.path === where && rule.test(item.message))
+  assert.ok(at("themes[0].distinct_accounts", /whole numbers/))
+  assert.ok(at("themes[0].comments.clusters[0].sentiment_counts.neutral", /whole numbers/))
+  assert.ok(at("themes[0].summary", /-character word/))
+  assert.ok(at("themes[0].cve_details[0].basis", /Keep it to 300/))
+  assert.ok(at("sources", /Keep 200 or fewer/))
+  assertFinite(renderModels(data))
+})
+
+test("the build reads a byte-order mark and stops on any gate error", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "weeks-"))
+  try {
+    const week = path.join(dir, "reports", "2026-10-30_2026-11-05")
+    fs.mkdirSync(week, { recursive: true })
+    const file = path.join(week, "data.json")
+    fs.writeFileSync(file, `\uFEFF${JSON.stringify(COMPLETE)}`)
+    assert.equal(loadWeeks(path.join(dir, "reports"))[0].data.meta.title, COMPLETE.meta.title)
+    const checked = spawnSync(process.execPath, [path.join(ROOT, "scripts", "check_week.mjs"), file], { encoding: "utf8" })
+    assert.equal(checked.status, 0, checked.stdout + checked.stderr)
+    assert.match(checked.stdout, /warn {2}starts with a byte-order mark/)
+
+    // The build's own validator accepts a folder that disagrees with the window. The gate does not.
+    fs.renameSync(week, path.join(dir, "reports", "2026-10-31_2026-11-06"))
+    assert.equal(loadWeeks(path.join(dir, "reports")).length, 1)
+    const built = spawnSync(process.execPath, [path.join(ROOT, "scripts", "build_site.mjs")], { cwd: dir, encoding: "utf8" })
+    assert.equal(built.status, 1, built.stdout + built.stderr)
+    assert.match(built.stderr, /^Build stopped\.\n.*data\.json: meta\.window\.start starts on 2026-10-30 but the folder says 2026-10-31\./)
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true })
+  }
 })
 
 test("pages cope with a thin week: one theme, no CVEs, no comments, no YouTube", () => {

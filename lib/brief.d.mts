@@ -148,6 +148,8 @@ export type ThemeRow = {
 export class BuildError extends Error {}
 export function reportsRoot(): string
 export function formatCount(value: number): string
+export function formatKpi(value: number): string
+export function graphemes(text: string): string[]
 export function shortLabel(name: string, shortName?: string | null): string
 export function nameDetail(name: string, label?: string | null): string
 export function exploitedTag(flag: Flag): string
@@ -207,6 +209,7 @@ export function waffleParts(
 ): { key: string; count: number; cells: number }[]
 export function sourceRows(data: WeekData): Source[]
 export function themesByRank(data: WeekData): Theme[]
+export function withPositionalRanks(data: WeekData): WeekData
 export function validateData(data: unknown, file?: string): WeekData
 export function legacyWindow(week: WeekRecord): string
 export function indexRow(week: WeekRecord): IndexRow

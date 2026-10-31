@@ -53,16 +53,36 @@ function check(target) {
     if (!legacy) error("", target.dir ? "has no data.json or index.html." : "does not exist.")
     return findings
   }
+  if (!fs.statSync(target.file).isFile()) {
+    error("", "data.json is a directory. Write the week as a file.")
+    return findings
+  }
   let data
   try {
-    data = JSON.parse(fs.readFileSync(target.file, "utf8"))
+    const text = fs.readFileSync(target.file, "utf8")
+    if (text.charCodeAt(0) === 0xfeff) {
+      findings.push({ level: "warn", path: "", message: "starts with a byte-order mark. The build skips it. Save as UTF-8 without a BOM." })
+    }
+    data = JSON.parse(text.replace(/^\uFEFF/, ""))
   } catch (failure) {
-    error("", `is not valid JSON. ${failure.message}`)
+    const hint = /\b(NaN|Infinity|undefined)\b/.test(failure.message) ? " JSON has no NaN, Infinity or undefined: write 0 or null." : ""
+    error("", `is not valid JSON. ${failure.message.replace(/\.?$/, ".")}${hint}`)
     return findings
   }
   const folder = target.folder != null && WEEK_FOLDER.test(target.folder) ? target.folder : null
   findings.push(...checkWeek(data, folder))
   return findings
+}
+
+/** Repeats of one rule (same path shape, same message apart from numbers) print once. */
+function grouped(findings) {
+  const groups = new Map()
+  for (const item of findings) {
+    const key = `${item.level} ${item.path.replace(/\[\d+\]/g, "[]")} ${item.message.replace(/-?\d[\d,.]*/g, "#")}`
+    if (!groups.has(key)) groups.set(key, [])
+    groups.get(key).push(item)
+  }
+  return [...groups.values()]
 }
 
 const results = targets().map((target) => ({ ...target, findings: check(target) }))
@@ -77,8 +97,10 @@ if (asJson) {
 } else {
   for (const result of results) {
     console.log(`${result.findings.length === 0 ? "ok  " : "    "} ${result.label}`)
-    for (const item of result.findings) {
-      console.log(`  ${item.level === "error" ? "error" : "warn "} ${item.path ? `${item.path} ` : ""}${item.message}`)
+    for (const group of grouped(result.findings)) {
+      const [item] = group
+      const more = group.length > 1 ? ` (${group.length}x: ${group.slice(0, 3).map((one) => one.path).join(", ")}${group.length > 3 ? ", …" : ""})` : ""
+      console.log(`  ${item.level === "error" ? "error" : "warn "} ${item.path ? `${item.path} ` : ""}${item.message}${more}`)
     }
   }
   console.log(`${plural(results.length, "week")}, ${plural(errors, "error")}, ${plural(warnings, "warning")}.`)
@@ -89,7 +111,8 @@ if (process.env.GITHUB_ACTIONS === "true") {
   const property = (text) => escape(text).replace(/:/g, "%3A").replace(/,/g, "%2C")
   for (const result of results) {
     const file = path.relative(root, result.file ?? result.dir)
-    for (const item of result.findings) {
+    for (const group of grouped(result.findings)) {
+      const [item] = group
       const kind = item.level === "error" ? "error" : "warning"
       console.log(`::${kind} file=${property(file)},title=${property(item.path || "week")}::${escape(item.message)}`)
     }

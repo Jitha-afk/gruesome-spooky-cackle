@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react"
-import { formatCount, sparkGlyphs } from "@/lib/brief.mjs"
+import { formatCount, formatKpi, sparkGlyphs } from "@/lib/brief.mjs"
 
 /**
  * Glyph tones. Each tone sets a colour and a block glyph, so a split never
@@ -135,7 +135,7 @@ export function Delta({
   if (isNew) return <span className="delta delta-new">new</span>
   if (value === 0) return <span className="delta">=</span>
   const up = value > 0
-  const text = `${up ? "↑" : "↓"}${formatCount(Math.abs(value))}`
+  const text = `${up ? "↑" : "↓"}${formatKpi(Math.abs(value))}`
   const tone = up ? (invert ? "delta-bad" : "delta-up") : "delta-down"
   return (
     <span className={`delta ${tone}`}>

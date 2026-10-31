@@ -8,6 +8,7 @@ import { pad, plural } from "@/components/tones"
 import {
   bottomLine,
   formatCount,
+  formatKpi,
   headlineStats,
   indexRow,
   loadWeeks,
@@ -49,20 +50,20 @@ function Latest({ week, data }: { week: WeekRecord; data: WeekData }) {
           <dl className="mini-kpis">
             <div>
               <dt>themes</dt>
-              <dd className="num">{formatCount(stats.themes)}</dd>
+              <dd className="num">{formatKpi(stats.themes)}</dd>
             </div>
             <div>
               <dt>sources</dt>
-              <dd className="num">{formatCount(stats.sources)}</dd>
+              <dd className="num">{formatKpi(stats.sources)}</dd>
             </div>
             <div>
               <dt>comments</dt>
-              <dd className="num">{formatCount(stats.comments)}</dd>
+              <dd className="num">{formatKpi(stats.comments)}</dd>
             </div>
             <div>
               <dt>exploited</dt>
               <dd className="num">
-                {formatCount(stats.exploited)}/{formatCount(stats.cves)}
+                {formatKpi(stats.exploited)}/{formatKpi(stats.cves)}
               </dd>
             </div>
           </dl>

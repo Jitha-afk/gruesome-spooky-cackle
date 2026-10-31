@@ -651,6 +651,11 @@ figcaption,
 .brand-mark {
   flex: none;
 }
+@media (max-width: 29.99rem) {
+  .has-crumb .brand {
+    flex: none;
+  }
+}
 .brand-name {
   min-width: 0;
   overflow: hidden;
@@ -1414,9 +1419,11 @@ details .split,
 .kpi-value {
   display: flex;
   align-items: baseline;
-  gap: 0.5rem;
+  gap: 0.25rem 0.5rem;
   font: 600 2rem/1 var(--font-sans);
   letter-spacing: -0.04em;
+  flex-wrap: wrap;
+  min-width: 0;
 }
 @media (min-width: 48rem) {
   .kpi-value {
@@ -1447,6 +1454,7 @@ details .split,
 .kpi-note {
   font: 0.75rem/1.5 var(--font-mono);
   color: var(--muted-foreground);
+  overflow-wrap: anywhere;
 }
 .kpi-note .num {
   color: var(--foreground);
@@ -1537,14 +1545,15 @@ details .split,
   background: color-mix(in oklab, var(--destructive) 10%, transparent);
 }
 .lead-foot {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem 1rem;
   margin-top: auto;
   padding-top: 0.75rem;
   background: var(--rule-x) 0 0 / 100% 1px no-repeat;
   container-type: inline-size;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 .lead-acc {
   display: flex;
@@ -1554,6 +1563,11 @@ details .split,
   overflow: hidden;
   font: 0.75rem var(--font-mono);
   white-space: nowrap;
+  flex: 1 0 auto;
+  max-width: 100%;
+}
+.lead-foot > .spark {
+  margin-left: auto;
 }
 .lead-acc .bar {
   flex: 1;
@@ -1734,6 +1748,10 @@ a.row-label {
   padding-right: 0.5rem;
   text-align: left;
   white-space: nowrap;
+}
+.heat tbody th > .row-label {
+  display: block;
+  max-width: 8rem;
 }
 .heat td {
   height: 1.875rem;
@@ -1917,6 +1935,9 @@ a.row-label {
   font: 500 0.8125rem var(--font-mono);
   color: var(--foreground);
   white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .tag {
   font: 500 0.75rem var(--font-mono);
@@ -1944,6 +1965,8 @@ a.row-label {
   font-size: 0.8125rem;
   line-height: 1.55;
   color: var(--muted-foreground);
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .advisory {
   font: 0.75rem var(--font-mono);
@@ -2271,6 +2294,12 @@ html.deep details[open] > * {
 .theme-cols {
   display: grid;
   gap: 1.5rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+.theme-prose,
+.theme-facts {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 @media (min-width: 64rem) {
   .theme-cols {
@@ -2393,6 +2422,10 @@ html.deep details[open] > * {
   margin-bottom: 0.25rem;
   font: 0.75rem/1.6 var(--font-mono);
   color: var(--muted-foreground);
+}
+.item-meta > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .item-text {
   display: -webkit-box;
@@ -2869,6 +2902,7 @@ html.deep details[open] > * {
   margin-bottom: 0.25rem;
   font: 0.75rem/1.6 var(--font-mono);
   color: var(--muted-foreground);
+  overflow-wrap: anywhere;
 }
 .src-text {
   display: -webkit-box;
