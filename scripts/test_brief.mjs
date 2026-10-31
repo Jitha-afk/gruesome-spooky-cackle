@@ -201,7 +201,7 @@ test("week graphs use only data.json", () => {
   assert.equal(stats.sources, data.meta.counts.x_posts + data.meta.counts.youtube_videos)
   assert.equal(stats.exploited, 7)
   assert.equal(stats.cves, 8)
-  assert.equal(data.meta.title, "Weekly cybersecurity threat-intel brief")
+  assert.equal(data.meta.title, "Weekly threat intel report")
   const heat = heatmapModel(data)
   assert.deepEqual(heat.columns, ["Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu"])
   assert.equal(heat.rows.length, 10)

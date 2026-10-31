@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "meta": {
-    "title": "Weekly cybersecurity threat-intel brief",
+    "title": "Weekly threat intel report",
     "window": { "start": "2026-11-06 00:00 IST", "end": "2026-11-12 23:59 IST" },
     "capture": {
       "x": "2026-11-13 20:05 IST to 2026-11-13 20:11 IST",
