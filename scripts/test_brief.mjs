@@ -115,7 +115,7 @@ test("real week validates and keeps each CVE state", () => {
   const row = indexRow(weeks[0])
   assert.equal(row.shortName, "PHP2Shell")
   assert.equal(row.themeCount, 10)
-  assert.match(heroLead(weeks[0].data), /^\d+ of \d+ cited CVEs exploited in the wild\. PHP2Shell led with \d+ accounts: PHP runs .+\.$/)
+  assert.match(heroLead(weeks[0].data), /^Attackers exploit \d+ of \d+ CVEs in this report\. PHP2Shell is the top theme, with \d+ accounts\. PHP runs .+\.$/)
   const ranks = rankRows(weeks[0].data)
   assert.deepEqual(
     ranks.map((item) => item.key),
@@ -160,16 +160,16 @@ test("heroLead prefers bottom_line, then counts and the top why_line", () => {
   const data = structuredClone(loadWeeks(REAL)[0].data)
   const top = data.themes.find((theme) => theme.rank === 1)
   top.why_line = "Patch is not enough"
-  assert.match(heroLead(data), /accounts: Patch is not enough\.$/)
+  assert.match(heroLead(data), /accounts\. Patch is not enough\.$/)
   top.why_line = "Is a patch enough?"
-  assert.match(heroLead(data), /accounts: Is a patch enough\?$/)
+  assert.match(heroLead(data), /accounts\. Is a patch enough\?$/)
   for (const theme of data.themes) theme.cves = []
-  assert.match(heroLead(data), /^PHP2Shell led with /)
+  assert.match(heroLead(data), /^PHP2Shell is the top theme, with /)
   data.meta.bottom_line = "One line."
   assert.equal(heroLead(data), "One line.")
   data.meta.bottom_line = null
   data.themes = []
-  assert.equal(heroLead(data), "No theme met the bar this week.")
+  assert.equal(heroLead(data), "This week has no themes.")
 })
 
 test("nameDetail drops a leading label only at a word boundary", () => {

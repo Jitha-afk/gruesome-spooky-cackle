@@ -59,7 +59,7 @@ function Kpis({ data, rows, delta }: { data: WeekData; rows: ThemeRow[]; delta: 
   const leadShare = percent(leadAccounts, accounts)
   const concentration: Part[] = [
     ...lead.map((row, index) => ({ label: row.label, tone: (["a", "b", "m"] as const)[index], value: counted(row) })),
-    { label: "rest", tone: "f", value: accounts - leadAccounts },
+    { label: "other themes", tone: "f", value: accounts - leadAccounts },
   ]
   const describe = (parts: Part[]) => parts.map((part) => `${part.value} ${part.label}`).join(", ")
   return (
@@ -76,7 +76,7 @@ function Kpis({ data, rows, delta }: { data: WeekData; rows: ThemeRow[]; delta: 
           </dd>
           <dd className="kpi-note">
             {accounts <= 0 ? (
-              "no accounts counted"
+              "0 accounts"
             ) : lead.length > 1 ? (
               <>
                 <span className="num t-a">{leadShare}%</span> in the top {lead.length}
@@ -126,7 +126,7 @@ function Kpis({ data, rows, delta }: { data: WeekData; rows: ThemeRow[]; delta: 
                 </span>
               </>
             ) : (
-              "no comments read"
+              "0 comments"
             )}
           </dd>
         </div>
@@ -147,14 +147,14 @@ function Kpis({ data, rows, delta }: { data: WeekData; rows: ThemeRow[]; delta: 
           </dd>
           <dd className="kpi-note">
             {stats.cves === 0
-              ? "no CVEs cited"
+              ? "0 CVEs"
               : unconfirmed > 0
                 ? `${formatCount(unconfirmed)} not confirmed`
                 : "all states confirmed"}
           </dd>
         </div>
       </dl>
-      {delta ? <p className="chart-note">Arrows compare with {delta.label}.</p> : null}
+      {delta ? <p className="chart-note">Arrows show the change from {delta.label}.</p> : null}
     </Frame>
   )
 }
@@ -198,7 +198,7 @@ function Leads({ themes, rows, days }: { themes: Theme[]; rows: ThemeRow[]; days
                 {preview.extra > 0 ? <li className="num muted">+{preview.extra}</li> : null}
               </ul>
             ) : (
-              <p className="lead-cves muted">no CVEs cited</p>
+              <p className="lead-cves muted">0 CVEs</p>
             )}
             <div className="lead-foot">
               <span className="lead-acc">
@@ -253,7 +253,7 @@ function Notes({ data }: { data: WeekData }) {
     <Box className="faq" title="notes">
       <details className="faq-item" id="method">
         <summary>
-          <span>How this brief is made</span>
+          <span>How we make this report</span>
           <i aria-hidden="true" className="plus" />
         </summary>
         <div className="faq-body">
@@ -267,7 +267,7 @@ function Notes({ data }: { data: WeekData }) {
       {funnels.sources.length > 0 || funnels.comments.length > 0 ? (
         <details className="faq-item" id="funnel">
           <summary>
-            <span>What was kept</span>
+            <span>What we kept</span>
             <i aria-hidden="true" className="plus" />
           </summary>
           <div className="faq-body funnels">
@@ -275,7 +275,7 @@ function Notes({ data }: { data: WeekData }) {
             {funnels.comments.length > 0 ? <Funnel stages={funnels.comments} title="comments" /> : null}
             {removed > 0 ? (
               <p className="chart-note">
-                {formatCount(removed)} comments removed before analysis:{" "}
+                We removed {formatCount(removed)} comments:{" "}
                 {funnels.removed.map((row) => `${row.label} ${formatCount(row.count)}`).join(" · ")}.
               </p>
             ) : null}
@@ -284,7 +284,7 @@ function Notes({ data }: { data: WeekData }) {
       ) : null}
       <details className="faq-item" id="capture">
         <summary>
-          <span>Capture window</span>
+          <span>Dates and counts</span>
           <i aria-hidden="true" className="plus" />
         </summary>
         <div className="faq-body">
@@ -312,7 +312,7 @@ function Notes({ data }: { data: WeekData }) {
               </div>
             ))}
             <div>
-              <dt>comments read</dt>
+              <dt>comments</dt>
               <dd className="num">{formatCount(data.meta.counts.comments_analysed_top_themes)}</dd>
             </div>
             {data.meta.generated ? (
@@ -329,7 +329,7 @@ function Notes({ data }: { data: WeekData }) {
       {hidden.length > 0 ? (
         <details className="faq-item" id="not-read">
           <summary>
-            <span>Not read in full</span>
+            <span>Limits</span>
             <span className="num muted">{hidden.length}</span>
             <i aria-hidden="true" className="plus" />
           </summary>
@@ -345,7 +345,7 @@ function Notes({ data }: { data: WeekData }) {
       {also.length > 0 ? (
         <details className="faq-item" id="also-observed">
           <summary>
-            <span>Also observed</span>
+            <span>Also seen</span>
             <span className="num muted">{also.length}</span>
             <i aria-hidden="true" className="plus" />
           </summary>
@@ -375,7 +375,7 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
   const toc: TocItem[] = [
     { id: "overview", label: "overview" },
     { id: "cves", label: "cves", count: cves.length },
-    { id: "signals", label: "signals" },
+    { id: "signals", label: "charts" },
     {
       id: "themes",
       label: "themes",
@@ -424,17 +424,17 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
               kicker="cves"
               lead={
                 cves.length > 0
-                  ? "Exploitation state as the sources report it. Exploited first, then by theme rank."
+                  ? "The sources give the state of each CVE. Exploited CVEs are first, then the order is by theme rank."
                   : undefined
               }
               title={
                 cves.length > 0
-                  ? `${formatCount(exploited)} of ${plural(cves.length, "CVE")} exploited in the wild`
-                  : "No CVEs cited this week"
+                  ? `${formatCount(exploited)} of ${plural(cves.length, "CVE")} exploited`
+                  : "No CVEs this week"
               }
             />
             {cves.length > 0 ? (
-              <Frame className="cve-frame" title="exploitation">
+              <Frame className="cve-frame" title="cve states">
                 <div className="cve-meter">
                   <Meter
                     hot={exploited}
@@ -456,7 +456,7 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
               </Frame>
             ) : (
               <Callout title="no cves" type="note">
-                <p>No source in the window cited a CVE for these themes.</p>
+                <p>No source in the window gives a CVE for these themes.</p>
               </Callout>
             )}
           </section>
@@ -464,9 +464,8 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
           <section aria-labelledby="signals-title" className="sec" id="signals">
             <SectionHead
               id="signals"
-              kicker="signals"
-              lead="Sources per day, accounts per theme, who covered each theme and how the comments read."
-              title="Where the attention went"
+              kicker="charts"
+              title="Sources, accounts and comments per theme"
             />
             <Signals data={data} />
           </section>
@@ -477,20 +476,20 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
                 themes.length > 1 ? (
                   <button className="btn js-only" data-expand-all data-on="false" type="button">
                     <ChevronsUpDown aria-hidden="true" size={14} strokeWidth={1.75} />
-                    <span className="when-off">expand all</span>
-                    <span className="when-on">collapse all</span>
+                    <span className="when-off">open all</span>
+                    <span className="when-on">close all</span>
                   </button>
                 ) : null
               }
               id="themes"
               kicker="themes"
-              lead="Open a theme for the summary, CVEs, key posts and the comment pulse."
-              title={`${plural(themes.length, "theme")}, ranked by accounts`}
+              lead="Open a theme to see its summary, CVEs, key sources and comments."
+              title={`${plural(themes.length, "theme")}, most accounts first`}
             />
             <ThemeBoard data={data} delta={delta} rows={rows} themes={themes} />
             {delta && delta.dropped.length > 0 ? (
               <p className="chart-note">
-                Dropped since {delta.label}: {delta.dropped.map((entry) => entry.label).join(", ")}.
+                Themes from {delta.label} that are not in this report: {delta.dropped.map((entry) => entry.label).join(", ")}.
               </p>
             ) : null}
           </section>
@@ -499,14 +498,14 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
             <SectionHead
               id="sources"
               kicker="sources"
-              lead="The posts and videos behind the themes. Most engaged first."
+              lead="Each source is a post or a video."
               title={plural(data.sources.length, "source")}
             />
             <Sources data={data} />
           </section>
 
           <section aria-labelledby="notes-title" className="sec" id="notes">
-            <SectionHead id="notes" kicker="notes" title="Method and caveats" />
+            <SectionHead id="notes" kicker="notes" title="Method and limits" />
             <Notes data={data} />
           </section>
         </main>

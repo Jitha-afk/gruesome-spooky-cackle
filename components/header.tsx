@@ -73,7 +73,7 @@ export function SiteHeader({ crumb, toc }: { crumb?: ReactNode; toc?: TocItem[] 
   return (
     <>
       <a className="skip" href="#main">
-        Skip to content
+        Go to the content
       </a>
       <header className={["site-header", toc ? "has-side" : "", crumb ? "has-crumb" : ""].filter(Boolean).join(" ")}>
         <div className="wrap header-bar">
@@ -91,14 +91,14 @@ export function SiteHeader({ crumb, toc }: { crumb?: ReactNode; toc?: TocItem[] 
           ) : null}
           <div className="header-actions">
             <button
-              aria-label="Choose an accent colour"
+              aria-label="Select an accent colour"
               className="icon-btn accent-btn js-only"
               popoverTarget="accent-menu"
               type="button"
             >
               <i aria-hidden="true" className="accent-dot" />
             </button>
-            <button aria-label="Switch theme" className="icon-btn js-only" data-theme-toggle type="button">
+            <button aria-label="Light or dark mode" className="icon-btn js-only" data-theme-toggle type="button">
               <Sun aria-hidden="true" className="only-dark" size={16} strokeWidth={1.75} />
               <Moon aria-hidden="true" className="only-light" size={16} strokeWidth={1.75} />
             </button>

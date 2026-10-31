@@ -43,7 +43,7 @@ function Latest({ week, data }: { week: WeekRecord; data: WeekData }) {
           <p className="lead">
             {bottomLine(data) ?? (
               <>
-                <span title={row.title ?? undefined}>{row.shortName}</span> led the week. {top ? whyText(top).text : null}
+                <span title={row.title ?? undefined}>{row.shortName}</span> is the top theme. {top ? whyText(top).text : null}
               </>
             )}
           </p>
@@ -69,7 +69,7 @@ function Latest({ week, data }: { week: WeekRecord; data: WeekData }) {
             </div>
           </dl>
           <Link className="btn btn-solid" href={row.href}>
-            read the brief
+            read the report
             <ArrowRight aria-hidden="true" size={14} strokeWidth={1.75} />
           </Link>
         </div>
@@ -111,14 +111,14 @@ export default function IndexPage() {
         <main className="main" id="main" tabIndex={-1}>
           <Hero
             kicker={read ? `weekly · ${read}` : "weekly"}
-            lead="What vendors, media and independent researchers talked about each week, ranked by how many accounts covered it. CVE states, key posts and the comment pulse for every theme."
+            lead="Each report shows the security themes of one week, with the CVE states, key sources and comment sentiment of each theme."
             title="Weekly threat intel"
           />
           {latest?.data ? <Latest data={latest.data} week={latest} /> : null}
           <section aria-labelledby="archive-title" className="sec" id="archive">
             <SectionHead id="archive" kicker="archive" title="All weeks" />
             {weeks.length === 0 ? (
-              <p className="muted">No briefs yet.</p>
+              <p className="muted">There are no reports.</p>
             ) : (
               <ol className="log">
                 {weeks.map((week, index) => {
@@ -139,7 +139,7 @@ export default function IndexPage() {
                           <span className="log-title">
                             {row.shortName ? (
                               <>
-                                <span className="muted">led by</span>{" "}
+                                <span className="muted">top theme</span>{" "}
                                 <span title={row.title ?? undefined}>{row.shortName}</span>
                               </>
                             ) : (
@@ -184,7 +184,7 @@ export default function IndexPage() {
         </main>
       </div>
       <SiteFooter>
-        <p>{plural(weeks.length, "week")} published. A new brief lands every week.</p>
+        <p>The site has {plural(weeks.length, "report")}. There is a new report every week.</p>
       </SiteFooter>
     </>
   )

@@ -140,7 +140,7 @@
               }
             }
           },
-          "description": "The three required counts, plus optional funnel counts. The funnel shows in notes as \"What was kept\" when two stages of a funnel are numbers."
+          "description": "The three required counts, plus optional funnel counts. The funnel shows in notes as \"What we kept\" when two stages of a funnel are numbers."
         },
         "methodology": { "type": "string", "description": "Shown in notes when method_steps is missing." },
         "method_steps": {
