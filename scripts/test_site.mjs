@@ -83,6 +83,22 @@ test("share metadata has absolute URLs and a served card", () => {
   assert.match(head(week, /<title>([^<]+)<\/title>/) ?? "", /^PHP2Shell, AI offence and Brotli CVE · 23–29 Oct 2026 · /)
 })
 
+test("each week has a 1200×630 PNG share card in its head", () => {
+  for (const week of loadWeeks(path.join(root, "reports")).filter((item) => item.kind === "data")) {
+    const png = fs.readFileSync(path.join(site, "reports", week.name, "og.png"))
+    assert.equal(png.subarray(0, 8).toString("hex"), "89504e470d0a1a0a", `${week.name}/og.png is not a PNG`)
+    assert.equal(png.subarray(12, 16).toString("latin1"), "IHDR")
+    assert.deepEqual([png.readUInt32BE(16), png.readUInt32BE(20)], [1200, 630], `${week.name}/og.png size`)
+    const html = fs.readFileSync(path.join(site, "reports", week.name, "index.html"), "utf8")
+    const card = `${SITE_URL}reports/${week.name}/og.png`
+    for (const name of ["og:image", "twitter:image"]) {
+      const tags = [...html.matchAll(new RegExp(`<meta (?:property|name)="${name}" content="([^"]+)"`, "g"))].map((match) => match[1])
+      assert.deepEqual(tags, [card], `${week.name} ${name}`)
+    }
+    assert.match(html, /<meta property="og:image:alt" content="Weekly threat intel report for Jitesh Thakur, [^"]+\. A chart shows the top themes by the number of accounts\."/)
+  }
+})
+
 test("the Atom feed is built, with absolute links, and every page links it", () => {
   const feed = fs.readFileSync(path.join(site, "feed.xml"), "utf8")
   assert.match(feed, /^<\?xml version="1\.0" encoding="utf-8"\?>\n<feed xmlns="http:\/\/www\.w3\.org\/2005\/Atom">/)

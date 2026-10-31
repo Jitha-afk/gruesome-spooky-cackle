@@ -88,14 +88,14 @@ Each funnel stage must be no larger than the stage before it. A stage that grows
 | `rank` | required | Everywhere themes are listed | A whole number from 1, and 1 is the most covered. Number the themes 1 to n. The page sorts by rank and prints positions, so a gap or a repeat still shows 1, 2, 3. Both are warnings. |
 | `key` | required | `#theme-<key>` links, week-over-week arrows | Letters, digits, `-` or `_`, unique in the week. **Keep the same key for the same storyline every week.** See [Keys](#keys-and-week-over-week). |
 | `name` | required | Theme row, tooltips | The full headline. |
-| `short_name` | optional | Side menu, charts, top-3 cards, index, page title | Unique in the week. The page title starts with the labels of the top 3 themes. Without it, `name` is cut at 11 characters with "…". |
+| `short_name` | optional | Side menu, charts, top-3 cards, index, page title, share card | Unique in the week. The page title and the share card start with the labels of the top 3 themes. Without it, `name` is cut at 11 characters with "…". |
 | `summary` | required | Theme body | What happened. |
 | `why` | required | "Why it is important" callout | |
 | `why_line` | optional | Top-3 cards | One sentence. Without it the cards show `why`, cut at three lines. |
 | `actions` | optional, warned | "What to do" callout | Steps for defenders, one imperative sentence each. Hidden when missing. The gate warns when no theme has any. |
 | `affected.products`, `affected.sectors`, `affected.regions` | required | Theme facts | Short phrases. Use `"Not stated"` when unknown. |
 | `vendors`, `media`, `independent` | required | "Coverage per theme" chart, theme credits | Account names, which can be empty lists. The chart uses the length of each list. |
-| `distinct_accounts` | required | Rank bars, KPIs, deltas | The ranking metric. Should match the `ranking` row. |
+| `distinct_accounts` | required | Rank bars, KPIs, deltas, share card | The ranking metric. Should match the `ranking` row. |
 | `x_engagement` | required | Theme facts | Interactions on the theme's X posts. |
 | `youtube_views` | required | Theme facts | Views on the theme's YouTube videos. |
 | `key_items` | required | "Key sources" | Source ids, best first. Each id must be in `sources`. Three show, and the rest fold behind "show more". |

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { WeekView } from "@/components/week-view"
-import { heroLead, loadWeeks, previousDataWeek, reportsRoot, weekTitle } from "@/lib/brief.mjs"
-import { FEED_TYPES, OPEN_GRAPH, SITE_NAME, dataUrl } from "@/lib/site"
+import { heroLead, loadWeeks, previousDataWeek, reportsRoot, weekTitle, windowLabel } from "@/lib/brief.mjs"
+import { CARD_SIZE, FEED_TYPES, OPEN_GRAPH, SITE_NAME, dataUrl, weekImageAlt } from "@/lib/site"
 
 export const dynamicParams = false
 
@@ -23,7 +23,15 @@ export async function generateMetadata({ params }: { params: Promise<{ week: str
     title,
     description,
     alternates: { canonical: url, types: FEED_TYPES },
-    openGraph: { ...OPEN_GRAPH, type: "article", title: `${title} · ${SITE_NAME}`, description, url },
+    openGraph: {
+      ...OPEN_GRAPH,
+      type: "article",
+      title: `${title} · ${SITE_NAME}`,
+      description,
+      url,
+      // Each week has its own card, drawn from data.json by og.png/route.tsx.
+      images: [{ url: `${url}og.png`, ...CARD_SIZE, alt: weekImageAlt(windowLabel(match.data)) }],
+    },
   }
 }
 
