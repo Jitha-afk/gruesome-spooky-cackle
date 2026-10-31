@@ -1,0 +1,28 @@
+{
+  "sources": [
+    {
+      "id": "s1",
+      "platform": "X",
+      "type": "vendor",
+      "account": "Vendor",
+      "date_ist": "2026-04-02 01:00",
+      "text": "Patch CVE-2026-1 now.",
+      "url": "https://example.test/s1",
+      "engagement": 4,
+      "theme": "alpha",
+      "metrics": { "likes": 4 }
+    }
+  ],
+  "samples": {
+    "alpha": [
+      [
+        {
+          "text": "A synthetic comment.",
+          "url": "https://example.test/c1",
+          "parent_url": "https://example.test/s1",
+          "date_ist": "2026-04-02 02:00"
+        }
+      ]
+    ]
+  }
+}

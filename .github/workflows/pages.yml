@@ -35,6 +35,9 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
+      - name: Install PyYAML
+        run: sudo apt-get update && sudo apt-get install -y python3-yaml
+
       - name: Test
         run: node --test scripts/test_brief.mjs
 
@@ -42,14 +45,18 @@ jobs:
         continue-on-error: true
         run: |
           set -eu
-          found=0
           for f in reports/*/data.json; do
             [ -e "$f" ] || continue
-            found=1
-            echo "check_schema_v1.py is a warning. Ranking short_name is required in the checker and optional in the site build."
             python3 scripts/check_schema_v1.py "$f"
           done
-          test "$found" -eq 1
+
+      - name: Check brief.md
+        run: |
+          set -eu
+          for f in reports/*/brief.md; do
+            [ -e "$f" ] || continue
+            python3 scripts/check_schema_v1.py "$f"
+          done
 
       - name: Build
         run: node scripts/build_site.mjs

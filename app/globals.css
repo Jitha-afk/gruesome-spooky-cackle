@@ -177,6 +177,12 @@
     width: 1px;
     background-image: repeating-linear-gradient(to bottom, var(--graph-frame) 0 2px, transparent 2px 7px);
 }
+/* Comark's document wrapper must not break the page flex column. */
+.comark-content,
+.brief-doc {
+  display: contents;
+}
+
 /* Site chrome. Figures keep the mdxcn frame. */
 html {
   -webkit-text-size-adjust: 100%;

@@ -77,8 +77,10 @@ export type WeekRecord = {
   name: string
   start: number
   end: number
-  kind: "data" | "legacy"
+  kind: "brief" | "data" | "legacy"
   data: WeekData | null
+  body: string
+  sections: Record<string, string>
   indexPath: string | null
 }
 
@@ -152,7 +154,16 @@ export function splitCounts(sources: Source[]): {
 }
 export function sourceRows(data: WeekData): Source[]
 export function themesByRank(data: WeekData): Theme[]
-export function validateData(data: unknown, file?: string): WeekData
+export function validateData(data: unknown, file?: string, version?: number): WeekData
+export function splitWeekData(data: WeekData): {
+  front: WeekData
+  sidecar: { sources: Source[]; samples: Record<string, Sample[][]> }
+}
+export function splitFrontmatter(text: string, file?: string): { yamlText: string; body: string }
+export function bodySections(body: string, themeKeys: Set<string>, file?: string): Record<string, string>
+export function joinBrief(front: unknown, sidecar: unknown, file?: string): WeekData
+export function loadBrief(briefPath: string): { data: WeekData; body: string; sections: Record<string, string> }
+export const basePath: string
 export function legacyWindow(week: WeekRecord): string
 export function indexRow(week: WeekRecord): IndexRow
 export function loadWeeks(reportsDir: string): WeekRecord[]
