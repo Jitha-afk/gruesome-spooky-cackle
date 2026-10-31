@@ -757,8 +757,8 @@ figcaption,
   position: fixed;
   inset: auto;
   top: calc(var(--header-h) + 0.5rem);
-  right: max(0.75rem, calc((100vw - 72rem) / 2 + 0.75rem));
-  width: min(20rem, calc(100vw - 1.5rem));
+  right: max(1rem, calc((100vw - 72rem) / 2 + 0.75rem));
+  width: min(20rem, calc(100vw - 2rem));
   max-height: calc(100dvh - var(--header-h) - 1.5rem);
   margin: 0;
   padding: 1.25rem 1.25rem 1rem;
@@ -965,16 +965,23 @@ figcaption,
   text-underline-offset: 0.25em;
   transition: text-decoration-color 0.15s ease;
 }
-/* The fill is clipped to the glyphs, so the underline needs its own colour. */
+/* The fill is clipped to the glyphs, and the clip paints an underline at full strength,
+   so gradient accents use a border as the underline. */
 html[data-accent-kind="gradient"] .intro-name {
   background: linear-gradient(90deg, var(--graph-accent), var(--graph-accent-2), var(--graph-accent-3));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-decoration-color: color-mix(in oklab, var(--graph-accent-2) 50%, transparent);
+  text-decoration: none;
+  padding-bottom: 1px;
+  border-bottom: 1px solid color-mix(in oklab, var(--graph-accent-2) 45%, transparent);
+  transition: border-color 0.15s ease;
 }
 .hero .intro-name:hover {
   text-decoration-color: var(--graph-accent);
+}
+html[data-accent-kind="gradient"] .hero .intro-name:hover {
+  border-bottom-color: var(--graph-accent-2);
 }
 .hero-meta {
   display: flex;
@@ -2995,7 +3002,6 @@ html.deep details[open] > * {
 }
 .src-eng .num {
   font: 0.75rem var(--font-mono);
-  color: var(--num-a);
 }
 .src-eng .bar {
   margin-top: 0.4375rem;
@@ -3388,6 +3394,7 @@ html.deep details[open] > * {
   html[data-accent-kind="gradient"] .intro-name {
     background: none;
     color: LinkText;
+    border-bottom-color: LinkText;
   }
   .swatch:has(:checked) {
     outline: 2px solid Highlight;

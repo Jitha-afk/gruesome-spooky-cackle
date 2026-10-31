@@ -79,7 +79,7 @@ function Kpis({ data, rows, delta }: { data: WeekData; rows: ThemeRow[]; delta: 
               "0 accounts"
             ) : lead.length > 1 ? (
               <>
-                <span className="num t-a">{leadShare}%</span> in the top {lead.length}
+                <span className="num t-n">{leadShare}%</span> in the top {lead.length}
               </>
             ) : (
               plural(lead.length, "theme")
