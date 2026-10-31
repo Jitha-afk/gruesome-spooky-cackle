@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Weekly threat intel",
-  description: "A weekly, ranked brief of security themes on X and YouTube, with CVE states, key posts and comment sentiment.",
+  description: "Weekly reports of the top security themes on X and YouTube, with CVE states, key sources and comment sentiment.",
 }
 
 export const viewport: Viewport = {

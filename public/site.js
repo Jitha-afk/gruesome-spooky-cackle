@@ -39,7 +39,7 @@
   function syncTheme() {
     var dark = root.classList.contains("dark")
     all("[data-theme-toggle]").forEach(function (button) {
-      button.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme")
+      button.setAttribute("aria-label", dark ? "Use light mode" : "Use dark mode")
     })
     var meta = d.querySelector('meta[name="theme-color"]')
     if (meta) meta.setAttribute("content", dark ? "#040404" : "#fafafa")
@@ -154,7 +154,7 @@
       body.appendChild(row)
     })
     var caption = body.parentNode.caption
-    if (caption) caption.textContent = up ? "Sources, least engaged first." : "Sources, most engaged first."
+    if (caption) caption.textContent = up ? "Sources, least engagement first." : "Sources, most engagement first."
     filter()
   }
 

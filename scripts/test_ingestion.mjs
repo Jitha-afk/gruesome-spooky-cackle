@@ -339,7 +339,7 @@ test("funnels come from the optional counts and skip what is missing or wrong", 
   delete data.meta.counts.candidates
   const funnel = funnelModel(data)
   assert.deepEqual(funnel.sources, [])
-  assert.deepEqual(funnel.comments.map((stage) => stage.label), ["in the window", "analysed", "on top themes"])
+  assert.deepEqual(funnel.comments.map((stage) => stage.label), ["in the window", "kept", "in themes"])
   assert.deepEqual(funnel.removed, [{ label: "no text", count: 2 }])
   const grown = structuredClone(COMPLETE)
   grown.meta.counts.candidates = 2
