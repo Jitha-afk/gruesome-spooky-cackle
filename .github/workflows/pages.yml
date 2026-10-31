@@ -23,11 +23,39 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Test and build
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Test
+        run: node --test scripts/test_brief.mjs
+
+      - name: Check schema v1 data
+        continue-on-error: true
         run: |
-          python3 scripts/test_build_site.py
-          python3 scripts/build_site.py
-          cmp reports/2026-10-23_2026-10-29/index.html site/reports/2026-10-23_2026-10-29/index.html
+          set -eu
+          found=0
+          for f in reports/*/data.json; do
+            [ -e "$f" ] || continue
+            found=1
+            echo "check_schema_v1.py is a warning. Ranking short_name is required in the checker and optional in the site build."
+            python3 scripts/check_schema_v1.py "$f"
+          done
+          test "$found" -eq 1
+
+      - name: Build
+        run: node scripts/build_site.mjs
+
+      - name: Test built site
+        run: node --test scripts/test_site.mjs
 
       - name: Configure Pages
         if: github.ref == 'refs/heads/main'

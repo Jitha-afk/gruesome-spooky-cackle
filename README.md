@@ -1,16 +1,18 @@
 # gruesome-spooky-cackle
 
-Repo for Weekly Top News
+Weekly threat intel pages. Each week is a directory under `reports/`.
 
 ## Add a week
 
-Open a pull request that adds `reports/YYYY-MM-DD_YYYY-MM-DD/index.html`. Both dates are real calendar days. The second date is the same day as the first, or a later day. The file is that week's brief. A directory under `reports/` with any other name fails the build, and so does a week directory with no `index.html`. The build copies each brief unchanged and writes the root page from those directory names. Merge the pull request to `main` to publish.
+Add `reports/YYYY-MM-DD_YYYY-MM-DD/data.json` (schema v1). The build reads that file and writes the week page. A week with no `data.json` keeps its `index.html` and the index links to that saved page.
 
-The published site is [Weekly threat intel](https://jitha-afk.github.io/gruesome-spooky-cackle/). The brief for 23 Oct 2026 to 29 Oct 2026 is [23 Oct 2026 to 29 Oct 2026](https://jitha-afk.github.io/gruesome-spooky-cackle/reports/2026-10-23_2026-10-29/).
+`short_name` on a theme or ranking row is optional. A CVE `basis` is optional. The build fails when `schema_version` is not 1 or a required field is missing.
+
+Merge to `main` to publish. The published site is [Weekly threat intel](https://jitha-afk.github.io/gruesome-spooky-cackle/).
 
 ## Preview locally
 
-From the repository root, run `python3 scripts/build_site.py`. Then run `python3 -m http.server 8000 --directory site`. Open `http://127.0.0.1:8000/`.
+From the repository root, run `pnpm install` and `pnpm build`. The site is written to `site/`. Serve that directory under `/gruesome-spooky-cackle/`.
 
 ## Enable GitHub Pages
 
