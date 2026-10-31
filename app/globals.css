@@ -324,6 +324,7 @@ html:not(.js) .filters { display: none; }
 .source-index td:nth-child(2) { white-space: normal; overflow-wrap: break-word; }
 .source-index td:nth-child(3) { white-space: normal; overflow-wrap: anywhere; }
 .source-index td:nth-child(3) a { color: var(--foreground); text-decoration: underline; text-decoration-color: var(--graph-accent); }
+.source-index tbody td:nth-child(3) a { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .source-index td:nth-child(n + 4) { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .source-index th:nth-child(n + 4), .source-index td:nth-child(n + 4) { display: none; }
 @media (max-width: 639px) {
@@ -331,7 +332,6 @@ html:not(.js) .filters { display: none; }
   .source-index tbody tr { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 0.75rem; padding: 0.6rem 0; }
   .source-index tbody tr td { padding: 0; }
   .source-index tbody td:nth-child(3) { grid-column: 1 / -1; padding-top: 0.25rem; }
-  .source-index tbody td:nth-child(3) a { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   .source-index tbody td .graph-rule-y { display: none; }
 }
 @media (min-width: 768px) {
@@ -378,6 +378,8 @@ html:not(.js) .filters { display: none; }
 .cve-table tbody tr td, .cve-table thead tr th { overflow-wrap: normal; }
 .cve-table tbody tr td:nth-child(-n + 3), .cve-table thead tr th { white-space: nowrap; }
 .cve-table tbody tr td:nth-child(4) { white-space: normal; overflow-wrap: break-word; }
+.cve-table tbody tr td:nth-child(2) { white-space: normal; overflow-wrap: break-word; }
+.cve-table tbody tr td:nth-child(4) { overflow-wrap: anywhere; }
 @media (max-width: 639px) {
   .cve-table thead { display: none; }
   .cve-table tbody tr { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 0.75rem; row-gap: 0.2rem; padding: 0.7rem 0; }
