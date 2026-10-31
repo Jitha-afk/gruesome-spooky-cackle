@@ -20,6 +20,11 @@ import {
 } from "@/registry/default/graph-frame/graph-motion"
 import { cn } from "@/lib/utils"
 
+type WaffleSegment = {
+  cells: number
+  className: string
+}
+
 type GraphWaffleProps = {
   title: string
   /** `0.73`, `"0.73"`, or `"73%"`. Or write `73% green` as children. */
@@ -27,6 +32,8 @@ type GraphWaffleProps = {
   cells?: number
   columns?: number
   caption?: string
+  /** When set, cells are painted in order instead of one fill. */
+  segments?: WaffleSegment[]
   /** Markdown: the value, then the caption. `73% — tests green`. */
   children?: ReactNode
   glyphs?: Glyphs
@@ -35,12 +42,22 @@ type GraphWaffleProps = {
   className?: string
 }
 
+function segmentClass(segments: WaffleSegment[], index: number) {
+  let cursor = 0
+  for (const segment of segments) {
+    cursor += segment.cells
+    if (index < cursor) return segment.className
+  }
+  return undefined
+}
+
 function GraphWaffle({
   title,
   value: valueProp,
   cells = 100,
   columns = 10,
   caption: captionProp,
+  segments,
   children,
   glyphs,
   palette,
@@ -78,16 +95,16 @@ function GraphWaffle({
                 if (index >= cells) {
                   return <span className="min-w-[1ch] flex-1" key={column} />
                 }
-                const isFilled = index < filled
+                const tone = segments
+                  ? (segmentClass(segments, index) ?? "text-graph-frame")
+                  : index < filled
+                    ? toneClass(palette, "primary")
+                    : "text-graph-frame"
+                const isFilled = segments ? tone !== "text-graph-frame" : index < filled
 
                 return (
                   <motion.span
-                    className={cn(
-                      "min-w-[1ch] flex-1 text-center",
-                      isFilled
-                        ? toneClass(palette, "primary")
-                        : "text-graph-frame"
-                    )}
+                    className={cn("min-w-[1ch] flex-1 text-center", tone)}
                     initial={reduce || !isFilled ? false : { opacity: 0 }}
                     key={column}
                     transition={graphTransition(reduce, {
@@ -103,9 +120,11 @@ function GraphWaffle({
             </div>
           ))}
         </div>
-        <p className={cn("tabular-nums", toneClass(palette, "primary"))}>
-          {Math.round(clamped * 100)}%
-        </p>
+        {segments ? null : (
+          <p className={cn("tabular-nums", toneClass(palette, "primary"))}>
+            {Math.round(clamped * 100)}%
+          </p>
+        )}
         {caption ? <p className="text-graph-muted">{caption}</p> : null}
         <span className="sr-only">
           {Math.round(clamped * 100)} percent

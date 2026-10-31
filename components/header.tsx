@@ -44,7 +44,7 @@ export function Header({
           <span className="only-light">Dark</span>
         </button>
       </div>
-      <h1>{title}</h1>
+      <h1 className="graph-title-ink">{title}</h1>
       {summary ? <p className="summary">{summary}</p> : null}
     </header>
   )

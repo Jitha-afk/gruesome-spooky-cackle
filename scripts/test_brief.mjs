@@ -5,14 +5,20 @@ import path from "node:path"
 import test from "node:test"
 import {
   BuildError,
+  cveTableRows,
   cveViews,
   commentModel,
+  headlineStats,
+  heatmapModel,
   indexRow,
   loadWeeks,
   previewCves,
   rankRows,
+  sentimentTotals,
   shortLabel,
+  sparkSeries,
   validateData,
+  waffleParts,
   weekSummary,
   whyText,
 } from "../lib/brief.mjs"
@@ -140,6 +146,30 @@ test("short_name and basis are optional and extra fields are allowed", () => {
   assert.equal(shortLabel("Alphabetical theme name", "Alpha"), "Alpha")
   assert.equal(cveViews(data.themes[0])[0].basis, "A basis line.")
   assert.equal(cveViews(data.themes[0])[1].tag, "EXPLOITED")
+})
+
+test("week graphs use only data.json", () => {
+  const data = loadWeeks(REAL)[0].data
+  const stats = headlineStats(data)
+  assert.equal(stats.themes, 10)
+  assert.equal(stats.sources, data.meta.counts.x_posts + data.meta.counts.youtube_videos)
+  assert.equal(stats.exploited, 7)
+  assert.equal(stats.cves, 8)
+  assert.equal(data.meta.title, "Weekly cybersecurity threat-intel brief")
+  const heat = heatmapModel(data)
+  assert.deepEqual(heat.columns, ["Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu"])
+  assert.equal(heat.rows.length, 10)
+  const counted = heat.rows.reduce((sum, row) => sum + row.values.reduce((a, b) => a + b, 0), 0)
+  assert.equal(counted, data.sources.length)
+  const table = cveTableRows(data)
+  assert.equal(table[0].flag, true)
+  assert.equal(table.at(-1).id, "CVE-2026-115560")
+  assert.equal(table.at(-1).tag, "NOT CONFIRMED")
+  const parts = waffleParts(sentimentTotals(data))
+  assert.equal(parts.reduce((sum, part) => sum + part.cells, 0), 100)
+  assert.equal(sparkSeries(data.themes[0], data).length, 7)
+  assert.equal(whyText(data.themes[0]).clamp, false)
+  assert.ok(whyText(data.themes[0]).text.length > 0)
 })
 
 test("why_line is optional and top cards keep three CVEs", () => {

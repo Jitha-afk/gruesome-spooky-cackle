@@ -112,6 +112,38 @@ export function whyText(theme: Theme): { text: string; clamp: boolean }
 export function previewCves(theme: Theme, limit?: number): { shown: CveView[]; extra: number }
 export function weekSummary(theme: Theme): string
 export function commentModel(theme: Theme): CommentView[]
+export function windowDays(data: WeekData): { iso: string; label: string }[]
+export function heatmapModel(data: WeekData): { columns: string[]; rows: { label: string; values: number[] }[] }
+export function sparkSeries(theme: Theme, data: WeekData): number[]
+export function coverageModels(data: WeekData): {
+  accounts: { label: string; segments: { label: string; value: number }[] }[]
+  platforms: { label: string; segments: { label: string; value: number }[] }[]
+}
+export function headlineStats(data: WeekData): {
+  themes: number
+  sources: number
+  comments: number
+  exploited: number
+  cves: number
+}
+export function cveTableRows(data: WeekData): {
+  id: string
+  theme: string
+  tag: string
+  flag: Flag
+  basis: string
+  rank: number
+}[]
+export function sentimentTotals(data: WeekData): {
+  positive: number
+  neutral: number
+  negative: number
+  unclassified: number
+}
+export function waffleParts(
+  totals: { positive: number; neutral: number; negative: number; unclassified: number },
+  cells?: number,
+): { key: string; count: number; cells: number }[]
 export function splitCounts(sources: Source[]): {
   type: { vendor: number; media: number; independent: number }
   platform: { X: number; YouTube: number }

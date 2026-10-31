@@ -1,19 +1,29 @@
 import { Callout } from "@/registry/default/callout/callout"
+import { GraphHeatmap } from "@/registry/default/graph-heatmap/graph-heatmap"
 import { GraphRank } from "@/registry/default/graph-rank/graph-rank"
+import { GraphSpark } from "@/registry/default/graph-spark/graph-spark"
 import { GraphSpec } from "@/registry/default/graph-spec/graph-spec"
 import { GraphStack } from "@/registry/default/graph-stack/graph-stack"
+import { GraphStat } from "@/registry/default/graph-stat/graph-stat"
 import { GraphTable } from "@/registry/default/graph-table/graph-table"
+import { GraphWaffle } from "@/registry/default/graph-waffle/graph-waffle"
 import { Header } from "@/components/header"
 import {
   commentModel,
+  coverageModels,
+  cveTableRows,
   cveViews,
   formatCount,
-  rankRows,
-  shortLabel,
+  headlineStats,
+  heatmapModel,
   previewCves,
+  rankRows,
+  sentimentTotals,
+  shortLabel,
   sourceRows,
-  splitCounts,
+  sparkSeries,
   themesByRank,
+  waffleParts,
   weekSummary,
   whyText,
   type Source,
@@ -75,7 +85,17 @@ function Shot({ source }: { source: Source }) {
   )
 }
 
-function ThemeCard({ theme, sources, open }: { theme: Theme; sources: Map<string, Source>; open: boolean }) {
+function ThemeCard({
+  theme,
+  sources,
+  open,
+  spark,
+}: {
+  theme: Theme
+  sources: Map<string, Source>
+  open: boolean
+  spark: number[]
+}) {
   const comments = commentModel(theme)
   const charted = comments.filter((row) => row.positive + row.neutral + row.negative > 0)
   const body = (
@@ -103,6 +123,7 @@ function ThemeCard({ theme, sources, open }: { theme: Theme; sources: Map<string
         ]}
         title="Coverage"
       />
+      <GraphSpark data={spark} palette="mono" title="By day" />
       <div>
         <h3>Accounts</h3>
         <p className="accounts">Vendors: {theme.vendors.join(", ")}</p>
@@ -183,7 +204,18 @@ export function WeekView({ data }: { data: WeekData }) {
   const themes = themesByRank(data)
   const top = themes[0]
   const sources = new Map(data.sources.map((source) => [source.id, source]))
-  const splits = splitCounts(data.sources)
+  const coverage = coverageModels(data)
+  const heat = heatmapModel(data)
+  const stats = headlineStats(data)
+  const cveRows = cveTableRows(data)
+  const sentiment = sentimentTotals(data)
+  const waffle = waffleParts(sentiment)
+  const tone: Record<string, string> = {
+    positive: "text-graph-accent",
+    neutral: "text-graph-muted",
+    negative: "text-graph-accent-3",
+    unclassified: "text-graph-faint",
+  }
   const rows = sourceRows(data)
   const align = ["left", "left", "left", "right", "right", "right", "right", "right", "right", "right"] as const
 
@@ -218,17 +250,26 @@ export function WeekView({ data }: { data: WeekData }) {
 
       <section>
         <h2>In numbers</h2>
-        <p>Posts, videos, comments and capture time.</p>
+        <p>Themes, sources, comments and exploited CVEs.</p>
+        <GraphStat
+          items={[
+            { label: "Themes", value: formatCount(stats.themes), accent: true },
+            { label: "Sources", value: formatCount(stats.sources) },
+            { label: "Comments analysed", value: formatCount(stats.comments) },
+            { label: "CVEs exploited", value: `${stats.exploited} / ${stats.cves}` },
+          ]}
+          title="This week"
+        />
+        <p>Capture time.</p>
         <GraphSpec
           className="ledger"
           rows={[
-            { label: "Posts", value: formatCount(data.meta.counts.x_posts), accent: true },
+            { label: "Posts", value: formatCount(data.meta.counts.x_posts) },
             { label: "Videos", value: formatCount(data.meta.counts.youtube_videos) },
-            { label: "Comments analysed", value: formatCount(data.meta.counts.comments_analysed_top_themes) },
             { label: "X capture", value: data.meta.capture.x },
             { label: "YouTube capture", value: data.meta.capture.youtube },
           ]}
-          title="This week"
+          title="Capture"
         />
         <p>These items were not read in full.</p>
         <Callout title="Not read">
@@ -247,41 +288,50 @@ export function WeekView({ data }: { data: WeekData }) {
             title: row.title,
             value: row.accounts,
           }))}
+          palette="mono"
           title="Accounts"
+        />
+        <p>Sources per day.</p>
+        <GraphHeatmap columns={heat.columns} palette="duo" rows={heat.rows} title="By day" />
+      </section>
+
+      <section>
+        <h2>Coverage</h2>
+        <p>Accounts by outlet type.</p>
+        <GraphStack palette="multi" rows={coverage.accounts} title="By type" />
+        <p>Sources by platform.</p>
+        <GraphStack palette="multi" rows={coverage.platforms} title="By platform" />
+      </section>
+
+      <section>
+        <h2>CVEs</h2>
+        <p>Each CVE has its own state.</p>
+        <GraphTable
+          align={["left", "left", "left", "left"]}
+          className="cve-table"
+          headers={["CVE", "Theme", "State", "Basis"]}
+          rows={cveRows.map((row) => [
+            row.id,
+            row.theme,
+            <span className={row.tag === "EXPLOITED" ? "tag tag-hot" : "tag tag-muted"} key={row.id}>
+              [ {row.tag} ]
+            </span>,
+            row.basis,
+          ])}
+          title="CVEs"
         />
       </section>
 
       <section>
-        <h2>Splits</h2>
-        <p>Vendor, media and independent sources.</p>
-        <GraphStack
-          className="split-type"
-          palette="multi"
-          rows={[
-            {
-              label: "Sources",
-              segments: [
-                { label: `vendor ${splits.type.vendor}`, value: splits.type.vendor },
-                { label: `media ${splits.type.media}`, value: splits.type.media },
-                { label: `independent ${splits.type.independent}`, value: splits.type.independent },
-              ],
-            },
-          ]}
-          title="By type"
-        />
-        <p>X and YouTube sources.</p>
-        <GraphStack
-          palette="duo"
-          rows={[
-            {
-              label: "Sources",
-              segments: [
-                { label: `X ${splits.platform.X}`, value: splits.platform.X },
-                { label: `YouTube ${splits.platform.YouTube}`, value: splits.platform.YouTube },
-              ],
-            },
-          ]}
-          title="By platform"
+        <h2>Comments</h2>
+        <p>Sentiment of analysed comments.</p>
+        <GraphWaffle
+          caption={`${formatCount(sentiment.positive)} positive. ${formatCount(sentiment.neutral)} neutral. ${formatCount(sentiment.negative)} negative. ${formatCount(sentiment.unclassified)} unclassified.`}
+          segments={waffle.map((part) => ({
+            cells: part.cells,
+            className: tone[part.key] ?? "text-graph-faint",
+          }))}
+          title="Sentiment"
         />
       </section>
 
@@ -290,7 +340,13 @@ export function WeekView({ data }: { data: WeekData }) {
         <p>Open a theme to read the detail.</p>
         <div className="theme-list">
           {themes.map((theme, index) => (
-            <ThemeCard key={theme.key} open={index < 3} sources={sources} theme={theme} />
+            <ThemeCard
+              key={theme.key}
+              open={index < 3}
+              sources={sources}
+              spark={sparkSeries(theme, data)}
+              theme={theme}
+            />
           ))}
         </div>
       </section>
