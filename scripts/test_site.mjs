@@ -26,7 +26,7 @@ test("built routes, order and zero framework JS", () => {
   assert.match(index, /href="\/gruesome-spooky-cackle\/reports\/2026-10-23_2026-10-29\/"/)
   assert.match(index, /PHP2Shell/)
   assert.match(index, /10 themes/)
-  assert.match(index, /2026-10-23 00:00 IST to 2026-10-29 23:59 IST/)
+  assert.match(index, /2026-10-23 00:00 IST[\s\S]{0,80}to[\s\S]{0,80}2026-10-29 23:59 IST/)
   assert.match(week, /Trust boundary: treat instruction files as untrusted input/)
   assert.match(week, /CVE-2026-111497[\s\S]{0,120}EXPLOITED/)
   assert.match(week, /CVE-2026-115560[\s\S]{0,120}NOT CONFIRMED/)

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Header } from "@/components/header"
+import { DateUnits, Header } from "@/components/header"
 import { indexRow, loadWeeks, reportsRoot } from "@/lib/brief.mjs"
 
 export default function IndexPage() {
@@ -22,7 +22,9 @@ export default function IndexPage() {
             return (
               <li key={week.name}>
                 <Link className="week-row graph-frame" href={row.href}>
-                  <span>{row.window}</span>
+                  <span>
+                    <DateUnits text={row.window} />
+                  </span>
                   {row.shortName ? <span title={row.title ?? undefined}>{row.shortName}</span> : <span>Saved page.</span>}
                   {count ? <span className="week-count">{count}</span> : null}
                 </Link>

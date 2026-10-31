@@ -1,5 +1,18 @@
 import Link from "next/link"
 
+export function DateUnits({ text }: { text: string }) {
+  const marker = " to "
+  const at = text.indexOf(marker)
+  if (at === -1) return text
+  return (
+    <>
+      <span className="date-unit">{text.slice(0, at)}</span>
+      {marker}
+      <span className="date-unit">{text.slice(at + marker.length)}</span>
+    </>
+  )
+}
+
 export function Header({
   kicker,
   title,
@@ -17,10 +30,14 @@ export function Header({
         <div className="min-w-0">
           {home ? null : (
             <Link className="home-link" href="/">
-              All weeks.
+              All weeks
             </Link>
           )}
-          {kicker ? <p className="window">{kicker}</p> : null}
+          {kicker ? (
+            <p className="window">
+              <DateUnits text={kicker} />
+            </p>
+          ) : null}
         </div>
         <button type="button" data-theme-toggle>
           <span className="only-dark">Light</span>

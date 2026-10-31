@@ -92,7 +92,7 @@
       rows.forEach(function (row) {
         body.appendChild(row)
       })
-      sortButton.textContent = direction === "desc" ? "Show lowest first." : "Show highest first."
+      sortButton.textContent = direction === "desc" ? "Show lowest first" : "Show highest first"
     })
   }
 })()

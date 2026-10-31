@@ -62,22 +62,16 @@ function CveList({
 }
 
 function Shot({ source }: { source: Source }) {
-  if (typeof source.image === "string" && source.image) {
-    return (
-      <figure className="shot">
-        <a className="shot-frame graph-frame" href={source.url}>
-          <img alt="" decoding="async" height={360} loading="lazy" src={source.image} width={640} />
-        </a>
-        <figcaption>
-          Credit: <a href={source.url}>{source.account}</a>
-        </figcaption>
-      </figure>
-    )
-  }
+  if (typeof source.image !== "string" || !source.image) return null
   return (
-    <a className="shot-frame shot-missing graph-frame" href={source.url}>
-      This post has no image.
-    </a>
+    <figure className="shot">
+      <a className="shot-frame graph-frame" href={source.url}>
+        <img alt="" decoding="async" height={360} loading="lazy" src={source.image} width={640} />
+      </a>
+      <figcaption>
+        Credit: <a href={source.url}>{source.account}</a>
+      </figcaption>
+    </figure>
   )
 }
 
@@ -87,7 +81,12 @@ function ThemeCard({ theme, sources, open }: { theme: Theme; sources: Map<string
   const body = (
     <>
       {theme.summary ? <p>{theme.summary}</p> : null}
-      {theme.why ? <p>{theme.why}</p> : null}
+      {theme.why ? (
+        <>
+          <h3>Why it is important</h3>
+          <p>{theme.why}</p>
+        </>
+      ) : null}
       <div>
         <h3>Affected</h3>
         <p>Products: {theme.affected.products}</p>
@@ -119,7 +118,7 @@ function ThemeCard({ theme, sources, open }: { theme: Theme; sources: Map<string
             return (
               <article className="key-item graph-frame" key={id}>
                 <p className="item-meta">
-                  {source.date_ist} {source.account}
+                  <span className="date-unit">{source.date_ist}</span> {source.account}
                 </p>
                 <a href={source.url}>{source.text}</a>
                 <Shot source={source} />
@@ -133,7 +132,7 @@ function ThemeCard({ theme, sources, open }: { theme: Theme; sources: Map<string
           className="comment-pulse"
           palette="multi"
           rows={charted.map((row) => ({
-            label: row.label,
+            label: `${row.label} (${row.positive + row.neutral + row.negative})`,
             segments: [
               { label: "positive", value: row.positive },
               { label: "neutral", value: row.neutral },
@@ -151,7 +150,9 @@ function ThemeCard({ theme, sources, open }: { theme: Theme; sources: Map<string
             <ul className="samples">
               {cluster.samples.map((sample, index) => (
                 <li key={`${sample.href}-${index}`}>
-                  <a href={sample.href}>{sample.text}</a>
+                  <a dir="auto" href={sample.href}>
+                    {sample.text}
+                  </a>
                   {sample.date ? <span className="sample-date">{sample.date}</span> : null}
                 </li>
               ))}
@@ -169,8 +170,8 @@ function ThemeCard({ theme, sources, open }: { theme: Theme; sources: Map<string
       </h3>
       {open ? null : (
         <button aria-expanded="false" data-collapse-toggle type="button">
-          <span className="when-closed">Show this theme.</span>
-          <span className="when-open">Hide this theme.</span>
+          <span className="when-closed">Show this theme</span>
+          <span className="when-open">Hide this theme</span>
         </button>
       )}
       {open ? body : <div data-collapse-body>{body}</div>}
@@ -196,7 +197,6 @@ export function WeekView({ data }: { data: WeekData }) {
 
       <section>
         <h2>Top 3 themes</h2>
-        <p>The first three themes this week.</p>
         <div className="top-list">
           {themes.slice(0, 3).map((theme) => {
             const why = whyText(theme)
@@ -209,6 +209,7 @@ export function WeekView({ data }: { data: WeekData }) {
                 </p>
                 <p className={why.clamp ? "why-line" : undefined}>{why.text}</p>
                 <CveList basis={false} limit={3} moreHref={`#theme-${theme.key}`} theme={theme} />
+                {cveViews(theme).length === 0 ? <p className="tag tag-muted">No CVE in the sources.</p> : null}
               </article>
             )
           })}
@@ -254,13 +255,15 @@ export function WeekView({ data }: { data: WeekData }) {
         <h2>Splits</h2>
         <p>Vendor, media and independent sources.</p>
         <GraphStack
+          className="split-type"
+          palette="multi"
           rows={[
             {
               label: "Sources",
               segments: [
-                { label: "vendor", value: splits.type.vendor },
-                { label: "media", value: splits.type.media },
-                { label: "independent", value: splits.type.independent },
+                { label: `vendor ${splits.type.vendor}`, value: splits.type.vendor },
+                { label: `media ${splits.type.media}`, value: splits.type.media },
+                { label: `independent ${splits.type.independent}`, value: splits.type.independent },
               ],
             },
           ]}
@@ -273,8 +276,8 @@ export function WeekView({ data }: { data: WeekData }) {
             {
               label: "Sources",
               segments: [
-                { label: "X", value: splits.platform.X },
-                { label: "YouTube", value: splits.platform.YouTube },
+                { label: `X ${splits.platform.X}`, value: splits.platform.X },
+                { label: `YouTube ${splits.platform.YouTube}`, value: splits.platform.YouTube },
               ],
             },
           ]}
@@ -297,7 +300,7 @@ export function WeekView({ data }: { data: WeekData }) {
         <p>Filter the list. Search the text. Sort by engagement.</p>
         <div className="filters">
           <fieldset>
-            <legend>Source type.</legend>
+            <legend>Source type</legend>
             <label>
               <input data-filter-type defaultChecked type="checkbox" value="vendor" />
               Vendor
@@ -312,7 +315,7 @@ export function WeekView({ data }: { data: WeekData }) {
             </label>
           </fieldset>
           <fieldset>
-            <legend>Platform.</legend>
+            <legend>Platform</legend>
             <label>
               <input data-filter-platform defaultChecked type="checkbox" value="X" />X
             </label>
@@ -326,7 +329,7 @@ export function WeekView({ data }: { data: WeekData }) {
             <input data-search-input type="search" />
           </label>
           <button data-sort type="button">
-            Show lowest first.
+            Show lowest first
           </button>
         </div>
         <GraphTable
@@ -359,8 +362,8 @@ export function WeekView({ data }: { data: WeekData }) {
       <section data-collapse>
         <h2>Method</h2>
         <button aria-expanded="false" data-collapse-toggle type="button">
-          <span className="when-closed">Show the method.</span>
-          <span className="when-open">Hide the method.</span>
+          <span className="when-closed">Show the method</span>
+          <span className="when-open">Hide the method</span>
         </button>
         <div data-collapse-body>
           <Callout title="Method">
