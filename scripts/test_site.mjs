@@ -3,7 +3,7 @@ import fs from "node:fs"
 import path from "node:path"
 import test from "node:test"
 import zlib from "node:zlib"
-import { funnelModel, loadWeeks } from "../lib/brief.mjs"
+import { cveStateLabel, funnelModel, headlineStats, heroLead, loadWeeks } from "../lib/brief.mjs"
 import { BASE_PATH, SITE_URL } from "../lib/site-url.mjs"
 
 const root = path.resolve(import.meta.dirname, "..")
@@ -117,5 +117,35 @@ test("the Atom feed is built, with absolute links, and every page links it", () 
     assert.equal(links.length, 1, `${page} has ${links.length} feed links`)
     assert.ok(links[0].includes(`href="${SITE_URL}feed.xml"`), links[0])
     assert.ok(html.includes(`href="${BASE_PATH}/feed.xml"`), `${page} has no footer feed link`)
+  }
+})
+
+test("screen-reader CVE counts name the sources, and the lead is the same in the meta tags and the feed", () => {
+  const index = fs.readFileSync(path.join(site, "index.html"), "utf8")
+  const feed = fs.readFileSync(path.join(site, "feed.xml"), "utf8")
+  const decode = (text) =>
+    text.replace(/&quot;/g, '"').replace(/&#x27;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&")
+  const spoken = (html) =>
+    [...html.matchAll(/aria-label="([^"]*)"|class="sr-only">([^<]*)</g)].map((match) => decode(match[1] ?? match[2]))
+  for (const week of loadWeeks(path.join(root, "reports")).filter((item) => item.kind === "data")) {
+    const html = fs.readFileSync(path.join(site, "reports", week.name, "index.html"), "utf8")
+    for (const page of [html, index]) {
+      for (const text of spoken(page).filter((text) => /\b\d+ of \d+ (?:CVEs? )?exploited\b/.test(text))) {
+        assert.match(text, /^CVE states from the sources: \d+ of \d+ exploited\.$/)
+      }
+    }
+    const stats = headlineStats(week.data)
+    if (stats.cves > 0) {
+      const label = `aria-label="${cveStateLabel(stats.exploited, stats.cves)}"`
+      assert.equal(html.split(label).length - 1, 2, `${week.name} needs the label on the KPI and CVE meters`)
+      assert.ok(index.includes(label), `the index meter for ${week.name}`)
+    }
+    const lead = heroLead(week.data)
+    for (const name of ["description", "og:description", "twitter:description"]) {
+      const tags = [...html.matchAll(new RegExp(`<meta (?:name|property)="${name}" content="([^"]*)"`, "g"))]
+      assert.deepEqual(tags.map((match) => decode(match[1])), [lead], `${week.name} ${name}`)
+    }
+    const entry = feed.split("<entry>").find((part) => part.includes(`<id>${SITE_URL}reports/${week.name}/</id>`))
+    assert.equal(decode(entry?.match(/<summary type="text">([^<]*)<\/summary>/)?.[1] ?? ""), lead, `${week.name} feed summary`)
   }
 })

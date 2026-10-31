@@ -175,6 +175,9 @@ test("heroLead names the sources first, then bottom_line or the top why_line", (
     }
   }
   assert.equal(cveSentence(data), "The sources tell you that attackers exploit 7 of the 8 CVEs in this report.")
+  data.meta.bottom_line = "One line."
+  assert.equal(heroLead(data), "The sources tell you that attackers exploit 7 of the 8 CVEs in this report. One line.")
+  data.meta.bottom_line = null
   flags(false)
   assert.equal(cveSentence(data), null)
   assert.match(heroLead(data), /^PHP2Shell is the top theme, with /)
