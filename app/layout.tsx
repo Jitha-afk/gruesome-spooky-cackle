@@ -1,5 +1,6 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
+import { DEFAULT_ACCENT } from "@/lib/accent.mjs"
 import "./globals.css"
 
 const geistSans = Geist({
@@ -15,12 +16,19 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Weekly threat intel",
+  description: "A weekly, ranked brief of security themes on X and YouTube, with CVE states, key posts and comment sentiment.",
+}
+
+export const viewport: Viewport = {
+  themeColor: "#040404",
+  colorScheme: "dark light",
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
+      data-accent={DEFAULT_ACCENT}
       data-accent-kind="gradient"
       className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
     >

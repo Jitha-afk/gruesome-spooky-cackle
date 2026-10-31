@@ -2,14 +2,19 @@
 import { spawnSync } from "node:child_process"
 import fs from "node:fs"
 import path from "node:path"
-import { loadWeeks, reportsRoot } from "../lib/brief.mjs"
+import { BuildError, loadWeeks, reportsRoot } from "../lib/brief.mjs"
+import { accentBoot } from "../lib/accent.mjs"
+import { checkWeek } from "../lib/check.mjs"
 
 const root = path.resolve(import.meta.dirname, "..")
 const outDir = path.join(root, "out")
 const siteDir = path.join(root, "site")
 
-const THEME_BOOT = `<script>(function(){var t="dark";try{var s=localStorage.getItem("theme");if(s==="light"||s==="dark")t=s;}catch(e){}var h=document.documentElement;if(t==="light")h.classList.remove("dark");else h.classList.add("dark");h.classList.add("js");h.style.colorScheme=t==="light"?"light":"dark";})();</script>`
-const SITE_JS = `<script src="/gruesome-spooky-cackle/site.js" defer></script>`
+// A deep link lands at once: no smooth scroll and no details animation until load.
+const DEEP_LINK = `if(location.hash){h.classList.add("deep");h.style.scrollBehavior="auto";var o=function(){h.classList.remove("deep");h.style.scrollBehavior=""};addEventListener("load",function(){setTimeout(o)});setTimeout(o,3e3)}`
+const THEME_BOOT = `<script>(function(){var t="dark";try{var s=localStorage.getItem("theme");if(s==="light"||s==="dark")t=s;}catch(e){}var h=document.documentElement;if(t==="light")h.classList.remove("dark");else h.classList.add("dark");h.classList.add("js");${DEEP_LINK}h.style.colorScheme=t==="light"?"light":"dark";var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",t==="light"?"#fafafa":"#040404");${accentBoot()}})();</script>`
+// If site.js fails to load, drop the js class so the page falls back to its no-JS layout.
+const SITE_JS = `<script src="/gruesome-spooky-cackle/site.js" defer onerror="document.documentElement.classList.remove('js')"></script>`
 
 function run(command, args) {
   const result = spawnSync(command, args, { cwd: root, stdio: "inherit" })
@@ -25,7 +30,29 @@ function inject(html) {
   return html.replace("</head>", `${THEME_BOOT}</head>`).replace("</body>", `${SITE_JS}</body>`)
 }
 
-const weeks = loadWeeks(reportsRoot())
+let weeks
+try {
+  weeks = loadWeeks(reportsRoot())
+} catch (error) {
+  if (!(error instanceof BuildError)) throw error
+  console.error(`Build stopped. ${error.message}\nRun: pnpm check:week for every rule.`)
+  process.exit(1)
+}
+
+// The errors that fail `pnpm check:week` also stop a local build, so no build publishes a week CI rejects.
+const stops = []
+for (const week of weeks) {
+  if (week.kind !== "data") continue
+  const file = path.join(reportsRoot(), week.name, "data.json")
+  const raw = JSON.parse(fs.readFileSync(file, "utf8").replace(/^\uFEFF/, ""))
+  for (const item of checkWeek(raw, week.name)) {
+    if (item.level === "error") stops.push(`${path.relative(root, file)}: ${item.path ? `${item.path} ` : ""}${item.message}`)
+  }
+}
+if (stops.length > 0) {
+  console.error(`Build stopped.\n${stops.join("\n")}\nRun: pnpm check:week for every rule.`)
+  process.exit(1)
+}
 run("pnpm", ["exec", "next", "build"])
 run("python3", ["scripts/strip-js.py", outDir, siteDir])
 

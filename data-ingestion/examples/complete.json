@@ -1,0 +1,581 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "title": "Weekly cybersecurity threat-intel brief",
+    "window": {
+      "start": "2026-10-30 00:00 IST",
+      "end": "2026-11-05 23:59 IST"
+    },
+    "generated": "2026-11-06 20:31 IST",
+    "bottom_line": "Patch Acme Gateway now and check for web shells: attackers used CVE-2026-120118 for four days before the advisory. Rotate npm tokens if your builds ran after 2 November.",
+    "capture": {
+      "x": "2026-11-06 20:05 IST to 2026-11-06 20:14 IST",
+      "youtube": "2026-11-06 20:10 IST to 2026-11-06 20:12 IST"
+    },
+    "counts": {
+      "x_posts": 7,
+      "youtube_videos": 2,
+      "comments_analysed_top_themes": 66,
+      "candidates": 14,
+      "comments_retrieved": 92,
+      "comments_analysed_all": 72,
+      "comment_exclusions": {
+        "retrieved": 92,
+        "in_window": 90,
+        "excluded_spam_bot_abuse": 9,
+        "excluded_retweet": 5,
+        "excluded_no_text": 3,
+        "duplicates": 1
+      }
+    },
+    "methodology": "We read posts and videos from a fixed list of vendor, media and independent accounts for the IST week. We grouped stories into themes and ranked them by distinct accounts. We clustered comments on the top themes and labelled their sentiment.",
+    "method_steps": [
+      {
+        "title": "Collect",
+        "detail": "Read every post from the tracked X accounts and every video from the tracked YouTube channels in the IST week."
+      },
+      {
+        "title": "Group",
+        "detail": "Group posts that tell the same story into one theme."
+      },
+      {
+        "title": "Rank",
+        "detail": "Rank themes by the number of distinct accounts that covered them. Keep themes with at least 5."
+      },
+      {
+        "title": "Read the comments",
+        "detail": "Cluster replies and quotes on the key posts and label each comment's sentiment."
+      }
+    ],
+    "inaccessible": [
+      "Lucerne Publishing: paywalled article, headline only."
+    ],
+    "also_observed": [
+      "A ransomware group claimed a regional hospital network. The claim is not confirmed.",
+      "Browser updates fixed two zero-days with no report of exploitation."
+    ]
+  },
+  "themes": [
+    {
+      "rank": 1,
+      "key": "acmegw",
+      "name": "Acme Gateway pre-auth RCE (CVE-2026-120118) exploited against edge appliances",
+      "short_name": "Acme GW",
+      "severity": "critical",
+      "first_seen": "2026-10-26",
+      "tags": [
+        "edge-device",
+        "rce",
+        "web-shell"
+      ],
+      "threat_actors": [
+        "Tidal Wren"
+      ],
+      "attack_techniques": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application"
+        },
+        {
+          "id": "T1505.003",
+          "name": "Web Shell"
+        }
+      ],
+      "references": [
+        {
+          "title": "Acme PSIRT advisory ACME-2026-0042",
+          "url": "https://security.example.com/advisories/ACME-2026-0042",
+          "kind": "advisory"
+        },
+        {
+          "title": "Web shells on Acme Gateway appliances",
+          "url": "https://research.example.org/acme-gateway-web-shells",
+          "kind": "research"
+        }
+      ],
+      "why_line": "A pre-auth flaw in an internet-facing gateway is being used to plant web shells before most teams patched.",
+      "summary": "Acme confirmed exploitation of CVE-2026-120118, a pre-authentication flaw in the Acme Gateway management portal. Two incident-response firms reported web shells on appliances from 26 October, four days before the advisory. A second flaw, CVE-2026-120119, lets an authenticated user read session secrets. The same release fixes it.",
+      "why": "Edge appliances sit outside most endpoint tools, so a gateway shell can go unseen while attackers harvest VPN sessions. Exploitation started before the advisory, so patching alone does not prove the box is clean.",
+      "actions": [
+        "Upgrade Acme Gateway to 9.4.2 or later.",
+        "Rotate session secrets and VPN certificates after patching.",
+        "Hunt for PHP files in /var/tmp/portal newer than the last upgrade."
+      ],
+      "affected": {
+        "products": "Acme Gateway 9.0 to 9.4.1",
+        "sectors": "Government, finance, healthcare",
+        "regions": "Global"
+      },
+      "vendors": [
+        "AcmeSecurity",
+        "ContosoThreatIntel",
+        "WoodgroveCERT",
+        "LitwareLabs"
+      ],
+      "media": [
+        "NorthwindNews",
+        "CohoDaily",
+        "Lucerne Publishing",
+        "Adatum Wire"
+      ],
+      "independent": [
+        "Tailspin Research",
+        "byte_warden",
+        "pcap_pilot",
+        "kernelkat",
+        "nullroute_nina",
+        "heapsprayer"
+      ],
+      "distinct_accounts": 14,
+      "x_engagement": 4358,
+      "youtube_views": 48200,
+      "key_items": [
+        "x2116000000000000101",
+        "ytEXAMPLE0001",
+        "x2116000000000000102"
+      ],
+      "comments": {
+        "count": 36,
+        "sentiment": {
+          "positive": 2,
+          "neutral": 16,
+          "negative": 17,
+          "unclassified": 1
+        },
+        "clusters": [
+          {
+            "label": "Patch status and the gap before the fix",
+            "sentiment_counts": {
+              "negative": 14,
+              "neutral": 9,
+              "positive": 2
+            },
+            "samples": [
+              {
+                "text": "Patched within the hour, but the advisory came out four days after the first web shells. That gap is the story.",
+                "parent_url": "https://x.com/AcmeSecurity/status/2116000000000000101",
+                "date_ist": "2026-10-30 10:02"
+              },
+              {
+                "text": "9.4.2 breaks SAML for us. Rolling back is not an option, so we are blocking the endpoint at the WAF for now.",
+                "parent_url": "https://x.com/AcmeSecurity/status/2116000000000000101",
+                "date_ist": "2026-10-30 13:47"
+              }
+            ]
+          },
+          {
+            "label": "Hunting for web shells on appliances",
+            "sentiment_counts": {
+              "neutral": 7,
+              "negative": 3,
+              "unclassified": 1
+            },
+            "samples": [
+              {
+                "text": "Look in /var/tmp/portal for .php files newer than the last upgrade.",
+                "parent_url": "https://x.com/NorthwindNews/status/2116000000000000102",
+                "date_ist": "2026-10-31 15:20"
+              }
+            ]
+          }
+        ]
+      },
+      "cves": [
+        "CVE-2026-120118",
+        "CVE-2026-120119"
+      ],
+      "exploited_in_wild": true,
+      "cve_details": [
+        {
+          "id": "CVE-2026-120118",
+          "exploited_in_wild": true,
+          "basis": "Vendor advisory confirms exploitation (Acme PSIRT)",
+          "source_ids": [
+            "x2116000000000000101",
+            "ytEXAMPLE0001"
+          ],
+          "cvss": 9.8,
+          "advisory_url": "https://security.example.com/advisories/ACME-2026-0042",
+          "kev": true,
+          "kev_added": "2026-10-31",
+          "epss": 0.94,
+          "vendor": "Acme",
+          "product": "Acme Gateway",
+          "patch": "available",
+          "fixed_versions": [
+            "9.4.2"
+          ],
+          "published": "2026-10-30"
+        },
+        {
+          "id": "CVE-2026-120119",
+          "exploited_in_wild": null,
+          "basis": "Fixed in the same release. No report of exploitation yet (Northwind News)",
+          "source_ids": [
+            "x2116000000000000102"
+          ],
+          "cvss": 6.5,
+          "advisory_url": "https://security.example.com/advisories/ACME-2026-0042",
+          "kev": false,
+          "epss": 0.02,
+          "vendor": "Acme",
+          "product": "Acme Gateway",
+          "patch": "available",
+          "fixed_versions": [
+            "9.4.2"
+          ],
+          "published": "2026-10-30"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "key": "npmworm",
+      "name": "Self-spreading npm worm steals CI tokens and publishes poisoned releases",
+      "short_name": "npm worm",
+      "severity": "high",
+      "first_seen": "2026-11-02",
+      "tags": [
+        "supply-chain",
+        "npm"
+      ],
+      "why_line": "Stolen publish tokens let the worm push releases that look legitimate to anyone who installs them.",
+      "summary": "A malicious npm package steals CI tokens from builds. It then uses each token to publish poisoned versions of the packages it can reach. Researchers have counted 14 affected versions so far. Registry staff have removed the known versions and revoked the exposed tokens.",
+      "why": "Any build that installed an affected version may have leaked its publish token, which turns one infection into many. Lockfiles pinned before 2 November are safe.",
+      "actions": [
+        "Check lockfiles for the 14 published versions.",
+        "Rotate npm and CI tokens used since 2 November.",
+        "Require short-lived, scoped publish tokens."
+      ],
+      "affected": {
+        "products": "npm packages, CI pipelines",
+        "sectors": "Software",
+        "regions": "Global"
+      },
+      "vendors": [
+        "ContosoThreatIntel",
+        "LitwareLabs"
+      ],
+      "media": [
+        "Coho Daily",
+        "Adatum Wire"
+      ],
+      "independent": [
+        "byte_warden",
+        "rev_eng_raj",
+        "kernelkat",
+        "pcap_pilot",
+        "nullroute_nina"
+      ],
+      "distinct_accounts": 9,
+      "x_engagement": 3188,
+      "youtube_views": 21500,
+      "key_items": [
+        "x2116000000000000201",
+        "ytEXAMPLE0002",
+        "x2116000000000000202"
+      ],
+      "comments": {
+        "count": 15,
+        "sentiment": {
+          "positive": 3,
+          "neutral": 8,
+          "negative": 4,
+          "unclassified": 0
+        },
+        "clusters": [
+          {
+            "label": "Token hygiene in CI",
+            "sentiment_counts": {
+              "neutral": 8,
+              "positive": 3,
+              "negative": 4
+            },
+            "samples": [
+              {
+                "text": "Short-lived publish tokens would have stopped this. Most teams still use one token for everything.",
+                "parent_url": "https://x.com/ContosoThreatIntel/status/2116000000000000201",
+                "date_ist": "2026-11-02 09:31"
+              }
+            ]
+          }
+        ]
+      },
+      "cves": [],
+      "exploited_in_wild": null,
+      "cve_details": []
+    },
+    {
+      "rank": 3,
+      "key": "contosoai",
+      "name": "AI-written phishing kits target Contoso 365 tenants",
+      "short_name": "AI phishing",
+      "severity": "medium",
+      "tags": [
+        "phishing",
+        "aitm"
+      ],
+      "why_line": "Unique lures per tenant get past template filters. The token-theft proxy behind them has not changed.",
+      "summary": "Phishing kits sold on two forums now generate a unique lure for each Contoso 365 tenant they target. The kits still route victims through the same adversary-in-the-middle proxy to steal session tokens.",
+      "why": "Filters that match known templates miss these lures, but phishing-resistant sign-in still stops the token theft.",
+      "actions": [
+        "Move admins to passkeys or FIDO2 keys.",
+        "Alert on sign-ins from the known proxy ranges."
+      ],
+      "affected": {
+        "products": "Contoso 365",
+        "sectors": "All",
+        "regions": "North America, Europe"
+      },
+      "vendors": [
+        "WoodgroveCERT"
+      ],
+      "media": [
+        "CohoDaily",
+        "Lucerne Publishing"
+      ],
+      "independent": [
+        "pcap_pilot",
+        "heapsprayer",
+        "nullroute_nina"
+      ],
+      "distinct_accounts": 6,
+      "x_engagement": 1161,
+      "youtube_views": 0,
+      "key_items": [
+        "x2116000000000000301",
+        "x2116000000000000302"
+      ],
+      "comments": {
+        "count": 15,
+        "sentiment": {
+          "positive": 4,
+          "neutral": 5,
+          "negative": 6,
+          "unclassified": 0
+        },
+        "clusters": [
+          {
+            "label": "Filters cannot keep up with unique lures",
+            "sentiment_counts": {
+              "negative": 6,
+              "neutral": 3
+            },
+            "samples": [
+              {
+                "text": "Every message is different, so the old hash and template rules are useless.",
+                "parent_url": "https://x.com/CohoDaily/status/2116000000000000301",
+                "date_ist": "2026-11-04 17:10"
+              }
+            ]
+          },
+          {
+            "label": "Phishing-resistant MFA is the fix",
+            "sentiment_counts": {
+              "positive": 4,
+              "neutral": 2
+            },
+            "samples": [
+              {
+                "text": "Passkeys make the proxy pointless. Roll them out to admins first.",
+                "parent_url": "https://x.com/pcap_pilot/status/2116000000000000302",
+                "date_ist": "2026-11-05 11:02"
+              }
+            ]
+          }
+        ]
+      },
+      "cves": [],
+      "exploited_in_wild": null,
+      "cve_details": []
+    }
+  ],
+  "ranking": [
+    {
+      "key": "acmegw",
+      "name": "Acme Gateway pre-auth RCE (CVE-2026-120118) exploited against edge appliances",
+      "short_name": "Acme GW",
+      "accounts": 14
+    },
+    {
+      "key": "npmworm",
+      "name": "Self-spreading npm worm steals CI tokens and publishes poisoned releases",
+      "short_name": "npm worm",
+      "accounts": 9
+    },
+    {
+      "key": "contosoai",
+      "name": "AI-written phishing kits target Contoso 365 tenants",
+      "short_name": "AI phishing",
+      "accounts": 6
+    },
+    {
+      "key": "fabrikam",
+      "name": "Fabrikam customer-data leak from a misconfigured bucket",
+      "short_name": "Fabrikam",
+      "accounts": 3
+    }
+  ],
+  "sources": [
+    {
+      "id": "x2116000000000000101",
+      "platform": "X",
+      "type": "vendor",
+      "account": "AcmeSecurity",
+      "date_ist": "2026-10-30 09:12",
+      "text": "Acme Gateway 9.x: we have confirmed exploitation of CVE-2026-120118. Patch to 9.4.2 now and rotate session secrets.",
+      "url": "https://x.com/AcmeSecurity/status/2116000000000000101",
+      "engagement": 2900,
+      "theme": "acmegw",
+      "metrics": {
+        "likes": 1840,
+        "reposts": 920,
+        "replies": 140
+      },
+      "followers": 4737,
+      "language": "en"
+    },
+    {
+      "id": "x2116000000000000102",
+      "platform": "X",
+      "type": "media",
+      "account": "NorthwindNews",
+      "date_ist": "2026-10-31 14:05",
+      "text": "Attackers are using an Acme Gateway pre-auth flaw to plant web shells, per two IR firms. The 9.4.2 fix also closes CVE-2026-120119, with no exploitation reported.",
+      "url": "https://x.com/NorthwindNews/status/2116000000000000102",
+      "engagement": 1458,
+      "theme": "acmegw",
+      "metrics": {
+        "likes": 960,
+        "reposts": 410,
+        "replies": 88
+      },
+      "followers": 4774,
+      "language": "en"
+    },
+    {
+      "id": "ytEXAMPLE0001",
+      "platform": "YouTube",
+      "type": "independent",
+      "account": "Tailspin Research",
+      "date_ist": "2026-11-01 18:30",
+      "text": "Acme Gateway CVE-2026-120118 explained: from one request to a root shell",
+      "url": "https://www.youtube.com/watch?v=EXAMPLE0001",
+      "engagement": 48200,
+      "theme": "acmegw",
+      "metrics": {
+        "views": 48200
+      },
+      "image": "https://i.ytimg.com/vi/EXAMPLE0001/hqdefault.jpg",
+      "followers": 42000,
+      "language": "en"
+    },
+    {
+      "id": "x2116000000000000201",
+      "platform": "X",
+      "type": "vendor",
+      "account": "ContosoThreatIntel",
+      "date_ist": "2026-11-02 08:40",
+      "text": "A self-spreading npm package is stealing CI tokens and publishing poisoned versions of the packages it can reach.",
+      "url": "https://x.com/ContosoThreatIntel/status/2116000000000000201",
+      "engagement": 2196,
+      "theme": "npmworm",
+      "metrics": {
+        "likes": 1320,
+        "reposts": 780,
+        "replies": 96
+      },
+      "followers": 8437,
+      "language": "en"
+    },
+    {
+      "id": "x2116000000000000202",
+      "platform": "X",
+      "type": "independent",
+      "account": "byte_warden",
+      "date_ist": "2026-11-03 21:15",
+      "text": "Check your lockfiles for these 14 package versions. The worm publishes from stolen tokens, so look for releases nobody on the team made.",
+      "url": "https://x.com/byte_warden/status/2116000000000000202",
+      "engagement": 992,
+      "theme": "npmworm",
+      "metrics": {
+        "likes": 640,
+        "reposts": 300,
+        "replies": 52
+      },
+      "followers": 8474,
+      "language": "en"
+    },
+    {
+      "id": "ytEXAMPLE0002",
+      "platform": "YouTube",
+      "type": "media",
+      "account": "Coho Daily",
+      "date_ist": "2026-11-04 12:00",
+      "text": "The npm worm that writes its own releases",
+      "url": "https://www.youtube.com/watch?v=EXAMPLE0002",
+      "engagement": 21500,
+      "theme": "npmworm",
+      "metrics": {
+        "views": 21500
+      },
+      "image": "https://i.ytimg.com/vi/EXAMPLE0002/hqdefault.jpg",
+      "followers": 42000,
+      "language": "en"
+    },
+    {
+      "id": "x2116000000000000301",
+      "platform": "X",
+      "type": "media",
+      "account": "CohoDaily",
+      "date_ist": "2026-11-04 16:45",
+      "text": "Phishing kits now write a fresh lure for every Contoso 365 tenant they hit, which beats template-based filters.",
+      "url": "https://x.com/CohoDaily/status/2116000000000000301",
+      "engagement": 621,
+      "theme": "contosoai",
+      "metrics": {
+        "likes": 410,
+        "reposts": 150,
+        "replies": 61
+      },
+      "followers": 12137,
+      "language": "en"
+    },
+    {
+      "id": "x2116000000000000302",
+      "platform": "X",
+      "type": "independent",
+      "account": "pcap_pilot",
+      "date_ist": "2026-11-05 10:20",
+      "text": "The AI-written lures still reuse the same token-theft proxy. Hunt for the proxy, not the text.",
+      "url": "https://x.com/pcap_pilot/status/2116000000000000302",
+      "engagement": 540,
+      "theme": "contosoai",
+      "metrics": {
+        "likes": 380,
+        "reposts": 120,
+        "replies": 40
+      },
+      "followers": 12174,
+      "language": "en"
+    },
+    {
+      "id": "x2116000000000000401",
+      "platform": "X",
+      "type": "vendor",
+      "account": "WoodgroveCERT",
+      "date_ist": "2026-11-05 19:05",
+      "text": "Fabrikam has notified customers of a data leak from a misconfigured storage bucket.",
+      "url": "https://x.com/WoodgroveCERT/status/2116000000000000401",
+      "engagement": 172,
+      "theme": "fabrikam",
+      "metrics": {
+        "likes": 120,
+        "reposts": 40,
+        "replies": 12
+      },
+      "followers": 15837,
+      "language": "en"
+    }
+  ]
+}

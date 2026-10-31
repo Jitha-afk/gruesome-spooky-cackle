@@ -9,9 +9,14 @@ for f in dst.rglob("*.html"):
     h = re.sub(r"<script\b[^>]*>.*?</script>", "", h, flags=re.S)
     h = re.sub(r'<link[^>]+rel="(?:modulepreload|preload)"[^>]+as="script"[^>]*>', "", h)
     h = re.sub(r'<link[^>]+as="script"[^>]*/?>', "", h)
-    h = re.sub(r"opacity:0(?![.\d]);?", "", h)
-    h = re.sub(r"transform:translateY\(8px\);?", "", h)
-    h = h.replace(' style=""', "")
+
+    # Only inside style attributes, so report text that mentions opacity:0 stays intact.
+    def clean(m):
+        s = re.sub(r"opacity:0(?![.\d]);?", "", m.group(1))
+        s = re.sub(r"transform:translateY\(8px\);?", "", s)
+        return f' style="{s}"' if s.strip() else ""
+
+    h = re.sub(r' style="([^"]*)"', clean, h)
     f.write_text(h)
 for f in dst.rglob("*.txt"): f.unlink()
 for f in (dst / "_next").rglob("*.js"): f.unlink()

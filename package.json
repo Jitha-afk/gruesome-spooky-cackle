@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "node scripts/build_site.mjs",
-    "test": "node --test scripts/test_brief.mjs",
+    "test": "node --test scripts/test_brief.mjs scripts/test_ingestion.mjs",
     "test:site": "node --test scripts/test_site.mjs",
+    "check:week": "node scripts/check_week.mjs",
     "lint": "eslint"
   },
   "dependencies": {
