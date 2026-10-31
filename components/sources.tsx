@@ -64,8 +64,8 @@ export function Sources({ data }: { data: WeekData }) {
           </label>
           <button className="btn" data-on="false" data-sort type="button">
             <ArrowDownUp aria-hidden="true" size={14} strokeWidth={1.75} />
-            <span className="when-off">most engaged</span>
-            <span className="when-on">least engaged</span>
+            <span className="when-off">most engagement</span>
+            <span className="when-on">least engagement</span>
           </button>
         </div>
         <p aria-hidden="true" className="src-count num" data-count>
@@ -77,12 +77,12 @@ export function Sources({ data }: { data: WeekData }) {
       </div>
       <Box className="src-box" title="sources">
         <table className="src">
-          <caption className="sr-only">Sources, most engaged first.</caption>
+          <caption className="sr-only">Sources, most engagement first.</caption>
           <thead>
             <tr>
               <th scope="col">date</th>
               <th scope="col">account</th>
-              <th scope="col">post</th>
+              <th scope="col">source</th>
               <th className="src-eng" scope="col">
                 engagement
               </th>
@@ -146,7 +146,7 @@ export function Sources({ data }: { data: WeekData }) {
           </tbody>
         </table>
         <p className="src-empty" data-empty hidden>
-          No source matches. Clear the search or turn a filter back on.
+          0 sources. Remove the search text or select more types and platforms.
         </p>
       </Box>
       {rows.length > SOURCE_LIMIT ? (

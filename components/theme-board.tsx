@@ -63,7 +63,7 @@ function CveGlyphs({ rows }: { rows: CveView[] }) {
     return (
       <span className="muted">
         <span aria-hidden="true">—</span>
-        <span className="sr-only">No CVEs cited.</span>
+        <span className="sr-only">0 CVEs.</span>
       </span>
     )
   const hot = rows.filter((row) => row.flag === true).length
@@ -76,7 +76,7 @@ function CveGlyphs({ rows }: { rows: CveView[] }) {
         ))}
       </span>
       <span aria-hidden="true" className="num">
-        {hot}/{rows.length}
+        <span className={hot > 0 ? "is-hot" : undefined}>{hot}</span>/{rows.length}
       </span>
       <span className="sr-only">
         {plural(rows.length, "CVE")}, {hot} exploited.
@@ -210,7 +210,7 @@ function Body({
             <KeepCves text={theme.summary} />
           </p>
           {theme.why ? (
-            <Callout title="why it matters" type="warning">
+            <Callout title="why it is important" type="warning">
               <p>
                 <KeepCves text={theme.why} />
               </p>
@@ -276,7 +276,7 @@ function Body({
 
       {items.length > 0 ? (
         <div className="theme-block">
-          <h4 className="kicker">key posts · {items.length}</h4>
+          <h4 className="kicker">key sources · {items.length}</h4>
           <ul className="items">
             {items.slice(0, SHOWN_ITEMS).map((source) => (
               <Item key={source.id} source={source} />
@@ -300,7 +300,7 @@ function Body({
 
       {clusters.length > 0 ? (
         <div className="theme-block">
-          <h4 className="kicker">comment pulse · {plural(row.comments, "comment")}</h4>
+          <h4 className="kicker">comments · {formatCount(row.comments)}</h4>
           <div className="pulse-total">
             <Split
               className="split-lg"
@@ -320,7 +320,7 @@ function Body({
       {accountsTotal > 0 ? (
         <details className="more accounts">
           <summary>
-            <span>named outlets · {accountsTotal}</span>
+            <span>named accounts · {accountsTotal}</span>
             <i aria-hidden="true" className="plus" />
           </summary>
           <dl className="spec">
@@ -370,7 +370,7 @@ export function ThemeBoard({
         <span>accounts</span>
         <span className="col-spark">by day</span>
         <span className="col-cve">cves</span>
-        {delta ? <span className="col-delta">vs prev</span> : null}
+        {delta ? <span className="col-delta">change</span> : null}
         <span />
       </div>
       {themes.map((theme, index) => {

@@ -49,22 +49,22 @@ Unknown fields are allowed and ignored, so the pipeline can capture a field befo
 
 | Field | Need | Shows in | Notes |
 | --- | --- | --- | --- |
-| `title` | required | Hero kicker, browser tab | One line, the same every week, for example "Weekly cybersecurity threat-intel brief". The hero heading is the window, for example "23–29 Oct 2026". |
+| `title` | required | Hero kicker, browser tab | One line, the same every week, for example "Weekly threat intel report". The hero heading is the window, for example "23–29 Oct 2026". |
 | `window.start`, `window.end` | required | Hero, index row, by-day chart | `YYYY-MM-DD HH:MM IST`. The days must match the folder name. The page is built for 7 days, one chart column per day. More than 7 is a warning, and the chart caps at 31 days. |
 | `window.start_utc`, `window.end_utc` | record | | |
 | `generated` | optional | Hero, notes, index "published" date | `YYYY-MM-DD HH:MM IST`. Without it the index shows no published date. |
-| `bottom_line` | optional, warned | Hero lead, index lead | One or two sentences: what a defender should take from the week. Without it, the hero reads "N of N cited CVEs exploited in the wild. `<top theme>` led with N accounts: `<its why_line>`" and the index shows "`<top theme>` led the week." plus that theme's `why_line`. The gate warns when it is missing. |
-| `capture` | required | Notes, "Capture window" | One row for each string, labelled by key. `x` and `youtube` are required. Add a key for a new platform, for example `"bluesky": "… to …"`. |
+| `bottom_line` | optional, warned | Hero lead, index lead | One or two sentences: what a defender should take from the week. Without it, the hero reads "Attackers exploit N of N CVEs in this report. `<top theme>` is the top theme, with N accounts. `<its why_line>`" and the index shows "`<top theme>` is the top theme." plus that theme's `why_line`. The gate warns when it is missing. |
+| `capture` | required | Notes, "Dates and counts" | One row for each string, labelled by key. `x` and `youtube` are required. Add a key for a new platform, for example `"bluesky": "… to …"`. |
 | `counts` | required | KPIs, notes | See [Counts and the funnel](#counts-and-the-funnel). |
-| `methodology` | required | Notes, "How this brief is made" | One paragraph. Hidden when `method_steps` is present. |
-| `method_steps` | optional | Notes, "How this brief is made" | 3 to 7 objects. Each has a `title` (one line) and an optional `detail` (one or two sentences). Replaces `methodology`. |
-| `inaccessible` | required | Notes, "Not read in full" | Strings. Use `[]` when every source was read. The item is hidden when the list is empty. |
-| `also_observed` | optional | Notes, "Also observed" | Stories in the window that did not make a theme. One or two sentences each. |
+| `methodology` | required | Notes, "How we make this report" | One paragraph. Hidden when `method_steps` is present. |
+| `method_steps` | optional | Notes, "How we make this report" | 3 to 7 objects. Each has a `title` (one line) and an optional `detail` (one or two sentences). Replaces `methodology`. |
+| `inaccessible` | required | Notes, "Limits" | Strings. Use `[]` when every source was read. The item is hidden when the list is empty. |
+| `also_observed` | optional | Notes, "Also seen" | Stories in the window that did not make a theme. One or two sentences each. |
 | `accounts` | record | | Monitored accounts by group. |
 
 ### Counts and the funnel
 
-The first three counts are required. The rest feed the "What was kept" funnel in the notes, which shows how much the pipeline read and how much it kept. A funnel needs at least two of its stages as numbers, and is hidden otherwise.
+The first three counts are required. The rest feed the "What we kept" funnel in the notes, which shows how much the pipeline read and how much it kept. A funnel needs at least two of its stages as numbers, and is hidden otherwise.
 
 | Field | Need | Shows in | Notes |
 | --- | --- | --- | --- |
@@ -90,16 +90,16 @@ Each funnel stage must be no larger than the stage before it. A stage that grows
 | `name` | required | Theme row, tooltips | The full headline. |
 | `short_name` | optional | Side menu, charts, top-3 cards, index | Unique in the week. Without it, `name` is cut at 11 characters with "…". |
 | `summary` | required | Theme body | What happened. |
-| `why` | required | "Why it matters" callout | |
+| `why` | required | "Why it is important" callout | |
 | `why_line` | optional | Top-3 cards | One sentence. Without it the cards show `why`, cut at three lines. |
 | `actions` | optional, warned | "What to do" callout | Steps for defenders, one imperative sentence each. Hidden when missing. The gate warns when no theme has any. |
 | `affected.products`, `affected.sectors`, `affected.regions` | required | Theme facts | Short phrases. Use `"Not stated"` when unknown. |
-| `vendors`, `media`, `independent` | required | "Who covered it" chart, theme credits | Account names, which can be empty lists. The chart uses the length of each list. |
+| `vendors`, `media`, `independent` | required | "Coverage per theme" chart, theme credits | Account names, which can be empty lists. The chart uses the length of each list. |
 | `distinct_accounts` | required | Rank bars, KPIs, deltas | The ranking metric. Should match the `ranking` row. |
 | `x_engagement` | required | Theme facts | Interactions on the theme's X posts. |
 | `youtube_views` | required | Theme facts | Views on the theme's YouTube videos. |
-| `key_items` | required | "Key posts" | Source ids, best first. Each id must be in `sources`. Three show, and the rest fold behind "show more". |
-| `comments` | required | "Comment pulse", sentiment chart | See below. |
+| `key_items` | required | "Key sources" | Source ids, best first. Each id must be in `sources`. Three show, and the rest fold behind "show more". |
+| `comments` | required | "Comments", sentiment chart | See below. |
 | `cves` | required | CVE table, theme CVE list | CVE ids, each listed once. Use `[]` when there are none. |
 | `exploited_in_wild` | required | Fallback state for a CVE with no `cve_details` entry | `true` when any CVE here is exploited, and `null` when not confirmed. |
 | `cve_details` | required | CVE table | See below. Use `[]` when there are no CVEs. |
@@ -110,7 +110,7 @@ Each funnel stage must be no larger than the stage before it. A stage that grows
 
 | Field | Need | Shows in | Notes |
 | --- | --- | --- | --- |
-| `clusters` | required | "Comment pulse" | Usually 3 to 6. Use `[]` when the theme has no comments. |
+| `clusters` | required | "Comments" | Usually 3 to 6. Use `[]` when the theme has no comments. |
 | `clusters[].label` | required | Cluster row | What the comments say. Unique in the theme. |
 | `clusters[].sentiment_counts` | required | Cluster bar | Counts for `positive`, `neutral`, `negative` and `unclassified`. Leave out a mood that has no comments. |
 | `clusters[].samples` | required | Quotes under the cluster | 1 to 3 representative comments. |
@@ -136,7 +136,7 @@ Each funnel stage must be no larger than the stage before it. A stage that grows
 
 ## `ranking[]`
 
-The accounts chart in "Where the attention went". It lists every theme, plus storylines that missed the bar. Sort it by `accounts`, most first.
+The accounts chart in the "charts" section. It lists every theme, plus storylines that missed the bar. Sort it by `accounts`, most first.
 
 | Field | Need | Notes |
 | --- | --- | --- |
@@ -148,7 +148,7 @@ The accounts chart in "Where the attention went". It lists every theme, plus sto
 
 ## `sources[]`
 
-The "Sources" table, the key posts and the by-day chart.
+The "Sources" table, the key sources and the by-day chart.
 
 | Field | Need | Notes |
 | --- | --- | --- |
@@ -162,7 +162,7 @@ The "Sources" table, the key posts and the by-day chart.
 | `engagement` | required | Interactions on X, views on YouTube. Sorts the table and sizes its bars. |
 | `theme` | required | A theme key, or a ranking key for a storyline below the bar. |
 | `metrics` | required | Raw counts by name, for example `{"views": 826905}`. Shown in the engagement tooltip. Values that are not numbers are skipped. Can be `{}`. |
-| `image` | optional | Thumbnail, about 16:9, on key posts. Without it, a key post shows text only. |
+| `image` | optional | Thumbnail, about 16:9, on key sources. Without it, a key source shows text only. |
 | `video_id`, `org`, `date_utc`, `date_publish_raw` | record | |
 | `followers`, `language` | proposed | See [PROPOSED.md](PROPOSED.md). |
 
@@ -194,7 +194,7 @@ Past a limit the page still renders, but not as designed. `pnpm check:week` warn
 
 The checker also warns about these:
 
-- repeated ranks, short names, cluster labels or key posts
+- repeated ranks, short names, cluster labels or key sources
 - ranks with a gap, like 1, 2, 4
 - counts that are negative or not whole numbers
 - a word longer than 40 characters

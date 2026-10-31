@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react"
 import { Frame } from "@/components/frame"
 import { Bar, Legend, Split, type Part } from "@/components/glyph"
-import { SENTIMENT, percent, platformTone, typeTone } from "@/components/tones"
+import { SENTIMENT, andList, percent, platformTone, typeTone } from "@/components/tones"
 import {
   formatCount,
   rankRows,
@@ -36,7 +36,7 @@ function Accounts({ data }: { data: WeekData }) {
   const rows = rankRows(data)
   const themes = new Set(data.themes.map((theme) => theme.key))
   const peak = Math.max(1, ...rows.map((row) => row.accounts))
-  const others = rows.filter((row) => !themes.has(row.key)).length
+  const others = rows.filter((row) => !themes.has(row.key)).map((row) => row.label)
   return (
     <Frame className="chart" title="accounts per theme">
       <ol className="rank-list">
@@ -60,9 +60,10 @@ function Accounts({ data }: { data: WeekData }) {
           )
         })}
       </ol>
-      {others > 0 ? (
+      {others.length > 0 ? (
         <p className="chart-note">
-          <span aria-hidden="true" className="key t-m" /> Muted rows were ranked but did not make a theme.
+          <span aria-hidden="true" className="key t-m" /> {andList(others)} did not become{" "}
+          {others.length === 1 ? "a theme" : "themes"}.
         </p>
       ) : null}
     </Frame>
@@ -160,11 +161,11 @@ function Coverage({ data, rows }: { data: WeekData; rows: ThemeRow[] }) {
   }
   const describe = (parts: Part[]) => parts.map((part) => `${part.value} ${part.label}`).join(", ")
   return (
-    <Frame className="chart" title="who covered it">
+    <Frame className="chart" title="coverage per theme">
       <div className="cov">
         <div aria-hidden="true" className="cov-head">
           <span />
-          <span>named outlets by type</span>
+          <span>named accounts by type</span>
           <span>sources by platform</span>
         </div>
         <ul className="cov-list">
@@ -172,7 +173,7 @@ function Coverage({ data, rows }: { data: WeekData; rows: ThemeRow[] }) {
             <li key={row.key}>
               <ThemeLink row={row} />
               <span className="cov-cell">
-                <Split label={`${row.label} named outlets: ${describe(outlets(row))}.`} parts={outlets(row)} />
+                <Split label={`${row.label} named accounts: ${describe(outlets(row))}.`} parts={outlets(row)} />
                 <span aria-hidden="true" className="num">
                   {outlets(row)
                     .map((part) => part.value)
@@ -209,7 +210,7 @@ function Sentiment({ data, rows }: { data: WeekData; rows: ThemeRow[] }) {
   return (
     <Frame className="chart" title="comment sentiment">
       {all === 0 ? (
-        <p className="chart-note">No comments were analysed this week.</p>
+        <p className="chart-note">This report has no comments.</p>
       ) : (
         <>
           <div className="sent-total">
@@ -237,7 +238,7 @@ export function Signals({ data }: { data: WeekData }) {
   const rows = themeRows(data)
   const style: Vars = { "--n": TABS.length }
   return (
-    <div aria-label="Signals view" className="tabs" role="group" style={style}>
+    <div aria-label="Charts" className="tabs" role="group" style={style}>
       {TABS.map((tab, index) => (
         <input
           aria-controls={`panel-${tab.id}`}

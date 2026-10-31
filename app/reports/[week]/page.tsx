@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ week: str
   if (!match?.data) return { title: "Weekly threat intel" }
   return {
     title: `${match.data.meta.title} · ${windowLabel(match.data)}`,
-    description: match.data.meta.bottom_line ?? `Weekly threat-intel brief for ${windowLabel(match.data)}.`,
+    description: match.data.meta.bottom_line ?? `Weekly threat intel report for ${windowLabel(match.data)}.`,
   }
 }
 

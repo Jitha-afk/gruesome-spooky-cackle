@@ -5,6 +5,7 @@ import type { Tone } from "@/components/glyph"
  * Like mdxcn, data uses the primary and secondary accent, then muted and faint.
  * Red (tone d) is reserved for exploited CVEs and negative comments, so the
  * third accent stop, red in prism, never marks data.
+ * Numbers use the same tones: a count takes the tone of the part it counts.
  */
 const TYPE: Record<string, Tone> = { vendor: "a", media: "b", independent: "m" }
 const PLATFORM: Record<string, Tone> = { X: "n", YouTube: "m" }
@@ -49,4 +50,9 @@ export function percent(part: number, total: number) {
 
 export function plural(count: number, one: string, many = `${one}s`) {
   return `${count.toLocaleString("en-US")} ${count === 1 ? one : many}`
+}
+
+/** "a", "a and b", "a, b and c". */
+export function andList(items: string[]) {
+  return items.length > 1 ? `${items.slice(0, -1).join(", ")} and ${items.at(-1)}` : (items[0] ?? "")
 }

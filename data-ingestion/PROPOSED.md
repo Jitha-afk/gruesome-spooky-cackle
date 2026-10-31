@@ -23,7 +23,7 @@ Fill rates are from the week of 23–29 Oct 2026.
 | Field | Filled | What it adds | How to capture |
 | --- | --- | --- | --- |
 | `meta.bottom_line` | no | An editor's lead in the hero and on the index. Today both fall back to a sentence built from the top theme. | One or two sentences, up to 240 characters: what a defender should take from the week. |
-| `meta.method_steps` | no | Numbered steps in "How this brief is made", instead of one paragraph. | 3 to 7 steps, each a `title` with an optional `detail`. |
+| `meta.method_steps` | no | Numbered steps in "How we make this report", instead of one paragraph. | 3 to 7 steps, each a `title` with an optional `detail`. |
 | `themes[].actions` | 0 of 10 | A "What to do" callout in each theme. This is the most useful field for defenders. | Up to 5 imperative sentences taken from advisories and vendor posts, for example "Patch to 9.4.2" or "Rotate session secrets". |
 | `cve_details[].cvss` | 0 of 8 | A score chip on each CVE row. | The CVSS base score from NVD or the vendor advisory. |
 | `cve_details[].advisory_url` | 0 of 8 | A link to the advisory on each CVE row. | The vendor advisory, or `https://nvd.nist.gov/vuln/detail/<id>`. |
@@ -40,7 +40,7 @@ Priorities:
 
 | Field | Type | Where to get it | Planned UI |
 | --- | --- | --- | --- |
-| `cve_details[].kev` | `true`, `false` or `null` | The [CISA KEV catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) JSON feed | A "KEV" chip on the CVE row and a KEV count in the exploitation chart. Also a cross-check for `exploited_in_wild`. |
+| `cve_details[].kev` | `true`, `false` or `null` | The [CISA KEV catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) JSON feed | A "KEV" chip on the CVE row and a KEV count in the CVE states chart. Also a cross-check for `exploited_in_wild`. |
 | `cve_details[].epss` | A number from 0 to 1, or `null` | The [FIRST EPSS API](https://www.first.org/epss/api), `?cve=<id>` | A probability bar next to CVSS, and a sort key for the CVE table. |
 | `cve_details[].patch` | `"available"`, `"mitigation"`, `"none"` or `null` | The vendor advisory | A patch chip on the CVE row. "No patch" becomes the loudest state after "exploited". |
 | `cve_details[].vendor`, `cve_details[].product` | Strings | The advisory, or NVD CPE data | Group the CVE table by vendor and product. |
