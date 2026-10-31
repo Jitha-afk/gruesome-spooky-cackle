@@ -28,4 +28,4 @@ The workflow deploys from GitHub Actions. If Pages is not already using that sou
 
 ## Credits
 
-Design language from [mdxcn](https://www.mdxcn.dev) (MIT).
+Design inspired by [mdxcn](https://www.mdxcn.dev). The mdxcn components in `registry/` keep their [MIT license](registry/LICENSE).
