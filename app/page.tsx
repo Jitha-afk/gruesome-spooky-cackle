@@ -93,8 +93,8 @@ function Latest({ week, data }: { week: WeekRecord; data: WeekData }) {
                 </span>
                 <Bar bracket tone="a" value={item.accounts / peak} />
                 <span className="num">
-                  {formatCount(item.accounts)}
-                  <span className="sr-only"> accounts</span>
+                  {formatCount(item.accounts)}{" "}
+                  <span className="num-unit">{item.accounts === 1 ? "account" : "accounts"}</span>
                 </span>
               </li>
             )

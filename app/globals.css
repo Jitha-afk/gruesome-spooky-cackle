@@ -1781,11 +1781,31 @@ a.row-label {
 .rank-list .is-other .num {
   color: var(--muted-foreground);
 }
+/* Each count shows its unit. On narrow screens the bar goes under the label and the count. */
 .latest-rank {
-  grid-template-columns: 1.5rem minmax(4.5rem, max-content) minmax(0, 1fr) 2.5rem;
+  grid-template-columns: 1.5rem minmax(0, 1fr) max-content;
+}
+.latest-rank > li {
+  row-gap: 0.375rem;
+}
+.latest-rank > li > .bracket {
+  grid-row: 2;
+  grid-column: 2 / -1;
 }
 .latest-rank .num.muted {
   text-align: left;
+}
+.latest-rank .num-unit {
+  color: var(--muted-foreground);
+}
+@media (min-width: 27rem) {
+  .latest-rank {
+    grid-template-columns: 1.5rem minmax(4.5rem, max-content) minmax(0, 1fr) max-content;
+  }
+  .latest-rank > li > .bracket {
+    grid-row: auto;
+    grid-column: auto;
+  }
 }
 .heat-scroll {
   position: relative;
