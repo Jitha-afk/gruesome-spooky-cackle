@@ -1,530 +1,517 @@
-import { Callout } from "@/registry/default/callout/callout"
-import { GraphHeatmap } from "@/registry/default/graph-heatmap/graph-heatmap"
-import { GraphRank } from "@/registry/default/graph-rank/graph-rank"
-import { GraphSpec } from "@/registry/default/graph-spec/graph-spec"
-import { GraphStack } from "@/registry/default/graph-stack/graph-stack"
-import { GraphStat } from "@/registry/default/graph-stat/graph-stat"
-import { GraphTable } from "@/registry/default/graph-table/graph-table"
-import { GraphWaffle } from "@/registry/default/graph-waffle/graph-waffle"
-import { Header } from "@/components/header"
+import type { CSSProperties } from "react"
+import { ChevronsUpDown } from "lucide-react"
+import { AccentPicker } from "@/components/accent-picker"
+import { Box, Corners, Frame, SectionHead } from "@/components/frame"
+import { Bar, Delta, Legend, Meter, Spark, Split, type Part } from "@/components/glyph"
+import { DateUnits, Hero, SiteFooter, SiteHeader, Toc, type TocItem } from "@/components/header"
+import { Callout, Steps } from "@/components/prose"
+import { Signals } from "@/components/signals"
+import { Sources } from "@/components/sources"
+import { CveRows, ThemeBoard } from "@/components/theme-board"
+import { SENTIMENT, cveGlyph, pad, percent, platformTone, plural } from "@/components/tones"
 import {
-  commentModel,
-  coverageModels,
+  alsoObserved,
+  bottomLine,
   cveTableRows,
-  cveViews,
   formatCount,
+  funnelModel,
   headlineStats,
-  heatmapModel,
+  methodSteps,
+  platformUnits,
   previewCves,
   rankRows,
   sentimentTotals,
-  shortLabel,
-  sourceRows,
-  sparkGlyphs,
-  sparkSeries,
+  sourceFacets,
   sparkSummary,
+  themeRows,
   themesByRank,
-  windowDays,
-  waffleParts,
+  weekDelta,
   weekSummary,
   whyText,
-  type Source,
+  windowDays,
+  windowLabel,
+  type FunnelStage,
   type Theme,
+  type ThemeRow,
   type WeekData,
+  type WeekDelta,
 } from "@/lib/brief.mjs"
 
-const METRICS = ["likes", "reposts", "replies", "quotes", "impressions", "views"] as const
+type Vars = CSSProperties & Record<`--${string}`, string | number>
 
-function metricCell(source: Source, key: string) {
-  const value = source.metrics[key]
-  return typeof value === "number" ? formatCount(value) : ""
-}
-
-function AccountLine({ label, names }: { label: string; names: string[] }) {
-  if (names.length === 0) return null
+function Kpis({ data, rows, delta }: { data: WeekData; rows: ThemeRow[]; delta: WeekDelta | null }) {
+  const stats = headlineStats(data)
+  const cves = cveTableRows(data)
+  const unconfirmed = cves.filter((row) => row.flag === null).length
+  const facets = sourceFacets(data)
+  const platformKeys = facets.platform.map((entry) => entry.key)
+  const platforms: Part[] = facets.platform.map((entry) => ({
+    label: entry.key,
+    tone: platformTone(entry.key, platformKeys),
+    value: entry.count,
+  }))
+  const sentiment = sentimentTotals(data)
+  const moods: Part[] = SENTIMENT.map((entry) => ({ label: entry.key, tone: entry.tone, value: sentiment[entry.key] }))
+  const read = moods.reduce((sum, part) => sum + part.value, 0)
+  const accounts = rows.reduce((sum, row) => sum + row.accounts, 0)
+  const lead = rows.slice(0, 3)
+  const leadShare = percent(
+    lead.reduce((sum, row) => sum + row.accounts, 0),
+    accounts,
+  )
+  const concentration: Part[] = [
+    ...lead.map((row, index) => ({ label: row.label, tone: (["a", "b", "m"] as const)[index], value: row.accounts })),
+    { label: "rest", tone: "f", value: accounts - lead.reduce((sum, row) => sum + row.accounts, 0) },
+  ]
+  const describe = (parts: Part[]) => parts.map((part) => `${part.value} ${part.label}`).join(", ")
   return (
-    <p className="accounts">
-      {label}: {names.join(", ")}
-    </p>
+    <Frame className="kpi-frame" title="this week">
+      <dl className="kpis">
+        <div className="kpi">
+          <dt>themes</dt>
+          <dd className="kpi-value">
+            <span className="num">{formatCount(stats.themes)}</span>
+            {delta ? <Delta unit="themes" value={delta.totals.themes} /> : null}
+          </dd>
+          <dd className="kpi-viz">
+            <Split label={`Accounts by theme: ${describe(concentration)}.`} parts={concentration} />
+          </dd>
+          <dd className="kpi-note">
+            top {lead.length} hold <span className="num">{leadShare}%</span> of accounts
+          </dd>
+        </div>
+        <div className="kpi">
+          <dt>sources</dt>
+          <dd className="kpi-value">
+            <span className="num">{formatCount(stats.sources)}</span>
+            {delta ? <Delta unit="sources" value={delta.totals.sources} /> : null}
+          </dd>
+          <dd className="kpi-viz">
+            <Split label={`Sources by platform: ${describe(platforms)}.`} parts={platforms} />
+          </dd>
+          <dd className="kpi-note">
+            {platforms.map((part, index) => (
+              <span key={part.label}>
+                {index > 0 ? " · " : null}
+                <span className="num">{formatCount(part.value)}</span> {part.label}
+              </span>
+            ))}
+          </dd>
+        </div>
+        <div className="kpi">
+          <dt>comments</dt>
+          <dd className="kpi-value">
+            <span className="num">{formatCount(stats.comments)}</span>
+            {delta ? <Delta unit="comments" value={delta.totals.comments} /> : null}
+          </dd>
+          <dd className="kpi-viz">
+            <Split label={`Comment sentiment: ${describe(moods)}.`} parts={moods} />
+          </dd>
+          <dd className="kpi-note">
+            {read > 0 ? (
+              <>
+                <span>
+                  <span className="num">{percent(sentiment.negative, read)}%</span> negative
+                </span>{" "}
+                <span>
+                  · <span className="num">{percent(sentiment.positive, read)}%</span> positive
+                </span>
+              </>
+            ) : (
+              "no comments read"
+            )}
+          </dd>
+        </div>
+        <div className="kpi kpi-hot">
+          <dt>exploited</dt>
+          <dd className="kpi-value">
+            <span className="num">{formatCount(stats.exploited)}</span>
+            <span className="kpi-of num">/{formatCount(stats.cves)}</span>
+            {delta ? <Delta invert unit="exploited CVEs" value={delta.totals.exploited} /> : null}
+          </dd>
+          <dd className="kpi-viz">
+            <Meter hot={stats.exploited} label={`${stats.exploited} of ${stats.cves} CVEs exploited.`} total={stats.cves} />
+          </dd>
+          <dd className="kpi-note">
+            {stats.cves === 0
+              ? "no cves cited"
+              : unconfirmed > 0
+                ? `${formatCount(unconfirmed)} not confirmed`
+                : "all states confirmed"}
+          </dd>
+        </div>
+      </dl>
+      {delta ? <p className="chart-note">Arrows compare with {delta.label}.</p> : null}
+    </Frame>
   )
 }
 
-function stackLabel(name: string, counts: string) {
+function Leads({ themes, rows, days }: { themes: Theme[]; rows: ThemeRow[]; days: { label: string }[] }) {
+  const byKey = new Map(rows.map((row) => [row.key, row]))
   return (
-    <span>
-      {name}
-      <span className="stack-counts">{counts}</span>
-    </span>
+    <ol className="leads">
+      {themes.slice(0, 3).map((theme, index) => {
+        const row = byKey.get(theme.key)
+        if (!row) return null
+        const why = whyText(theme)
+        const preview = previewCves(theme, 3)
+        const style: Vars = { "--i": index }
+        return (
+          <li className="frame lead-card" key={theme.key} style={style}>
+            <Corners />
+            <p aria-hidden="true" className="lead-rank num">
+              {pad(theme.rank)}
+            </p>
+            <h3 className="lead-title">
+              <a href={`#theme-${theme.key}`} title={theme.name}>
+                <span className="sr-only">Rank {theme.rank}: </span>
+                {row.label}
+              </a>
+            </h3>
+            <p className={why.clamp ? "lead-why is-clamped" : "lead-why"}>{why.text}</p>
+            {preview.shown.length > 0 ? (
+              <ul aria-label="CVEs" className="lead-cves">
+                {preview.shown.map((cve) => (
+                  <li key={cve.id}>
+                    <code className={cve.flag === true ? "cve-chip is-hot" : "cve-chip"}>
+                      <i aria-hidden="true" className={cveGlyph(cve.flag)} />
+                      {cve.id}
+                      <span className="sr-only"> {cve.tag.toLowerCase()}</span>
+                    </code>
+                  </li>
+                ))}
+                {preview.extra > 0 ? <li className="num muted">+{preview.extra}</li> : null}
+              </ul>
+            ) : (
+              <p className="lead-cves muted">no cve in the sources</p>
+            )}
+            <div className="lead-foot">
+              <span className="lead-acc">
+                <Bar value={row.share} />
+                <span className="num">{formatCount(row.accounts)}</span>
+                <span className="muted">accounts</span>
+              </span>
+              <Spark label={sparkSummary(row.spark, days)} series={row.spark} />
+            </div>
+          </li>
+        )
+      })}
+    </ol>
   )
 }
 
-function CveList({
-  theme,
-  basis,
-  limit,
-  moreHref,
-}: {
-  theme: Theme
-  basis: boolean
-  limit?: number
-  moreHref?: string
-}) {
-  const preview = previewCves(theme, limit)
-  const rows = limit == null ? cveViews(theme) : preview.shown
-  const extra = limit == null ? 0 : preview.extra
-  if (rows.length === 0) return null
+function Funnel({ title, stages }: { title: string; stages: FunnelStage[] }) {
+  const peak = Math.max(1, ...stages.map((stage) => stage.count))
   return (
-    <ul className="cves">
-      {rows.map((row) => (
-        <li className="cve" key={row.id}>
-          <span>{row.id}</span>
-          <span className={row.tag === "EXPLOITED" ? "tag tag-hot" : "tag tag-muted"}>[ {row.tag} ]</span>
-          {basis && row.basis ? <span className="basis">{row.basis}</span> : null}
-        </li>
-      ))}
-      {extra > 0 && moreHref ? (
-        <li>
-          <a href={moreHref}>+{extra} more</a>
-        </li>
-      ) : null}
-    </ul>
-  )
-}
-
-function Shot({ source }: { source: Source }) {
-  if (typeof source.image !== "string" || !source.image) return null
-  return (
-    <figure className="shot">
-      <a className="shot-frame graph-frame" href={source.url}>
-        <img alt="" decoding="async" height={360} loading="lazy" src={source.image} width={640} />
-      </a>
-      <figcaption>
-        Credit: <a href={source.url}>{source.account}</a>
-      </figcaption>
+    <figure className="funnel-block">
+      <figcaption className="funnel-head">{title}</figcaption>
+      <ol className="funnel">
+        {stages.map((stage, index) => {
+          const style: Vars = { "--i": index }
+          const drop = index === 0 || stage.drop === 0 ? "" : `${stage.drop > 0 ? "−" : "+"}${formatCount(Math.abs(stage.drop))}`
+          return (
+            <li key={stage.label} style={style}>
+              <span className="row-label">{stage.label}</span>
+              <Bar bracket tone={index === stages.length - 1 ? "a" : "m"} value={stage.count / peak} />
+              <span className="num">{formatCount(stage.count)}</span>
+              <span className="num drop">{drop}</span>
+            </li>
+          )
+        })}
+      </ol>
     </figure>
   )
 }
 
-function ThemeCard({
-  theme,
-  sources,
-  open,
-  spark,
-  days,
-}: {
-  theme: Theme
-  sources: Map<string, Source>
-  open: boolean
-  spark: number[]
-  days: { label: string }[]
-}) {
-  const comments = commentModel(theme)
-  const charted = comments.filter((row) => row.positive + row.neutral + row.negative > 0)
-  const body = (
-    <>
-      {theme.summary ? <p>{theme.summary}</p> : null}
-      {theme.why ? (
-        <>
-          <h3>Why it is important</h3>
-          <p>{theme.why}</p>
-        </>
-      ) : null}
-      <div>
-        <h3>Affected</h3>
-        <p>Products: {theme.affected.products}</p>
-        <p>Sectors: {theme.affected.sectors}</p>
-        <p>Regions: {theme.affected.regions}</p>
-      </div>
-      <CveList basis theme={theme} />
-      <GraphSpec
-        className="coverage"
-        rows={[
-          { label: "Accounts", value: formatCount(theme.distinct_accounts), accent: true },
-          { label: "X interactions", value: formatCount(theme.x_engagement) },
-          { label: "YouTube views", value: formatCount(theme.youtube_views) },
-          {
-            label: "By day",
-            rich: (
-              <>
-                <span aria-hidden="true" className="font-mono leading-none">
-                  <span className="text-graph-muted">{sparkGlyphs(spark).slice(0, -1).join("")}</span>
-                  <span className="text-graph-accent">{sparkGlyphs(spark).at(-1)}</span>
-                </span>
-                <span className="sr-only">{sparkSummary(spark, days)}</span>
-              </>
-            ),
-          },
-        ]}
-        title="Coverage"
-      />
-      <div>
-        <h3>Accounts</h3>
-        <AccountLine label="Vendors" names={theme.vendors} />
-        <AccountLine label="Media" names={theme.media} />
-        <AccountLine label="Independent" names={theme.independent} />
-      </div>
-      <div>
-        <h3>Key items</h3>
-        <div className="key-list">
-          {theme.key_items.map((id) => {
-            const source = sources.get(id)
-            if (!source) return null
-            return (
-              <article className="key-item graph-frame" key={id}>
-                <p className="item-meta">
-                  <span className="date-unit">{source.date_ist}</span> {source.account}
-                </p>
-                <a href={source.url}>{source.text}</a>
-                <Shot source={source} />
-              </article>
-            )
-          })}
+function Notes({ data }: { data: WeekData }) {
+  const steps = methodSteps(data)
+  const also = alsoObserved(data)
+  const funnels = funnelModel(data)
+  const removed = funnels.removed.reduce((sum, row) => sum + row.count, 0)
+  const hidden = data.meta.inaccessible ?? []
+  // One row per platform read, so a new platform shows without a code change.
+  const captures = Object.entries(data.meta.capture).filter(
+    (entry): entry is [string, string] => typeof entry[1] === "string" && entry[1].trim() !== "",
+  )
+  const platforms = sourceFacets(data).platform
+  return (
+    <Box className="faq" title="notes">
+      <details className="faq-item" id="method">
+        <summary>
+          <span>How this brief is made</span>
+          <i aria-hidden="true" className="plus" />
+        </summary>
+        <div className="faq-body">
+          {steps.length > 0 ? (
+            <Steps steps={steps} />
+          ) : (
+            <p className="prose-text">{data.meta.methodology}</p>
+          )}
         </div>
-      </div>
-      {charted.length > 0 ? (
-        <GraphStack
-          className="comment-pulse"
-          palette="multi"
-          rows={charted.map((row) => ({
-            label: `${row.label} (${row.positive + row.neutral + row.negative})`,
-            segments: [
-              { label: "positive", value: row.positive },
-              { label: "neutral", value: row.neutral },
-              { label: "negative", value: row.negative },
-            ],
-          }))}
-          title="Comments"
-        />
+      </details>
+      {funnels.sources.length > 0 || funnels.comments.length > 0 ? (
+        <details className="faq-item" id="funnel">
+          <summary>
+            <span>What was kept</span>
+            <i aria-hidden="true" className="plus" />
+          </summary>
+          <div className="faq-body funnels">
+            {funnels.sources.length > 0 ? <Funnel stages={funnels.sources} title="sources" /> : null}
+            {funnels.comments.length > 0 ? <Funnel stages={funnels.comments} title="comments" /> : null}
+            {removed > 0 ? (
+              <p className="chart-note">
+                {formatCount(removed)} comments removed before analysis:{" "}
+                {funnels.removed.map((row) => `${row.label} ${formatCount(row.count)}`).join(" · ")}.
+              </p>
+            ) : null}
+          </div>
+        </details>
       ) : null}
-      {comments.map((cluster) => (
-        <div key={cluster.label}>
-          <h3>{cluster.label}</h3>
-          {cluster.unclassified > 0 ? <p>Unclassified comments: {formatCount(cluster.unclassified)}.</p> : null}
-          {cluster.samples.length > 0 ? (
-            <ul className="samples">
-              {cluster.samples.map((sample, index) => (
-                <li key={`${sample.href}-${index}`}>
-                  <a dir="auto" href={sample.href}>
-                    {sample.text}
-                  </a>
-                  {sample.date ? <span className="sample-date">{sample.date}</span> : null}
-                </li>
+      <details className="faq-item" id="capture">
+        <summary>
+          <span>Capture window</span>
+          <i aria-hidden="true" className="plus" />
+        </summary>
+        <div className="faq-body">
+          <dl className="spec">
+            <div>
+              <dt>window</dt>
+              <dd>
+                <DateUnits text={`${data.meta.window.start} to ${data.meta.window.end}`} />
+              </dd>
+            </div>
+            {captures.map(([platform, text]) => (
+              <div key={`capture-${platform}`}>
+                <dt>{platform.toLowerCase()} capture</dt>
+                <dd className="date-unit">{text}</dd>
+              </div>
+            ))}
+            {platforms.map((entry) => (
+              <div key={`count-${entry.key}`}>
+                <dt>
+                  {entry.key.toLowerCase()} {platformUnits(entry.key).noun}
+                </dt>
+                <dd className="num">{formatCount(entry.count)}</dd>
+              </div>
+            ))}
+            <div>
+              <dt>comments read</dt>
+              <dd className="num">{formatCount(data.meta.counts.comments_analysed_top_themes)}</dd>
+            </div>
+            {data.meta.generated ? (
+              <div>
+                <dt>generated</dt>
+                <dd className="date-unit">{data.meta.generated}</dd>
+              </div>
+            ) : null}
+          </dl>
+        </div>
+      </details>
+      {hidden.length > 0 ? (
+        <details className="faq-item" id="not-read">
+          <summary>
+            <span>Not read in full</span>
+            <span className="num muted">{hidden.length}</span>
+            <i aria-hidden="true" className="plus" />
+          </summary>
+          <div className="faq-body">
+            <ul className="dash-list">
+              {hidden.map((item, index) => (
+                <li key={index}>{item}</li>
               ))}
             </ul>
-          ) : null}
-        </div>
-      ))}
-    </>
-  )
-
-  return (
-    <article className="theme-card" id={`theme-${theme.key}`} {...(open ? {} : { "data-collapse": "" })}>
-      <h3>
-        {theme.rank}. {theme.name}
-      </h3>
-      {open ? null : (
-        <button aria-expanded="false" data-collapse-toggle type="button">
-          <span className="when-closed">Show this theme</span>
-          <span className="when-open">Hide this theme</span>
-        </button>
-      )}
-      {open ? body : <div data-collapse-body>{body}</div>}
-    </article>
+          </div>
+        </details>
+      ) : null}
+      {also.length > 0 ? (
+        <details className="faq-item" id="also-observed">
+          <summary>
+            <span>Also observed</span>
+            <span className="num muted">{also.length}</span>
+            <i aria-hidden="true" className="plus" />
+          </summary>
+          <div className="faq-body">
+            <ul className="dash-list">
+              {also.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </details>
+      ) : null}
+    </Box>
   )
 }
 
-export function WeekView({ data }: { data: WeekData }) {
+export function WeekView({ data, previous = null }: { data: WeekData; previous?: WeekData | null }) {
   const themes = themesByRank(data)
+  const rows = themeRows(data)
   const top = themes[0]
-  const sources = new Map(data.sources.map((source) => [source.id, source]))
-  const coverage = coverageModels(data)
-  const heat = heatmapModel(data)
   const stats = headlineStats(data)
-  const cveRows = cveTableRows(data)
-  const sentiment = sentimentTotals(data)
-  const waffle = waffleParts(sentiment)
-  const tone: Record<string, string> = {
-    positive: "text-graph-accent",
-    neutral: "text-graph-muted",
-    negative: "text-graph-accent-3",
-    unclassified: "text-graph-faint",
-  }
-  const rows = sourceRows(data)
-  const align = ["left", "left", "left", "right", "right", "right", "right", "right", "right", "right"] as const
+  const cves = cveTableRows(data)
+  const days = windowDays(data)
+  const delta = weekDelta(data, previous)
+  const others = rankRows(data).filter((row) => !themes.some((theme) => theme.key === row.key))
+  const exploited = cves.filter((row) => row.flag === true).length
+  const unconfirmed = cves.filter((row) => row.flag === null).length
+  const notExploited = cves.filter((row) => row.flag === false).length
+  const toc: TocItem[] = [
+    { id: "overview", label: "overview" },
+    { id: "signals", label: "signals" },
+    { id: "cves", label: "cves", count: cves.length },
+    {
+      id: "themes",
+      label: "themes",
+      count: themes.length,
+      sub: rows.map((row) => ({ id: `theme-${row.key}`, label: row.label, count: formatCount(row.accounts) })),
+    },
+    { id: "sources", label: "sources", count: formatCount(data.sources.length) },
+    { id: "notes", label: "notes" },
+  ]
+  const lead = bottomLine(data) ?? (top ? weekSummary(top) : "No theme met the bar this week.")
 
   return (
-    <main className="site font-sans">
-      <Header
-        kicker={`${data.meta.window.start} to ${data.meta.window.end}`}
-        summary={weekSummary(top)}
-        title={data.meta.title}
-      />
+    <>
+      <SiteHeader crumb={windowLabel(data)} toc={toc} />
+      <div className="shell has-side">
+        <aside aria-label="Page tools" className="side">
+          <Toc items={toc} label="Sections" />
+          <AccentPicker />
+        </aside>
+        <main className="main" id="main">
+          <Hero kicker={`weekly brief · ${windowLabel(data)}`} lead={lead} title={data.meta.title}>
+            <span>
+              <DateUnits text={`${data.meta.window.start} to ${data.meta.window.end}`} />
+            </span>
+            {data.meta.generated ? (
+              <span>
+                generated <span className="date-unit">{data.meta.generated}</span>
+              </span>
+            ) : null}
+          </Hero>
 
-      <section>
-        <h2>Top 3 themes</h2>
-        <div className="top-list">
-          {themes.slice(0, 3).map((theme) => {
-            const why = whyText(theme)
-            return (
-              <article className="top-theme graph-frame" key={theme.key}>
-                <p>
-                  <a href={`#theme-${theme.key}`} title={theme.name}>
-                    {theme.rank}. {shortLabel(theme.name, theme.short_name)}
-                  </a>
-                </p>
-                <p className={why.clamp ? "why-line" : undefined}>{why.text}</p>
-                <CveList basis={false} limit={3} moreHref={`#theme-${theme.key}`} theme={theme} />
-                {cveViews(theme).length === 0 ? <p className="tag tag-muted">No CVE in the sources.</p> : null}
-              </article>
-            )
-          })}
-        </div>
-      </section>
+          <section aria-labelledby="overview-title" className="sec sec-first" id="overview">
+            <h2 className="sr-only" id="overview-title">
+              Overview
+            </h2>
+            <Kpis data={data} delta={delta} rows={rows} />
+            {themes.length > 0 ? (
+              <>
+                <p className="kicker sub-kicker">top {Math.min(3, themes.length)}</p>
+                <Leads days={days} rows={rows} themes={themes} />
+              </>
+            ) : null}
+          </section>
 
-      <section>
-        <h2>In numbers</h2>
-        <p>Themes, sources, comments and exploited CVEs.</p>
-        <GraphStat
-          className="stat-row"
-          items={[
-            { label: "Themes", value: formatCount(stats.themes), accent: true },
-            { label: "Sources", value: formatCount(stats.sources) },
-            { label: "Comments analysed", value: formatCount(stats.comments) },
-            { label: "CVEs exploited", value: `${stats.exploited} / ${stats.cves}` },
-          ]}
-          title="This week"
-        />
-        <p>Capture time.</p>
-        <GraphSpec
-          className="ledger"
-          rows={[
-            { label: "Posts", value: formatCount(data.meta.counts.x_posts) },
-            { label: "Videos", value: formatCount(data.meta.counts.youtube_videos) },
-            { label: "X capture", value: data.meta.capture.x },
-            { label: "YouTube capture", value: data.meta.capture.youtube },
-          ]}
-          title="Capture"
-        />
-        <p>These items were not read in full.</p>
-        <Callout title="Not read">
-          {data.meta.inaccessible.map((item, index) => (
-            <p key={index}>{item}</p>
-          ))}
-        </Callout>
-      </section>
-
-      <section>
-        <h2>Ranking</h2>
-        <p>Accounts in each theme.</p>
-        <GraphRank
-          items={rankRows(data).map((row) => ({
-            label: row.label,
-            title: row.title,
-            value: row.accounts,
-          }))}
-          palette="mono"
-          title="Accounts"
-        />
-        <p>Sources per day.</p>
-        <GraphHeatmap
-          columns={heat.columns.map((day) => day.slice(0, 2))}
-          palette="duo"
-          rows={heat.rows}
-          spoken={heat.columns}
-          title="By day"
-        />
-      </section>
-
-      <section>
-        <h2>Coverage</h2>
-        <p>Accounts by outlet type.</p>
-        <GraphStack
-          className="split-type"
-          palette="multi"
-          rows={coverage.accounts.map((row, index) => {
-            const theme = themes[index]
-            const name = theme ? shortLabel(theme.name, theme.short_name) : row.label
-            const [v, m, i] = row.segments.map((segment) => segment.value)
-            return {
-              name,
-              label: stackLabel(name, `${v} / ${m} / ${i}`),
-              segments: row.segments,
-            }
-          })}
-          title="By type"
-        />
-        <p>Sources by platform.</p>
-        <GraphStack
-          palette="multi"
-          rows={coverage.platforms.map((row, index) => {
-            const theme = themes[index]
-            const name = theme ? shortLabel(theme.name, theme.short_name) : row.label
-            const [x, yt] = row.segments.map((segment) => segment.value)
-            return {
-              name,
-              label: stackLabel(name, `${x} / ${yt}`),
-              segments: row.segments,
-            }
-          })}
-          title="By platform"
-        />
-      </section>
-
-      <section>
-        <h2>CVEs</h2>
-        <p>Each CVE has its own state.</p>
-        <GraphTable
-          align={["left", "left", "left", "left"]}
-          className="cve-table"
-          headers={["CVE", "Theme", "State", "Basis"]}
-          rows={cveRows.map((row) => [
-            row.id,
-            row.theme,
-            <span className={row.tag === "EXPLOITED" ? "tag tag-hot" : "tag tag-muted"} key={row.id}>
-              [ {row.tag} ]
-            </span>,
-            row.basis,
-          ])}
-          title="CVEs"
-        />
-      </section>
-
-      <section>
-        <h2>Comments</h2>
-        <p>Sentiment of analysed comments.</p>
-        <GraphWaffle
-          className="sentiment"
-          description={`${formatCount(sentiment.positive)} positive, ${formatCount(sentiment.neutral)} neutral, ${formatCount(sentiment.negative)} negative, ${formatCount(sentiment.unclassified)} unclassified, of ${formatCount(sentiment.positive + sentiment.neutral + sentiment.negative + sentiment.unclassified)} comments.`}
-          legend={
-            <ul className="waffle-key">
-              <li>
-                <span aria-hidden="true" className="text-graph-accent">
-                  █
-                </span>
-                <span>positive {formatCount(sentiment.positive)}</span>
-              </li>
-              <li>
-                <span aria-hidden="true" className="text-graph-muted">
-                  █
-                </span>
-                <span>neutral {formatCount(sentiment.neutral)}</span>
-              </li>
-              <li>
-                <span aria-hidden="true" className="text-graph-accent-3">
-                  █
-                </span>
-                <span>negative {formatCount(sentiment.negative)}</span>
-              </li>
-              <li>
-                <span aria-hidden="true" className="text-graph-muted">
-                  ░
-                </span>
-                <span>unclassified {formatCount(sentiment.unclassified)}</span>
-              </li>
-            </ul>
-          }
-          segments={waffle.map((part) => ({
-            cells: part.cells,
-            className: tone[part.key] ?? "text-graph-faint",
-            glyph: part.key === "unclassified" ? "░" : undefined,
-          }))}
-          title="Sentiment"
-        />
-      </section>
-
-      <section>
-        <h2>Themes</h2>
-        <p>Open a theme to read the detail.</p>
-        <div className="theme-list">
-          {themes.map((theme, index) => (
-            <ThemeCard
-              days={windowDays(data)}
-              key={theme.key}
-              open={index < 3}
-              sources={sources}
-              spark={sparkSeries(theme, data)}
-              theme={theme}
+          <section aria-labelledby="signals-title" className="sec" id="signals">
+            <SectionHead
+              id="signals"
+              kicker="signals"
+              lead="Accounts per theme, sources per day, who covered each theme and how the comments read."
+              title="Where the attention went"
             />
-          ))}
-        </div>
-      </section>
+            <Signals data={data} />
+          </section>
 
-      <section>
-        <h2>Sources</h2>
-        <p>Filter the list. Search the text. Sort by engagement.</p>
-        <div className="filters">
-          <fieldset>
-            <legend>Source type</legend>
-            <label>
-              <input data-filter-type defaultChecked type="checkbox" value="vendor" />
-              Vendor
-            </label>
-            <label>
-              <input data-filter-type defaultChecked type="checkbox" value="media" />
-              Media
-            </label>
-            <label>
-              <input data-filter-type defaultChecked type="checkbox" value="independent" />
-              Independent
-            </label>
-          </fieldset>
-          <fieldset>
-            <legend>Platform</legend>
-            <label>
-              <input data-filter-platform defaultChecked type="checkbox" value="X" />X
-            </label>
-            <label>
-              <input data-filter-platform defaultChecked type="checkbox" value="YouTube" />
-              YouTube
-            </label>
-          </fieldset>
-          <label className="search-label">
-            Search the source text.
-            <input data-search-input type="search" />
-          </label>
-          <button data-sort type="button">
-            Show lowest first
-          </button>
-        </div>
-        <GraphTable
-          align={[...align]}
-          className="source-index"
-          headers={["Date", "Account", "Text", "Likes", "Reposts", "Replies", "Quotes", "Impressions", "Views", "Engagement"]}
-          rows={rows.map((source) => ({
-            attrs: {
-              "data-type": source.type,
-              "data-platform": source.platform,
-              "data-engagement": String(source.engagement),
-            },
-            cells: [
-              source.date_ist,
-              source.account,
-              <a href={source.url} key={source.id}>
-                {source.text}
-              </a>,
-              ...METRICS.map((key) => metricCell(source, key)),
-              formatCount(source.engagement),
-            ],
-          }))}
-          title="Sources"
-        />
-        <p data-empty hidden>
-          No source matches.
+          <section aria-labelledby="cves-title" className="sec" id="cves">
+            <SectionHead
+              id="cves"
+              kicker="cves"
+              lead={
+                cves.length > 0
+                  ? "Exploitation state as the sources report it. Exploited first, then by theme rank."
+                  : undefined
+              }
+              title={
+                cves.length > 0
+                  ? `${formatCount(exploited)} of ${plural(cves.length, "CVE")} exploited in the wild`
+                  : "No CVEs cited this week"
+              }
+            />
+            {cves.length > 0 ? (
+              <Frame className="cve-frame" title="exploitation">
+                <div className="cve-meter">
+                  <Meter hot={exploited} label={`${exploited} of ${cves.length} CVEs exploited.`} total={cves.length} />
+                  <Legend
+                    parts={[
+                      { label: "exploited", tone: "d", value: exploited },
+                      { label: "not confirmed", tone: "f", value: unconfirmed },
+                      { label: "not exploited", tone: "m", value: notExploited },
+                    ]}
+                  />
+                </div>
+                <CveRows rows={cves} themeHref />
+              </Frame>
+            ) : (
+              <Callout title="no cves" type="note">
+                <p>No source in the window cited a CVE for these themes.</p>
+              </Callout>
+            )}
+          </section>
+
+          <section aria-labelledby="themes-title" className="sec" id="themes">
+            <SectionHead
+              action={
+                themes.length > 1 ? (
+                  <button aria-pressed="false" className="btn js-only" data-expand-all type="button">
+                    <ChevronsUpDown aria-hidden="true" size={14} strokeWidth={1.75} />
+                    <span className="when-off">expand all</span>
+                    <span className="when-on">collapse all</span>
+                  </button>
+                ) : null
+              }
+              id="themes"
+              kicker="themes"
+              lead="Open a theme for the summary, CVEs, key posts and the comment pulse."
+              title={`${plural(themes.length, "theme")}, ranked by accounts`}
+            />
+            <ThemeBoard data={data} delta={delta} rows={rows} themes={themes} />
+            {delta && delta.dropped.length > 0 ? (
+              <p className="chart-note">
+                Dropped since {delta.label}: {delta.dropped.map((entry) => entry.label).join(", ")}.
+              </p>
+            ) : null}
+            {others.length > 0 ? (
+              <p className="chart-note">
+                Also ranked, below the theme bar:{" "}
+                {others.map((row, index) => (
+                  <span key={row.key}>
+                    {index > 0 ? ", " : null}
+                    <span title={row.title}>{row.label}</span> <span className="num">({row.accounts})</span>
+                  </span>
+                ))}
+                .
+              </p>
+            ) : null}
+          </section>
+
+          <section aria-labelledby="sources-title" className="sec" id="sources">
+            <SectionHead
+              id="sources"
+              kicker="sources"
+              lead="The posts and videos behind the themes. Most engaged first."
+              title={plural(data.sources.length, "source")}
+            />
+            <Sources data={data} />
+          </section>
+
+          <section aria-labelledby="notes-title" className="sec" id="notes">
+            <SectionHead id="notes" kicker="notes" title="Method and caveats" />
+            <Notes data={data} />
+          </section>
+        </main>
+      </div>
+      <SiteFooter>
+        <p>
+          {plural(stats.themes, "theme")} from {plural(stats.sources, "source")}
+          {data.meta.generated ? (
+            <>
+              {" "}
+              · generated <span className="date-unit">{data.meta.generated}</span>
+            </>
+          ) : null}
         </p>
-      </section>
-
-      <section data-collapse>
-        <h2>Method</h2>
-        <button aria-expanded="false" data-collapse-toggle type="button">
-          <span className="when-closed">Show the method</span>
-          <span className="when-open">Hide the method</span>
-        </button>
-        <div data-collapse-body>
-          <Callout title="Method">
-            <p>{data.meta.methodology}</p>
-          </Callout>
-        </div>
-      </section>
-    </main>
+      </SiteFooter>
+    </>
   )
 }

@@ -3,6 +3,7 @@ import fs from "node:fs"
 import path from "node:path"
 import test from "node:test"
 import zlib from "node:zlib"
+import { funnelModel, loadWeeks } from "../lib/brief.mjs"
 
 const root = path.resolve(import.meta.dirname, "..")
 const site = path.join(root, "site")
@@ -46,4 +47,26 @@ test("built routes, order and zero framework JS", () => {
   assert.deepEqual(js, ["site.js"])
   const gz = zlib.gzipSync(fs.readFileSync(path.join(site, "site.js")))
   assert.ok(gz.length < 3072, `site.js gzip ${gz.length}`)
+})
+
+test("every week and theme is built, with no broken values", () => {
+  const index = fs.readFileSync(path.join(site, "index.html"), "utf8")
+  const weeks = loadWeeks(path.join(root, "reports"))
+  assert.ok(weeks.length > 0)
+  for (const week of weeks) {
+    const file = path.join(site, "reports", week.name, "index.html")
+    assert.ok(fs.existsSync(file), `${week.name} has no page`)
+    assert.ok(index.includes(`href="/gruesome-spooky-cackle/reports/${week.name}/"`), `the index does not link ${week.name}`)
+    if (week.kind !== "data") continue
+    const html = fs.readFileSync(file, "utf8")
+    for (const theme of week.data.themes) {
+      assert.ok(html.includes(`id="theme-${theme.key}"`), `${week.name} has no #theme-${theme.key}`)
+    }
+    const funnel = funnelModel(week.data)
+    if (funnel.sources.length > 0 || funnel.comments.length > 0) assert.match(html, /id="funnel"/)
+    for (const page of [html, index]) {
+      assert.doesNotMatch(page, /\s(?:style|data-[\w-]+|aria-[\w-]+|width|height)="[^"]*\b(?:NaN|Infinity|undefined)\b/)
+      assert.doesNotMatch(page, /class="[^"]*\bnum\b[^"]*"[^>]*>[^<]*\b(?:NaN|Infinity|undefined)\b/)
+    }
+  }
 })

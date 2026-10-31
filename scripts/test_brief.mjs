@@ -18,13 +18,17 @@ import {
   shortLabel,
   sparkSeries,
   sparkSummary,
+  themeRows,
+  themeSentiment,
   windowDays,
+  windowLabel,
   validateData,
   waffleParts,
   weekSummary,
   whyText,
 } from "../lib/brief.mjs"
 import { logIntensityLevel } from "../lib/scale.mjs"
+import { ACCENT_KEY, DEFAULT_ACCENT, accentBoot, accents } from "../lib/accent.mjs"
 
 const REAL = path.join(import.meta.dirname, "..", "reports")
 
@@ -155,6 +159,7 @@ test("week graphs use only data.json", () => {
   const data = loadWeeks(REAL)[0].data
   const stats = headlineStats(data)
   assert.equal(stats.themes, 10)
+  assert.equal(stats.sources, data.sources.length)
   assert.equal(stats.sources, data.meta.counts.x_posts + data.meta.counts.youtube_videos)
   assert.equal(stats.exploited, 7)
   assert.equal(stats.cves, 8)
@@ -181,6 +186,79 @@ test("week graphs use only data.json", () => {
   assert.equal(logIntensityLevel(peak, peak), 4)
   assert.equal(whyText(data.themes[0]).clamp, false)
   assert.ok(whyText(data.themes[0]).text.length > 0)
+})
+
+test("theme rows hold the small multiples for each theme", () => {
+  const data = loadWeeks(REAL)[0].data
+  const rows = themeRows(data)
+  assert.equal(rows.length, 10)
+  assert.deepEqual(
+    rows.map((row) => row.rank),
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+  )
+  const php = rows[0]
+  assert.equal(php.label, "PHP2Shell")
+  assert.equal(php.accounts, 30)
+  assert.equal(php.share, 1)
+  assert.deepEqual(php.spark, [17, 14, 4, 7, 9, 6, 6])
+  assert.deepEqual([php.cves, php.exploited, php.unconfirmed], [3, 2, 1])
+  assert.deepEqual(php.mix, { vendor: 6, media: 6, independent: 12 })
+  const count = (row) => row.platforms.reduce((sum, entry) => sum + entry.count, 0)
+  assert.equal(count(php), 63)
+  assert.deepEqual(
+    php.platforms.map((entry) => entry.key),
+    ["X", "YouTube"],
+  )
+  assert.equal(
+    rows.reduce((sum, row) => sum + count(row), 0),
+    data.sources.length,
+  )
+  assert.equal(windowLabel(data), "23–29 Oct 2026")
+  assert.equal(cveTableRows(data).at(-1).key, "php2shell")
+  assert.equal(php.comments, 52)
+  assert.ok(rows.every((row) => row.share > 0 && row.share <= 1))
+  const total = rows.reduce((sum, row) => sum + row.comments, 0)
+  const all = sentimentTotals(data)
+  assert.equal(total, all.positive + all.neutral + all.negative + all.unclassified)
+
+  const fixture = minimal()
+  assert.deepEqual(themeSentiment(fixture.themes[0]), { positive: 1, neutral: 0, negative: 2, unclassified: 0 })
+  fixture.themes[0].comments.sentiment = { positive: 5, neutral: 1 }
+  assert.deepEqual(themeSentiment(fixture.themes[0]), { positive: 5, neutral: 1, negative: 0, unclassified: 0 })
+  fixture.meta.window = { start: "2026-12-29 00:00 IST", end: "2027-01-04 23:59 IST" }
+  assert.equal(windowLabel(fixture), "29 Dec 2026 – 4 Jan 2027")
+  fixture.meta.window = { start: "2026-10-29 00:00 IST", end: "2026-11-04 23:59 IST" }
+  assert.equal(windowLabel(fixture), "29 Oct – 4 Nov 2026")
+  const [only] = themeRows(fixture)
+  assert.deepEqual([only.cves, only.exploited, only.unconfirmed], [2, 0, 1])
+  assert.equal(only.label, "Alphabetica…")
+})
+
+test("accent families boot to a known accent", () => {
+  const ids = accents.map((accent) => accent.id)
+  assert.equal(new Set(ids).size, ids.length)
+  assert.ok(ids.includes(DEFAULT_ACCENT))
+  assert.equal(accents.find((accent) => accent.id === DEFAULT_ACCENT).kind, "gradient")
+  assert.deepEqual(
+    [...new Set(accents.map((accent) => accent.kind))].sort(),
+    ["gradient", "solid"],
+  )
+  const css = fs.readFileSync(path.join(import.meta.dirname, "..", "app", "globals.css"), "utf8")
+  for (const id of ids) {
+    assert.ok(css.includes(`html[data-accent="${id}"] {`), `light rule for ${id}`)
+    assert.ok(css.includes(`html.dark[data-accent="${id}"] {`), `dark rule for ${id}`)
+  }
+  const run = (stored) => {
+    const attrs = {}
+    const h = { setAttribute: (key, value) => (attrs[key] = value) }
+    const localStorage = { getItem: (key) => (key === ACCENT_KEY ? stored : null) }
+    new Function("h", "localStorage", accentBoot())(h, localStorage)
+    return attrs
+  }
+  assert.deepEqual(run(null), { "data-accent": "prism", "data-accent-kind": "gradient" })
+  assert.deepEqual(run("mint"), { "data-accent": "mint", "data-accent-kind": "solid" })
+  assert.deepEqual(run("ocean"), { "data-accent": "ocean", "data-accent-kind": "gradient" })
+  assert.deepEqual(run("nope"), { "data-accent": "prism", "data-accent-kind": "gradient" })
 })
 
 test("why_line is optional and top cards keep three CVEs", () => {

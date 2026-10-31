@@ -3,12 +3,15 @@ import { spawnSync } from "node:child_process"
 import fs from "node:fs"
 import path from "node:path"
 import { loadWeeks, reportsRoot } from "../lib/brief.mjs"
+import { accentBoot } from "../lib/accent.mjs"
 
 const root = path.resolve(import.meta.dirname, "..")
 const outDir = path.join(root, "out")
 const siteDir = path.join(root, "site")
 
-const THEME_BOOT = `<script>(function(){var t="dark";try{var s=localStorage.getItem("theme");if(s==="light"||s==="dark")t=s;}catch(e){}var h=document.documentElement;if(t==="light")h.classList.remove("dark");else h.classList.add("dark");h.classList.add("js");h.style.colorScheme=t==="light"?"light":"dark";})();</script>`
+// A deep link lands at once: no smooth scroll and no details animation until load.
+const DEEP_LINK = `if(location.hash){h.classList.add("deep");h.style.scrollBehavior="auto";var o=function(){h.classList.remove("deep");h.style.scrollBehavior=""};addEventListener("load",function(){setTimeout(o)});setTimeout(o,3e3)}`
+const THEME_BOOT = `<script>(function(){var t="dark";try{var s=localStorage.getItem("theme");if(s==="light"||s==="dark")t=s;}catch(e){}var h=document.documentElement;if(t==="light")h.classList.remove("dark");else h.classList.add("dark");h.classList.add("js");${DEEP_LINK}h.style.colorScheme=t==="light"?"light":"dark";var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",t==="light"?"#fafafa":"#040404");${accentBoot()}})();</script>`
 const SITE_JS = `<script src="/gruesome-spooky-cackle/site.js" defer></script>`
 
 function run(command, args) {

@@ -36,7 +36,10 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Test
-        run: node --test scripts/test_brief.mjs
+        run: node --test scripts/test_brief.mjs scripts/test_ingestion.mjs
+
+      - name: Check weeks
+        run: node scripts/check_week.mjs
 
       - name: Check schema v1 data
         continue-on-error: true

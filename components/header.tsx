@@ -1,4 +1,7 @@
 import Link from "next/link"
+import type { ReactNode } from "react"
+import { Moon, Sun, TableOfContents } from "lucide-react"
+import { AccentPicker } from "@/components/accent-picker"
 
 export function DateUnits({ text }: { text: string }) {
   const marker = " to "
@@ -13,39 +16,151 @@ export function DateUnits({ text }: { text: string }) {
   )
 }
 
-export function Header({
+/** Site mark: a dashed frame with `+` corners and three rising bars in the accent family. */
+export function BrandMark() {
+  return (
+    <svg aria-hidden="true" className="brand-mark" height="16" viewBox="0 0 32 32" width="16">
+      <rect className="mk-frame" fill="none" height="23" strokeDasharray="2 2" width="23" x="4.5" y="4.5" />
+      <path
+        className="mk-ink"
+        d="M4.5 2v5M2 4.5h5M27.5 2v5M25 4.5h5M4.5 25v5M2 27.5h5M27.5 25v5M25 27.5h5"
+        fill="none"
+      />
+      <rect className="mk-c" height="6" width="4" x="8" y="18" />
+      <rect className="mk-b" height="11" width="4" x="14" y="13" />
+      <rect className="mk-a" height="16" width="4" x="20" y="8" />
+    </svg>
+  )
+}
+
+export type TocItem = { id: string; label: string; count?: ReactNode; sub?: TocItem[] }
+
+export function Toc({ items, label = "On this page" }: { items: TocItem[]; label?: string }) {
+  return (
+    <nav aria-label={label} className="toc">
+      <p className="kicker">on this page</p>
+      <ol>
+        {items.map((item) => (
+          <li key={item.id}>
+            <a href={`#${item.id}`}>
+              <span className="toc-label">{item.label}</span>
+              {item.count != null ? <span className="num">{item.count}</span> : null}
+            </a>
+            {item.sub && item.sub.length > 0 ? (
+              <ol className="toc-sub">
+                {item.sub.map((sub) => (
+                  <li key={sub.id}>
+                    <a href={`#${sub.id}`}>
+                      <span className="toc-label">{sub.label}</span>
+                      {sub.count != null ? <span className="num">{sub.count}</span> : null}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            ) : null}
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}
+
+/**
+ * Sticky header on the site rails. The accent and contents menus are native
+ * popovers, so the contents menu works without JS.
+ */
+export function SiteHeader({ crumb, toc }: { crumb?: ReactNode; toc?: TocItem[] }) {
+  return (
+    <>
+      <a className="skip" href="#main">
+        Skip to content
+      </a>
+      <header className={["site-header", toc ? "has-side" : "", crumb ? "has-crumb" : ""].filter(Boolean).join(" ")}>
+        <div className="wrap header-bar">
+          <Link aria-label="Weekly threat intel, all weeks" className="brand" href="/">
+            <BrandMark />
+            <span className="brand-name">threat intel</span>
+          </Link>
+          {crumb ? (
+            <span className="crumb">
+              <span aria-hidden="true" className="crumb-sep">
+                /
+              </span>
+              {crumb}
+            </span>
+          ) : null}
+          <div className="header-actions">
+            <button
+              aria-label="Choose an accent colour"
+              className="icon-btn accent-btn js-only"
+              popoverTarget="accent-menu"
+              type="button"
+            >
+              <i aria-hidden="true" className="accent-dot" />
+            </button>
+            <button aria-label="Switch theme" className="icon-btn js-only" data-theme-toggle type="button">
+              <Sun aria-hidden="true" className="only-dark" size={16} strokeWidth={1.75} />
+              <Moon aria-hidden="true" className="only-light" size={16} strokeWidth={1.75} />
+            </button>
+            {toc ? (
+              <button aria-label="On this page" className="icon-btn toc-btn" popoverTarget="toc-menu" type="button">
+                <TableOfContents aria-hidden="true" size={16} strokeWidth={1.75} />
+              </button>
+            ) : null}
+          </div>
+          <i aria-hidden="true" className="mark mark-bl" />
+          <i aria-hidden="true" className="mark mark-br" />
+          {toc ? <i aria-hidden="true" className="mark mark-side" /> : null}
+        </div>
+      </header>
+      <div className="pop pop-accent" id="accent-menu" popover="auto">
+        <AccentPicker />
+      </div>
+      {toc ? (
+        <div className="pop pop-toc" id="toc-menu" popover="auto">
+          <Toc items={toc} label="On this page, menu" />
+        </div>
+      ) : null}
+    </>
+  )
+}
+
+export function Hero({
   kicker,
   title,
-  summary,
-  home,
+  lead,
+  children,
 }: {
-  kicker?: string
+  kicker: ReactNode
   title: string
-  summary?: string
-  home?: boolean
+  lead?: ReactNode
+  children?: ReactNode
 }) {
   return (
-    <header className="site-header">
-      <div className="site-header-top">
-        <div className="min-w-0">
-          {home ? null : (
-            <Link className="home-link" href="/">
-              All weeks
-            </Link>
-          )}
-          {kicker ? (
-            <p className="window">
-              <DateUnits text={kicker} />
-            </p>
-          ) : null}
-        </div>
-        <button type="button" data-theme-toggle>
-          <span className="only-dark">Light</span>
-          <span className="only-light">Dark</span>
-        </button>
-      </div>
-      <h1 className="graph-title-ink">{title}</h1>
-      {summary ? <p className="summary">{summary}</p> : null}
+    <header className="hero">
+      <p className="kicker rise">{kicker}</p>
+      <h1>{title}</h1>
+      {lead ? <p className="lead rise">{lead}</p> : null}
+      {children ? <div className="hero-meta rise">{children}</div> : null}
     </header>
+  )
+}
+
+export function SiteFooter({ children }: { children?: ReactNode }) {
+  return (
+    <footer className="site-footer">
+      <div className="wrap footer-bar">
+        <p className="footer-brand">
+          <BrandMark />
+          <span>Weekly threat intel</span>
+        </p>
+        {children ? <div className="footer-note">{children}</div> : null}
+        <p className="footer-credit">
+          Design language from <a href="https://www.mdxcn.dev">mdxcn</a> (MIT).
+        </p>
+        <i aria-hidden="true" className="mark mark-tl" />
+        <i aria-hidden="true" className="mark mark-tr" />
+      </div>
+    </footer>
   )
 }

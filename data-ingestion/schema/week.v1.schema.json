@@ -1,0 +1,537 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Weekly threat-intel brief, schema v1",
+  "description": "One week of the brief, saved as reports/YYYY-MM-DD_YYYY-MM-DD/data.json. A file this schema accepts passes `pnpm check:week` with no errors, except for rules a schema cannot express: unique theme keys and source ids, key_items that exist in sources, real calendar days, the window order and the folder name. Layout warnings live in lib/check.mjs. Unknown fields are allowed and ignored, so a field can be captured before the site shows it. A node with \"$comment\": \"soft\" is checked as a warning only, because the site ignores a bad value there: fields kept for the record, the optional funnel counts and the proposed fields in data-ingestion/PROPOSED.md.",
+  "type": "object",
+  "required": ["schema_version", "meta", "themes", "ranking", "sources"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "meta": { "$ref": "#/$defs/meta" },
+    "themes": {
+      "description": "Themes that met the bar, in any order. The page sorts them by rank. Keys must be unique. 3 to 12 read best.",
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/theme" }
+    },
+    "ranking": {
+      "description": "Accounts per storyline, most first. Every theme, plus storylines that missed the bar.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/rankingRow" }
+    },
+    "sources": {
+      "description": "Every post or video behind the themes. Ids must be unique.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/source" }
+    }
+  },
+  "$defs": {
+    "text": { "type": "string", "pattern": "\\S" },
+    "strings": { "type": "array", "items": { "type": "string" } },
+    "optionalStrings": { "type": ["array", "null"], "items": { "type": "string" } },
+    "optionalText": { "type": ["string", "null"] },
+    "meta": {
+      "type": "object",
+      "required": ["title", "window", "capture", "counts", "methodology", "inaccessible"],
+      "properties": {
+        "title": { "$ref": "#/$defs/text", "description": "Week page heading. Up to 60 characters." },
+        "window": {
+          "type": "object",
+          "required": ["start", "end"],
+          "properties": {
+            "start": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}",
+              "description": "First IST minute of the week. A real calendar day that matches the folder.",
+              "examples": ["2026-10-23 00:00 IST"]
+            },
+            "end": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}",
+              "description": "Last IST minute of the week. A real calendar day that matches the folder, not before start.",
+              "examples": ["2026-10-29 23:59 IST"]
+            },
+            "start_utc": { "$comment": "soft", "type": "string", "description": "Kept for the record." },
+            "end_utc": { "$comment": "soft", "type": "string", "description": "Kept for the record." }
+          }
+        },
+        "generated": {
+          "$ref": "#/$defs/optionalText",
+          "description": "When the file was written, \"YYYY-MM-DD HH:MM IST\". The index shows it as the published date.",
+          "examples": ["2026-10-30 20:31 IST"]
+        },
+        "bottom_line": {
+          "$ref": "#/$defs/optionalText",
+          "description": "One or two sentences for the week lead and the index. Up to 240 characters. Without it the lead is built from the top theme."
+        },
+        "capture": {
+          "type": "object",
+          "required": ["x", "youtube"],
+          "description": "When each platform was read, \"<start> to <end>\". Notes show one row per string entry, so a new platform can add its own key.",
+          "properties": { "x": { "type": "string" }, "youtube": { "type": "string" } }
+        },
+        "counts": {
+          "type": "object",
+          "required": ["x_posts", "youtube_videos", "comments_analysed_top_themes"],
+          "properties": {
+            "x_posts": {
+              "type": "number",
+              "description": "X rows in sources. A whole number from 0. The checker warns when they differ."
+            },
+            "youtube_videos": {
+              "type": "number",
+              "description": "YouTube rows in sources. A whole number from 0. The checker warns when they differ."
+            },
+            "comments_analysed_top_themes": {
+              "type": "number",
+              "description": "Comments analysed on the themes. The comments KPI and the last comment funnel stage."
+            },
+            "candidates": {
+              "$comment": "soft",
+              "$ref": "#/$defs/count",
+              "description": "Sources funnel, stage 1: posts and videos on topic before themes were picked."
+            },
+            "candidates_x": {
+              "$comment": "soft",
+              "$ref": "#/$defs/count",
+              "description": "Kept for the record. X share of candidates."
+            },
+            "candidates_youtube": {
+              "$comment": "soft",
+              "$ref": "#/$defs/count",
+              "description": "Kept for the record. YouTube share of candidates."
+            },
+            "sources_in_top_themes": {
+              "$comment": "soft",
+              "$ref": "#/$defs/count",
+              "description": "Kept for the record. The page counts sources instead."
+            },
+            "comments_retrieved": {
+              "$comment": "soft",
+              "$ref": "#/$defs/count",
+              "description": "Comments funnel, stage 1: every comment fetched."
+            },
+            "comments_analysed_all": {
+              "$comment": "soft",
+              "$ref": "#/$defs/count",
+              "description": "Comments funnel, stage 3: comments left after exclusions, on every candidate."
+            },
+            "themes_kept": {
+              "$comment": "soft",
+              "$ref": "#/$defs/count",
+              "description": "Kept for the record. The page counts themes instead."
+            },
+            "comment_exclusions": {
+              "$comment": "soft",
+              "type": "object",
+              "description": "Why comments were dropped. Shown under the comments funnel.",
+              "properties": {
+                "retrieved": {
+                  "$ref": "#/$defs/count",
+                  "description": "Used when comments_retrieved is missing."
+                },
+                "in_window": {
+                  "$ref": "#/$defs/count",
+                  "description": "Comments funnel, stage 2: retrieved comments posted inside the window."
+                },
+                "excluded_spam_bot_abuse": { "$ref": "#/$defs/count" },
+                "excluded_retweet": { "$ref": "#/$defs/count" },
+                "excluded_no_text": { "$ref": "#/$defs/count" },
+                "duplicates": { "$ref": "#/$defs/count" }
+              }
+            }
+          },
+          "description": "The three required counts, plus optional funnel counts. The funnel shows in notes as \"What was kept\" when two stages of a funnel are numbers."
+        },
+        "methodology": { "type": "string", "description": "Shown in notes when method_steps is missing." },
+        "method_steps": {
+          "type": ["array", "null"],
+          "description": "The method as 3 to 7 steps. Replaces the methodology paragraph.",
+          "items": {
+            "type": "object",
+            "required": ["title"],
+            "properties": {
+              "title": { "type": "string", "description": "Up to 60 characters." },
+              "detail": { "$ref": "#/$defs/optionalText", "description": "Up to 300 characters." }
+            }
+          }
+        },
+        "inaccessible": {
+          "$ref": "#/$defs/strings",
+          "description": "Sources that could not be read in full. Hidden when empty."
+        },
+        "also_observed": {
+          "$ref": "#/$defs/optionalStrings",
+          "description": "Stories in the window that did not make a theme. One or two sentences each."
+        },
+        "accounts": {
+          "$comment": "soft",
+          "type": "object",
+          "description": "Kept for the record. Monitored accounts by group."
+        }
+      }
+    },
+    "theme": {
+      "type": "object",
+      "required": [
+        "rank",
+        "key",
+        "name",
+        "summary",
+        "why",
+        "affected",
+        "vendors",
+        "media",
+        "independent",
+        "distinct_accounts",
+        "x_engagement",
+        "youtube_views",
+        "key_items",
+        "comments",
+        "cves",
+        "exploited_in_wild",
+        "cve_details"
+      ],
+      "properties": {
+        "rank": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "1 is the most covered. Keep ranks unique. The checker warns on a repeat."
+        },
+        "key": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$",
+          "description": "Id of the storyline, used in #theme-<key> links. Reuse it in later weeks so the week-over-week arrows work."
+        },
+        "name": { "$ref": "#/$defs/text", "description": "Full headline. Up to 110 characters." },
+        "short_name": {
+          "$ref": "#/$defs/optionalText",
+          "description": "Label for the side menu, charts and cards. Up to 12 characters, unique in the week. Without it the name is cut at 11 characters."
+        },
+        "summary": { "type": "string", "description": "What happened. Up to 1200 characters." },
+        "why": {
+          "type": "string",
+          "description": "Why it matters, in the warning callout. Up to 600 characters."
+        },
+        "why_line": {
+          "$ref": "#/$defs/optionalText",
+          "description": "One sentence for the top-3 cards and the index. Up to 140 characters. Without it the cards cut `why` at three lines."
+        },
+        "actions": {
+          "$ref": "#/$defs/optionalStrings",
+          "description": "Up to 5 steps for defenders, one imperative sentence each. Shown as a tip callout."
+        },
+        "affected": {
+          "type": "object",
+          "required": ["products", "sectors", "regions"],
+          "properties": {
+            "products": { "type": "string" },
+            "sectors": { "type": "string" },
+            "regions": { "type": "string" }
+          }
+        },
+        "vendors": { "$ref": "#/$defs/strings", "description": "Vendor accounts that covered it." },
+        "media": { "$ref": "#/$defs/strings", "description": "Media accounts that covered it." },
+        "independent": { "$ref": "#/$defs/strings", "description": "Independent accounts that covered it." },
+        "distinct_accounts": {
+          "type": "number",
+          "description": "Accounts that covered the theme. The ranking metric, a whole number from 0."
+        },
+        "x_engagement": { "type": "number", "description": "Interactions on the theme's X posts." },
+        "youtube_views": { "type": "number", "description": "Views on the theme's YouTube videos." },
+        "key_items": {
+          "$ref": "#/$defs/strings",
+          "description": "Source ids, best first. Each must be in sources. Three show and the rest fold."
+        },
+        "comments": {
+          "type": "object",
+          "required": ["clusters"],
+          "properties": {
+            "clusters": { "type": "array", "items": { "$ref": "#/$defs/cluster" } },
+            "sentiment": {
+              "type": ["object", "null"],
+              "description": "Totals for the theme. Without it the clusters are added up. The checker warns when they differ.",
+              "properties": {
+                "positive": { "type": "number" },
+                "neutral": { "type": "number" },
+                "negative": { "type": "number" },
+                "unclassified": { "type": "number" }
+              }
+            },
+            "count": { "$comment": "soft", "type": "number", "description": "Kept for the record." },
+            "parents": {
+              "$comment": "soft",
+              "$ref": "#/$defs/strings",
+              "description": "Kept for the record."
+            }
+          }
+        },
+        "cves": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/text" },
+          "description": "CVE ids in this theme, each once. Each should have a cve_details entry."
+        },
+        "exploited_in_wild": {
+          "type": ["boolean", "null"],
+          "description": "true when any CVE here is exploited. null when not confirmed."
+        },
+        "cve_details": { "type": "array", "items": { "$ref": "#/$defs/cve" } },
+        "both_vendor_and_media": {
+          "$comment": "soft",
+          "type": "boolean",
+          "description": "Kept for the record. True when vendors and media both covered the theme."
+        },
+        "item_ids": { "$comment": "soft", "$ref": "#/$defs/strings", "description": "Kept for the record." },
+        "severity": {
+          "$comment": "soft",
+          "enum": ["critical", "high", "medium", "low"],
+          "description": "Proposed. Editorial severity for defenders."
+        },
+        "first_seen": {
+          "$comment": "soft",
+          "$ref": "#/$defs/day",
+          "description": "Proposed. First day the storyline was reported anywhere."
+        },
+        "tags": {
+          "$comment": "soft",
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 5,
+          "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+          "description": "Proposed. Lowercase kebab-case topics, for example \"ransomware\" or \"supply-chain\". Up to 5."
+        },
+        "threat_actors": {
+          "$comment": "soft",
+          "$ref": "#/$defs/strings",
+          "description": "Proposed. Actors or groups named by at least one vendor source."
+        },
+        "attack_techniques": {
+          "$comment": "soft",
+          "type": "array",
+          "description": "Proposed. MITRE ATT&CK techniques named by the sources.",
+          "items": {
+            "type": "object",
+            "required": ["id"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^T\\d{4}(\\.\\d{3})?$",
+                "examples": ["T1190", "T1566.001"]
+              },
+              "name": { "type": "string" }
+            }
+          }
+        },
+        "references": {
+          "$comment": "soft",
+          "type": "array",
+          "maxItems": 5,
+          "description": "Proposed. Primary sources beyond social posts: advisories, vendor research, government alerts. Up to 5.",
+          "items": {
+            "type": "object",
+            "required": ["title", "url"],
+            "properties": {
+              "title": { "type": "string" },
+              "url": { "$ref": "#/$defs/url" },
+              "kind": { "enum": ["advisory", "research", "government", "media"] }
+            }
+          }
+        }
+      }
+    },
+    "cve": {
+      "type": "object",
+      "required": ["id", "exploited_in_wild"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "CVE-YYYY-NNNN. Must also be listed in the theme's cves to show.",
+          "examples": ["CVE-2026-109618"]
+        },
+        "exploited_in_wild": {
+          "type": ["boolean", "null"],
+          "description": "true = exploited (red). false = not exploited. null = not confirmed."
+        },
+        "basis": {
+          "$ref": "#/$defs/optionalText",
+          "description": "The evidence for the state, with the outlet in brackets."
+        },
+        "cvss": { "type": ["number", "null"], "minimum": 0, "maximum": 10, "description": "CVSS base score." },
+        "advisory_url": {
+          "type": ["string", "null"],
+          "pattern": "^\\s*[Hh][Tt][Tt][Pp][Ss]?://\\S+\\s*$",
+          "description": "Vendor or NVD advisory, http or https."
+        },
+        "source_ids": { "$comment": "soft", "$ref": "#/$defs/strings", "description": "Kept for the record." },
+        "kev": {
+          "$comment": "soft",
+          "type": ["boolean", "null"],
+          "description": "Proposed. true when listed in the CISA KEV catalog."
+        },
+        "kev_added": {
+          "$comment": "soft",
+          "$ref": "#/$defs/day",
+          "description": "Proposed. Day it was added to KEV."
+        },
+        "epss": {
+          "$comment": "soft",
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Proposed. EPSS probability from 0 to 1."
+        },
+        "vendor": {
+          "$comment": "soft",
+          "type": "string",
+          "description": "Proposed. Vendor of the affected product."
+        },
+        "product": { "$comment": "soft", "type": "string", "description": "Proposed. The affected product." },
+        "patch": {
+          "$comment": "soft",
+          "enum": ["available", "mitigation", "none", null],
+          "description": "Proposed. Whether a fix exists."
+        },
+        "fixed_versions": {
+          "$comment": "soft",
+          "$ref": "#/$defs/strings",
+          "description": "Proposed. First fixed versions."
+        },
+        "published": {
+          "$comment": "soft",
+          "$ref": "#/$defs/day",
+          "description": "Proposed. Day the CVE was published."
+        }
+      }
+    },
+    "cluster": {
+      "type": "object",
+      "required": ["label", "sentiment_counts", "samples"],
+      "properties": {
+        "label": { "type": "string", "description": "What the comments say. Up to 90 characters." },
+        "sentiment_counts": {
+          "type": "object",
+          "description": "Counts for positive, neutral, negative and unclassified. Leave out a mood with no comments.",
+          "additionalProperties": { "type": "number" }
+        },
+        "samples": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/sample" },
+          "description": "Up to 3 representative comments."
+        },
+        "count": { "$comment": "soft", "type": "number", "description": "Kept for the record." },
+        "share": { "$comment": "soft", "type": "number", "description": "Kept for the record." },
+        "sentiment": { "$comment": "soft", "type": "string", "description": "Kept for the record." }
+      }
+    },
+    "sample": {
+      "type": "object",
+      "required": ["text", "parent_url"],
+      "properties": {
+        "text": { "type": "string", "description": "The comment. Up to 400 characters." },
+        "parent_url": {
+          "type": "string",
+          "description": "The post it replies to, http or https. Anything else shows without a link."
+        },
+        "date_ist": { "$ref": "#/$defs/optionalText", "description": "\"YYYY-MM-DD HH:MM\"." },
+        "url": { "$comment": "soft", "type": "string", "description": "Kept for the record." },
+        "kind": { "$comment": "soft", "type": "string", "description": "Kept for the record." }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "id",
+        "platform",
+        "type",
+        "account",
+        "date_ist",
+        "text",
+        "url",
+        "engagement",
+        "theme",
+        "metrics"
+      ],
+      "properties": {
+        "id": { "type": "string", "description": "Unique in the week." },
+        "platform": {
+          "type": "string",
+          "description": "Case-sensitive. A new platform shows with a spare colour.",
+          "examples": ["X", "YouTube"]
+        },
+        "type": {
+          "type": "string",
+          "description": "Case-sensitive. A new type shows with a spare colour.",
+          "examples": ["vendor", "media", "independent"]
+        },
+        "account": { "type": "string", "description": "Display name. Up to 48 characters." },
+        "date_ist": {
+          "type": "string",
+          "description": "\"YYYY-MM-DD HH:MM\" in IST, inside the window. The by-day chart uses the date.",
+          "examples": ["2026-10-23 07:59"]
+        },
+        "text": { "type": "string", "description": "Post text or video title." },
+        "url": { "type": "string", "description": "http or https. Anything else shows without a link." },
+        "engagement": {
+          "type": "number",
+          "description": "Interactions on X, views on YouTube. A whole number from 0."
+        },
+        "theme": {
+          "type": "string",
+          "description": "A theme key, or a ranking key for a storyline below the bar."
+        },
+        "metrics": {
+          "type": "object",
+          "description": "Raw counts by name, for example {\"views\": 826905}. Shown in the engagement tooltip. Non-numbers are skipped."
+        },
+        "image": {
+          "$ref": "#/$defs/optionalText",
+          "description": "Thumbnail URL, http or https, about 16:9."
+        },
+        "video_id": { "$comment": "soft", "type": "string", "description": "Kept for the record." },
+        "org": { "$comment": "soft", "type": "string", "description": "Kept for the record." },
+        "date_utc": { "$comment": "soft", "type": "string", "description": "Kept for the record." },
+        "date_publish_raw": { "$comment": "soft", "type": "string", "description": "Kept for the record." },
+        "followers": {
+          "$comment": "soft",
+          "$ref": "#/$defs/count",
+          "description": "Proposed. Followers or subscribers of the account at capture."
+        },
+        "language": {
+          "$comment": "soft",
+          "type": "string",
+          "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]+)*$",
+          "description": "Proposed. BCP 47 tag, for example \"en\"."
+        }
+      }
+    },
+    "rankingRow": {
+      "type": "object",
+      "required": ["key", "name", "accounts"],
+      "properties": {
+        "key": { "type": "string", "description": "A theme key, or a new key for a storyline below the bar." },
+        "name": { "type": "string" },
+        "short_name": {
+          "$ref": "#/$defs/optionalText",
+          "description": "Up to 12 characters. Falls back to the theme's."
+        },
+        "accounts": {
+          "type": "number",
+          "description": "Accounts that covered the storyline. Sort the list by it, most first."
+        },
+        "x_eng": { "$comment": "soft", "type": "number", "description": "Kept for the record." },
+        "yt_views": { "$comment": "soft", "type": "number", "description": "Kept for the record." }
+      }
+    },
+    "day": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "description": "A calendar day, YYYY-MM-DD."
+    },
+    "url": {
+      "type": "string",
+      "pattern": "^\\s*[Hh][Tt][Tt][Pp][Ss]?://\\S+\\s*$",
+      "description": "http or https."
+    },
+    "count": { "type": "number", "minimum": 0 }
+  }
+}
