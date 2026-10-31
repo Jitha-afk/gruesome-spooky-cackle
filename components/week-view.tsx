@@ -510,7 +510,7 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
           </section>
         </main>
       </div>
-      <SiteFooter>
+      <SiteFooter side>
         <p>
           {plural(stats.themes, "theme")} from {plural(stats.sources, "source")}
           {data.meta.generated ? (

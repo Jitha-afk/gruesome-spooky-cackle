@@ -556,9 +556,12 @@ figcaption,
   display: none;
 }
 @media (min-width: 64rem) {
+  /* The shell draws the side rule so it runs to the footer. The sticky side stops at its last link. */
   .shell.has-side {
     display: grid;
     grid-template-columns: var(--side-w) minmax(0, 1fr);
+    background-image: var(--rule-y), var(--rule-y), var(--rule-y);
+    background-position: 0 0, calc(var(--side-w) - 1px) 0, 100% 0;
   }
   .side {
     display: block;
@@ -570,7 +573,6 @@ figcaption,
     overscroll-behavior: contain;
     scrollbar-width: thin;
     padding: 2.25rem 1.25rem 2rem;
-    background: var(--rule-y) 100% 0 / 1px 100% no-repeat;
   }
 }
 .mark {
@@ -615,6 +617,10 @@ figcaption,
   .mark-side {
     display: block !important;
   }
+}
+.site-footer .mark-side {
+  top: -4px;
+  bottom: auto;
 }
 
 /* ───────────────────────── header ───────────────────────── */
@@ -3419,5 +3425,6 @@ html.deep details[open] > * {
   }
   .shell.has-side {
     display: block;
+    background-position: 0 0, 100% 0, 100% 0;
   }
 }
