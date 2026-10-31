@@ -162,7 +162,7 @@ export function Hero({
   )
 }
 
-export function SiteFooter({ children }: { children?: ReactNode }) {
+export function SiteFooter({ side = false, children }: { side?: boolean; children?: ReactNode }) {
   return (
     <footer className="site-footer">
       <div className="wrap footer-bar">
@@ -173,6 +173,7 @@ export function SiteFooter({ children }: { children?: ReactNode }) {
         {children ? <div className="footer-note">{children}</div> : null}
         <i aria-hidden="true" className="mark mark-tl" />
         <i aria-hidden="true" className="mark mark-tr" />
+        {side ? <i aria-hidden="true" className="mark mark-side" /> : null}
       </div>
     </footer>
   )
