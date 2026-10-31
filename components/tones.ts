@@ -5,6 +5,7 @@ import type { Tone } from "@/components/glyph"
  * Like mdxcn, data uses the primary and secondary accent, then muted and faint.
  * Red (tone d) is reserved for exploited CVEs and negative comments, so the
  * third accent stop, red in prism, never marks data.
+ * Numbers use the same tones: a count takes the tone of the part it counts.
  */
 const TYPE: Record<string, Tone> = { vendor: "a", media: "b", independent: "m" }
 const PLATFORM: Record<string, Tone> = { X: "n", YouTube: "m" }

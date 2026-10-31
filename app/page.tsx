@@ -60,10 +60,11 @@ function Latest({ week, data }: { week: WeekRecord; data: WeekData }) {
               <dt>comments</dt>
               <dd className="num">{formatKpi(stats.comments)}</dd>
             </div>
-            <div>
+            <div className="is-hot">
               <dt>exploited</dt>
               <dd className="num">
-                {formatKpi(stats.exploited)}/{formatKpi(stats.cves)}
+                {formatKpi(stats.exploited)}
+                <span className="muted">/{formatKpi(stats.cves)}</span>
               </dd>
             </div>
           </dl>
