@@ -65,7 +65,7 @@
    "We sampled one page of replies (max 25) per post, up to the window end. Thus the data shows only part of very large threads. For example, the top PHP2Shell post has 225 replies. The quote-post endpoints returned mostly reposts of quotes. We excluded these reposts.",
    "Check Point (@CheckPointSW) and Microsoft Security (@msftsecurity) had no posts relevant to a theme in the window. Google/Mandiant posted only training promotions.",
    "Some YouTube watch pages failed on the first request. We fetched them again. View counts are a snapshot at capture time. They continue to change.",
-   "X post text is as the API returned it. We did not open links inside posts. Thus the brief attributes claims to the posting account and does not verify them independently."
+   "X post text is as the API returned it. We did not open links inside posts. The report shows the account that posted each claim. It does not make sure that the claims are correct."
   ],
   "also_observed": [
    "Linux kernel flaws: a TCP/MPTCP bug with CVSS 9.8, and KSMBD issues. Anthropic demonstrated a root exploit for the TCP/MPTCP bug. One outlet covered this on X, with high engagement.",
@@ -407,7 +407,7 @@
      }
     ]
    },
-   "why_line": "PHP runs many web applications and appliances, and a patch alone does not remove web shells or rotate stolen credentials.",
+   "why_line": "Many web applications and appliances use PHP. A patch does not remove web shells or change stolen credentials.",
    "short_name": "PHP2Shell",
    "cves": [
     "CVE-2026-109618",

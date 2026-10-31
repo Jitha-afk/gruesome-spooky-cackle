@@ -115,7 +115,7 @@ test("real week validates and keeps each CVE state", () => {
   const row = indexRow(weeks[0])
   assert.equal(row.shortName, "PHP2Shell")
   assert.equal(row.themeCount, 10)
-  assert.match(heroLead(weeks[0].data), /^The sources tell you that attackers exploit \d+ of the \d+ CVEs in this report\. PHP2Shell is the top theme, with \d+ accounts\. PHP runs .+\.$/)
+  assert.match(heroLead(weeks[0].data), /^The sources tell you that attackers exploit \d+ of the \d+ CVEs in this report\. PHP2Shell is the top theme, with \d+ accounts\. Many web applications and appliances use PHP\. .+\.$/)
   const ranks = rankRows(weeks[0].data)
   assert.deepEqual(
     ranks.map((item) => item.key),
