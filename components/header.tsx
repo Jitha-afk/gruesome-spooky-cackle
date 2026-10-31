@@ -155,9 +155,6 @@ export function SiteFooter({ children }: { children?: ReactNode }) {
           <span>Weekly threat intel</span>
         </p>
         {children ? <div className="footer-note">{children}</div> : null}
-        <p className="footer-credit">
-          Design language from <a href="https://www.mdxcn.dev">mdxcn</a> (MIT).
-        </p>
         <i aria-hidden="true" className="mark mark-tl" />
         <i aria-hidden="true" className="mark mark-tr" />
       </div>

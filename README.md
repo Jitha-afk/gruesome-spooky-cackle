@@ -25,3 +25,7 @@ From the repository root, run `pnpm install` and `pnpm build`. The site is writt
 ## Enable GitHub Pages
 
 The workflow deploys from GitHub Actions. If Pages is not already using that source, open Settings, open Pages, and set Source to GitHub Actions.
+
+## Credits
+
+Design language from [mdxcn](https://www.mdxcn.dev) (MIT).

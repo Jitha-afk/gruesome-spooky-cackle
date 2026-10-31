@@ -3194,21 +3194,6 @@ html.deep details[open] > * {
   gap: 0.5rem;
   color: var(--foreground);
 }
-.footer-credit {
-  margin-left: auto;
-}
-@media (max-width: 63.99rem) {
-  .footer-credit {
-    flex-basis: 100%;
-    margin-left: 0;
-  }
-}
-.footer-credit a {
-  color: var(--foreground);
-  text-decoration: underline;
-  text-decoration-color: var(--graph-accent);
-  text-underline-offset: 0.2em;
-}
 
 /* ───────────────────────── hover (pointer devices only) ───────────────────────── */
 @media (hover: hover) and (pointer: fine) {
