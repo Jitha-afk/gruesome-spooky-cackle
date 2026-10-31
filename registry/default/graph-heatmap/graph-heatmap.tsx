@@ -34,6 +34,8 @@ type GraphHeatmapProps = {
   title: string
   /** Data form. Or `"0 4 8 12"`. */
   columns?: string[] | string
+  /** Spoken column names when `columns` are abbreviated. Defaults to `columns`. */
+  spoken?: string[]
   /** Data form. Or write `<Row label="Mon">0 1 4 8</Row>`. */
   rows?: HeatRow[]
   children?: ReactNode
@@ -80,6 +82,7 @@ function IntensityScale({
 function GraphHeatmap({
   title,
   columns: columnsProp,
+  spoken: spokenProp,
   rows: rowsProp,
   children,
   max,
@@ -93,6 +96,7 @@ function GraphHeatmap({
   const markdown = labeledTable(children)
   const columns =
     columnsProp == null ? (markdown?.columns ?? []) : words(columnsProp)
+  const spoken = spokenProp ?? columns
   const taggedRows = childItems(children, Row).map((row) => ({
     label: row.label ?? "",
     values: numbers(textOf(row.children)),
@@ -142,7 +146,10 @@ function GraphHeatmap({
             {rows.map((row) => (
               <motion.li
                 aria-label={`${row.label}: ${columns
-                  .map((column, index) => `${column} ${row.values[index] ?? 0}`)
+                  .map(
+                    (column, index) =>
+                      `${spoken[index] ?? column} ${row.values[index] ?? 0}`
+                  )
                   .join(", ")}`}
                 className="grid items-center gap-x-1"
                 key={row.label}

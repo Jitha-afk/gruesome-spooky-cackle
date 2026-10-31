@@ -38,6 +38,24 @@ function metricCell(source: Source, key: string) {
   return typeof value === "number" ? formatCount(value) : ""
 }
 
+function AccountLine({ label, names }: { label: string; names: string[] }) {
+  if (names.length === 0) return null
+  return (
+    <p className="accounts">
+      {label}: {names.join(", ")}
+    </p>
+  )
+}
+
+function stackLabel(name: string, counts: string) {
+  return (
+    <span>
+      {name}
+      <span className="stack-counts">{counts}</span>
+    </span>
+  )
+}
+
 function CveList({
   theme,
   basis,
@@ -126,9 +144,9 @@ function ThemeCard({
       <GraphSpark data={spark} palette="mono" title="By day" />
       <div>
         <h3>Accounts</h3>
-        <p className="accounts">Vendors: {theme.vendors.join(", ")}</p>
-        <p className="accounts">Media: {theme.media.join(", ")}</p>
-        <p className="accounts">Independent: {theme.independent.join(", ")}</p>
+        <AccountLine label="Vendors" names={theme.vendors} />
+        <AccountLine label="Media" names={theme.media} />
+        <AccountLine label="Independent" names={theme.independent} />
       </div>
       <div>
         <h3>Key items</h3>
@@ -292,15 +310,48 @@ export function WeekView({ data }: { data: WeekData }) {
           title="Accounts"
         />
         <p>Sources per day.</p>
-        <GraphHeatmap columns={heat.columns} palette="duo" rows={heat.rows} title="By day" />
+        <GraphHeatmap
+          columns={heat.columns.map((day) => day.slice(0, 2))}
+          palette="duo"
+          rows={heat.rows}
+          spoken={heat.columns}
+          title="By day"
+        />
       </section>
 
       <section>
         <h2>Coverage</h2>
         <p>Accounts by outlet type.</p>
-        <GraphStack palette="multi" rows={coverage.accounts} title="By type" />
+        <GraphStack
+          className="split-type"
+          palette="multi"
+          rows={coverage.accounts.map((row, index) => {
+            const theme = themes[index]
+            const name = theme ? shortLabel(theme.name, theme.short_name) : row.label
+            const [v, m, i] = row.segments.map((segment) => segment.value)
+            return {
+              name,
+              label: stackLabel(name, `${v} / ${m} / ${i}`),
+              segments: row.segments,
+            }
+          })}
+          title="By type"
+        />
         <p>Sources by platform.</p>
-        <GraphStack palette="multi" rows={coverage.platforms} title="By platform" />
+        <GraphStack
+          palette="multi"
+          rows={coverage.platforms.map((row, index) => {
+            const theme = themes[index]
+            const name = theme ? shortLabel(theme.name, theme.short_name) : row.label
+            const [x, yt] = row.segments.map((segment) => segment.value)
+            return {
+              name,
+              label: stackLabel(name, `${x} / ${yt}`),
+              segments: row.segments,
+            }
+          })}
+          title="By platform"
+        />
       </section>
 
       <section>
@@ -326,10 +377,40 @@ export function WeekView({ data }: { data: WeekData }) {
         <h2>Comments</h2>
         <p>Sentiment of analysed comments.</p>
         <GraphWaffle
-          caption={`${formatCount(sentiment.positive)} positive. ${formatCount(sentiment.neutral)} neutral. ${formatCount(sentiment.negative)} negative. ${formatCount(sentiment.unclassified)} unclassified.`}
+          className="sentiment"
+          description={`${formatCount(sentiment.positive)} positive, ${formatCount(sentiment.neutral)} neutral, ${formatCount(sentiment.negative)} negative, ${formatCount(sentiment.unclassified)} unclassified, of ${formatCount(sentiment.positive + sentiment.neutral + sentiment.negative + sentiment.unclassified)} comments.`}
+          legend={
+            <ul className="waffle-key">
+              <li>
+                <span aria-hidden="true" className="text-graph-accent">
+                  █
+                </span>
+                <span>positive {formatCount(sentiment.positive)}</span>
+              </li>
+              <li>
+                <span aria-hidden="true" className="text-graph-muted">
+                  █
+                </span>
+                <span>neutral {formatCount(sentiment.neutral)}</span>
+              </li>
+              <li>
+                <span aria-hidden="true" className="text-graph-accent-3">
+                  █
+                </span>
+                <span>negative {formatCount(sentiment.negative)}</span>
+              </li>
+              <li>
+                <span aria-hidden="true" className="text-graph-muted">
+                  ░
+                </span>
+                <span>unclassified {formatCount(sentiment.unclassified)}</span>
+              </li>
+            </ul>
+          }
           segments={waffle.map((part) => ({
             cells: part.cells,
             className: tone[part.key] ?? "text-graph-faint",
+            glyph: part.key === "unclassified" ? "░" : undefined,
           }))}
           title="Sentiment"
         />

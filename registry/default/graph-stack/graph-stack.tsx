@@ -35,7 +35,9 @@ type StackSegment = {
 }
 
 type StackRow = {
-  label: string
+  label: ReactNode
+  /** Plain name for the accessible label and the list key. Required when `label` is not a string. */
+  name?: string
   /** Data form. Or nest `<Segment />` children inside `<Bar>`. */
   segments?: StackSegment[]
   children?: ReactNode
@@ -61,7 +63,13 @@ const Bar = defineItem<StackRow>("Bar")
 const Segment = defineItem<StackSegment>("Segment")
 
 type SegmentRow = { label: string; value: number }
-type BarRow = { label: string; segments: SegmentRow[] }
+type BarRow = { label: ReactNode; name: string; segments: SegmentRow[] }
+
+function plainName(label: ReactNode, name?: string) {
+  if (typeof name === "string" && name.length > 0) return name
+  if (typeof label === "string" || typeof label === "number") return String(label)
+  return "row"
+}
 
 function segmentsOf(row: StackRow): SegmentRow[] {
   const source = row.segments ?? childItems(row.children, Segment)
@@ -135,16 +143,19 @@ function GraphStack({
     const { label, rest } = splitLabel(itemText(item))
     return {
       label,
+      name: label,
       segments: segmentsFromText(rest),
     }
   })
   const tagged = childItems(children, Bar).map((row) => ({
     label: row.label,
+    name: plainName(row.label, row.name),
     segments: segmentsOf(row),
   }))
   const rows: BarRow[] = rowsProp
     ? rowsProp.map((row) => ({
         label: row.label,
+        name: plainName(row.label, row.name),
         segments: segmentsOf(row),
       }))
     : listed.length > 0
@@ -176,16 +187,16 @@ function GraphStack({
 
             return (
               <motion.li
-                aria-label={`${row.label}: ${row.segments
+                aria-label={`${row.name}: ${row.segments
                   .map((segment) => `${segment.label} ${segment.value}`)
                   .join(", ")}`}
                 className="grid grid-cols-[minmax(0,7rem)_minmax(0,1fr)] items-center gap-x-2 sm:gap-x-4"
-                key={row.label}
+                key={row.name}
                 variants={item}
               >
                 <span
                   className="min-w-0 text-foreground [overflow-wrap:anywhere]"
-                  title={row.label}
+                  title={row.name}
                 >
                   {row.label}
                 </span>
