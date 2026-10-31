@@ -27,6 +27,9 @@ import {
   waffleParts,
   heroLead,
   cveSentence,
+  cveStateLabel,
+  andList,
+  weekTitle,
   whyText,
 } from "../lib/brief.mjs"
 import { atomFeed, weekUpdated } from "../lib/feed.mjs"
@@ -158,7 +161,7 @@ test("short_name and basis are optional and extra fields are allowed", () => {
   assert.equal(cveViews(data.themes[0])[1].tag, "EXPLOITED")
 })
 
-test("heroLead prefers bottom_line, then counts and the top why_line", () => {
+test("heroLead names the sources first, then bottom_line or the top why_line", () => {
   const data = structuredClone(loadWeeks(REAL)[0].data)
   const top = data.themes.find((theme) => theme.rank === 1)
   top.why_line = "Patch is not enough"
@@ -179,6 +182,9 @@ test("heroLead prefers bottom_line, then counts and the top why_line", () => {
   assert.match(heroLead(data), /^The sources tell you that attackers exploit all \d+ CVEs in this report\. PHP2Shell/)
   for (const theme of data.themes) theme.cves = theme === top ? theme.cves.slice(0, 1) : []
   assert.match(heroLead(data), /^The sources tell you that attackers exploit the CVE in this report\. PHP2Shell/)
+  data.meta.bottom_line = "One line."
+  assert.equal(heroLead(data), "The sources tell you that attackers exploit the CVE in this report. One line.")
+  data.meta.bottom_line = null
   for (const theme of data.themes) theme.cves = []
   assert.match(heroLead(data), /^PHP2Shell is the top theme, with /)
   data.meta.bottom_line = "One line."
@@ -186,6 +192,22 @@ test("heroLead prefers bottom_line, then counts and the top why_line", () => {
   data.meta.bottom_line = null
   data.themes = []
   assert.equal(heroLead(data), "This report has no themes.")
+})
+
+test("cveStateLabel names the sources for each count", () => {
+  assert.equal(cveStateLabel(7, 8), "CVE states from the sources: 7 of 8 exploited.")
+  assert.equal(cveStateLabel(0, 1), "CVE states from the sources: 0 of 1 exploited.")
+  assert.equal(cveStateLabel(0, 0), "0 CVEs.")
+})
+
+test("andList and weekTitle join the top theme names", () => {
+  assert.equal(andList([]), "")
+  assert.equal(andList(["a"]), "a")
+  assert.equal(andList(["a", "b"]), "a and b")
+  assert.equal(andList(["a", "b", "c"]), "a, b and c")
+  const data = loadWeeks(REAL)[0].data
+  assert.equal(weekTitle(data), "PHP2Shell, AI offence and Brotli CVE · 23–29 Oct 2026")
+  assert.equal(weekTitle(data, 1), "PHP2Shell · 23–29 Oct 2026")
 })
 
 test("nameDetail drops a leading label only at a word boundary", () => {

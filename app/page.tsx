@@ -8,6 +8,7 @@ import { DateUnits, Hero, SiteFooter, SiteHeader } from "@/components/header"
 import { pad, plural } from "@/components/tones"
 import {
   bottomLine,
+  cveStateLabel,
   formatCount,
   formatKpi,
   headlineStats,
@@ -117,8 +118,8 @@ export default function IndexPage() {
       <div className="shell">
         <main className="main" id="main" tabIndex={-1}>
           <Hero
-            kicker={read ? `weekly · ${read}` : "weekly"}
-            lead="Each report shows the security themes of one week and the CVE states. For each theme, it shows the key sources and the comment sentiment."
+            kicker={read ?? "each week"}
+            lead="Each report shows the security themes of one week and the CVE states from the sources. For each theme, it shows the key sources and the comment sentiment."
             title="Weekly threat intel"
           />
           {latest?.data ? <Latest data={latest.data} week={latest} /> : null}
@@ -168,7 +169,7 @@ export default function IndexPage() {
                                     </span>
                                     <Meter
                                       hot={stats.exploited}
-                                      label={`${stats.exploited} of ${stats.cves} CVEs exploited.`}
+                                      label={cveStateLabel(stats.exploited, stats.cves)}
                                       max={12}
                                       total={stats.cves}
                                     />
