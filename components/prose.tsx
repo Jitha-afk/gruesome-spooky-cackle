@@ -1,6 +1,27 @@
 import type { ReactNode } from "react"
 import { Corners } from "@/components/frame"
 
+const CVE_ID = /(CVE-\d{4}-\d{4,})/i
+
+/** Plain text with each CVE id kept on one line, so an id never breaks at its hyphens. */
+export function KeepCves({ text }: { text: string }) {
+  const parts = String(text ?? "").split(CVE_ID)
+  if (parts.length === 1) return <>{text}</>
+  return (
+    <>
+      {parts.map((part, index) =>
+        index % 2 === 1 ? (
+          <span className="nowrap" key={index}>
+            {part}
+          </span>
+        ) : (
+          part
+        ),
+      )}
+    </>
+  )
+}
+
 export type CalloutType = "note" | "tip" | "warning" | "danger"
 
 const GLYPH: Record<CalloutType, string> = { note: "i", tip: "+", warning: "!", danger: "×" }

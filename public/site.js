@@ -55,17 +55,17 @@
 
   function syncAccent() {
     var id = root.getAttribute("data-accent")
-    all("[data-accent-set]").forEach(function (button) {
-      button.setAttribute("aria-pressed", String(button.getAttribute("data-accent-set") === id))
+    all("[data-accent-set]").forEach(function (input) {
+      input.checked = input.value === id
     })
   }
 
-  function setAccent(button) {
-    var id = button.getAttribute("data-accent-set")
+  function setAccent(input) {
+    var id = input.value
     if (id === root.getAttribute("data-accent")) return
     sweep(function () {
       root.setAttribute("data-accent", id)
-      root.setAttribute("data-accent-kind", button.getAttribute("data-kind") || "solid")
+      root.setAttribute("data-accent-kind", input.getAttribute("data-kind") || "solid")
       store("graph-accent", id)
       syncAccent()
     })
@@ -88,7 +88,7 @@
     var open = themes.length > 0 && themes.every(function (theme) {
       return theme.open
     })
-    expand.setAttribute("aria-pressed", String(open))
+    expand.setAttribute("data-on", String(open))
   }
 
   // Source table: filters, search, sort and the row limit.
@@ -97,6 +97,8 @@
   var search = d.querySelector("[data-search-input]")
   var more = d.querySelector("[data-more]")
   var count = d.querySelector("[data-count]")
+  var live = d.querySelector("[data-said]")
+  var said
   var empty = d.querySelector("[data-empty]")
   rows.forEach(function (row, index) {
     row._i = index
@@ -126,7 +128,13 @@
       if (ok) matches += 1
       row.hidden = !ok || (!full && matches > LIMIT)
     })
-    if (count) count.textContent = matches.toLocaleString("en-US") + " of " + rows.length.toLocaleString("en-US") + " sources"
+    var text = matches.toLocaleString("en-US") + " of " + rows.length.toLocaleString("en-US") + " sources"
+    if (count) count.textContent = text
+    // The live region waits for typing to pause, so it speaks once.
+    clearTimeout(said)
+    said = setTimeout(function () {
+      if (live && live.textContent !== text) live.textContent = text
+    }, 500)
     if (empty) empty.hidden = matches > 0
     if (more) {
       more.hidden = matches <= LIMIT
@@ -137,8 +145,8 @@
   }
 
   function sort(button) {
-    var up = button.getAttribute("aria-pressed") !== "true"
-    button.setAttribute("aria-pressed", String(up))
+    var up = button.getAttribute("data-on") !== "true"
+    button.setAttribute("data-on", String(up))
     rows.sort(function (a, b) {
       return (a.getAttribute("data-engagement") - b.getAttribute("data-engagement")) * (up ? 1 : -1) || a._i - b._i
     })
@@ -162,9 +170,8 @@
     if (!target || !target.closest) return
     var hit
     if ((hit = target.closest("[data-theme-toggle]"))) return sweep(toggleTheme)
-    if ((hit = target.closest("[data-accent-set]"))) return setAccent(hit)
     if ((hit = target.closest("[data-expand-all]"))) {
-      var open = hit.getAttribute("aria-pressed") !== "true"
+      var open = hit.getAttribute("data-on") !== "true"
       // Ten height animations at once drop frames on phones, so these snap.
       root.classList.add("bulk")
       themes.forEach(function (theme) {
@@ -172,7 +179,7 @@
       })
       void root.offsetWidth
       root.classList.remove("bulk")
-      return hit.setAttribute("aria-pressed", String(open))
+      return hit.setAttribute("data-on", String(open))
     }
     if ((hit = target.closest("[data-sort]"))) return sort(hit)
     if ((hit = target.closest("[data-more]"))) return toggleMore(hit)
@@ -184,7 +191,11 @@
   })
 
   function onField(event) {
-    if (event.target.matches("[data-search-input], [data-filter-type], [data-filter-platform]")) filter()
+    var field = event.target
+    // Radios fire input and change; the accent listens to change only.
+    if (field.hasAttribute("data-accent-set")) {
+      if (event.type === "change") setAccent(field)
+    } else if (field.matches("[data-search-input], [data-filter-type], [data-filter-platform]")) filter()
   }
   d.addEventListener("input", onField)
   d.addEventListener("change", onField)
@@ -195,6 +206,12 @@
     },
     true,
   )
+  // Tabbing out of a menu closes it. Its own button keeps it open.
+  d.addEventListener("focusout", function (event) {
+    var pop = event.target.closest && event.target.closest("[popover]")
+    var next = event.relatedTarget
+    if (pop && next && !pop.contains(next) && !next.hasAttribute("popovertarget") && pop.matches(":popover-open")) pop.hidePopover()
+  })
   addEventListener("hashchange", function () {
     reveal(location.hash)
   })
@@ -226,7 +243,7 @@
     if (sub && !top.contains(sub)) sub = null
     links.forEach(function (link) {
       var id = link.getAttribute("href").slice(1)
-      if ((top && top.id === id) || (sub && sub.id === id)) link.setAttribute("aria-current", "true")
+      if ((top && top.id === id) || (sub && sub.id === id)) link.setAttribute("aria-current", "location")
       else link.removeAttribute("aria-current")
     })
   }

@@ -44,11 +44,11 @@ Unknown fields are allowed and ignored, so the pipeline can capture a field befo
 
 | Field | Need | Shows in | Notes |
 | --- | --- | --- | --- |
-| `title` | required | Hero heading, browser tab | One line. |
+| `title` | required | Hero kicker, browser tab | One line, the same every week, for example "Weekly cybersecurity threat-intel brief". The hero heading is the window, for example "23–29 Oct 2026". |
 | `window.start`, `window.end` | required | Hero, index row, by-day chart | `YYYY-MM-DD HH:MM IST`. The days must match the folder name. The page is built for 7 days, one chart column per day. More than 7 is a warning, and the chart caps at 31 days. |
 | `window.start_utc`, `window.end_utc` | record | | |
 | `generated` | optional | Hero, notes, index "published" date | `YYYY-MM-DD HH:MM IST`. Without it the index shows no published date. |
-| `bottom_line` | optional | Hero lead, index lead | One or two sentences. Without it, the hero reads "`<top theme>` led this week with N accounts, N interactions and N views." The index shows "`<top theme>` led the week." plus that theme's `why_line`. |
+| `bottom_line` | optional, warned | Hero lead, index lead | One or two sentences: what a defender should take from the week. Without it, the hero reads "N of N cited CVEs exploited in the wild. `<top theme>` led with N accounts: `<its why_line>`" and the index shows "`<top theme>` led the week." plus that theme's `why_line`. The gate warns when it is missing. |
 | `capture` | required | Notes, "Capture window" | One row for each string, labelled by key. `x` and `youtube` are required. Add a key for a new platform, for example `"bluesky": "… to …"`. |
 | `counts` | required | KPIs, notes | See [Counts and the funnel](#counts-and-the-funnel). |
 | `methodology` | required | Notes, "How this brief is made" | One paragraph. Hidden when `method_steps` is present. |
@@ -87,7 +87,7 @@ Each funnel stage must be no larger than the stage before it. A stage that grows
 | `summary` | required | Theme body | What happened. |
 | `why` | required | "Why it matters" callout | |
 | `why_line` | optional | Top-3 cards | One sentence. Without it the cards show `why`, cut at three lines. |
-| `actions` | optional | "What to do" callout | Steps for defenders, one imperative sentence each. Hidden when missing. |
+| `actions` | optional, warned | "What to do" callout | Steps for defenders, one imperative sentence each. Hidden when missing. The gate warns when no theme has any. |
 | `affected.products`, `affected.sectors`, `affected.regions` | required | Theme facts | Short phrases. Use `"Not stated"` when unknown. |
 | `vendors`, `media`, `independent` | required | "Who covered it" chart, theme credits | Account names, which can be empty lists. The chart uses the length of each list. |
 | `distinct_accounts` | required | Rank bars, KPIs, deltas | The ranking metric. Should match the `ranking` row. |
@@ -167,7 +167,7 @@ Past a limit the page still renders, but not as designed. `pnpm check:week` warn
 
 | Field | Limit | `LIMITS` key | Past the limit |
 | --- | --- | --- | --- |
-| `meta.title` | 60 characters | `title` | The hero title wraps to three or more lines. |
+| `meta.title` | 60 characters | `title` | The hero kicker wraps to two or more lines on phones. |
 | `meta.bottom_line` | 240 characters | `bottom_line` | The hero and index leads get long. |
 | `themes[].short_name`, `ranking[].short_name` | 12 characters | `short_name` | Labels are cut with "…". |
 | `themes[].name` | 110 characters | `name` | The theme row cuts it with "…". |

@@ -114,7 +114,7 @@ export function SiteHeader({ crumb, toc }: { crumb?: ReactNode; toc?: TocItem[] 
         </div>
       </header>
       <div className="pop pop-accent" id="accent-menu" popover="auto">
-        <AccentPicker />
+        <AccentPicker name="accent-menu" />
       </div>
       {toc ? (
         <div className="pop pop-toc" id="toc-menu" popover="auto">

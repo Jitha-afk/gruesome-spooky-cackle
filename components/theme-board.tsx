@@ -1,12 +1,13 @@
 import type { CSSProperties } from "react"
 import { Box } from "@/components/frame"
 import { Bar, Delta, Legend, Spark, Split, type Part } from "@/components/glyph"
-import { Callout, Quote } from "@/components/prose"
+import { Callout, KeepCves, Quote } from "@/components/prose"
 import { SENTIMENT, cveGlyph, pad, plural } from "@/components/tones"
 import {
   commentModel,
   cveViews,
   formatCount,
+  nameDetail,
   platformUnits,
   safeHref,
   sparkSummary,
@@ -38,7 +39,11 @@ export function CveRows({ rows, themeHref }: { rows: (CveView & { theme?: string
               {row.theme}
             </a>
           ) : null}
-          {row.basis ? <p className="basis">{row.basis}</p> : null}
+          {row.basis ? (
+            <p className="basis">
+              <KeepCves text={row.basis} />
+            </p>
+          ) : null}
           {row.advisory ? (
             <a className="advisory" href={row.advisory} rel="noreferrer">
               advisory
@@ -50,22 +55,50 @@ export function CveRows({ rows, themeHref }: { rows: (CveView & { theme?: string
   )
 }
 
+const flagOrder = (flag: boolean | null) => (flag === true ? 0 : flag === null ? 1 : 2)
+
+/** Exploited first, at most four glyphs, then exploited over cited. */
 function CveGlyphs({ rows }: { rows: CveView[] }) {
-  if (rows.length === 0) return <span className="muted">—</span>
+  if (rows.length === 0)
+    return (
+      <span className="muted">
+        <span aria-hidden="true">—</span>
+        <span className="sr-only">No CVEs cited.</span>
+      </span>
+    )
   const hot = rows.filter((row) => row.flag === true).length
-  const shown = rows.slice(0, 6)
+  const shown = [...rows].sort((a, b) => flagOrder(a.flag) - flagOrder(b.flag)).slice(0, 4)
   return (
     <>
       <span aria-hidden="true" className="cve-glyphs">
         {shown.map((row) => (
           <i className={cveGlyph(row.flag)} key={row.id} />
         ))}
-        {rows.length > shown.length ? <span className="num">+{rows.length - shown.length}</span> : null}
+      </span>
+      <span aria-hidden="true" className="num">
+        {hot}/{rows.length}
       </span>
       <span className="sr-only">
         {plural(rows.length, "CVE")}, {hot} exploited.
       </span>
     </>
+  )
+}
+
+/** Key for the CVE glyphs. Decorative: each glyph's state is also in text. */
+export function CveKey({ className }: { className?: string }) {
+  return (
+    <p aria-hidden="true" className={className ? `board-key ${className}` : "board-key"}>
+      <span>
+        <i className="g-hot" /> exploited
+      </span>
+      <span>
+        <i className="g-open" /> not confirmed
+      </span>
+      <span>
+        <i className="g-cold" /> not exploited
+      </span>
+    </p>
   )
 }
 
@@ -79,7 +112,16 @@ function Item({ source }: { source: Source }) {
         <span aria-hidden="true" className="thumb">
           {/* Static export: thumbnails are remote and small, so a plain img is right. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" decoding="async" height={90} loading="lazy" referrerPolicy="no-referrer" src={image} width={160} />
+          <img
+            alt=""
+            data-fallback={source.platform.slice(0, 2)}
+            decoding="async"
+            height={90}
+            loading="lazy"
+            referrerPolicy="no-referrer"
+            src={image}
+            width={160}
+          />
         </span>
       ) : (
         <span aria-hidden="true" className="thumb thumb-none">
@@ -161,12 +203,17 @@ function Body({
   const sentiment: Part[] = SENTIMENT.map((entry) => ({ label: entry.key, tone: entry.tone, value: row.sentiment[entry.key] }))
   return (
     <div className="theme-body">
+      <h3 className="sr-only">{theme.name}</h3>
       <div className="theme-cols">
         <div className="theme-prose">
-          <p>{theme.summary}</p>
+          <p>
+            <KeepCves text={theme.summary} />
+          </p>
           {theme.why ? (
             <Callout title="why it matters" type="warning">
-              <p>{theme.why}</p>
+              <p>
+                <KeepCves text={theme.why} />
+              </p>
             </Callout>
           ) : null}
           {actions.length > 0 ? (
@@ -273,7 +320,7 @@ function Body({
       {accountsTotal > 0 ? (
         <details className="more accounts">
           <summary>
-            <span>accounts · {accountsTotal}</span>
+            <span>named outlets · {accountsTotal}</span>
             <i aria-hidden="true" className="plus" />
           </summary>
           <dl className="spec">
@@ -330,21 +377,26 @@ export function ThemeBoard({
         const row = byKey.get(theme.key)
         if (!row) return null
         const change = delta?.themes[theme.key]
+        const detail = nameDetail(theme.name, row.label)
         const style: Vars = { "--i": index }
         return (
           <details className="theme" id={`theme-${theme.key}`} key={theme.key} style={style}>
             <summary>
               <span className="t-rank num">{pad(theme.rank)}</span>
-              <span className="t-name">
+              <span className="t-name" title={theme.name}>
                 <span className="t-label">{row.label}</span>
-                <span className="t-full">{theme.name}</span>
+                {detail ? (
+                  <span aria-hidden="true" className="t-full">
+                    {detail}
+                  </span>
+                ) : null}
               </span>
               <span className="t-acc">
                 <Bar value={row.share} />
                 <span className="num">{formatCount(row.accounts)}</span>
                 <span className="sr-only"> accounts.</span>
               </span>
-              <span className="t-spark col-spark">
+              <span aria-hidden="true" className="t-spark col-spark">
                 <Spark label={sparkSummary(row.spark, days)} series={row.spark} />
               </span>
               <span className="t-cve col-cve">
@@ -361,17 +413,7 @@ export function ThemeBoard({
           </details>
         )
       })}
-      <p aria-hidden="true" className="board-key">
-        <span>
-          <i className="g-hot" /> exploited
-        </span>
-        <span>
-          <i className="g-open" /> not confirmed
-        </span>
-        <span>
-          <i className="g-cold" /> not exploited
-        </span>
-      </p>
+      <CveKey />
     </Box>
   )
 }

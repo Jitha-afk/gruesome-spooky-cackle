@@ -8,7 +8,6 @@ import path from "node:path"
 import test from "node:test"
 import {
   alsoObserved,
-  bottomLine,
   commentModel,
   cveTableRows,
   cveViews,
@@ -30,7 +29,7 @@ import {
   themesByRank,
   validateData,
   weekDelta,
-  weekSummary,
+  heroLead,
   whyText,
   windowDays,
   windowLabel,
@@ -64,7 +63,7 @@ function renderModels(data, previous = COMPLETE) {
     facets: sourceFacets(data),
     sources: sourceRows(data),
     label: windowLabel(data),
-    lead: bottomLine(data) ?? (themes[0] ? weekSummary(themes[0]) : ""),
+    lead: heroLead(data),
     also: alsoObserved(data),
     steps: methodSteps(data),
     funnel: funnelModel(data),
@@ -196,7 +195,7 @@ test("minimal.json passes the gate and only warns about optional fields", () => 
   const findings = checkWeek(MINIMAL, "2026-11-06_2026-11-12")
   assert.deepEqual(
     findings.map((item) => `${item.level} ${item.path}`),
-    ["warn meta.generated", "warn themes[0].short_name", "warn themes[0].why_line"],
+    ["warn meta.bottom_line", "warn meta.generated", "warn themes", "warn themes[0].short_name", "warn themes[0].why_line"],
   )
 })
 

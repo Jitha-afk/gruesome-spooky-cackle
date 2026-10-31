@@ -1,7 +1,6 @@
 import { ArrowDownUp, Search } from "lucide-react"
 import { Box } from "@/components/frame"
-import { Bar, Key } from "@/components/glyph"
-import { platformTone, typeTone } from "@/components/tones"
+import { Bar } from "@/components/glyph"
 import {
   formatCount,
   platformUnits,
@@ -24,7 +23,7 @@ function metricsText(source: Source) {
     .join(" · ")
 }
 
-function Chips({ name, facets, tone }: { name: "type" | "platform"; facets: Facet[]; tone: (key: string) => ReturnType<typeof typeTone> }) {
+function Chips({ name, facets }: { name: "type" | "platform"; facets: Facet[] }) {
   return (
     <fieldset className="chips">
       <legend className="kicker">{name}</legend>
@@ -36,7 +35,7 @@ function Chips({ name, facets, tone }: { name: "type" | "platform"; facets: Face
             value={entry.key}
             {...(name === "type" ? { "data-filter-type": "" } : { "data-filter-platform": "" })}
           />
-          <Key tone={tone(entry.key)} />
+          <i aria-hidden="true" className="chip-box" />
           <span>{entry.key}</span>
           <span className="num">{formatCount(entry.count)}</span>
         </label>
@@ -49,30 +48,31 @@ function Chips({ name, facets, tone }: { name: "type" | "platform"; facets: Face
 export function Sources({ data }: { data: WeekData }) {
   const rows = sourceRows(data)
   const facets = sourceFacets(data)
-  const typeKeys = facets.type.map((entry) => entry.key)
-  const platformKeys = facets.platform.map((entry) => entry.key)
   const labels = new Map(rankRows(data).map((row) => [row.key, row.label]))
   const themes = new Set(data.themes.map((theme) => theme.key))
   const peak = Math.log10(1 + Math.max(1, ...rows.map((source) => source.engagement)))
   return (
     <>
       <div className="src-tools js-only">
-        <Chips facets={facets.type} name="type" tone={(key) => typeTone(key, typeKeys)} />
-        <Chips facets={facets.platform} name="platform" tone={(key) => platformTone(key, platformKeys)} />
+        <Chips facets={facets.type} name="type" />
+        <Chips facets={facets.platform} name="platform" />
         <div className="src-search">
           <label className="search">
             <Search aria-hidden="true" size={14} strokeWidth={1.75} />
             <span className="sr-only">Search the sources</span>
             <input autoComplete="off" data-search-input placeholder="search" spellCheck={false} type="search" />
           </label>
-          <button aria-pressed="false" className="btn" data-sort type="button">
+          <button className="btn" data-on="false" data-sort type="button">
             <ArrowDownUp aria-hidden="true" size={14} strokeWidth={1.75} />
             <span className="when-off">most engaged</span>
             <span className="when-on">least engaged</span>
           </button>
         </div>
-        <p aria-live="polite" className="src-count num" data-count>
-          {formatCount(rows.length)} of {formatCount(rows.length)}
+        <p aria-hidden="true" className="src-count num" data-count>
+          {formatCount(rows.length)} of {formatCount(rows.length)} sources
+        </p>
+        <p aria-live="polite" className="sr-only" data-said>
+          {formatCount(rows.length)} of {formatCount(rows.length)} sources
         </p>
       </div>
       <Box className="src-box" title="sources">
@@ -88,7 +88,7 @@ export function Sources({ data }: { data: WeekData }) {
               </th>
             </tr>
           </thead>
-          <tbody data-src-body>
+          <tbody data-src-body id="src-rows">
             {rows.map((source) => {
               const href = safeHref(source.url)
               const label = labels.get(source.theme)
@@ -138,7 +138,7 @@ export function Sources({ data }: { data: WeekData }) {
                       {unit}
                       {metrics ? `. ${metrics}` : ""}
                     </span>
-                    <Bar tone="b" value={Math.log10(1 + Math.max(0, source.engagement)) / peak} />
+                    <Bar value={Math.log10(1 + Math.max(0, source.engagement)) / peak} />
                   </td>
                 </tr>
               )
@@ -150,7 +150,7 @@ export function Sources({ data }: { data: WeekData }) {
         </p>
       </Box>
       {rows.length > SOURCE_LIMIT ? (
-        <button aria-expanded="false" className="btn btn-more js-only" data-more type="button">
+        <button aria-controls="src-rows" aria-expanded="false" className="btn btn-more js-only" data-more type="button">
           <span className="when-closed">
             show all <span data-more-count>{formatCount(rows.length)}</span>
           </span>

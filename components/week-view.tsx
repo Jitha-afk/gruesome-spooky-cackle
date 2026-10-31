@@ -1,32 +1,30 @@
-import type { CSSProperties } from "react"
+import { Fragment, type CSSProperties } from "react"
 import { ChevronsUpDown } from "lucide-react"
 import { AccentPicker } from "@/components/accent-picker"
 import { Box, Corners, Frame, SectionHead } from "@/components/frame"
 import { Bar, Delta, Legend, Meter, Spark, Split, type Part } from "@/components/glyph"
 import { DateUnits, Hero, SiteFooter, SiteHeader, Toc, type TocItem } from "@/components/header"
-import { Callout, Steps } from "@/components/prose"
+import { Callout, KeepCves, Steps } from "@/components/prose"
 import { Signals } from "@/components/signals"
 import { Sources } from "@/components/sources"
-import { CveRows, ThemeBoard } from "@/components/theme-board"
+import { CveKey, CveRows, ThemeBoard } from "@/components/theme-board"
 import { SENTIMENT, cveGlyph, pad, percent, platformTone, plural } from "@/components/tones"
 import {
   alsoObserved,
-  bottomLine,
   cveTableRows,
   formatCount,
   funnelModel,
   headlineStats,
+  heroLead,
   methodSteps,
   platformUnits,
   previewCves,
-  rankRows,
   sentimentTotals,
   sourceFacets,
   sparkSummary,
   themeRows,
   themesByRank,
   weekDelta,
-  weekSummary,
   whyText,
   windowDays,
   windowLabel,
@@ -77,7 +75,13 @@ function Kpis({ data, rows, delta }: { data: WeekData; rows: ThemeRow[]; delta: 
             <Split label={`Accounts by theme: ${describe(concentration)}.`} parts={concentration} />
           </dd>
           <dd className="kpi-note">
-            top {lead.length} hold <span className="num">{leadShare}%</span> of accounts
+            {lead.length > 1 ? (
+              <>
+                <span className="num">{leadShare}%</span> in the top {lead.length}
+              </>
+            ) : (
+              plural(lead.length, "theme")
+            )}
           </dd>
         </div>
         <div className="kpi">
@@ -91,10 +95,12 @@ function Kpis({ data, rows, delta }: { data: WeekData; rows: ThemeRow[]; delta: 
           </dd>
           <dd className="kpi-note">
             {platforms.map((part, index) => (
-              <span key={part.label}>
-                {index > 0 ? " · " : null}
-                <span className="num">{formatCount(part.value)}</span> {part.label}
-              </span>
+              <Fragment key={part.label}>
+                {index > 0 ? " " : null}
+                <span className="kpi-part">
+                  <span className="num">{formatCount(part.value)}</span> {part.label}
+                </span>
+              </Fragment>
             ))}
           </dd>
         </div>
@@ -110,11 +116,11 @@ function Kpis({ data, rows, delta }: { data: WeekData; rows: ThemeRow[]; delta: 
           <dd className="kpi-note">
             {read > 0 ? (
               <>
-                <span>
+                <span className="kpi-part">
                   <span className="num">{percent(sentiment.negative, read)}%</span> negative
                 </span>{" "}
-                <span>
-                  · <span className="num">{percent(sentiment.positive, read)}%</span> positive
+                <span className="kpi-part">
+                  <span className="num">{percent(sentiment.positive, read)}%</span> positive
                 </span>
               </>
             ) : (
@@ -134,7 +140,7 @@ function Kpis({ data, rows, delta }: { data: WeekData; rows: ThemeRow[]; delta: 
           </dd>
           <dd className="kpi-note">
             {stats.cves === 0
-              ? "no cves cited"
+              ? "no CVEs cited"
               : unconfirmed > 0
                 ? `${formatCount(unconfirmed)} not confirmed`
                 : "all states confirmed"}
@@ -168,7 +174,9 @@ function Leads({ themes, rows, days }: { themes: Theme[]; rows: ThemeRow[]; days
                 {row.label}
               </a>
             </h3>
-            <p className={why.clamp ? "lead-why is-clamped" : "lead-why"}>{why.text}</p>
+            <p className={why.clamp ? "lead-why is-clamped" : "lead-why"}>
+              <KeepCves text={why.text} />
+            </p>
             {preview.shown.length > 0 ? (
               <ul aria-label="CVEs" className="lead-cves">
                 {preview.shown.map((cve) => (
@@ -183,7 +191,7 @@ function Leads({ themes, rows, days }: { themes: Theme[]; rows: ThemeRow[]; days
                 {preview.extra > 0 ? <li className="num muted">+{preview.extra}</li> : null}
               </ul>
             ) : (
-              <p className="lead-cves muted">no cve in the sources</p>
+              <p className="lead-cves muted">no CVEs cited</p>
             )}
             <div className="lead-foot">
               <span className="lead-acc">
@@ -283,7 +291,9 @@ function Notes({ data }: { data: WeekData }) {
             {captures.map(([platform, text]) => (
               <div key={`capture-${platform}`}>
                 <dt>{platform.toLowerCase()} capture</dt>
-                <dd className="date-unit">{text}</dd>
+                <dd>
+                  <DateUnits text={text} />
+                </dd>
               </div>
             ))}
             {platforms.map((entry) => (
@@ -301,7 +311,9 @@ function Notes({ data }: { data: WeekData }) {
             {data.meta.generated ? (
               <div>
                 <dt>generated</dt>
-                <dd className="date-unit">{data.meta.generated}</dd>
+                <dd>
+                  <DateUnits text={data.meta.generated} />
+                </dd>
               </div>
             ) : null}
           </dl>
@@ -346,19 +358,17 @@ function Notes({ data }: { data: WeekData }) {
 export function WeekView({ data, previous = null }: { data: WeekData; previous?: WeekData | null }) {
   const themes = themesByRank(data)
   const rows = themeRows(data)
-  const top = themes[0]
   const stats = headlineStats(data)
   const cves = cveTableRows(data)
   const days = windowDays(data)
   const delta = weekDelta(data, previous)
-  const others = rankRows(data).filter((row) => !themes.some((theme) => theme.key === row.key))
   const exploited = cves.filter((row) => row.flag === true).length
   const unconfirmed = cves.filter((row) => row.flag === null).length
   const notExploited = cves.filter((row) => row.flag === false).length
   const toc: TocItem[] = [
     { id: "overview", label: "overview" },
-    { id: "signals", label: "signals" },
     { id: "cves", label: "cves", count: cves.length },
+    { id: "signals", label: "signals" },
     {
       id: "themes",
       label: "themes",
@@ -368,7 +378,6 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
     { id: "sources", label: "sources", count: formatCount(data.sources.length) },
     { id: "notes", label: "notes" },
   ]
-  const lead = bottomLine(data) ?? (top ? weekSummary(top) : "No theme met the bar this week.")
 
   return (
     <>
@@ -376,13 +385,10 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
       <div className="shell has-side">
         <aside aria-label="Page tools" className="side">
           <Toc items={toc} label="Sections" />
-          <AccentPicker />
+          <AccentPicker name="accent-side" />
         </aside>
-        <main className="main" id="main">
-          <Hero kicker={`weekly brief · ${windowLabel(data)}`} lead={lead} title={data.meta.title}>
-            <span>
-              <DateUnits text={`${data.meta.window.start} to ${data.meta.window.end}`} />
-            </span>
+        <main className="main" id="main" tabIndex={-1}>
+          <Hero kicker={data.meta.title} lead={<KeepCves text={heroLead(data)} />} title={windowLabel(data)}>
             {data.meta.generated ? (
               <span>
                 generated <span className="date-unit">{data.meta.generated}</span>
@@ -399,18 +405,11 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
               <>
                 <p className="kicker sub-kicker">top {Math.min(3, themes.length)}</p>
                 <Leads days={days} rows={rows} themes={themes} />
+                {themes.slice(0, 3).some((theme) => previewCves(theme).shown.length > 0) ? (
+                  <CveKey className="leads-key" />
+                ) : null}
               </>
             ) : null}
-          </section>
-
-          <section aria-labelledby="signals-title" className="sec" id="signals">
-            <SectionHead
-              id="signals"
-              kicker="signals"
-              lead="Accounts per theme, sources per day, who covered each theme and how the comments read."
-              title="Where the attention went"
-            />
-            <Signals data={data} />
           </section>
 
           <section aria-labelledby="cves-title" className="sec" id="cves">
@@ -433,11 +432,13 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
                 <div className="cve-meter">
                   <Meter hot={exploited} label={`${exploited} of ${cves.length} CVEs exploited.`} total={cves.length} />
                   <Legend
-                    parts={[
-                      { label: "exploited", tone: "d", value: exploited },
-                      { label: "not confirmed", tone: "f", value: unconfirmed },
-                      { label: "not exploited", tone: "m", value: notExploited },
-                    ]}
+                    parts={(
+                      [
+                        { label: "exploited", tone: "d", value: exploited },
+                        { label: "not confirmed", tone: "f", value: unconfirmed },
+                        { label: "not exploited", tone: "m", value: notExploited },
+                      ] satisfies Part[]
+                    ).filter((part) => part.value > 0)}
                   />
                 </div>
                 <CveRows rows={cves} themeHref />
@@ -449,11 +450,21 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
             )}
           </section>
 
+          <section aria-labelledby="signals-title" className="sec" id="signals">
+            <SectionHead
+              id="signals"
+              kicker="signals"
+              lead="Sources per day, accounts per theme, who covered each theme and how the comments read."
+              title="Where the attention went"
+            />
+            <Signals data={data} />
+          </section>
+
           <section aria-labelledby="themes-title" className="sec" id="themes">
             <SectionHead
               action={
                 themes.length > 1 ? (
-                  <button aria-pressed="false" className="btn js-only" data-expand-all type="button">
+                  <button className="btn js-only" data-expand-all data-on="false" type="button">
                     <ChevronsUpDown aria-hidden="true" size={14} strokeWidth={1.75} />
                     <span className="when-off">expand all</span>
                     <span className="when-on">collapse all</span>
@@ -469,18 +480,6 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
             {delta && delta.dropped.length > 0 ? (
               <p className="chart-note">
                 Dropped since {delta.label}: {delta.dropped.map((entry) => entry.label).join(", ")}.
-              </p>
-            ) : null}
-            {others.length > 0 ? (
-              <p className="chart-note">
-                Also ranked, below the theme bar:{" "}
-                {others.map((row, index) => (
-                  <span key={row.key}>
-                    {index > 0 ? ", " : null}
-                    <span title={row.title}>{row.label}</span> <span className="num">({row.accounts})</span>
-                  </span>
-                ))}
-                .
               </p>
             ) : null}
           </section>

@@ -4,8 +4,8 @@ import { formatCount, sparkGlyphs } from "@/lib/brief.mjs"
 /**
  * Glyph tones. Each tone sets a colour and a block glyph, so a split never
  * depends on colour alone.
- * a accent █, b accent-2 ▓, c accent-3 ▒, m muted ▒, n foreground █,
- * d destructive ▓, f frame ░.
+ * a data █, b data-2 ▓ (the accent, unless it is red), c accent-3 ▒,
+ * m muted ▒, n foreground █, d destructive ▓, f mark ░.
  */
 export type Tone = "a" | "b" | "c" | "m" | "n" | "d" | "f"
 
@@ -73,15 +73,24 @@ export function Legend({ parts, className }: { parts: Part[]; className?: string
   )
 }
 
-/** Block spark, one glyph per day. The last day is in the accent. */
+/** Block spark, one glyph per day. The busiest day is in the data colour. */
 export function Spark({ series, label }: { series: number[]; label: string }) {
   if (series.length === 0) return null
   const glyphs = sparkGlyphs(series)
+  const peak = Math.max(...series)
+  const at = peak > 0 ? series.indexOf(peak) : -1
   return (
     <span aria-label={label} className="spark" role="img">
-      <span aria-hidden="true">{glyphs.slice(0, -1).join("")}</span>
-      <span aria-hidden="true" className="spark-last">
-        {glyphs.at(-1)}
+      <span aria-hidden="true">
+        {at < 0 ? (
+          glyphs.join("")
+        ) : (
+          <>
+            {glyphs.slice(0, at).join("")}
+            <span className="spark-peak">{glyphs[at]}</span>
+            {glyphs.slice(at + 1).join("")}
+          </>
+        )}
       </span>
     </span>
   )

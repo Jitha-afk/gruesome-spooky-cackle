@@ -149,12 +149,13 @@ export class BuildError extends Error {}
 export function reportsRoot(): string
 export function formatCount(value: number): string
 export function shortLabel(name: string, shortName?: string | null): string
+export function nameDetail(name: string, label?: string | null): string
 export function exploitedTag(flag: Flag): string
 export function cveViews(theme: Theme): CveView[]
 export function rankRows(data: WeekData): RankView[]
 export function whyText(theme: Theme): { text: string; clamp: boolean }
 export function previewCves(theme: Theme, limit?: number): { shown: CveView[]; extra: number }
-export function weekSummary(theme: Theme): string
+export function heroLead(data: WeekData): string
 export function commentModel(theme: Theme): CommentView[]
 export function isRealDay(text: unknown): boolean
 export function rangeLabel(startText: string, endText: string): string

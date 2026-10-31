@@ -106,7 +106,7 @@ export default function IndexPage() {
     <>
       <SiteHeader />
       <div className="shell">
-        <main className="main" id="main">
+        <main className="main" id="main" tabIndex={-1}>
           <Hero
             kicker={read ? `weekly · ${read}` : "weekly"}
             lead="What vendors, media and independent researchers talked about each week, ranked by how many accounts covered it. CVE states, key posts and the comment pulse for every theme."
@@ -143,7 +143,6 @@ export default function IndexPage() {
                             ) : (
                               "Saved page."
                             )}
-                            {index === 0 ? <span className="badge">latest</span> : null}
                           </span>
                           <span className="log-meta">
                             {stats ? (
@@ -151,11 +150,13 @@ export default function IndexPage() {
                                 <span className="log-stat">{plural(stats.themes, "theme")}</span>
                                 <span className="log-stat">
                                   {plural(stats.sources, "source")}
-                                  <Bar tone="b" value={stats.sources / volume} />
+                                  <Bar value={stats.sources / volume} />
                                 </span>
                                 {stats.cves > 0 ? (
                                   <span className="log-stat">
-                                    {stats.exploited}/{stats.cves} exploited
+                                    <span aria-hidden="true">
+                                      {stats.exploited}/{stats.cves} exploited
+                                    </span>
                                     <Meter
                                       hot={stats.exploited}
                                       label={`${stats.exploited} of ${stats.cves} CVEs exploited.`}

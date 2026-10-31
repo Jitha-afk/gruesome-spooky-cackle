@@ -16,6 +16,7 @@ import {
   rankRows,
   sentimentTotals,
   shortLabel,
+  nameDetail,
   sparkSeries,
   sparkSummary,
   themeRows,
@@ -24,7 +25,7 @@ import {
   windowLabel,
   validateData,
   waffleParts,
-  weekSummary,
+  heroLead,
   whyText,
 } from "../lib/brief.mjs"
 import { logIntensityLevel } from "../lib/scale.mjs"
@@ -114,7 +115,7 @@ test("real week validates and keeps each CVE state", () => {
   const row = indexRow(weeks[0])
   assert.equal(row.shortName, "PHP2Shell")
   assert.equal(row.themeCount, 10)
-  assert.match(weekSummary(weeks[0].data.themes.find((theme) => theme.rank === 1)), /^PHP2Shell led this week with /)
+  assert.match(heroLead(weeks[0].data), /^\d+ of \d+ cited CVEs exploited in the wild\. PHP2Shell led with \d+ accounts: PHP runs .+\.$/)
   const ranks = rankRows(weeks[0].data)
   assert.deepEqual(
     ranks.map((item) => item.key),
@@ -153,6 +154,31 @@ test("short_name and basis are optional and extra fields are allowed", () => {
   assert.equal(shortLabel("Alphabetical theme name", "Alpha"), "Alpha")
   assert.equal(cveViews(data.themes[0])[0].basis, "A basis line.")
   assert.equal(cveViews(data.themes[0])[1].tag, "EXPLOITED")
+})
+
+test("heroLead prefers bottom_line, then counts and the top why_line", () => {
+  const data = structuredClone(loadWeeks(REAL)[0].data)
+  const top = data.themes.find((theme) => theme.rank === 1)
+  top.why_line = "Patch is not enough"
+  assert.match(heroLead(data), /accounts: Patch is not enough\.$/)
+  top.why_line = "Is a patch enough?"
+  assert.match(heroLead(data), /accounts: Is a patch enough\?$/)
+  for (const theme of data.themes) theme.cves = []
+  assert.match(heroLead(data), /^PHP2Shell led with /)
+  data.meta.bottom_line = "One line."
+  assert.equal(heroLead(data), "One line.")
+  data.meta.bottom_line = null
+  data.themes = []
+  assert.equal(heroLead(data), "No theme met the bar this week.")
+})
+
+test("nameDetail drops a leading label only at a word boundary", () => {
+  assert.equal(nameDetail("PHP2Shell: critical PHP core RCE flaws", "PHP2Shell"), "Critical PHP core RCE flaws")
+  assert.equal(nameDetail("Tailworm — SSH flaws", "tailworm"), "SSH flaws")
+  assert.equal(nameDetail("Windows zero-day", "Win"), "Windows zero-day")
+  assert.equal(nameDetail("Brotli decoder flaw", "Brotli CVE"), "Brotli decoder flaw")
+  assert.equal(nameDetail("Tailworm", "Tailworm"), "")
+  assert.equal(nameDetail("Organisations disclose breaches", "Organisatio…"), "Organisations disclose breaches")
 })
 
 test("week graphs use only data.json", () => {

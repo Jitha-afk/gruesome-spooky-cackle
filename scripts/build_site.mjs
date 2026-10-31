@@ -12,7 +12,8 @@ const siteDir = path.join(root, "site")
 // A deep link lands at once: no smooth scroll and no details animation until load.
 const DEEP_LINK = `if(location.hash){h.classList.add("deep");h.style.scrollBehavior="auto";var o=function(){h.classList.remove("deep");h.style.scrollBehavior=""};addEventListener("load",function(){setTimeout(o)});setTimeout(o,3e3)}`
 const THEME_BOOT = `<script>(function(){var t="dark";try{var s=localStorage.getItem("theme");if(s==="light"||s==="dark")t=s;}catch(e){}var h=document.documentElement;if(t==="light")h.classList.remove("dark");else h.classList.add("dark");h.classList.add("js");${DEEP_LINK}h.style.colorScheme=t==="light"?"light":"dark";var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",t==="light"?"#fafafa":"#040404");${accentBoot()}})();</script>`
-const SITE_JS = `<script src="/gruesome-spooky-cackle/site.js" defer></script>`
+// If site.js fails to load, drop the js class so the page falls back to its no-JS layout.
+const SITE_JS = `<script src="/gruesome-spooky-cackle/site.js" defer onerror="document.documentElement.classList.remove('js')"></script>`
 
 function run(command, args) {
   const result = spawnSync(command, args, { cwd: root, stdio: "inherit" })

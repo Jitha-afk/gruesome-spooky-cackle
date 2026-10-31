@@ -16,9 +16,10 @@ import { logIntensityLevel } from "@/lib/scale.mjs"
 
 type Vars = CSSProperties & Record<`--${string}`, string | number>
 
+// Order matters: CSS pairs the nth tab input with the nth panel.
 const TABS = [
-  { id: "accounts", label: "accounts" },
   { id: "days", label: "by day" },
+  { id: "accounts", label: "accounts" },
   { id: "coverage", label: "coverage" },
   { id: "sentiment", label: "sentiment" },
 ] as const
@@ -139,7 +140,7 @@ function Days({ data, rows }: { data: WeekData; rows: ThemeRow[] }) {
           <i aria-hidden="true" data-l={level} key={level} />
         ))}
         <span>more</span>
-        <span className="muted">· log scale · IST days</span>
+        <span className="muted">log scale · IST days</span>
       </p>
     </Frame>
   )
@@ -163,7 +164,7 @@ function Coverage({ data, rows }: { data: WeekData; rows: ThemeRow[] }) {
       <div className="cov">
         <div aria-hidden="true" className="cov-head">
           <span />
-          <span>accounts by outlet</span>
+          <span>named outlets by type</span>
           <span>sources by platform</span>
         </div>
         <ul className="cov-list">
@@ -171,7 +172,7 @@ function Coverage({ data, rows }: { data: WeekData; rows: ThemeRow[] }) {
             <li key={row.key}>
               <ThemeLink row={row} />
               <span className="cov-cell">
-                <Split label={`${row.label} accounts: ${describe(outlets(row))}.`} parts={outlets(row)} />
+                <Split label={`${row.label} named outlets: ${describe(outlets(row))}.`} parts={outlets(row)} />
                 <span aria-hidden="true" className="num">
                   {outlets(row)
                     .map((part) => part.value)
@@ -236,7 +237,7 @@ export function Signals({ data }: { data: WeekData }) {
   const rows = themeRows(data)
   const style: Vars = { "--n": TABS.length }
   return (
-    <div className="tabs" style={style}>
+    <div aria-label="Signals view" className="tabs" role="group" style={style}>
       {TABS.map((tab, index) => (
         <input
           aria-controls={`panel-${tab.id}`}
@@ -261,11 +262,11 @@ export function Signals({ data }: { data: WeekData }) {
         <span aria-hidden="true" className="tab-thumb" />
       </div>
       <div className="tab-panels">
-        <div aria-label="Accounts per theme" className="tab-panel" id="panel-accounts" role="region">
-          <Accounts data={data} />
-        </div>
         <div aria-label="Sources per day" className="tab-panel" id="panel-days" role="region">
           <Days data={data} rows={rows} />
+        </div>
+        <div aria-label="Accounts per theme" className="tab-panel" id="panel-accounts" role="region">
+          <Accounts data={data} />
         </div>
         <div aria-label="Coverage" className="tab-panel" id="panel-coverage" role="region">
           <Coverage data={data} rows={rows} />
