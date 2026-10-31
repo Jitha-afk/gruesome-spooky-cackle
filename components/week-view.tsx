@@ -10,10 +10,12 @@ import {
   formatCount,
   rankRows,
   shortLabel,
+  previewCves,
   sourceRows,
   splitCounts,
   themesByRank,
   weekSummary,
+  whyText,
   type Source,
   type Theme,
   type WeekData,
@@ -26,8 +28,20 @@ function metricCell(source: Source, key: string) {
   return typeof value === "number" ? formatCount(value) : ""
 }
 
-function CveList({ theme, basis }: { theme: Theme; basis: boolean }) {
-  const rows = cveViews(theme)
+function CveList({
+  theme,
+  basis,
+  limit,
+  moreHref,
+}: {
+  theme: Theme
+  basis: boolean
+  limit?: number
+  moreHref?: string
+}) {
+  const preview = previewCves(theme, limit)
+  const rows = limit == null ? cveViews(theme) : preview.shown
+  const extra = limit == null ? 0 : preview.extra
   if (rows.length === 0) return null
   return (
     <ul className="cves">
@@ -38,6 +52,11 @@ function CveList({ theme, basis }: { theme: Theme; basis: boolean }) {
           {basis && row.basis ? <span className="basis">{row.basis}</span> : null}
         </li>
       ))}
+      {extra > 0 && moreHref ? (
+        <li>
+          <a href={moreHref}>+{extra} more</a>
+        </li>
+      ) : null}
     </ul>
   )
 }
@@ -168,7 +187,7 @@ export function WeekView({ data }: { data: WeekData }) {
   const align = ["left", "left", "left", "right", "right", "right", "right", "right", "right", "right"] as const
 
   return (
-    <main className="site">
+    <main className="site font-sans">
       <Header
         kicker={`${data.meta.window.start} to ${data.meta.window.end}`}
         summary={weekSummary(top)}
@@ -179,17 +198,20 @@ export function WeekView({ data }: { data: WeekData }) {
         <h2>Top 3 themes</h2>
         <p>The first three themes this week.</p>
         <div className="top-list">
-          {themes.slice(0, 3).map((theme) => (
-            <article className="top-theme graph-frame" key={theme.key}>
-              <p>
-                <a href={`#theme-${theme.key}`} title={theme.name}>
-                  {theme.rank}. {shortLabel(theme.name, theme.short_name)}
-                </a>
-              </p>
-              <p className="why-line">{theme.why}</p>
-              <CveList basis={false} theme={theme} />
-            </article>
-          ))}
+          {themes.slice(0, 3).map((theme) => {
+            const why = whyText(theme)
+            return (
+              <article className="top-theme graph-frame" key={theme.key}>
+                <p>
+                  <a href={`#theme-${theme.key}`} title={theme.name}>
+                    {theme.rank}. {shortLabel(theme.name, theme.short_name)}
+                  </a>
+                </p>
+                <p className={why.clamp ? "why-line" : undefined}>{why.text}</p>
+                <CveList basis={false} limit={3} moreHref={`#theme-${theme.key}`} theme={theme} />
+              </article>
+            )
+          })}
         </div>
       </section>
 

@@ -8,7 +8,6 @@ import {
   defineItem,
   Graph,
   GraphBody,
-  GraphTick,
   GraphTrack,
   itemText,
   listItems,
@@ -191,22 +190,26 @@ function GraphStack({
                   {row.label}
                 </span>
                 <GraphTrack>
-                  {painted.flatMap((piece) =>
-                    Array.from({ length: piece.count }, (_, index) => (
-                      <GraphTick
-                        className={seriesClass(
+                  {painted.map((piece) =>
+                    piece.count > 0 ? (
+                      <span
+                        className={`min-w-0 overflow-hidden text-center leading-none whitespace-nowrap [text-align-last:justify] ${seriesClass(
                           palette,
                           legend.indexOf(piece.label)
-                        )}
-                        key={`${piece.label}-${index}`}
-                        style={seriesDim(
-                          palette,
-                          isMonoPalette(palette) ? piece.accent : true
-                        )}
+                        )}`}
+                        key={piece.label}
+                        style={{
+                          flexGrow: piece.count,
+                          flexBasis: 0,
+                          ...seriesDim(
+                            palette,
+                            isMonoPalette(palette) ? piece.accent : true
+                          ),
+                        }}
                       >
-                        {piece.glyph}
-                      </GraphTick>
-                    ))
+                        {piece.glyph.repeat(piece.count)}
+                      </span>
+                    ) : null
                   )}
                 </GraphTrack>
               </motion.li>

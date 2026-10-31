@@ -5,7 +5,7 @@ import { indexRow, loadWeeks, reportsRoot } from "@/lib/brief.mjs"
 export default function IndexPage() {
   const weeks = loadWeeks(reportsRoot())
   return (
-    <main className="site">
+    <main className="site font-mono">
       <Header home title="Weekly threat intel" summary="Open a week." />
       {weeks.length === 0 ? (
         <p>No briefs yet.</p>

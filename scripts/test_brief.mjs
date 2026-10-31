@@ -9,10 +9,12 @@ import {
   commentModel,
   indexRow,
   loadWeeks,
+  previewCves,
   rankRows,
   shortLabel,
   validateData,
   weekSummary,
+  whyText,
 } from "../lib/brief.mjs"
 
 const REAL = path.join(import.meta.dirname, "..", "reports")
@@ -138,6 +140,31 @@ test("short_name and basis are optional and extra fields are allowed", () => {
   assert.equal(shortLabel("Alphabetical theme name", "Alpha"), "Alpha")
   assert.equal(cveViews(data.themes[0])[0].basis, "A basis line.")
   assert.equal(cveViews(data.themes[0])[1].tag, "EXPLOITED")
+})
+
+test("why_line is optional and top cards keep three CVEs", () => {
+  const data = minimal()
+  assert.equal(whyText(data.themes[0]).clamp, true)
+  assert.equal(whyText(data.themes[0]).text, data.themes[0].why)
+  data.themes[0].why_line = "One short line."
+  assert.deepEqual(whyText(data.themes[0]), { text: "One short line.", clamp: false })
+  data.themes[0].why_line = "   "
+  assert.equal(whyText(data.themes[0]).clamp, true)
+  delete data.themes[0].why_line
+  assert.doesNotThrow(() => validateData(data, "fixture"))
+  data.themes[0].why_line = 4
+  assert.throws(() => validateData(data, "fixture"), /why_line must be a string/)
+  data.themes[0].why_line = "One short line."
+  data.themes[0].cves = ["CVE-1", "CVE-2", "CVE-3", "CVE-4", "CVE-5"]
+  data.themes[0].cve_details = data.themes[0].cves.map((id) => ({
+    id,
+    exploited_in_wild: false,
+  }))
+  const preview = previewCves(data.themes[0], 3)
+  assert.equal(preview.shown.length, 3)
+  assert.equal(preview.extra, 2)
+  assert.equal(preview.shown[0].id, "CVE-1")
+  assert.equal(cveViews(data.themes[0]).length, 5)
 })
 
 test("unknown schema_version and missing fields fail", () => {

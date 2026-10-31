@@ -25,6 +25,7 @@ export type Theme = {
   short_name?: string
   summary: string
   why: string
+  why_line?: string
   affected: { products: string; sectors: string; regions: string }
   vendors: string[]
   media: string[]
@@ -107,6 +108,8 @@ export function shortLabel(name: string, shortName?: string | null): string
 export function exploitedTag(flag: Flag): string
 export function cveViews(theme: Theme): CveView[]
 export function rankRows(data: WeekData): RankView[]
+export function whyText(theme: Theme): { text: string; clamp: boolean }
+export function previewCves(theme: Theme, limit?: number): { shown: CveView[]; extra: number }
 export function weekSummary(theme: Theme): string
 export function commentModel(theme: Theme): CommentView[]
 export function splitCounts(sources: Source[]): {

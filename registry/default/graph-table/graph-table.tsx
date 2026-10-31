@@ -26,14 +26,8 @@ import { cn } from "@/lib/utils"
 
 type GraphAlign = "left" | "right"
 
-function RuleY() {
-  return (
-    <span
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-y-0 left-0 graph-rule-y"
-    />
-  )
-}
+const columnRule =
+  "bg-left bg-no-repeat [background-size:1px_100%] [background-image:repeating-linear-gradient(to_bottom,var(--graph-frame)_0_2px,transparent_2px_7px)]"
 
 type GraphTableRow =
   | ReactNode[]
@@ -109,13 +103,13 @@ function GraphTable({
                     key={header}
                     className={cn(
                       "relative px-3 pb-3 font-normal whitespace-nowrap text-foreground",
+                      index > 0 && columnRule,
                       (align?.[index] ?? (index === 0 ? "left" : "right")) ===
                         "right"
                         ? "text-right"
                         : "text-left"
                     )}
                   >
-                    {index > 0 ? <RuleY /> : null}
                     {header}
                   </th>
                 ))}
@@ -139,13 +133,13 @@ function GraphTable({
                       key={cellIndex}
                       className={cn(
                         "relative px-3 py-2.5 whitespace-nowrap",
+                        cellIndex > 0 && columnRule,
                         (align?.[cellIndex] ??
                           (cellIndex === 0 ? "left" : "right")) === "right"
                           ? "text-right tabular-nums"
                           : "text-left"
                       )}
                     >
-                      {cellIndex > 0 ? <RuleY /> : null}
                       {cell}
                     </td>
                   ))}
@@ -165,13 +159,13 @@ function GraphTable({
                       key={cellIndex}
                       className={cn(
                         "relative px-3 pt-1 whitespace-nowrap",
+                        cellIndex > 0 && columnRule,
                         (align?.[cellIndex] ??
                           (cellIndex === 0 ? "left" : "right")) === "right"
                           ? "text-right tabular-nums"
                           : "text-left"
                       )}
                     >
-                      {cellIndex > 0 ? <RuleY /> : null}
                       {cell}
                     </td>
                   ))}

@@ -9,7 +9,6 @@ import {
   firstToken,
   Graph,
   GraphBody,
-  GraphTick,
   GraphTrack,
   itemText,
   listItems,
@@ -141,22 +140,22 @@ function GraphRank({
                     [
                   </span>
                   <GraphTrack>
-                    {Array.from({ length: ticks }, (_, index) => {
-                      const on = index < filled
-
-                      return (
-                        <GraphTick
-                          className={
-                            on
-                              ? toneClass(palette, "primary")
-                              : "text-graph-frame"
-                          }
-                          key={index}
-                        >
-                          {on ? marks.fill : marks.empty}
-                        </GraphTick>
-                      )
-                    })}
+                    {filled > 0 ? (
+                      <span
+                        className={`min-w-0 overflow-hidden text-center leading-none whitespace-nowrap [text-align-last:justify] ${toneClass(palette, "primary")}`}
+                        style={{ flexGrow: filled, flexBasis: 0 }}
+                      >
+                        {marks.fill.repeat(filled)}
+                      </span>
+                    ) : null}
+                    {ticks - filled > 0 ? (
+                      <span
+                        className="min-w-0 overflow-hidden text-center leading-none whitespace-nowrap text-graph-frame [text-align-last:justify]"
+                        style={{ flexGrow: ticks - filled, flexBasis: 0 }}
+                      >
+                        {marks.empty.repeat(ticks - filled)}
+                      </span>
+                    ) : null}
                   </GraphTrack>
                   <span
                     aria-hidden="true"
