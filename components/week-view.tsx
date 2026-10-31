@@ -1,6 +1,5 @@
 import { Fragment, type CSSProperties } from "react"
 import { ChevronsUpDown } from "lucide-react"
-import { AccentPicker } from "@/components/accent-picker"
 import { Box, Corners, Frame, SectionHead } from "@/components/frame"
 import { Bar, Delta, Legend, Meter, Spark, Split, type Part } from "@/components/glyph"
 import { DateUnits, Hero, SiteFooter, SiteHeader, Toc, type TocItem } from "@/components/header"
@@ -391,10 +390,9 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
     <>
       <SiteHeader crumb={windowLabel(data)} toc={toc} />
       <div className="shell has-side">
-        <aside aria-label="Page tools" className="side">
+        <div className="side">
           <Toc items={toc} label="Sections" />
-          <AccentPicker name="accent-side" />
-        </aside>
+        </div>
         <main className="main" id="main" tabIndex={-1}>
           <Hero kicker={data.meta.title} lead={<KeepCves text={heroLead(data)} />} title={windowLabel(data)}>
             {data.meta.generated ? (

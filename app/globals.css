@@ -737,8 +737,8 @@ figcaption,
   background: conic-gradient(from 200deg, var(--graph-accent), var(--graph-accent-2), var(--graph-accent-3), var(--graph-accent));
   box-shadow: 0 0 0 1px color-mix(in oklab, var(--foreground) 25%, transparent);
 }
+/* The side column shows the contents from 64rem, so only its menu button hides. */
 @media (min-width: 64rem) {
-  .site-header.has-side .accent-btn,
   .toc-btn {
     display: none;
   }
@@ -776,8 +776,10 @@ figcaption,
 .pop-accent {
   transform-origin: calc(100% - 4.5rem) top;
 }
-.site-header.has-side + .pop-accent {
-  transform-origin: calc(100% - 7.375rem) top;
+@media (max-width: 63.99rem) {
+  .site-header.has-side + .pop-accent {
+    transform-origin: calc(100% - 7.375rem) top;
+  }
 }
 .pop:popover-open {
   opacity: 1;
@@ -794,10 +796,6 @@ figcaption,
 .pop::backdrop {
   background: transparent;
 }
-.pop .picker {
-  margin-top: 0;
-}
-.pop .toc + .picker,
 .pop-toc .toc {
   margin: 0;
 }
@@ -859,20 +857,13 @@ figcaption,
   }
 }
 .picker {
-  --sw: 1.5rem;
-  margin-top: 2rem;
-}
-.pop .picker {
   --sw: 1.75rem;
 }
 .swatches {
   display: grid;
   grid-template-columns: repeat(8, var(--sw));
-  gap: 0.25rem;
-  margin-top: 0.75rem;
-}
-.pop .swatches {
   gap: 0.375rem;
+  margin-top: 0.75rem;
 }
 .swatch {
   position: relative;
@@ -911,8 +902,7 @@ figcaption,
   background: var(--rule-x);
 }
 @media (pointer: coarse) {
-  .picker,
-  .pop .picker {
+  .picker {
     --sw: 2.25rem;
   }
   .swatches {
@@ -949,6 +939,35 @@ figcaption,
   color: var(--muted-foreground);
   text-wrap: pretty;
 }
+/* A quiet byline under the lead. Every accent stop clears 4.5:1 on both themes. */
+.hero .intro {
+  margin-top: 0.875rem;
+  max-width: 60ch;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+  text-wrap: pretty;
+}
+.intro-name {
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--graph-accent);
+  text-decoration: underline 1px;
+  text-decoration-color: color-mix(in oklab, var(--graph-accent) 45%, transparent);
+  text-underline-offset: 0.25em;
+  transition: text-decoration-color 0.15s ease;
+}
+/* The fill is clipped to the glyphs, so the underline needs its own colour. */
+html[data-accent-kind="gradient"] .intro-name {
+  background: linear-gradient(90deg, var(--graph-accent), var(--graph-accent-2), var(--graph-accent-3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-decoration-color: color-mix(in oklab, var(--graph-accent-2) 50%, transparent);
+}
+.hero .intro-name:hover {
+  text-decoration-color: var(--graph-accent);
+}
 .hero-meta {
   display: flex;
   flex-wrap: wrap;
@@ -966,6 +985,9 @@ figcaption,
 }
 .hero > :nth-child(4) {
   animation-delay: 80ms;
+}
+.hero > :nth-child(5) {
+  animation-delay: 120ms;
 }
 @keyframes rise {
   from {
@@ -3314,6 +3336,10 @@ html.deep details[open] > * {
   .chip-box,
   .swatch i {
     forced-color-adjust: none;
+  }
+  html[data-accent-kind="gradient"] .intro-name {
+    background: none;
+    color: LinkText;
   }
   .swatch:has(:checked) {
     outline: 2px solid Highlight;

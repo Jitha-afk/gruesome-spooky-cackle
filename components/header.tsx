@@ -125,6 +125,21 @@ export function SiteHeader({ crumb, toc }: { crumb?: ReactNode; toc?: TocItem[] 
   )
 }
 
+const OWNER_URL = "https://www.linkedin.com/in/jithamsft/"
+
+/** The byline under every lead: who the reports are for and what makes them. */
+function Intro() {
+  return (
+    <p className="intro rise">
+      This site shows automatic weekly threat intel reports for{" "}
+      <a className="intro-name" href={OWNER_URL} rel="noreferrer">
+        Jitesh Thakur
+      </a>
+      . AI agents use Grok, Cursor and Copilot to find the posts, write each report and build the site.
+    </p>
+  )
+}
+
 export function Hero({
   kicker,
   title,
@@ -141,6 +156,7 @@ export function Hero({
       <p className="kicker rise">{kicker}</p>
       <h1>{title}</h1>
       {lead ? <p className="lead rise">{lead}</p> : null}
+      <Intro />
       {children ? <div className="hero-meta rise">{children}</div> : null}
     </header>
   )
