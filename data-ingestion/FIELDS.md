@@ -53,7 +53,7 @@ Unknown fields are allowed and ignored, so the pipeline can capture a field befo
 | `window.start`, `window.end` | required | Hero, index row, by-day chart | `YYYY-MM-DD HH:MM IST`. The days must match the folder name. The page is built for 7 days, one chart column per day. More than 7 is a warning, and the chart caps at 31 days. |
 | `window.start_utc`, `window.end_utc` | record | | |
 | `generated` | optional | Hero, notes, index "published" date | `YYYY-MM-DD HH:MM IST`. Without it the index shows no published date. |
-| `bottom_line` | optional, warned | Hero lead, index lead | One or two sentences: what a defender should take from the week. Without it, the hero reads "Attackers exploit N of N CVEs in this report. `<top theme>` is the top theme, with N accounts. `<its why_line>`" and the index shows "`<top theme>` is the top theme." plus that theme's `why_line`. The gate warns when it is missing. |
+| `bottom_line` | optional, warned | Hero lead, index lead | One or two sentences: what a defender should take from the week. Without it, the hero reads "The sources tell you that attackers exploit N of the N CVEs in this report. `<top theme>` is the top theme, with N accounts. `<its why_line>`" and the index shows "`<top theme>` is the top theme." plus that theme's `why_line`. The gate warns when it is missing. |
 | `capture` | required | Notes, "Dates and counts" | One row for each string, labelled by key. `x` and `youtube` are required. Add a key for a new platform, for example `"bluesky": "… to …"`. |
 | `counts` | required | KPIs, notes | See [Counts and the funnel](#counts-and-the-funnel). |
 | `methodology` | required | Notes, "How we make this report" | One paragraph. Hidden when `method_steps` is present. |
