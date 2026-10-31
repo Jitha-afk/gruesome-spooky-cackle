@@ -363,6 +363,10 @@ html:not(.js) .filters { display: none; }
 .samples li { display: flex; flex-direction: column; gap: 0.15rem; }
 .samples a { unicode-bidi: isolate; }
 .theme-list { gap: 2rem; }
+.top-list { gap: 0.5rem; }
+@media (max-width: 639px) {
+  .stat-row ul { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 1.5rem; }
+}
 .theme-card + .theme-card { padding-top: 1.25rem; background: repeating-linear-gradient(to right, var(--graph-frame) 0 2px, transparent 2px 7px) top / 100% 1px no-repeat; }
 .graph-title-ink {
   background-image: linear-gradient(90deg, var(--graph-accent), var(--graph-accent-2), var(--graph-accent-3));

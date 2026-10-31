@@ -114,6 +114,8 @@ export function weekSummary(theme: Theme): string
 export function commentModel(theme: Theme): CommentView[]
 export function windowDays(data: WeekData): { iso: string; label: string }[]
 export function heatmapModel(data: WeekData): { columns: string[]; rows: { label: string; values: number[] }[] }
+export function sparkGlyphs(series: number[]): string[]
+export function sparkSummary(series: number[], days: { label: string }[]): string
 export function sparkSeries(theme: Theme, data: WeekData): number[]
 export function coverageModels(data: WeekData): {
   accounts: { label: string; segments: { label: string; value: number }[] }[]

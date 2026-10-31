@@ -29,6 +29,8 @@ type SpecRow = {
   accent?: boolean
   /** Muted, under the value. A list item's body paragraphs land here. */
   note?: ReactNode
+  /** Replaces the value text when the row is not a plain string. */
+  rich?: ReactNode
 }
 
 type SpecLine = SpecRow & {

@@ -17,12 +17,12 @@ import {
   fadeUp,
   intensityClass,
   intensityGlyph,
-  intensityLevel,
   resolveGlyphs,
   staggerList,
   type Glyphs,
   type GraphPalette,
 } from "@/registry/default/graph-frame/graph-motion"
+import { logIntensityLevel } from "@/lib/scale.mjs"
 import { cn } from "@/lib/utils"
 
 type HeatRow = {
@@ -159,7 +159,7 @@ function GraphHeatmap({
                 <span className="truncate text-foreground">{row.label}</span>
                 {columns.map((column, index) => {
                   const value = row.values[index] ?? 0
-                  const level = intensityLevel(value, peak)
+                  const level = logIntensityLevel(value, peak)
 
                   return (
                     <span
@@ -181,7 +181,14 @@ function GraphHeatmap({
         {legend || caption ? (
           <div className="flex flex-wrap items-center justify-between gap-3">
             {caption ? <p className="text-graph-muted">{caption}</p> : <span />}
-            {legend ? <IntensityScale glyphs={set} palette={palette} /> : null}
+            {legend ? (
+              <>
+                <IntensityScale glyphs={set} palette={palette} />
+                <span className="sr-only">
+                  Shading uses one log scale for every row. The numbers are the source counts.
+                </span>
+              </>
+            ) : null}
           </div>
         ) : null}
       </GraphBody>

@@ -1,7 +1,6 @@
 import { Callout } from "@/registry/default/callout/callout"
 import { GraphHeatmap } from "@/registry/default/graph-heatmap/graph-heatmap"
 import { GraphRank } from "@/registry/default/graph-rank/graph-rank"
-import { GraphSpark } from "@/registry/default/graph-spark/graph-spark"
 import { GraphSpec } from "@/registry/default/graph-spec/graph-spec"
 import { GraphStack } from "@/registry/default/graph-stack/graph-stack"
 import { GraphStat } from "@/registry/default/graph-stat/graph-stat"
@@ -21,8 +20,11 @@ import {
   sentimentTotals,
   shortLabel,
   sourceRows,
+  sparkGlyphs,
   sparkSeries,
+  sparkSummary,
   themesByRank,
+  windowDays,
   waffleParts,
   weekSummary,
   whyText,
@@ -108,11 +110,13 @@ function ThemeCard({
   sources,
   open,
   spark,
+  days,
 }: {
   theme: Theme
   sources: Map<string, Source>
   open: boolean
   spark: number[]
+  days: { label: string }[]
 }) {
   const comments = commentModel(theme)
   const charted = comments.filter((row) => row.positive + row.neutral + row.negative > 0)
@@ -138,10 +142,21 @@ function ThemeCard({
           { label: "Accounts", value: formatCount(theme.distinct_accounts), accent: true },
           { label: "X interactions", value: formatCount(theme.x_engagement) },
           { label: "YouTube views", value: formatCount(theme.youtube_views) },
+          {
+            label: "By day",
+            rich: (
+              <>
+                <span aria-hidden="true" className="font-mono leading-none">
+                  <span className="text-graph-muted">{sparkGlyphs(spark).slice(0, -1).join("")}</span>
+                  <span className="text-graph-accent">{sparkGlyphs(spark).at(-1)}</span>
+                </span>
+                <span className="sr-only">{sparkSummary(spark, days)}</span>
+              </>
+            ),
+          },
         ]}
         title="Coverage"
       />
-      <GraphSpark data={spark} palette="mono" title="By day" />
       <div>
         <h3>Accounts</h3>
         <AccountLine label="Vendors" names={theme.vendors} />
@@ -270,6 +285,7 @@ export function WeekView({ data }: { data: WeekData }) {
         <h2>In numbers</h2>
         <p>Themes, sources, comments and exploited CVEs.</p>
         <GraphStat
+          className="stat-row"
           items={[
             { label: "Themes", value: formatCount(stats.themes), accent: true },
             { label: "Sources", value: formatCount(stats.sources) },
@@ -422,6 +438,7 @@ export function WeekView({ data }: { data: WeekData }) {
         <div className="theme-list">
           {themes.map((theme, index) => (
             <ThemeCard
+              days={windowDays(data)}
               key={theme.key}
               open={index < 3}
               sources={sources}

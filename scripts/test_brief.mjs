@@ -17,11 +17,14 @@ import {
   sentimentTotals,
   shortLabel,
   sparkSeries,
+  sparkSummary,
+  windowDays,
   validateData,
   waffleParts,
   weekSummary,
   whyText,
 } from "../lib/brief.mjs"
+import { logIntensityLevel } from "../lib/scale.mjs"
 
 const REAL = path.join(import.meta.dirname, "..", "reports")
 
@@ -168,6 +171,14 @@ test("week graphs use only data.json", () => {
   const parts = waffleParts(sentimentTotals(data))
   assert.equal(parts.reduce((sum, part) => sum + part.cells, 0), 100)
   assert.equal(sparkSeries(data.themes[0], data).length, 7)
+  const php = sparkSeries(data.themes.find((theme) => theme.key === "php2shell"), data)
+  assert.deepEqual(php, [17, 14, 4, 7, 9, 6, 6])
+  assert.equal(sparkSummary(php, windowDays(data)), "Sources per day, Fri to Thu: 17, 14, 4, 7, 9, 6, 6.")
+  const peak = Math.max(...heat.rows.flatMap((row) => row.values))
+  assert.equal(logIntensityLevel(0, peak), 0)
+  assert.ok(logIntensityLevel(1, peak) < logIntensityLevel(4, peak))
+  assert.ok(logIntensityLevel(4, peak) < logIntensityLevel(17, peak))
+  assert.equal(logIntensityLevel(peak, peak), 4)
   assert.equal(whyText(data.themes[0]).clamp, false)
   assert.ok(whyText(data.themes[0]).text.length > 0)
 })
