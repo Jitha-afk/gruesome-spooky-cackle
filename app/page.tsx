@@ -184,7 +184,7 @@ export default function IndexPage() {
         </main>
       </div>
       <SiteFooter>
-        <p>The site has {plural(weeks.length, "report")}. There is a new report every week.</p>
+        <p>The site has {plural(weeks.length, "report")}.</p>
       </SiteFooter>
     </>
   )

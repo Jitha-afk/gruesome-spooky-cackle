@@ -73,7 +73,7 @@ export function SiteHeader({ crumb, toc }: { crumb?: ReactNode; toc?: TocItem[] 
   return (
     <>
       <a className="skip" href="#main">
-        Go to the content
+        Go to the main content
       </a>
       <header className={["site-header", toc ? "has-side" : "", crumb ? "has-crumb" : ""].filter(Boolean).join(" ")}>
         <div className="wrap header-bar">
@@ -135,7 +135,7 @@ function Intro() {
       <a className="intro-name" href={OWNER_URL} rel="noreferrer">
         Jitesh Thakur
       </a>
-      . AI agents use Grok, Cursor and Copilot to find the posts, write each report and build the site.
+      . AI agents from Grok, Cursor and Copilot find the sources, write each report and build the site.
     </p>
   )
 }

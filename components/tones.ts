@@ -51,3 +51,8 @@ export function percent(part: number, total: number) {
 export function plural(count: number, one: string, many = `${one}s`) {
   return `${count.toLocaleString("en-US")} ${count === 1 ? one : many}`
 }
+
+/** "a", "a and b", "a, b and c". */
+export function andList(items: string[]) {
+  return items.length > 1 ? `${items.slice(0, -1).join(", ")} and ${items.at(-1)}` : (items[0] ?? "")
+}

@@ -146,7 +146,7 @@ export function Sources({ data }: { data: WeekData }) {
           </tbody>
         </table>
         <p className="src-empty" data-empty hidden>
-          0 sources. Clear the search or select more types and platforms.
+          0 sources. Remove the search text or select more types and platforms.
         </p>
       </Box>
       {rows.length > SOURCE_LIMIT ? (

@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react"
 import { Frame } from "@/components/frame"
 import { Bar, Legend, Split, type Part } from "@/components/glyph"
-import { SENTIMENT, percent, platformTone, typeTone } from "@/components/tones"
+import { SENTIMENT, andList, percent, platformTone, typeTone } from "@/components/tones"
 import {
   formatCount,
   rankRows,
@@ -36,7 +36,7 @@ function Accounts({ data }: { data: WeekData }) {
   const rows = rankRows(data)
   const themes = new Set(data.themes.map((theme) => theme.key))
   const peak = Math.max(1, ...rows.map((row) => row.accounts))
-  const others = rows.filter((row) => !themes.has(row.key)).length
+  const others = rows.filter((row) => !themes.has(row.key)).map((row) => row.label)
   return (
     <Frame className="chart" title="accounts per theme">
       <ol className="rank-list">
@@ -60,9 +60,10 @@ function Accounts({ data }: { data: WeekData }) {
           )
         })}
       </ol>
-      {others > 0 ? (
+      {others.length > 0 ? (
         <p className="chart-note">
-          <span aria-hidden="true" className="key t-m" /> Grey rows did not become themes.
+          <span aria-hidden="true" className="key t-m" /> {andList(others)} did not become{" "}
+          {others.length === 1 ? "a theme" : "themes"}.
         </p>
       ) : null}
     </Frame>

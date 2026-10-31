@@ -424,7 +424,7 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
               kicker="cves"
               lead={
                 cves.length > 0
-                  ? "The sources give the state of each CVE. Exploited CVEs are first, then the order is by theme rank."
+                  ? "The sources give the state of each CVE. The order is by state, then by theme rank."
                   : undefined
               }
               title={
@@ -456,7 +456,7 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
               </Frame>
             ) : (
               <Callout title="no cves" type="note">
-                <p>No source in the window gives a CVE for these themes.</p>
+                <p>No source gives a CVE for these themes.</p>
               </Callout>
             )}
           </section>

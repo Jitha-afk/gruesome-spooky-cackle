@@ -115,7 +115,7 @@ test("real week validates and keeps each CVE state", () => {
   const row = indexRow(weeks[0])
   assert.equal(row.shortName, "PHP2Shell")
   assert.equal(row.themeCount, 10)
-  assert.match(heroLead(weeks[0].data), /^Attackers exploit \d+ of \d+ CVEs in this report\. PHP2Shell is the top theme, with \d+ accounts\. PHP runs .+\.$/)
+  assert.match(heroLead(weeks[0].data), /^Attackers exploit \d+ of the \d+ CVEs in this report\. PHP2Shell is the top theme, with \d+ accounts\. PHP runs .+\.$/)
   const ranks = rankRows(weeks[0].data)
   assert.deepEqual(
     ranks.map((item) => item.key),
@@ -163,13 +163,25 @@ test("heroLead prefers bottom_line, then counts and the top why_line", () => {
   assert.match(heroLead(data), /accounts\. Patch is not enough\.$/)
   top.why_line = "Is a patch enough?"
   assert.match(heroLead(data), /accounts\. Is a patch enough\?$/)
+  const flags = (value) => {
+    for (const theme of data.themes) {
+      theme.exploited_in_wild = value
+      for (const detail of theme.cve_details ?? []) detail.exploited_in_wild = value
+    }
+  }
+  flags(false)
+  assert.match(heroLead(data), /^PHP2Shell is the top theme, with /)
+  flags(true)
+  assert.match(heroLead(data), /^Attackers exploit all \d+ CVEs in this report\. PHP2Shell/)
+  for (const theme of data.themes) theme.cves = theme === top ? theme.cves.slice(0, 1) : []
+  assert.match(heroLead(data), /^Attackers exploit the CVE in this report\. PHP2Shell/)
   for (const theme of data.themes) theme.cves = []
   assert.match(heroLead(data), /^PHP2Shell is the top theme, with /)
   data.meta.bottom_line = "One line."
   assert.equal(heroLead(data), "One line.")
   data.meta.bottom_line = null
   data.themes = []
-  assert.equal(heroLead(data), "This week has no themes.")
+  assert.equal(heroLead(data), "This report has no themes.")
 })
 
 test("nameDetail drops a leading label only at a word boundary", () => {
