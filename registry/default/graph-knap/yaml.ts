@@ -80,6 +80,8 @@ function yamlObject(value: Record<string, unknown>, indent: number) {
     const rendered = yamlValue(item, indent + 2)
     if (rendered.startsWith("\n")) {
       lines.push(`${pad}${key}:${rendered}`)
+    } else if (rendered.includes("\n")) {
+      lines.push(`${pad}${key}:\n${rendered}`)
     } else {
       lines.push(`${pad}${key}: ${rendered}`)
     }

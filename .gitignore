@@ -147,6 +147,7 @@ vite.config.ts.timestamp-*
 
 # Generated Pages upload. The root index is built, not committed.
 /site/
+/generated/
 /.site.build/
 
 # Turbo Repo

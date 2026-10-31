@@ -26,6 +26,11 @@ function inject(html) {
 }
 
 const weeks = loadWeeks(reportsRoot())
+for (const week of weeks) {
+  if (week.kind !== "brief") continue
+  run("python3", ["scripts/check_schema_v1.py", path.join(reportsRoot(), week.name, "brief.md")])
+}
+run("node", ["--import", "tsx", "scripts/render_weeks.tsx"])
 run("pnpm", ["exec", "next", "build"])
 run("python3", ["scripts/strip-js.py", outDir, siteDir])
 

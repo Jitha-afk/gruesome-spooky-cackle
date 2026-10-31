@@ -3,8 +3,10 @@ import fs from "node:fs"
 import os from "node:os"
 import path from "node:path"
 import test from "node:test"
+import { parseStrictYaml } from "../lib/yaml-strict.mjs"
 import {
   BuildError,
+  bodySections,
   cveTableRows,
   cveViews,
   commentModel,
@@ -95,8 +97,13 @@ function minimal() {
 test("real week validates and keeps each CVE state", () => {
   const weeks = loadWeeks(REAL)
   assert.equal(weeks.length, 1)
-  assert.equal(weeks[0].kind, "data")
+  assert.equal(weeks[0].kind, "brief")
   assert.equal(weeks[0].name, "2026-10-23_2026-10-29")
+  assert.equal(weeks[0].body.trim(), "")
+  const original = JSON.parse(fs.readFileSync(path.join(REAL, weeks[0].name, "data.json"), "utf8"))
+  const rejoined = structuredClone(weeks[0].data)
+  rejoined.schema_version = 1
+  assert.deepEqual(rejoined, original)
   const views = weeks[0].data.themes.flatMap((theme) => cveViews(theme))
   assert.equal(views.length, 8)
   assert.equal(views.filter((row) => row.tag === "EXPLOITED").length, 7)
@@ -266,4 +273,53 @@ test("routes, legacy pages and index order", () => {
   fs.rmSync(path.join(reports, "2026-02-31_2026-03-02"), { recursive: true })
   fs.mkdirSync(path.join(reports, "2026-10-29_2026-10-23"))
   assert.throws(() => loadWeeks(reports), /ends before it starts/)
+})
+
+test("strict YAML keeps quoted dates and numeric ids as strings", () => {
+  const flow = parseStrictYaml(
+    '{ "date_ist": "2026-10-23", "id": "00123", "count": 4, "flag": false, "quoted_flag": "false" }',
+  )
+  assert.equal(flow.date_ist, "2026-10-23")
+  assert.equal(typeof flow.date_ist, "string")
+  assert.equal(flow.id, "00123")
+  assert.equal(typeof flow.id, "string")
+  assert.equal(flow.count, 4)
+  assert.equal(flow.flag, false)
+  assert.equal(flow.quoted_flag, "false")
+  const block = parseStrictYaml('date_ist: "2026-10-23"\nid: "00123"\nraw: 2026-10-22T18:30:00Z\n')
+  assert.equal(block.date_ist, "2026-10-23")
+  assert.equal(typeof block.id, "string")
+  assert.equal(block.id, "00123")
+  assert.equal(typeof block.raw, "string")
+  assert.equal(block.raw, "2026-10-22T18:30:00Z")
+})
+
+test("brief.md joins sources and allows a missing body section", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "brief-"))
+  const reports = path.join(root, "reports")
+  const week = path.join(reports, "2026-03-01_2026-03-07")
+  fs.mkdirSync(week, { recursive: true })
+  const data = minimal()
+  data.schema_version = 2
+  const samples = {
+    alpha: data.themes[0].comments.clusters.map((cluster) => cluster.samples),
+  }
+  for (const cluster of data.themes[0].comments.clusters) delete cluster.samples
+  const sources = data.sources
+  delete data.sources
+  fs.writeFileSync(path.join(week, "brief.md"), `---\n${JSON.stringify(data)}\n---\n`)
+  fs.writeFileSync(path.join(week, "sources.json"), JSON.stringify({ sources, samples }))
+  const weeks = loadWeeks(reports)
+  assert.equal(weeks[0].kind, "brief")
+  assert.equal(weeks[0].data.schema_version, 2)
+  assert.equal(weeks[0].data.sources[0].id, "s1")
+  assert.equal(weeks[0].data.themes[0].comments.clusters[0].samples[0].text, "A comment.")
+  assert.equal(weeks[0].data.sources[0].date_ist, "2026-01-02 01:00")
+  assert.equal(typeof weeks[0].data.sources[0].date_ist, "string")
+  const keys = new Set(["alpha"])
+  assert.deepEqual(bodySections("", keys), {})
+  assert.deepEqual(bodySections("## alpha\n\nA note.\n", keys), { alpha: "A note." })
+  assert.throws(() => bodySections("## nope\n", keys), /not a theme key/)
+  assert.throws(() => bodySections("## alpha\n\n## alpha\n", keys), /more than once/)
+  assert.throws(() => bodySections("Hello\n", keys), /before a theme heading/)
 })
