@@ -2,7 +2,7 @@
 
 By [Jitesh Thakur](https://www.linkedin.com/in/jithamsft/). I use Grok, Cursor and Copilot. Agents write the code. CI blocks a bad week, and I merge each change.
 
-This is the build story of [Weekly threat intel](https://jitha-afk.github.io/gruesome-spooky-cackle/), from the first commit to the redesign. Each fact links to a pull request, a commit or an Actions run. Times are UTC. The [README](../README.md) explains what the report shows and how it works.
+This is the build story of [Weekly threat intel](https://jitha-afk.github.io/gruesome-spooky-cackle/), from the first commit to the redesign. Each fact links to a pull request, a commit, an Actions run or the week's data file. Times are UTC. The [README](../README.md) explains what the report shows and how it works.
 
 ## At a glance
 
@@ -17,9 +17,9 @@ This is the build story of [Weekly threat intel](https://jitha-afk.github.io/gru
 
 ## Before the first commit
 
-The week-1 data is older than the repository. Its `meta.generated` field says 30 Oct 2026, 20:25 IST (14:55 UTC). The X capture ran from 20:11 to 20:22 IST, about an hour before the first commit.
+The week-1 data is older than the repository. Its [`meta.generated`](https://github.com/Jitha-afk/gruesome-spooky-cackle/blob/main/reports/2026-10-23_2026-10-29/data.json) field says 30 Oct 2026, 20:25 IST (14:55 UTC). The X capture ran from 20:11 to 20:22 IST, more than an hour before the first commit.
 
-The method in that file names the tools. `get_users_by_usernames` checked the vendor and media handles on X. `search_posts_all` searched each handle and each keyword inside the week. YouTube videos came from web search and YouTube search pages, and then from each watch page.
+The method in that file names the tools. `get_users_by_usernames` checked the vendor and media handles on X. `search_posts_all` searched each handle inside the week. Keyword searches added independent researchers. YouTube videos came from web search and YouTube search pages, and then from each watch page.
 
 ## Day 1: 30 Oct 2026
 
@@ -86,10 +86,3 @@ Each week is one `data.json`. CI runs the unit tests, the week check and the bui
 - **A very long page.** Before PR #4, the week page was 39,733 px tall. To reach the fifth theme, a reader scrolled past every post in the first four.
 - **A claim given as a fact.** The first plain-English lead, in PR #5, gave the exploitation of 7 of the 8 CVEs as a fact. The report does not check claims, so the lead now names the sources.
 - **A dead end.** PR #3 split a week into two files. Jitesh closed it without a merge, and each week stays one `data.json`.
-
-<!-- [confirm] Lessons, in Jitesh's words, before they go public:
-- Write the data contract before the prompt.
-- Make failure safe: a bad week does not deploy.
-- Ask one agent to try to break the work of another.
-- Keep a person on the merge button.
--->

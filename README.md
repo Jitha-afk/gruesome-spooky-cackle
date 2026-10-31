@@ -78,7 +78,7 @@ The description of PR #4 records these results:
 - No page scrolls sideways at eight widths from 320 to 1440 px.
 - An agent wrote odd weeks to try to break the layout. Five broken weeks stopped the build, with one line for each error.
 
-The full build story, with a link to each pull request, commit and run, is in [How agents built this](docs/how-agents-built-this.md).
+The full build story, with links to each pull request and to the key commits and runs, is in [How agents built this](docs/how-agents-built-this.md).
 
 ## What Jitesh decided
 
@@ -90,8 +90,6 @@ The agents wrote the code. These choices came from Jitesh, in the pull requests 
 - **The credit in the README.** At his request, PR #5 moved the design credit from the site footer to this README ([a7804ca](https://github.com/Jitha-afk/gruesome-spooky-cackle/commit/a7804ca)).
 - **One JSON file for each week.** He merged PR #2, which reads one `data.json` for each week. He closed PR #3, which split a week into a Markdown file and a sources file, without a merge.
 - **A human merge.** He merges each pull request, and he ran the first deploy by hand.
-
-<!-- [confirm] Add more only if they were Jitesh's decisions: the rank by distinct accounts, not likes; the JSON data contract; the GPL-3.0 licence; the research step and its agent. -->
 
 ## What went wrong
 
@@ -180,7 +178,9 @@ The workflow deploys from GitHub Actions. If Pages does not use that source, ope
 
 ## Credits
 
-Design inspired by [mdxcn](https://www.mdxcn.dev). The mdxcn components in `registry/` keep their [MIT license](registry/LICENSE).
+Design inspired by [mdxcn](https://www.mdxcn.dev).
+
+The components in `registry/` keep their [MIT licence](registry/LICENSE).
 
 ## Licence
 
