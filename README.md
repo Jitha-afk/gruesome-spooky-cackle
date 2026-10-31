@@ -22,9 +22,9 @@ Merge to `main` to publish. The published site is [Weekly threat intel](https://
 
 From the repository root, run `pnpm install` and `pnpm build`. The site is written to `site/`. Serve that directory under `/gruesome-spooky-cackle/`.
 
-## Enable GitHub Pages
+## GitHub Pages
 
-The workflow deploys from GitHub Actions. If Pages is not already using that source, open Settings, open Pages, and set Source to GitHub Actions.
+The workflow deploys from GitHub Actions.
 
 ## Credits
 
