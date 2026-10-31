@@ -1,13 +1,12 @@
 import type { NextConfig } from "next"
 import createMDX from "@next/mdx"
-
-// GitHub Pages project site. Asset URLs include this path.
-const basePath = "/gruesome-spooky-cackle"
+import { BASE_PATH } from "./lib/site-url.mjs"
 
 const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
-  basePath,
+  // GitHub Pages project site. Asset URLs include this path.
+  basePath: BASE_PATH,
   images: { unoptimized: true },
   pageExtensions: ["ts", "tsx", "md", "mdx"],
   turbopack: {

@@ -4,6 +4,7 @@ import path from "node:path"
 import test from "node:test"
 import zlib from "node:zlib"
 import { funnelModel, loadWeeks } from "../lib/brief.mjs"
+import { BASE_PATH } from "../lib/site-url.mjs"
 
 const root = path.resolve(import.meta.dirname, "..")
 const site = path.join(root, "site")
@@ -24,7 +25,7 @@ test("built routes, order and zero framework JS", () => {
   const week = fs.readFileSync(weekPath, "utf8")
   const legacy = fs.readFileSync(path.join(root, "reports", weekName, "index.html"))
   assert.notEqual(fs.readFileSync(weekPath), legacy)
-  assert.match(index, /href="\/gruesome-spooky-cackle\/reports\/2026-10-23_2026-10-29\/"/)
+  assert.ok(index.includes(`href="${BASE_PATH}/reports/${weekName}/"`))
   assert.match(index, /PHP2Shell/)
   assert.match(index, /10 themes/)
   assert.match(index, /2026-10-23 00:00 IST[\s\S]{0,80}to[\s\S]{0,80}2026-10-29 23:59 IST/)
@@ -40,7 +41,7 @@ test("built routes, order and zero framework JS", () => {
   const scripts = [...week.matchAll(/<script\b/gi)]
   assert.equal(scripts.length, 2)
   assert.match(week, /localStorage\.getItem\("theme"\)/)
-  assert.match(week, /src="\/gruesome-spooky-cackle\/site\.js"/)
+  assert.ok(week.includes(`src="${BASE_PATH}/site.js"`))
   const js = walk(site)
     .filter((file) => file.endsWith(".js"))
     .map((file) => path.relative(site, file))
@@ -56,7 +57,7 @@ test("every week and theme is built, with no broken values", () => {
   for (const week of weeks) {
     const file = path.join(site, "reports", week.name, "index.html")
     assert.ok(fs.existsSync(file), `${week.name} has no page`)
-    assert.ok(index.includes(`href="/gruesome-spooky-cackle/reports/${week.name}/"`), `the index does not link ${week.name}`)
+    assert.ok(index.includes(`href="${BASE_PATH}/reports/${week.name}/"`), `the index does not link ${week.name}`)
     if (week.kind !== "data") continue
     const html = fs.readFileSync(file, "utf8")
     for (const theme of week.data.themes) {
