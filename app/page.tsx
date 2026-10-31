@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import type { CSSProperties } from "react"
 import Link from "next/link"
 import { ArrowRight, ArrowUpRight } from "lucide-react"
@@ -7,6 +8,7 @@ import { DateUnits, Hero, SiteFooter, SiteHeader } from "@/components/header"
 import { pad, plural } from "@/components/tones"
 import {
   bottomLine,
+  cveStateLabel,
   formatCount,
   formatKpi,
   headlineStats,
@@ -21,6 +23,12 @@ import {
   type WeekData,
   type WeekRecord,
 } from "@/lib/brief.mjs"
+import { FEED_TYPES, OPEN_GRAPH } from "@/lib/site"
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/", types: FEED_TYPES },
+  openGraph: { ...OPEN_GRAPH, url: "/" },
+}
 
 type Vars = CSSProperties & Record<`--${string}`, string | number>
 
@@ -86,8 +94,8 @@ function Latest({ week, data }: { week: WeekRecord; data: WeekData }) {
                 </span>
                 <Bar bracket tone="a" value={item.accounts / peak} />
                 <span className="num">
-                  {formatCount(item.accounts)}
-                  <span className="sr-only"> accounts</span>
+                  {formatCount(item.accounts)}{" "}
+                  <span className="num-unit">{item.accounts === 1 ? "account" : "accounts"}</span>
                 </span>
               </li>
             )
@@ -110,8 +118,8 @@ export default function IndexPage() {
       <div className="shell">
         <main className="main" id="main" tabIndex={-1}>
           <Hero
-            kicker={read ? `weekly · ${read}` : "weekly"}
-            lead="Each report shows the security themes of one week, with the CVE states, key sources and comment sentiment of each theme."
+            kicker={read ?? "each week"}
+            lead="Each report shows the security themes of one week and the CVE states from the sources. For each theme, it shows the key sources and the comment sentiment."
             title="Weekly threat intel"
           />
           {latest?.data ? <Latest data={latest.data} week={latest} /> : null}
@@ -161,7 +169,7 @@ export default function IndexPage() {
                                     </span>
                                     <Meter
                                       hot={stats.exploited}
-                                      label={`${stats.exploited} of ${stats.cves} CVEs exploited.`}
+                                      label={cveStateLabel(stats.exploited, stats.cves)}
                                       max={12}
                                       total={stats.cves}
                                     />

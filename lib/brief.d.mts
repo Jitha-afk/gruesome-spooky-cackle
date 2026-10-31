@@ -158,10 +158,14 @@ export function rankRows(data: WeekData): RankView[]
 export function whyText(theme: Theme): { text: string; clamp: boolean }
 export function previewCves(theme: Theme, limit?: number): { shown: CveView[]; extra: number }
 export function heroLead(data: WeekData): string
+export function cveSentence(data: WeekData): string | null
+export function cveStateLabel(exploited: number, total: number): string
 export function commentModel(theme: Theme): CommentView[]
 export function isRealDay(text: unknown): boolean
 export function rangeLabel(startText: string, endText: string): string
 export function windowLabel(data: WeekData): string
+export function andList(items: string[]): string
+export function weekTitle(data: WeekData, count?: number): string
 export function windowDays(data: WeekData): { iso: string; label: string }[]
 export function heatmapModel(data: WeekData): { columns: string[]; rows: { label: string; values: number[] }[] }
 export function sparkGlyphs(series: number[]): string[]

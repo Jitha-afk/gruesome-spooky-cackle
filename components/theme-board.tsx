@@ -2,9 +2,10 @@ import type { CSSProperties } from "react"
 import { Box } from "@/components/frame"
 import { Bar, Delta, Legend, Spark, Split, type Part } from "@/components/glyph"
 import { Callout, KeepCves, Quote } from "@/components/prose"
-import { SENTIMENT, cveGlyph, pad, plural } from "@/components/tones"
+import { SENTIMENT, cveGlyph, pad } from "@/components/tones"
 import {
   commentModel,
+  cveStateLabel,
   cveViews,
   formatCount,
   nameDetail,
@@ -78,9 +79,7 @@ function CveGlyphs({ rows }: { rows: CveView[] }) {
       <span aria-hidden="true" className="num">
         <span className={hot > 0 ? "is-hot" : undefined}>{hot}</span>/{rows.length}
       </span>
-      <span className="sr-only">
-        {plural(rows.length, "CVE")}, {hot} exploited.
-      </span>
+      <span className="sr-only">{cveStateLabel(hot, rows.length)}</span>
     </>
   )
 }

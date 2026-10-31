@@ -10,6 +10,7 @@ import { CveKey, CveRows, ThemeBoard } from "@/components/theme-board"
 import { SENTIMENT, cveGlyph, pad, percent, platformTone, plural } from "@/components/tones"
 import {
   alsoObserved,
+  cveStateLabel,
   cveTableRows,
   formatCount,
   formatKpi,
@@ -140,17 +141,13 @@ function Kpis({ data, rows, delta }: { data: WeekData; rows: ThemeRow[]; delta: 
           <dd className="kpi-viz">
             <Meter
               hot={stats.exploited}
-              label={`${stats.exploited} of ${stats.cves} CVEs exploited.`}
+              label={cveStateLabel(stats.exploited, stats.cves)}
               max={12}
               total={stats.cves}
             />
           </dd>
           <dd className="kpi-note">
-            {stats.cves === 0
-              ? "0 CVEs"
-              : unconfirmed > 0
-                ? `${formatCount(unconfirmed)} not confirmed`
-                : "all states confirmed"}
+            {stats.cves === 0 ? "0 CVEs" : `${formatCount(unconfirmed)} not confirmed`}
           </dd>
         </div>
       </dl>
@@ -362,7 +359,15 @@ function Notes({ data }: { data: WeekData }) {
   )
 }
 
-export function WeekView({ data, previous = null }: { data: WeekData; previous?: WeekData | null }) {
+export function WeekView({
+  data,
+  previous = null,
+  dataHref,
+}: {
+  data: WeekData
+  previous?: WeekData | null
+  dataHref?: string
+}) {
   const themes = themesByRank(data)
   const rows = themeRows(data)
   const stats = headlineStats(data)
@@ -424,7 +429,7 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
               kicker="cves"
               lead={
                 cves.length > 0
-                  ? "The sources give the state of each CVE. The order is by state, then by theme rank."
+                  ? "The sources give the CVE states. The sequence is by CVE state, then by theme rank."
                   : undefined
               }
               title={
@@ -438,7 +443,7 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
                 <div className="cve-meter">
                   <Meter
                     hot={exploited}
-                    label={`${exploited} of ${cves.length} CVEs exploited.`}
+                    label={cveStateLabel(exploited, cves.length)}
                     max={20}
                     total={cves.length}
                   />
@@ -510,7 +515,7 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
           </section>
         </main>
       </div>
-      <SiteFooter>
+      <SiteFooter dataHref={dataHref}>
         <p>
           {plural(stats.themes, "theme")} from {plural(stats.sources, "source")}
           {data.meta.generated ? (

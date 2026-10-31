@@ -49,11 +49,11 @@ Unknown fields are allowed and ignored, so the pipeline can capture a field befo
 
 | Field | Need | Shows in | Notes |
 | --- | --- | --- | --- |
-| `title` | required | Hero kicker, browser tab | One line, the same every week, for example "Weekly threat intel report". The hero heading is the window, for example "23–29 Oct 2026". |
+| `title` | required | Hero kicker | One line, the same every week, for example "Weekly threat intel report". The hero heading is the window, for example "23–29 Oct 2026". |
 | `window.start`, `window.end` | required | Hero, index row, by-day chart | `YYYY-MM-DD HH:MM IST`. The days must match the folder name. The page is built for 7 days, one chart column per day. More than 7 is a warning, and the chart caps at 31 days. |
 | `window.start_utc`, `window.end_utc` | record | | |
-| `generated` | optional | Hero, notes, index "published" date | `YYYY-MM-DD HH:MM IST`. Without it the index shows no published date. |
-| `bottom_line` | optional, warned | Hero lead, index lead | One or two sentences: what a defender should take from the week. Without it, the hero reads "Attackers exploit N of N CVEs in this report. `<top theme>` is the top theme, with N accounts. `<its why_line>`" and the index shows "`<top theme>` is the top theme." plus that theme's `why_line`. The gate warns when it is missing. |
+| `generated` | optional | Hero, notes, index "published" date, feed | `YYYY-MM-DD HH:MM IST`. Without it the index shows no published date, and the feed uses `window.end` as the time of the week. |
+| `bottom_line` | optional, warned | Hero lead, index lead, page description, feed | One or two sentences: what a defender should take from the week. When the sources report an exploited CVE, the hero, the page description and the feed put "The sources tell you that attackers exploit N of the M CVEs in this report." before it, so the exploited count always names the sources. Without it, the hero reads "The sources tell you that attackers exploit N of the M CVEs in this report. `<top theme>` is the top theme, with N accounts. `<its why_line>`" and the index shows "`<top theme>` is the top theme." plus that theme's `why_line`. The gate warns when it is missing. |
 | `capture` | required | Notes, "Dates and counts" | One row for each string, labelled by key. `x` and `youtube` are required. Add a key for a new platform, for example `"bluesky": "… to …"`. |
 | `counts` | required | KPIs, notes | See [Counts and the funnel](#counts-and-the-funnel). |
 | `methodology` | required | Notes, "How we make this report" | One paragraph. Hidden when `method_steps` is present. |
@@ -88,14 +88,14 @@ Each funnel stage must be no larger than the stage before it. A stage that grows
 | `rank` | required | Everywhere themes are listed | A whole number from 1, and 1 is the most covered. Number the themes 1 to n. The page sorts by rank and prints positions, so a gap or a repeat still shows 1, 2, 3. Both are warnings. |
 | `key` | required | `#theme-<key>` links, week-over-week arrows | Letters, digits, `-` or `_`, unique in the week. **Keep the same key for the same storyline every week.** See [Keys](#keys-and-week-over-week). |
 | `name` | required | Theme row, tooltips | The full headline. |
-| `short_name` | optional | Side menu, charts, top-3 cards, index | Unique in the week. Without it, `name` is cut at 11 characters with "…". |
+| `short_name` | optional | Side menu, charts, top-3 cards, index, page title, share cards | Unique in the week. The page title starts with the labels of the top 3 themes. The share cards show the top 3 (`og.png`) or the top 5 (`share.png`). Without it, `name` is cut at 11 characters with "…". |
 | `summary` | required | Theme body | What happened. |
 | `why` | required | "Why it is important" callout | |
 | `why_line` | optional | Top-3 cards | One sentence. Without it the cards show `why`, cut at three lines. |
 | `actions` | optional, warned | "What to do" callout | Steps for defenders, one imperative sentence each. Hidden when missing. The gate warns when no theme has any. |
 | `affected.products`, `affected.sectors`, `affected.regions` | required | Theme facts | Short phrases. Use `"Not stated"` when unknown. |
 | `vendors`, `media`, `independent` | required | "Coverage per theme" chart, theme credits | Account names, which can be empty lists. The chart uses the length of each list. |
-| `distinct_accounts` | required | Rank bars, KPIs, deltas | The ranking metric. Should match the `ranking` row. |
+| `distinct_accounts` | required | Rank bars, KPIs, deltas, share cards | The ranking metric. Should match the `ranking` row. |
 | `x_engagement` | required | Theme facts | Interactions on the theme's X posts. |
 | `youtube_views` | required | Theme facts | Views on the theme's YouTube videos. |
 | `key_items` | required | "Key sources" | Source ids, best first. Each id must be in `sources`. Three show, and the rest fold behind "show more". |
@@ -127,7 +127,7 @@ Each funnel stage must be no larger than the stage before it. A stage that grows
 | Field | Need | Shows in | Notes |
 | --- | --- | --- | --- |
 | `id` | required | CVE table | `CVE-YYYY-NNNN`. It shows only when it is also in the theme's `cves`. |
-| `exploited_in_wild` | required | CVE state | `true` shows as exploited, in red. `false` shows as not exploited, and `null` as not confirmed. |
+| `exploited_in_wild` | required | CVE state, hero lead, `share.png` | `true` shows as exploited, in red. `false` shows as not exploited, and `null` as not confirmed. |
 | `basis` | optional | Evidence line | The evidence for the state, with the outlet in brackets. Without it the row has no evidence line. |
 | `cvss` | optional | Score chip | A number from 0 to 10. |
 | `advisory_url` | optional | Advisory link | The vendor or NVD advisory. |

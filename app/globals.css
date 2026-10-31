@@ -1781,11 +1781,31 @@ a.row-label {
 .rank-list .is-other .num {
   color: var(--muted-foreground);
 }
+/* Each count shows its unit. On narrow screens the bar goes under the label and the count. */
 .latest-rank {
-  grid-template-columns: 1.5rem minmax(4.5rem, max-content) minmax(0, 1fr) 2.5rem;
+  grid-template-columns: 1.5rem minmax(0, 1fr) max-content;
+}
+.latest-rank > li {
+  row-gap: 0.375rem;
+}
+.latest-rank > li > .bracket {
+  grid-row: 2;
+  grid-column: 2 / -1;
 }
 .latest-rank .num.muted {
   text-align: left;
+}
+.latest-rank .num-unit {
+  color: var(--muted-foreground);
+}
+@media (min-width: 27rem) {
+  .latest-rank {
+    grid-template-columns: 1.5rem minmax(4.5rem, max-content) minmax(0, 1fr) max-content;
+  }
+  .latest-rank > li > .bracket {
+    grid-row: auto;
+    grid-column: auto;
+  }
 }
 .heat-scroll {
   position: relative;
@@ -3272,9 +3292,45 @@ html.deep details[open] > * {
   gap: 0.5rem;
   color: var(--foreground);
 }
+/* Links to the code, the data, the feed and the issue form. On wide screens they sit at the right end of the bar.
+   Each dot sits in the gap before its link. The clip removes a dot at the start of a wrapped line,
+   and its 0.25rem margin keeps the focus ring visible. */
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1.5rem;
+  clip-path: inset(-0.5rem -0.5rem -0.5rem -0.25rem);
+}
+.footer-links > span {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.footer-links > span > [aria-hidden] {
+  position: absolute;
+  top: 50%;
+  left: -0.75rem;
+  translate: -50% -50%;
+}
+.footer-links a {
+  display: inline-block;
+  padding-block: 0.25rem;
+  color: var(--foreground);
+  text-decoration: underline 1px;
+  text-decoration-color: color-mix(in oklab, var(--foreground) 35%, transparent);
+  text-underline-offset: 0.25em;
+}
+@media (min-width: 64rem) {
+  .footer-links {
+    margin-left: auto;
+  }
+}
 
 /* ───────────────────────── hover (pointer devices only) ───────────────────────── */
 @media (hover: hover) and (pointer: fine) {
+  .footer-links a:hover {
+    text-decoration-color: var(--foreground);
+  }
   .brand:hover .mk-a {
     fill: var(--graph-accent-2);
   }

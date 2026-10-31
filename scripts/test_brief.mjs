@@ -26,8 +26,13 @@ import {
   validateData,
   waffleParts,
   heroLead,
+  cveSentence,
+  cveStateLabel,
+  andList,
+  weekTitle,
   whyText,
 } from "../lib/brief.mjs"
+import { atomFeed, weekUpdated } from "../lib/feed.mjs"
 import { logIntensityLevel } from "../lib/scale.mjs"
 import { ACCENT_KEY, DEFAULT_ACCENT, accentBoot, accents } from "../lib/accent.mjs"
 
@@ -115,7 +120,7 @@ test("real week validates and keeps each CVE state", () => {
   const row = indexRow(weeks[0])
   assert.equal(row.shortName, "PHP2Shell")
   assert.equal(row.themeCount, 10)
-  assert.match(heroLead(weeks[0].data), /^Attackers exploit \d+ of the \d+ CVEs in this report\. PHP2Shell is the top theme, with \d+ accounts\. PHP runs .+\.$/)
+  assert.match(heroLead(weeks[0].data), /^The sources tell you that attackers exploit \d+ of the \d+ CVEs in this report\. PHP2Shell is the top theme, with \d+ accounts\. Many web applications and appliances use PHP\. .+\.$/)
   const ranks = rankRows(weeks[0].data)
   assert.deepEqual(
     ranks.map((item) => item.key),
@@ -156,7 +161,7 @@ test("short_name and basis are optional and extra fields are allowed", () => {
   assert.equal(cveViews(data.themes[0])[1].tag, "EXPLOITED")
 })
 
-test("heroLead prefers bottom_line, then counts and the top why_line", () => {
+test("heroLead names the sources first, then bottom_line or the top why_line", () => {
   const data = structuredClone(loadWeeks(REAL)[0].data)
   const top = data.themes.find((theme) => theme.rank === 1)
   top.why_line = "Patch is not enough"
@@ -169,12 +174,20 @@ test("heroLead prefers bottom_line, then counts and the top why_line", () => {
       for (const detail of theme.cve_details ?? []) detail.exploited_in_wild = value
     }
   }
+  assert.equal(cveSentence(data), "The sources tell you that attackers exploit 7 of the 8 CVEs in this report.")
+  data.meta.bottom_line = "One line."
+  assert.equal(heroLead(data), "The sources tell you that attackers exploit 7 of the 8 CVEs in this report. One line.")
+  data.meta.bottom_line = null
   flags(false)
+  assert.equal(cveSentence(data), null)
   assert.match(heroLead(data), /^PHP2Shell is the top theme, with /)
   flags(true)
-  assert.match(heroLead(data), /^Attackers exploit all \d+ CVEs in this report\. PHP2Shell/)
+  assert.match(heroLead(data), /^The sources tell you that attackers exploit all \d+ CVEs in this report\. PHP2Shell/)
   for (const theme of data.themes) theme.cves = theme === top ? theme.cves.slice(0, 1) : []
-  assert.match(heroLead(data), /^Attackers exploit the CVE in this report\. PHP2Shell/)
+  assert.match(heroLead(data), /^The sources tell you that attackers exploit the CVE in this report\. PHP2Shell/)
+  data.meta.bottom_line = "One line."
+  assert.equal(heroLead(data), "The sources tell you that attackers exploit the CVE in this report. One line.")
+  data.meta.bottom_line = null
   for (const theme of data.themes) theme.cves = []
   assert.match(heroLead(data), /^PHP2Shell is the top theme, with /)
   data.meta.bottom_line = "One line."
@@ -182,6 +195,22 @@ test("heroLead prefers bottom_line, then counts and the top why_line", () => {
   data.meta.bottom_line = null
   data.themes = []
   assert.equal(heroLead(data), "This report has no themes.")
+})
+
+test("cveStateLabel names the sources for each count", () => {
+  assert.equal(cveStateLabel(7, 8), "CVE states from the sources: 7 of 8 exploited.")
+  assert.equal(cveStateLabel(0, 1), "CVE states from the sources: 0 of 1 exploited.")
+  assert.equal(cveStateLabel(0, 0), "0 CVEs.")
+})
+
+test("andList and weekTitle join the top theme names", () => {
+  assert.equal(andList([]), "")
+  assert.equal(andList(["a"]), "a")
+  assert.equal(andList(["a", "b"]), "a and b")
+  assert.equal(andList(["a", "b", "c"]), "a, b and c")
+  const data = loadWeeks(REAL)[0].data
+  assert.equal(weekTitle(data), "PHP2Shell, AI offence and Brotli CVE · 23–29 Oct 2026")
+  assert.equal(weekTitle(data, 1), "PHP2Shell · 23–29 Oct 2026")
 })
 
 test("nameDetail drops a leading label only at a word boundary", () => {
@@ -341,6 +370,43 @@ test("unknown schema_version and missing fields fail", () => {
   const missingBasisIsOk = minimal()
   delete missingBasisIsOk.themes[0].cve_details[0].basis
   assert.doesNotThrow(() => validateData(missingBasisIsOk, "fixture"))
+})
+
+test("atomFeed lists the data weeks newest first, with escaped text and absolute links", () => {
+  const site = { url: "https://example.test/base/", title: "T & co", subtitle: "S <b>", author: { name: "A", uri: "https://example.test/a" } }
+  const real = atomFeed(loadWeeks(REAL), site)
+  assert.match(real, /^<\?xml version="1\.0" encoding="utf-8"\?>\n<feed xmlns="http:\/\/www\.w3\.org\/2005\/Atom">/)
+  assert.match(real, /<title>T &amp; co<\/title>\n {2}<subtitle>S &lt;b&gt;<\/subtitle>/)
+  assert.match(real, /<summary type="text">The sources tell you that attackers exploit 7 of the 8 CVEs in this report\. PHP2Shell/)
+  assert.match(real, /<updated>2026-10-30T20:25:00\+05:30<\/updated>/)
+  for (const [, href] of real.matchAll(/href="([^"]+)"/g)) assert.ok(href.startsWith(site.url), href)
+  const week = (name, start, end) => {
+    const data = minimal()
+    data.meta.window = { start: `${start} 00:00 IST`, end: `${end} 23:59 IST` }
+    return { name, start: Date.parse(start), end: Date.parse(end), kind: "data", data, indexPath: null }
+  }
+  const older = week("2026-01-01_2026-01-07", "2026-01-01", "2026-01-07")
+  const newer = week("2026-01-08_2026-01-14", "2026-01-08", "2026-01-14")
+  const legacy = { ...older, name: "2025-12-25_2025-12-31", kind: "legacy", data: null, indexPath: "index.html" }
+  const xml = atomFeed([older, legacy, newer], site)
+  assert.deepEqual(
+    [...xml.matchAll(/<id>([^<]+)<\/id>/g)].map((match) => match[1]),
+    [site.url, `${site.url}reports/2026-01-08_2026-01-14/`, `${site.url}reports/2026-01-01_2026-01-07/`],
+  )
+  assert.equal(xml.match(/<updated>([^<]+)<\/updated>/)?.[1], "2026-01-14T23:59:00+05:30")
+  assert.match(atomFeed([], site), /<updated>1970-01-01T00:00:00Z<\/updated>\n[\s\S]*<\/author>\n<\/feed>\n$/)
+})
+
+test("weekUpdated uses meta.generated, then the window end, in IST", () => {
+  const data = structuredClone(loadWeeks(REAL)[0].data)
+  assert.equal(weekUpdated(data), "2026-10-30T20:25:00+05:30")
+  data.meta.generated = "2026-02-30 10:00 IST"
+  assert.equal(weekUpdated(data), "2026-10-29T23:59:00+05:30")
+  data.meta.generated = "2026-10-30 24:00 IST"
+  assert.equal(weekUpdated(data), "2026-10-29T23:59:00+05:30")
+  delete data.meta.generated
+  data.meta.window.end = "2026-10-29"
+  assert.equal(weekUpdated(data), "2026-10-29T23:59:00+05:30")
 })
 
 test("routes, legacy pages and index order", () => {

@@ -3,7 +3,8 @@ import fs from "node:fs"
 import path from "node:path"
 import test from "node:test"
 import zlib from "node:zlib"
-import { funnelModel, loadWeeks } from "../lib/brief.mjs"
+import { cveStateLabel, funnelModel, headlineStats, heroLead, loadWeeks } from "../lib/brief.mjs"
+import { BASE_PATH, SITE_URL } from "../lib/site-url.mjs"
 
 const root = path.resolve(import.meta.dirname, "..")
 const site = path.join(root, "site")
@@ -24,7 +25,7 @@ test("built routes, order and zero framework JS", () => {
   const week = fs.readFileSync(weekPath, "utf8")
   const legacy = fs.readFileSync(path.join(root, "reports", weekName, "index.html"))
   assert.notEqual(fs.readFileSync(weekPath), legacy)
-  assert.match(index, /href="\/gruesome-spooky-cackle\/reports\/2026-10-23_2026-10-29\/"/)
+  assert.ok(index.includes(`href="${BASE_PATH}/reports/${weekName}/"`))
   assert.match(index, /PHP2Shell/)
   assert.match(index, /10 themes/)
   assert.match(index, /2026-10-23 00:00 IST[\s\S]{0,80}to[\s\S]{0,80}2026-10-29 23:59 IST/)
@@ -40,7 +41,7 @@ test("built routes, order and zero framework JS", () => {
   const scripts = [...week.matchAll(/<script\b/gi)]
   assert.equal(scripts.length, 2)
   assert.match(week, /localStorage\.getItem\("theme"\)/)
-  assert.match(week, /src="\/gruesome-spooky-cackle\/site\.js"/)
+  assert.ok(week.includes(`src="${BASE_PATH}/site.js"`))
   const js = walk(site)
     .filter((file) => file.endsWith(".js"))
     .map((file) => path.relative(site, file))
@@ -56,7 +57,7 @@ test("every week and theme is built, with no broken values", () => {
   for (const week of weeks) {
     const file = path.join(site, "reports", week.name, "index.html")
     assert.ok(fs.existsSync(file), `${week.name} has no page`)
-    assert.ok(index.includes(`href="/gruesome-spooky-cackle/reports/${week.name}/"`), `the index does not link ${week.name}`)
+    assert.ok(index.includes(`href="${BASE_PATH}/reports/${week.name}/"`), `the index does not link ${week.name}`)
     if (week.kind !== "data") continue
     const html = fs.readFileSync(file, "utf8")
     for (const theme of week.data.themes) {
@@ -68,5 +69,83 @@ test("every week and theme is built, with no broken values", () => {
       assert.doesNotMatch(page, /\s(?:style|data-[\w-]+|aria-[\w-]+|width|height)="[^"]*\b(?:NaN|Infinity|undefined)\b/)
       assert.doesNotMatch(page, /class="[^"]*\bnum\b[^"]*"[^>]*>[^<]*\b(?:NaN|Infinity|undefined)\b/)
     }
+  }
+})
+
+test("share metadata has absolute URLs and a served card", () => {
+  const index = fs.readFileSync(path.join(site, "index.html"), "utf8")
+  const week = fs.readFileSync(path.join(site, "reports", weekName, "index.html"), "utf8")
+  const head = (html, pattern) => html.match(pattern)?.[1]
+  assert.ok(fs.existsSync(path.join(site, "og.png")), "og.png is missing")
+  assert.equal(head(index, /<link rel="canonical" href="([^"]+)"/), SITE_URL)
+  assert.equal(head(week, /<link rel="canonical" href="([^"]+)"/), `${SITE_URL}reports/${weekName}/`)
+  assert.equal(head(index, /<meta property="og:image" content="([^"]+)"/), `${SITE_URL}og.png`)
+  assert.match(head(week, /<title>([^<]+)<\/title>/) ?? "", /^PHP2Shell, AI offence and Brotli CVE · 23–29 Oct 2026 · /)
+})
+
+test("each week has a 1200×630 card in its head and a 1080×1350 share card", () => {
+  for (const week of loadWeeks(path.join(root, "reports")).filter((item) => item.kind === "data")) {
+    for (const [file, size] of [["og.png", [1200, 630]], ["share.png", [1080, 1350]]]) {
+      const png = fs.readFileSync(path.join(site, "reports", week.name, file))
+      assert.equal(png.subarray(0, 8).toString("hex"), "89504e470d0a1a0a", `${week.name}/${file} is not a PNG`)
+      assert.equal(png.subarray(12, 16).toString("latin1"), "IHDR")
+      assert.deepEqual([png.readUInt32BE(16), png.readUInt32BE(20)], size, `${week.name}/${file} size`)
+    }
+    const html = fs.readFileSync(path.join(site, "reports", week.name, "index.html"), "utf8")
+    const card = `${SITE_URL}reports/${week.name}/og.png`
+    for (const name of ["og:image", "twitter:image"]) {
+      const tags = [...html.matchAll(new RegExp(`<meta (?:property|name)="${name}" content="([^"]+)"`, "g"))].map((match) => match[1])
+      assert.deepEqual(tags, [card], `${week.name} ${name}`)
+    }
+    assert.match(html, /<meta property="og:image:alt" content="Weekly threat intel report for Jitesh Thakur, [^"]+\. A chart shows the top themes by the number of accounts\."/)
+  }
+})
+
+test("the Atom feed is built, with absolute links, and every page links it", () => {
+  const feed = fs.readFileSync(path.join(site, "feed.xml"), "utf8")
+  assert.match(feed, /^<\?xml version="1\.0" encoding="utf-8"\?>\n<feed xmlns="http:\/\/www\.w3\.org\/2005\/Atom">/)
+  assert.ok(feed.includes(`<link rel="self" type="application/atom+xml" href="${SITE_URL}feed.xml"/>`))
+  assert.ok(feed.includes(`<id>${SITE_URL}reports/${weekName}/</id>`))
+  assert.doesNotMatch(feed, /&(?!amp;|lt;|gt;|quot;)/)
+  for (const [, href] of feed.matchAll(/href="([^"]+)"/g)) assert.ok(href.startsWith(SITE_URL), href)
+  const dataWeeks = loadWeeks(path.join(root, "reports")).filter((week) => week.kind === "data")
+  assert.equal(feed.match(/<entry>/g)?.length, dataWeeks.length)
+  const pages = ["index.html", "404.html", path.join("reports", weekName, "index.html")]
+  for (const page of pages) {
+    const html = fs.readFileSync(path.join(site, page), "utf8")
+    const links = html.match(/<link\b[^>]*type="application\/atom\+xml"[^>]*>/g) ?? []
+    assert.equal(links.length, 1, `${page} has ${links.length} feed links`)
+    assert.ok(links[0].includes(`href="${SITE_URL}feed.xml"`), links[0])
+    assert.ok(html.includes(`href="${BASE_PATH}/feed.xml"`), `${page} has no footer feed link`)
+  }
+})
+
+test("screen-reader CVE counts name the sources, and the lead is the same in the meta tags and the feed", () => {
+  const index = fs.readFileSync(path.join(site, "index.html"), "utf8")
+  const feed = fs.readFileSync(path.join(site, "feed.xml"), "utf8")
+  const decode = (text) =>
+    text.replace(/&quot;/g, '"').replace(/&#x27;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&")
+  const spoken = (html) =>
+    [...html.matchAll(/aria-label="([^"]*)"|class="sr-only">([^<]*)</g)].map((match) => decode(match[1] ?? match[2]))
+  for (const week of loadWeeks(path.join(root, "reports")).filter((item) => item.kind === "data")) {
+    const html = fs.readFileSync(path.join(site, "reports", week.name, "index.html"), "utf8")
+    for (const page of [html, index]) {
+      for (const text of spoken(page).filter((text) => /\b\d+ of \d+ (?:CVEs? )?exploited\b/.test(text))) {
+        assert.match(text, /^CVE states from the sources: \d+ of \d+ exploited\.$/)
+      }
+    }
+    const stats = headlineStats(week.data)
+    if (stats.cves > 0) {
+      const label = `aria-label="${cveStateLabel(stats.exploited, stats.cves)}"`
+      assert.equal(html.split(label).length - 1, 2, `${week.name} needs the label on the KPI and CVE meters`)
+      assert.ok(index.includes(label), `the index meter for ${week.name}`)
+    }
+    const lead = heroLead(week.data)
+    for (const name of ["description", "og:description", "twitter:description"]) {
+      const tags = [...html.matchAll(new RegExp(`<meta (?:name|property)="${name}" content="([^"]*)"`, "g"))]
+      assert.deepEqual(tags.map((match) => decode(match[1])), [lead], `${week.name} ${name}`)
+    }
+    const entry = feed.split("<entry>").find((part) => part.includes(`<id>${SITE_URL}reports/${week.name}/</id>`))
+    assert.equal(decode(entry?.match(/<summary type="text">([^<]*)<\/summary>/)?.[1] ?? ""), lead, `${week.name} feed summary`)
   }
 })

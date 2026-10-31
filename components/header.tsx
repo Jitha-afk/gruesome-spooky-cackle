@@ -2,6 +2,7 @@ import Link from "next/link"
 import type { ReactNode } from "react"
 import { Moon, Sun, TableOfContents } from "lucide-react"
 import { AccentPicker } from "@/components/accent-picker"
+import { BASE_PATH, ISSUE_URL, OWNER_URL, REPO_URL } from "@/lib/site"
 
 export function DateUnits({ text }: { text: string }) {
   const marker = " to "
@@ -125,8 +126,6 @@ export function SiteHeader({ crumb, toc }: { crumb?: ReactNode; toc?: TocItem[] 
   )
 }
 
-const OWNER_URL = "https://www.linkedin.com/in/jithamsft/"
-
 /** The byline under every lead: who the reports are for and what makes them. */
 function Intro() {
   return (
@@ -162,7 +161,14 @@ export function Hero({
   )
 }
 
-export function SiteFooter({ children }: { children?: ReactNode }) {
+/** Footer: the brand, an optional note and links to the code, the week's data and the issue form. */
+export function SiteFooter({ children, dataHref }: { children?: ReactNode; dataHref?: string }) {
+  const links = [
+    { href: REPO_URL, label: "Code" },
+    ...(dataHref ? [{ href: dataHref, label: "Data" }] : []),
+    { href: `${BASE_PATH}/feed.xml`, label: "Atom feed" },
+    { href: ISSUE_URL, label: "Open an issue" },
+  ]
   return (
     <footer className="site-footer">
       <div className="wrap footer-bar">
@@ -171,6 +177,16 @@ export function SiteFooter({ children }: { children?: ReactNode }) {
           <span>Weekly threat intel</span>
         </p>
         {children ? <div className="footer-note">{children}</div> : null}
+        <p className="footer-links">
+          {links.map((link, i) => (
+            <span key={link.label}>
+              {i > 0 ? <span aria-hidden="true">·</span> : null}
+              <a href={link.href} rel="noreferrer">
+                {link.label}
+              </a>
+            </span>
+          ))}
+        </p>
         <i aria-hidden="true" className="mark mark-tl" />
         <i aria-hidden="true" className="mark mark-tr" />
       </div>
