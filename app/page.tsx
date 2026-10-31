@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import type { CSSProperties } from "react"
 import Link from "next/link"
 import { ArrowRight, ArrowUpRight } from "lucide-react"
@@ -21,6 +22,12 @@ import {
   type WeekData,
   type WeekRecord,
 } from "@/lib/brief.mjs"
+import { OPEN_GRAPH } from "@/lib/site"
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  openGraph: { ...OPEN_GRAPH, url: "/" },
+}
 
 type Vars = CSSProperties & Record<`--${string}`, string | number>
 

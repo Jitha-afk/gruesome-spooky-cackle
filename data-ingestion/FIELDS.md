@@ -49,7 +49,7 @@ Unknown fields are allowed and ignored, so the pipeline can capture a field befo
 
 | Field | Need | Shows in | Notes |
 | --- | --- | --- | --- |
-| `title` | required | Hero kicker, browser tab | One line, the same every week, for example "Weekly threat intel report". The hero heading is the window, for example "23–29 Oct 2026". |
+| `title` | required | Hero kicker | One line, the same every week, for example "Weekly threat intel report". The hero heading is the window, for example "23–29 Oct 2026". |
 | `window.start`, `window.end` | required | Hero, index row, by-day chart | `YYYY-MM-DD HH:MM IST`. The days must match the folder name. The page is built for 7 days, one chart column per day. More than 7 is a warning, and the chart caps at 31 days. |
 | `window.start_utc`, `window.end_utc` | record | | |
 | `generated` | optional | Hero, notes, index "published" date | `YYYY-MM-DD HH:MM IST`. Without it the index shows no published date. |
@@ -88,7 +88,7 @@ Each funnel stage must be no larger than the stage before it. A stage that grows
 | `rank` | required | Everywhere themes are listed | A whole number from 1, and 1 is the most covered. Number the themes 1 to n. The page sorts by rank and prints positions, so a gap or a repeat still shows 1, 2, 3. Both are warnings. |
 | `key` | required | `#theme-<key>` links, week-over-week arrows | Letters, digits, `-` or `_`, unique in the week. **Keep the same key for the same storyline every week.** See [Keys](#keys-and-week-over-week). |
 | `name` | required | Theme row, tooltips | The full headline. |
-| `short_name` | optional | Side menu, charts, top-3 cards, index | Unique in the week. Without it, `name` is cut at 11 characters with "…". |
+| `short_name` | optional | Side menu, charts, top-3 cards, index, page title | Unique in the week. The page title starts with the labels of the top 3 themes. Without it, `name` is cut at 11 characters with "…". |
 | `summary` | required | Theme body | What happened. |
 | `why` | required | "Why it is important" callout | |
 | `why_line` | optional | Top-3 cards | One sentence. Without it the cards show `why`, cut at three lines. |

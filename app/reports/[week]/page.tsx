@@ -1,5 +1,7 @@
+import type { Metadata } from "next"
 import { WeekView } from "@/components/week-view"
-import { loadWeeks, previousDataWeek, reportsRoot, windowLabel } from "@/lib/brief.mjs"
+import { heroLead, loadWeeks, previousDataWeek, reportsRoot, weekTitle } from "@/lib/brief.mjs"
+import { OPEN_GRAPH, SITE_NAME } from "@/lib/site"
 
 export const dynamicParams = false
 
@@ -9,13 +11,19 @@ export function generateStaticParams() {
     .map((week) => ({ week: week.name }))
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ week: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ week: string }> }): Promise<Metadata> {
   const { week } = await params
   const match = loadWeeks(reportsRoot()).find((item) => item.name === week && item.data)
-  if (!match?.data) return { title: "Weekly threat intel" }
+  if (!match?.data) return {}
+  // The top theme names lead the title, so a share or a search result names the threats.
+  const title = weekTitle(match.data)
+  const description = heroLead(match.data)
+  const url = `reports/${week}/`
   return {
-    title: `${match.data.meta.title} · ${windowLabel(match.data)}`,
-    description: match.data.meta.bottom_line ?? `Weekly threat intel report for ${windowLabel(match.data)}.`,
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: { ...OPEN_GRAPH, type: "article", title: `${title} · ${SITE_NAME}`, description, url },
   }
 }
 

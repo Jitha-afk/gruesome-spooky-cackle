@@ -4,7 +4,7 @@ import path from "node:path"
 import test from "node:test"
 import zlib from "node:zlib"
 import { funnelModel, loadWeeks } from "../lib/brief.mjs"
-import { BASE_PATH } from "../lib/site-url.mjs"
+import { BASE_PATH, SITE_URL } from "../lib/site-url.mjs"
 
 const root = path.resolve(import.meta.dirname, "..")
 const site = path.join(root, "site")
@@ -70,4 +70,15 @@ test("every week and theme is built, with no broken values", () => {
       assert.doesNotMatch(page, /class="[^"]*\bnum\b[^"]*"[^>]*>[^<]*\b(?:NaN|Infinity|undefined)\b/)
     }
   }
+})
+
+test("share metadata has absolute URLs and a served card", () => {
+  const index = fs.readFileSync(path.join(site, "index.html"), "utf8")
+  const week = fs.readFileSync(path.join(site, "reports", weekName, "index.html"), "utf8")
+  const head = (html, pattern) => html.match(pattern)?.[1]
+  assert.ok(fs.existsSync(path.join(site, "og.png")), "og.png is missing")
+  assert.equal(head(index, /<link rel="canonical" href="([^"]+)"/), SITE_URL)
+  assert.equal(head(week, /<link rel="canonical" href="([^"]+)"/), `${SITE_URL}reports/${weekName}/`)
+  assert.equal(head(index, /<meta property="og:image" content="([^"]+)"/), `${SITE_URL}og.png`)
+  assert.match(head(week, /<title>([^<]+)<\/title>/) ?? "", /^PHP2Shell, AI offence and Brotli CVE · 23–29 Oct 2026 · /)
 })

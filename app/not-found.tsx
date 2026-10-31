@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react"
 import { Hero, SiteFooter, SiteHeader } from "@/components/header"
 
 export const metadata: Metadata = {
-  title: { absolute: "Page not found · Weekly threat intel" },
+  title: "Page not found",
 }
 
 export default function NotFound() {
