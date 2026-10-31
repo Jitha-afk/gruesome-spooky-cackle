@@ -362,7 +362,15 @@ function Notes({ data }: { data: WeekData }) {
   )
 }
 
-export function WeekView({ data, previous = null }: { data: WeekData; previous?: WeekData | null }) {
+export function WeekView({
+  data,
+  previous = null,
+  dataHref,
+}: {
+  data: WeekData
+  previous?: WeekData | null
+  dataHref?: string
+}) {
   const themes = themesByRank(data)
   const rows = themeRows(data)
   const stats = headlineStats(data)
@@ -510,7 +518,7 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
           </section>
         </main>
       </div>
-      <SiteFooter>
+      <SiteFooter dataHref={dataHref}>
         <p>
           {plural(stats.themes, "theme")} from {plural(stats.sources, "source")}
           {data.meta.generated ? (

@@ -3272,9 +3272,36 @@ html.deep details[open] > * {
   gap: 0.5rem;
   color: var(--foreground);
 }
+/* Links to the code, the data and the issue form. On wide screens they sit at the right end of the bar. */
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+}
+.footer-links > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: 0.5rem;
+}
+.footer-links a {
+  display: inline-block;
+  padding-block: 0.25rem;
+  color: var(--foreground);
+  text-decoration: underline 1px;
+  text-decoration-color: color-mix(in oklab, var(--foreground) 35%, transparent);
+  text-underline-offset: 0.25em;
+}
+@media (min-width: 64rem) {
+  .footer-links {
+    margin-left: auto;
+  }
+}
 
 /* ───────────────────────── hover (pointer devices only) ───────────────────────── */
 @media (hover: hover) and (pointer: fine) {
+  .footer-links a:hover {
+    text-decoration-color: var(--foreground);
+  }
   .brand:hover .mk-a {
     fill: var(--graph-accent-2);
   }

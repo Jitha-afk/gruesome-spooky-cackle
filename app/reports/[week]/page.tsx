@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { WeekView } from "@/components/week-view"
 import { heroLead, loadWeeks, previousDataWeek, reportsRoot, weekTitle } from "@/lib/brief.mjs"
-import { OPEN_GRAPH, SITE_NAME } from "@/lib/site"
+import { OPEN_GRAPH, SITE_NAME, dataUrl } from "@/lib/site"
 
 export const dynamicParams = false
 
@@ -33,5 +33,5 @@ export default async function WeekPage({ params }: { params: Promise<{ week: str
   const match = weeks.find((item) => item.name === week && item.kind === "data" && item.data)
   if (!match?.data) throw new Error(`${week} has no data.json.`)
   const previous = previousDataWeek(weeks, week)
-  return <WeekView data={match.data} previous={previous?.data ?? null} />
+  return <WeekView data={match.data} previous={previous?.data ?? null} dataHref={dataUrl(week)} />
 }
