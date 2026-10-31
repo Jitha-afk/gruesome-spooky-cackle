@@ -12,8 +12,10 @@ export const ISSUE_URL = `${REPO_URL}/issues/new`
 export const SITE_DESCRIPTION =
   "Each week, AI agents find security posts and videos on X and YouTube. The report sorts the themes by the number of accounts. It shows CVE states, key sources and comment sentiment."
 
-/** The size of the share cards: public/og.png and the og.png of each week. */
+/** The size of the link-preview cards: public/og.png and the og.png of each week. */
 export const CARD_SIZE = { width: 1200, height: 630 }
+/** The size of the 4:5 share.png of each week, for image posts. */
+export const SHARE_SIZE = { width: 1080, height: 1350 }
 
 /** The alt text of the share card of a week, for example for "23–29 Oct 2026". */
 export function weekImageAlt(window: string) {

@@ -158,6 +158,7 @@ export function rankRows(data: WeekData): RankView[]
 export function whyText(theme: Theme): { text: string; clamp: boolean }
 export function previewCves(theme: Theme, limit?: number): { shown: CveView[]; extra: number }
 export function heroLead(data: WeekData): string
+export function cveSentence(data: WeekData): string | null
 export function commentModel(theme: Theme): CommentView[]
 export function isRealDay(text: unknown): boolean
 export function rangeLabel(startText: string, endText: string): string

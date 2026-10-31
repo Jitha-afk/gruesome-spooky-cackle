@@ -26,6 +26,7 @@ import {
   validateData,
   waffleParts,
   heroLead,
+  cveSentence,
   whyText,
 } from "../lib/brief.mjs"
 import { atomFeed, weekUpdated } from "../lib/feed.mjs"
@@ -170,7 +171,9 @@ test("heroLead prefers bottom_line, then counts and the top why_line", () => {
       for (const detail of theme.cve_details ?? []) detail.exploited_in_wild = value
     }
   }
+  assert.equal(cveSentence(data), "The sources tell you that attackers exploit 7 of the 8 CVEs in this report.")
   flags(false)
+  assert.equal(cveSentence(data), null)
   assert.match(heroLead(data), /^PHP2Shell is the top theme, with /)
   flags(true)
   assert.match(heroLead(data), /^The sources tell you that attackers exploit all \d+ CVEs in this report\. PHP2Shell/)

@@ -83,12 +83,14 @@ test("share metadata has absolute URLs and a served card", () => {
   assert.match(head(week, /<title>([^<]+)<\/title>/) ?? "", /^PHP2Shell, AI offence and Brotli CVE · 23–29 Oct 2026 · /)
 })
 
-test("each week has a 1200×630 PNG share card in its head", () => {
+test("each week has a 1200×630 card in its head and a 1080×1350 share card", () => {
   for (const week of loadWeeks(path.join(root, "reports")).filter((item) => item.kind === "data")) {
-    const png = fs.readFileSync(path.join(site, "reports", week.name, "og.png"))
-    assert.equal(png.subarray(0, 8).toString("hex"), "89504e470d0a1a0a", `${week.name}/og.png is not a PNG`)
-    assert.equal(png.subarray(12, 16).toString("latin1"), "IHDR")
-    assert.deepEqual([png.readUInt32BE(16), png.readUInt32BE(20)], [1200, 630], `${week.name}/og.png size`)
+    for (const [file, size] of [["og.png", [1200, 630]], ["share.png", [1080, 1350]]]) {
+      const png = fs.readFileSync(path.join(site, "reports", week.name, file))
+      assert.equal(png.subarray(0, 8).toString("hex"), "89504e470d0a1a0a", `${week.name}/${file} is not a PNG`)
+      assert.equal(png.subarray(12, 16).toString("latin1"), "IHDR")
+      assert.deepEqual([png.readUInt32BE(16), png.readUInt32BE(20)], size, `${week.name}/${file} size`)
+    }
     const html = fs.readFileSync(path.join(site, "reports", week.name, "index.html"), "utf8")
     const card = `${SITE_URL}reports/${week.name}/og.png`
     for (const name of ["og:image", "twitter:image"]) {
