@@ -424,7 +424,7 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
               kicker="cves"
               lead={
                 cves.length > 0
-                  ? "The sources give the state of each CVE. The order is by state, then by theme rank."
+                  ? "The sources give the CVE states. The sequence is by CVE state, then by theme rank."
                   : undefined
               }
               title={
