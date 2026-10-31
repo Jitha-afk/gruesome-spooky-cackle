@@ -28,6 +28,7 @@ import {
   heroLead,
   whyText,
 } from "../lib/brief.mjs"
+import { atomFeed, weekUpdated } from "../lib/feed.mjs"
 import { logIntensityLevel } from "../lib/scale.mjs"
 import { ACCENT_KEY, DEFAULT_ACCENT, accentBoot, accents } from "../lib/accent.mjs"
 
@@ -341,6 +342,43 @@ test("unknown schema_version and missing fields fail", () => {
   const missingBasisIsOk = minimal()
   delete missingBasisIsOk.themes[0].cve_details[0].basis
   assert.doesNotThrow(() => validateData(missingBasisIsOk, "fixture"))
+})
+
+test("atomFeed lists the data weeks newest first, with escaped text and absolute links", () => {
+  const site = { url: "https://example.test/base/", title: "T & co", subtitle: "S <b>", author: { name: "A", uri: "https://example.test/a" } }
+  const real = atomFeed(loadWeeks(REAL), site)
+  assert.match(real, /^<\?xml version="1\.0" encoding="utf-8"\?>\n<feed xmlns="http:\/\/www\.w3\.org\/2005\/Atom">/)
+  assert.match(real, /<title>T &amp; co<\/title>\n {2}<subtitle>S &lt;b&gt;<\/subtitle>/)
+  assert.match(real, /<summary type="text">The sources tell you that attackers exploit 7 of the 8 CVEs in this report\. PHP2Shell/)
+  assert.match(real, /<updated>2026-10-30T20:25:00\+05:30<\/updated>/)
+  for (const [, href] of real.matchAll(/href="([^"]+)"/g)) assert.ok(href.startsWith(site.url), href)
+  const week = (name, start, end) => {
+    const data = minimal()
+    data.meta.window = { start: `${start} 00:00 IST`, end: `${end} 23:59 IST` }
+    return { name, start: Date.parse(start), end: Date.parse(end), kind: "data", data, indexPath: null }
+  }
+  const older = week("2026-01-01_2026-01-07", "2026-01-01", "2026-01-07")
+  const newer = week("2026-01-08_2026-01-14", "2026-01-08", "2026-01-14")
+  const legacy = { ...older, name: "2025-12-25_2025-12-31", kind: "legacy", data: null, indexPath: "index.html" }
+  const xml = atomFeed([older, legacy, newer], site)
+  assert.deepEqual(
+    [...xml.matchAll(/<id>([^<]+)<\/id>/g)].map((match) => match[1]),
+    [site.url, `${site.url}reports/2026-01-08_2026-01-14/`, `${site.url}reports/2026-01-01_2026-01-07/`],
+  )
+  assert.equal(xml.match(/<updated>([^<]+)<\/updated>/)?.[1], "2026-01-14T23:59:00+05:30")
+  assert.match(atomFeed([], site), /<updated>1970-01-01T00:00:00Z<\/updated>\n[\s\S]*<\/author>\n<\/feed>\n$/)
+})
+
+test("weekUpdated uses meta.generated, then the window end, in IST", () => {
+  const data = structuredClone(loadWeeks(REAL)[0].data)
+  assert.equal(weekUpdated(data), "2026-10-30T20:25:00+05:30")
+  data.meta.generated = "2026-02-30 10:00 IST"
+  assert.equal(weekUpdated(data), "2026-10-29T23:59:00+05:30")
+  data.meta.generated = "2026-10-30 24:00 IST"
+  assert.equal(weekUpdated(data), "2026-10-29T23:59:00+05:30")
+  delete data.meta.generated
+  data.meta.window.end = "2026-10-29"
+  assert.equal(weekUpdated(data), "2026-10-29T23:59:00+05:30")
 })
 
 test("routes, legacy pages and index order", () => {

@@ -82,3 +82,22 @@ test("share metadata has absolute URLs and a served card", () => {
   assert.equal(head(index, /<meta property="og:image" content="([^"]+)"/), `${SITE_URL}og.png`)
   assert.match(head(week, /<title>([^<]+)<\/title>/) ?? "", /^PHP2Shell, AI offence and Brotli CVE · 23–29 Oct 2026 · /)
 })
+
+test("the Atom feed is built, with absolute links, and every page links it", () => {
+  const feed = fs.readFileSync(path.join(site, "feed.xml"), "utf8")
+  assert.match(feed, /^<\?xml version="1\.0" encoding="utf-8"\?>\n<feed xmlns="http:\/\/www\.w3\.org\/2005\/Atom">/)
+  assert.ok(feed.includes(`<link rel="self" type="application/atom+xml" href="${SITE_URL}feed.xml"/>`))
+  assert.ok(feed.includes(`<id>${SITE_URL}reports/${weekName}/</id>`))
+  assert.doesNotMatch(feed, /&(?!amp;|lt;|gt;|quot;)/)
+  for (const [, href] of feed.matchAll(/href="([^"]+)"/g)) assert.ok(href.startsWith(SITE_URL), href)
+  const dataWeeks = loadWeeks(path.join(root, "reports")).filter((week) => week.kind === "data")
+  assert.equal(feed.match(/<entry>/g)?.length, dataWeeks.length)
+  const pages = ["index.html", "404.html", path.join("reports", weekName, "index.html")]
+  for (const page of pages) {
+    const html = fs.readFileSync(path.join(site, page), "utf8")
+    const links = html.match(/<link\b[^>]*type="application\/atom\+xml"[^>]*>/g) ?? []
+    assert.equal(links.length, 1, `${page} has ${links.length} feed links`)
+    assert.ok(links[0].includes(`href="${SITE_URL}feed.xml"`), links[0])
+    assert.ok(html.includes(`href="${BASE_PATH}/feed.xml"`), `${page} has no footer feed link`)
+  }
+})

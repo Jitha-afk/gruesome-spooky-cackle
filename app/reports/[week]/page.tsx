@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { WeekView } from "@/components/week-view"
 import { heroLead, loadWeeks, previousDataWeek, reportsRoot, weekTitle } from "@/lib/brief.mjs"
-import { OPEN_GRAPH, SITE_NAME, dataUrl } from "@/lib/site"
+import { FEED_TYPES, OPEN_GRAPH, SITE_NAME, dataUrl } from "@/lib/site"
 
 export const dynamicParams = false
 
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ week: str
   return {
     title,
     description,
-    alternates: { canonical: url },
+    alternates: { canonical: url, types: FEED_TYPES },
     openGraph: { ...OPEN_GRAPH, type: "article", title: `${title} · ${SITE_NAME}`, description, url },
   }
 }

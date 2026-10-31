@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { DEFAULT_ACCENT } from "@/lib/accent.mjs"
-import { OPEN_GRAPH, OWNER_NAME, OWNER_URL, SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/site"
+import { FEED_TYPES, OPEN_GRAPH, OWNER_NAME, OWNER_URL, SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/site"
 import "./globals.css"
 
 const geistSans = Geist({
@@ -22,6 +22,7 @@ export const metadata: Metadata = {
   applicationName: SITE_NAME,
   authors: [{ name: OWNER_NAME, url: OWNER_URL }],
   creator: OWNER_NAME,
+  alternates: { types: FEED_TYPES },
   openGraph: OPEN_GRAPH,
   twitter: { card: "summary_large_image" },
 }

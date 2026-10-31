@@ -2,7 +2,7 @@ import Link from "next/link"
 import type { ReactNode } from "react"
 import { Moon, Sun, TableOfContents } from "lucide-react"
 import { AccentPicker } from "@/components/accent-picker"
-import { ISSUE_URL, OWNER_URL, REPO_URL } from "@/lib/site"
+import { BASE_PATH, ISSUE_URL, OWNER_URL, REPO_URL } from "@/lib/site"
 
 export function DateUnits({ text }: { text: string }) {
   const marker = " to "
@@ -166,6 +166,7 @@ export function SiteFooter({ children, dataHref }: { children?: ReactNode; dataH
   const links = [
     { href: REPO_URL, label: "Code" },
     ...(dataHref ? [{ href: dataHref, label: "Data" }] : []),
+    { href: `${BASE_PATH}/feed.xml`, label: "Atom feed" },
     { href: ISSUE_URL, label: "Open an issue" },
   ]
   return (

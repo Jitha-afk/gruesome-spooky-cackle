@@ -28,6 +28,11 @@ export const OPEN_GRAPH = {
   ],
 } satisfies Metadata["openGraph"]
 
+// Feed autodiscovery. A page-level alternates replaces the layout's, so pages spread this too.
+export const FEED_TYPES = {
+  "application/atom+xml": [{ url: "feed.xml", title: `${SITE_NAME} · Atom feed` }],
+} satisfies NonNullable<Metadata["alternates"]>["types"]
+
 /** The week's data.json on GitHub. */
 export function dataUrl(week: string) {
   return `${REPO_URL}/blob/main/reports/${week}/data.json`

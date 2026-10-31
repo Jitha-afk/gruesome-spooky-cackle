@@ -3292,16 +3292,25 @@ html.deep details[open] > * {
   gap: 0.5rem;
   color: var(--foreground);
 }
-/* Links to the code, the data and the issue form. On wide screens they sit at the right end of the bar. */
+/* Links to the code, the data, the feed and the issue form. On wide screens they sit at the right end of the bar.
+   Each dot sits in the gap before its link. The clip removes a dot at the start of a wrapped line,
+   and its 0.25rem margin keeps the focus ring visible. */
 .footer-links {
   display: flex;
   flex-wrap: wrap;
+  column-gap: 1.5rem;
+  clip-path: inset(-0.5rem -0.5rem -0.5rem -0.25rem);
 }
 .footer-links > span {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-right: 0.5rem;
+}
+.footer-links > span > [aria-hidden] {
+  position: absolute;
+  top: 50%;
+  left: -0.75rem;
+  translate: -50% -50%;
 }
 .footer-links a {
   display: inline-block;

@@ -22,10 +22,10 @@ import {
   type WeekData,
   type WeekRecord,
 } from "@/lib/brief.mjs"
-import { OPEN_GRAPH } from "@/lib/site"
+import { FEED_TYPES, OPEN_GRAPH } from "@/lib/site"
 
 export const metadata: Metadata = {
-  alternates: { canonical: "/" },
+  alternates: { canonical: "/", types: FEED_TYPES },
   openGraph: { ...OPEN_GRAPH, url: "/" },
 }
 
