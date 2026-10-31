@@ -118,7 +118,7 @@ export default function IndexPage() {
         <main className="main" id="main" tabIndex={-1}>
           <Hero
             kicker={read ? `weekly · ${read}` : "weekly"}
-            lead="Each report shows the security themes of one week, with the CVE states, key sources and comment sentiment of each theme."
+            lead="Each report shows the security themes of one week and the CVE states. For each theme, it shows the key sources and the comment sentiment."
             title="Weekly threat intel"
           />
           {latest?.data ? <Latest data={latest.data} week={latest} /> : null}
