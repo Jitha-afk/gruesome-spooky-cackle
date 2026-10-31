@@ -79,7 +79,7 @@ function Kpis({ data, rows, delta }: { data: WeekData; rows: ThemeRow[]; delta: 
               "no accounts counted"
             ) : lead.length > 1 ? (
               <>
-                <span className="num">{leadShare}%</span> in the top {lead.length}
+                <span className="num t-a">{leadShare}%</span> in the top {lead.length}
               </>
             ) : (
               plural(lead.length, "theme")
@@ -100,7 +100,7 @@ function Kpis({ data, rows, delta }: { data: WeekData; rows: ThemeRow[]; delta: 
               <Fragment key={part.label}>
                 {index > 0 ? " " : null}
                 <span className="kpi-part">
-                  <span className="num">{formatCount(part.value)}</span> {part.label}
+                  <span className={`num t-${part.tone}`}>{formatCount(part.value)}</span> {part.label}
                 </span>
               </Fragment>
             ))}
@@ -119,10 +119,10 @@ function Kpis({ data, rows, delta }: { data: WeekData; rows: ThemeRow[]; delta: 
             {read > 0 ? (
               <>
                 <span className="kpi-part">
-                  <span className="num">{percent(sentiment.negative, read)}%</span> negative
+                  <span className="num t-d">{percent(sentiment.negative, read)}%</span> negative
                 </span>{" "}
                 <span className="kpi-part">
-                  <span className="num">{percent(sentiment.positive, read)}%</span> positive
+                  <span className="num t-a">{percent(sentiment.positive, read)}%</span> positive
                 </span>
               </>
             ) : (
@@ -228,7 +228,7 @@ function Funnel({ title, stages }: { title: string; stages: FunnelStage[] }) {
             <li key={stage.label} style={style}>
               <span className="row-label">{stage.label}</span>
               <Bar bracket tone={index === stages.length - 1 ? "a" : "m"} value={stage.count / peak} />
-              <span className="num">{formatCount(stage.count)}</span>
+              <span className={index === stages.length - 1 ? "num t-a" : "num"}>{formatCount(stage.count)}</span>
               <span className="num drop">{drop}</span>
             </li>
           )

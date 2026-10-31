@@ -6,6 +6,8 @@ import { formatCount, formatKpi, sparkGlyphs } from "@/lib/brief.mjs"
  * depends on colour alone.
  * a data █, b data-2 ▓ (the accent, unless it is red), c accent-3 ▒,
  * m muted ▒, n foreground █, d destructive ▓, f mark ░.
+ * A `.num` in a tone takes a colour that keeps 4.5:1 as text: a and b use
+ * --num-a and --num-b, c and n foreground, m and f muted, d destructive.
  */
 export type Tone = "a" | "b" | "c" | "m" | "n" | "d" | "f"
 
@@ -58,7 +60,7 @@ export function Key({ tone }: { tone: Tone }) {
   return <i aria-hidden="true" className={`key t-${tone}`} />
 }
 
-/** A legend row: glyph, label and count. */
+/** A legend row: glyph, label and count. The count takes the tone of its key. */
 export function Legend({ parts, className }: { parts: Part[]; className?: string }) {
   return (
     <ul className={`legend${className ? ` ${className}` : ""}`}>
@@ -66,7 +68,7 @@ export function Legend({ parts, className }: { parts: Part[]; className?: string
         <li key={part.label}>
           <Key tone={part.tone} />
           <span>{part.label}</span>
-          <span className="num">{formatCount(part.value)}</span>
+          <span className={`num t-${part.tone}`}>{formatCount(part.value)}</span>
         </li>
       ))}
     </ul>
@@ -120,7 +122,11 @@ export function Meter({ hot, total, max = 24, label }: { hot: number; total: num
   )
 }
 
-/** Change against the previous week. Rank moves up when the number is positive. */
+/**
+ * Change against the previous week. Rank moves up when the number is positive.
+ * As in mdxcn graph-slope: up is primary ↑, down secondary ↓, no change a muted =,
+ * and new a primary badge. With `invert` (exploited CVEs), up is red.
+ */
 export function Delta({
   value,
   isNew,

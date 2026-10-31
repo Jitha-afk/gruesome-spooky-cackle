@@ -76,7 +76,7 @@ function CveGlyphs({ rows }: { rows: CveView[] }) {
         ))}
       </span>
       <span aria-hidden="true" className="num">
-        {hot}/{rows.length}
+        <span className={hot > 0 ? "is-hot" : undefined}>{hot}</span>/{rows.length}
       </span>
       <span className="sr-only">
         {plural(rows.length, "CVE")}, {hot} exploited.
