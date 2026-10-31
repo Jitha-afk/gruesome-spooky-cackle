@@ -947,7 +947,8 @@ figcaption,
   color: var(--muted-foreground);
   text-wrap: pretty;
 }
-/* A quiet byline under the lead. Every accent stop clears 4.5:1 on both themes. */
+/* A quiet byline under the lead. Every accent stop clears 4.5:1 on both themes, and the
+   underline (80% of the accent) clears 3:1. */
 .hero .intro {
   margin-top: 0.875rem;
   max-width: 60ch;
@@ -961,7 +962,7 @@ figcaption,
   white-space: nowrap;
   color: var(--graph-accent);
   text-decoration: underline 1px;
-  text-decoration-color: color-mix(in oklab, var(--graph-accent) 45%, transparent);
+  text-decoration-color: color-mix(in oklab, var(--graph-accent) 80%, transparent);
   text-underline-offset: 0.25em;
   transition: text-decoration-color 0.15s ease;
 }
@@ -974,14 +975,15 @@ html[data-accent-kind="gradient"] .intro-name {
   color: transparent;
   text-decoration: none;
   padding-bottom: 1px;
-  border-bottom: 1px solid color-mix(in oklab, var(--graph-accent-2) 45%, transparent);
+  border-bottom: 1px solid color-mix(in oklab, var(--graph-accent-2) 80%, transparent);
   transition: border-color 0.15s ease;
 }
 .hero .intro-name:hover {
   text-decoration-color: var(--graph-accent);
+  text-decoration-thickness: 2px;
 }
 html[data-accent-kind="gradient"] .hero .intro-name:hover {
-  border-bottom-color: var(--graph-accent-2);
+  border-bottom: 2px solid var(--graph-accent-2);
 }
 .hero-meta {
   display: flex;
