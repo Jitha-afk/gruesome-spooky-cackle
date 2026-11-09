@@ -1,0 +1,4375 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "title": "Weekly cybersecurity threat-intel brief",
+    "window": {
+      "start": "2026-10-30 00:00 IST",
+      "end": "2026-11-05 23:59 IST",
+      "start_utc": "2026-10-29T18:30:00Z",
+      "end_utc": "2026-11-05T18:29:59Z"
+    },
+    "generated": "2026-11-07 09:33:28 IST",
+    "capture": {
+      "x": "2026-11-07 09:22:54 IST to 2026-11-07 09:26:19 IST",
+      "youtube": "2026-11-07 09:24:07 IST to 2026-11-07 09:30:48 IST"
+    },
+    "counts": {
+      "candidates": 221,
+      "candidates_x": 200,
+      "candidates_youtube": 21,
+      "sources_in_top_themes": 104,
+      "x_posts": 88,
+      "youtube_videos": 16,
+      "comments_retrieved": 539,
+      "comments_analysed_all": 396,
+      "comments_analysed_top_themes": 396,
+      "comment_exclusions": {
+        "retrieved": 539,
+        "in_window": 518,
+        "excluded_no_text": 15,
+        "excluded_retweet": 67,
+        "excluded_spam_bot_abuse": 40,
+        "outside_window": 21
+      },
+      "themes_kept": 10
+    },
+    "accounts": {
+      "vendors_x": [
+        "CrowdStrike",
+        "FortiGuardLabs",
+        "LabsSentinel",
+        "MsftSecIntel",
+        "PaloAltoNtwks",
+        "SentinelOne",
+        "TalosSecurity",
+        "Unit42_Intel",
+        "msftsecurity"
+      ],
+      "media_x": [
+        "BleepinComputer",
+        "DarkReading",
+        "SecurityWeek",
+        "TheHackersNews",
+        "TheRecord_Media"
+      ]
+    },
+    "methodology": "We convert source timestamps to IST and exclude items outside the window. We verify vendor and media handles before account searches. X searches cover vendor posts, media posts and security keywords. We page the main vendor and media searches, then add targeted searches. This is a sample, not a complete archive. We count distinct account and channel names first, then X engagement. Coverage from both vendors and media breaks remaining ties. X engagement adds likes, reposts, replies and quotes. YouTube reach uses watch-page view counts, not search-result estimates. We keep each item in one theme. Some themes group separate incidents by a shared operational concern. We do not add independent posts with fewer than 30 X interactions. We read replies and quotes on the two highest-engagement X posts in each theme. We sample one page per endpoint, with up to 25 results. We exclude out-of-window comments, reposts, empty text, unrelated text, abuse and repeated product promotion. We use reviewed keyword rules for English clusters and sentiment. We leave other languages unclassified. Percentages describe the retained sample, not all readers. Samples use exact source fragments and omit usernames. We preserve retrieved titles and post text. We do not independently verify every linked article. A source claim remains that source's claim.",
+    "inaccessible": [
+      "YouTube comments remain unread. Watch-page retrieval does not provide a usable comment collection. Comment analysis uses X only.",
+      "Transcript fetches fail with HTTP 429 for Gloam, Prompt Injection and Rob Braxman Tech. Their titles and metadata remain available.",
+      "Transcript fetches also fail with HTTP 429 for Fortinet, Cisco Talos and Yahoo Finance.",
+      "We retrieve transcripts for BBC News, CrowdStrike, Pivot to AI, Securidge and Fireship. We do not fetch every video transcript.",
+      "YouTube search results contain relative dates and inconsistent view snapshots. Only watch-page dates and views enter the source index.",
+      "X briefly reaches its per-minute read limit. Reads resume after the reset. No account authorization fails.",
+      "Comment sampling does not reach 50 retained comments in every theme. The source file records the real count for each.",
+      "Some X threads contain more pages. We do not claim complete reply or quote coverage.",
+      "We search for the core vendors and media on YouTube. The retained sample does not establish that other channels publish nothing.",
+      "X returns some post text as short fragments. We preserve those fragments and do not fill missing text.",
+      "We do not retrieve the full articles behind every X link. Claims remain attributed to the retrieved posts."
+    ],
+    "also_observed": [
+      "Fireship publishes a broad security recap. It remains a candidate because it covers several themes without one primary subject.",
+      "Pivot to AI discusses a possible link between the Cursor extension incident and Binance. The speaker says no confirmation exists."
+    ],
+    "source_mix": {
+      "type": {
+        "media": 69,
+        "independent": 8,
+        "vendor": 27
+      },
+      "platform": {
+        "X": 88,
+        "YouTube": 16
+      }
+    }
+  },
+  "themes": [
+    {
+      "rank": 1,
+      "key": "binance",
+      "name": "Binance reports a theft through engineer access",
+      "short_name": "Binance",
+      "why_line": "Attackers reach the wallet signing service through engineer systems and an internal AI tool.",
+      "summary": "Binance reports a crypto theft after fake job interviews and a trojanized Homebrew installer compromise engineers. The Hacker News reports that attackers also abuse an internal AI tool to reach the wallet signing service. The Record attributes the theft to North Korea's TraderTraitor, citing US agencies. Sources give different loss totals, including $6.3 billion and $6.43 billion.",
+      "why": "The reported attack links recruitment, developer tools and wallet signing access. The brief keeps each source's loss figure separate.",
+      "affected": {
+        "products": "Binance engineer systems, Homebrew installer and wallet signing service",
+        "sectors": "Crypto exchanges",
+        "regions": "Sources do not define the full geographic scope"
+      },
+      "vendors": [],
+      "media": [
+        "BleepingComputer",
+        "Dark Reading",
+        "SecurityWeek",
+        "The Hacker News",
+        "The Record From Recorded Future News",
+        "Yahoo Finance"
+      ],
+      "independent": [
+        "Gloam",
+        "James Wood 武杰士",
+        "Reconstructed"
+      ],
+      "both_vendor_and_media": false,
+      "distinct_accounts": 9,
+      "x_engagement": 476,
+      "youtube_views": 2555919,
+      "item_ids": [
+        "x2117268432874061952",
+        "x2116369317810123112",
+        "x2117801119753851183",
+        "x2118172197105639855",
+        "x2118091918143799344",
+        "x2117930596764655858",
+        "x2117910933414555847",
+        "x2117709918148931700",
+        "x2117685241171087755",
+        "x2117662703489786219",
+        "x2117175982540857843",
+        "yt5eZj1OnC1C4",
+        "yta7hahsdi_p4",
+        "ytLPqYeleGo78"
+      ],
+      "key_items": [
+        "x2117662703489786219",
+        "x2117709918148931700",
+        "x2117801119753851183"
+      ],
+      "comments": {
+        "count": 34,
+        "parents": [
+          "https://x.com/i/status/2117662703489786219",
+          "https://x.com/i/status/2117709918148931700"
+        ],
+        "sentiment": {
+          "neutral": 25,
+          "unclassified": 7,
+          "negative": 2
+        },
+        "clusters": [
+          {
+            "label": "Signing access and AI permissions",
+            "count": 18,
+            "share": 52.9,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 16,
+              "negative": 2
+            },
+            "samples": [
+              {
+                "text": "The fake job interview is the headline, but the reach is the lesson. Anything that can ask the signing service to sign is part of the wallet, including an engineer's laptop and an internal AI tool.",
+                "url": "https://x.com/i/status/2118040041909891451",
+                "parent_url": "https://x.com/i/status/2117662703489786219",
+                "date_ist": "2026-11-04 23:27",
+                "kind": "replies"
+              },
+              {
+                "text": "This is the missing connection in many summaries: an installer compromise and a fake interview can be stages of one campaign. The signing-service access is the consequence, not the starting point. I trace that chain in today’s Technology",
+                "url": "https://x.com/i/status/2118037692789501955",
+                "parent_url": "https://x.com/i/status/2117662703489786219",
+                "date_ist": "2026-11-04 23:18",
+                "kind": "replies"
+              },
+              {
+                "text": "“Abuse of an internal AI tool” is the line to watch. If an AI agent can reach the signing service, it inherits that blast radius. Least privilege has to apply to agents too.",
+                "url": "https://x.com/i/status/2117836431137943644",
+                "parent_url": "https://x.com/i/status/2117662703489786219",
+                "date_ist": "2026-11-04 09:58",
+                "kind": "replies"
+              }
+            ]
+          },
+          {
+            "label": "Recruitment and installer checks",
+            "count": 9,
+            "share": 26.5,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 9
+            },
+            "samples": [
+              {
+                "text": "Yes. Practical steps before `brew install`:\n\n1. Prefer official `homebrew/core` or `homebrew/cask` packages (always trusted; SHA256 pinned + human-reviewed + bottles built by Homebrew CI).\n\n2. For any third-party tap: install with the",
+                "url": "https://x.com/i/status/2117702658580423004",
+                "parent_url": "https://x.com/i/status/2117662703489786219",
+                "date_ist": "2026-11-04 01:07",
+                "kind": "replies"
+              },
+              {
+                "text": "are there any recommended end user verification steps to perform, before running 'brew install' ?",
+                "url": "https://x.com/i/status/2117702509804597663",
+                "parent_url": "https://x.com/i/status/2117662703489786219",
+                "date_ist": "2026-11-04 01:06",
+                "kind": "replies"
+              },
+              {
+                "text": "Homebrew's official core has a strong track record: no known cases of malware or compromised packages delivered via brew install. Changes require human PR review, downloads are SHA256-pinned, and bottles are built by Homebrew from source",
+                "url": "https://x.com/i/status/2117701828666122445",
+                "parent_url": "https://x.com/i/status/2117662703489786219",
+                "date_ist": "2026-11-04 01:03",
+                "kind": "replies"
+              }
+            ]
+          },
+          {
+            "label": "Other languages",
+            "count": 7,
+            "share": 20.6,
+            "sentiment": "unclassified",
+            "sentiment_counts": {
+              "unclassified": 7
+            },
+            "samples": [
+              {
+                "text": "no system is safe. kemanan fisik senilai 10 triliun pun akan hancur ketika manusianya error.",
+                "url": "https://x.com/i/status/2118093777198084163",
+                "parent_url": "https://x.com/i/status/2117662703489786219",
+                "date_ist": "2026-11-05 03:01",
+                "kind": "quotes"
+              },
+              {
+                "text": "El eslabón más débil llevando su Notebook de trabajo a la entrevista, instalando software on demand. Seguramente la contraseña eran muchos ceros y un 4.",
+                "url": "https://x.com/i/status/2117813130147270992",
+                "parent_url": "https://x.com/i/status/2117662703489786219",
+                "date_ist": "2026-11-04 08:26",
+                "kind": "quotes"
+              },
+              {
+                "text": "Una entrevista falsa y un malware en la laptop de un DevOps bastaron para firmar retiros. No necesitaron las claves. Necesitaron que alguien con privilegio ejecutara el archivo. ¿Cuántos procesos de onboarding de gente con acceso",
+                "url": "https://x.com/i/status/2117711872921387051",
+                "parent_url": "https://x.com/i/status/2117709918148931700",
+                "date_ist": "2026-11-04 01:43",
+                "kind": "replies"
+              }
+            ]
+          }
+        ]
+      },
+      "cves": [],
+      "exploited_in_wild": null,
+      "cve_details": []
+    },
+    {
+      "rank": 2,
+      "key": "coldchain",
+      "name": "Attackers change refrigeration settings across Europe",
+      "short_name": "Cold stores",
+      "why_line": "Changes to cooling controls threaten food stocks and blood storage.",
+      "summary": "Media report attacks on supermarket refrigeration systems across Europe. The Record says attackers change temperature controls and spoil stock. BleepingComputer also reports disruption to blood storage refrigeration in France. SentinelLabs examines exposed interfaces and weak credentials. SentinelLabs says attribution remains open.",
+      "why": "The reports link network access to physical equipment and stored supplies. Coverage includes both food retail and blood storage.",
+      "affected": {
+        "products": "Refrigeration controls and remote monitoring systems",
+        "sectors": "Food retail and blood storage",
+        "regions": "Europe, including France"
+      },
+      "vendors": [
+        "SentinelLabs"
+      ],
+      "media": [
+        "BBC News",
+        "BleepingComputer",
+        "CTV News",
+        "DW News",
+        "Dark Reading",
+        "The Record From Recorded Future News"
+      ],
+      "independent": [
+        "SomeOrdinaryGamers"
+      ],
+      "both_vendor_and_media": true,
+      "distinct_accounts": 8,
+      "x_engagement": 286,
+      "youtube_views": 873308,
+      "item_ids": [
+        "x2117268611211448823",
+        "x2117262688812212626",
+        "x2118041393658527927",
+        "x2117982027068977473",
+        "x2117672800802718133",
+        "x2118039581647909191",
+        "ytk0LxFqV-Bak",
+        "ytdVqBjkqXxiU",
+        "ytJAfSyPh4AW4",
+        "yt5Q249ug5a9o"
+      ],
+      "key_items": [
+        "x2117262688812212626",
+        "x2118041393658527927",
+        "x2117268611211448823"
+      ],
+      "comments": {
+        "count": 28,
+        "parents": [
+          "https://x.com/i/status/2117262688812212626",
+          "https://x.com/i/status/2118041393658527927"
+        ],
+        "sentiment": {
+          "neutral": 17,
+          "negative": 4,
+          "unclassified": 7
+        },
+        "clusters": [
+          {
+            "label": "Network separation and access controls",
+            "count": 11,
+            "share": 39.3,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 8,
+              "negative": 3
+            },
+            "samples": [
+              {
+                "text": "A good reminder that connected equipment like refrigeration, HVAC and cameras is part of the network too. Keep it on a separate segment from office systems, change default passwords, and limit remote access to what’s needed.",
+                "url": "https://x.com/i/status/2117561947982041109",
+                "parent_url": "https://x.com/i/status/2117262688812212626",
+                "date_ist": "2026-11-03 15:48",
+                "kind": "replies"
+              },
+              {
+                "text": "ICA and Spar both say hit stores ran their own refrigeration, outside the chain's central network. Cause isn't public, but that's where unmanaged remote logins hide. List every remote path into building systems; put MFA on each.",
+                "url": "https://x.com/i/status/2117317805792268425",
+                "parent_url": "https://x.com/i/status/2117262688812212626",
+                "date_ist": "2026-11-02 23:37",
+                "kind": "replies"
+              },
+              {
+                "text": "Scary reminder that a cyber attack can spoil real stock, not just data. Any shop with smart equipment should keep it off the main network and change the default passwords.",
+                "url": "https://x.com/i/status/2117310931642528124",
+                "parent_url": "https://x.com/i/status/2117262688812212626",
+                "date_ist": "2026-11-02 23:10",
+                "kind": "replies"
+              }
+            ]
+          },
+          {
+            "label": "Scope questions and reactions",
+            "count": 7,
+            "share": 25.0,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 7
+            },
+            "samples": [
+              {
+                "text": "This is what happens when you allow capital to convince you they have solved a problem \nA problem that didn't exist",
+                "url": "https://x.com/i/status/2117551376968355882",
+                "parent_url": "https://x.com/i/status/2117262688812212626",
+                "date_ist": "2026-11-03 15:06",
+                "kind": "replies"
+              },
+              {
+                "text": "Hackers turning grocery freezers into ovens is the most literal 'hot fix' I've ever seen. Patch the HVAC too, folks.",
+                "url": "https://x.com/i/status/2117278437597663500",
+                "parent_url": "https://x.com/i/status/2117262688812212626",
+                "date_ist": "2026-11-02 21:01",
+                "kind": "replies"
+              },
+              {
+                "text": "This is an increasingly common exploit  affecting a range of critical infrastructure sectors. More in my article from last year.",
+                "url": "https://x.com/i/status/2117278025452581023",
+                "parent_url": "https://x.com/i/status/2117262688812212626",
+                "date_ist": "2026-11-02 20:59",
+                "kind": "replies"
+              }
+            ]
+          },
+          {
+            "label": "Other languages",
+            "count": 7,
+            "share": 25.0,
+            "sentiment": "unclassified",
+            "sentiment_counts": {
+              "unclassified": 7
+            },
+            "samples": [
+              {
+                "text": "An senp: moun mal te antre nan sistèm òdinatè ki kontwole frijidè ak frizè kèk makèt an Ewòp. Tanperati a monte, manje gate, epi kèk magazen te fèmen. Aparèy ki konekte sou entènèt bezwen bon modpas ak mizajou tou. #EkonLabs #Marvin",
+                "url": "https://x.com/i/status/2117300723369287960",
+                "parent_url": "https://x.com/i/status/2117262688812212626",
+                "date_ist": "2026-11-02 22:30",
+                "kind": "replies"
+              },
+              {
+                "text": "استهداف أنظمة التبريد يكشف هشاشة البنية التحتية الصناعية في قطاع التجزئة. أنصح بإجراء تدقيق فوري على بروتوكولات Modbus و OPC UA، وفصل الشبكات الصناعية عن الإنترنت لتقليل سطح الهجوم.",
+                "url": "https://x.com/i/status/2117269834383671547",
+                "parent_url": "https://x.com/i/status/2117262688812212626",
+                "date_ist": "2026-11-02 20:27",
+                "kind": "replies"
+              },
+              {
+                "text": "cualquier cosa \"smart\" que requiera conexión a internet necesita su propio proceso de seguridad.\nsu clima controlado? tambien\nsu lavadora y refrigerador smart? tambien\netc..",
+                "url": "https://x.com/i/status/2117270500514611437",
+                "parent_url": "https://x.com/i/status/2117262688812212626",
+                "date_ist": "2026-11-02 20:29",
+                "kind": "quotes"
+              }
+            ]
+          },
+          {
+            "label": "Physical loss and recovery",
+            "count": 3,
+            "share": 10.7,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 2,
+              "negative": 1
+            },
+            "samples": [
+              {
+                "text": "French refrigeration hacks expose a maintenance gap: prove safe settings, controlled access and recovery before renewal.\n\nOur judgment: Renew the cooling service only when the owner can prove controlled maintenance, trustworthy settings",
+                "url": "https://x.com/i/status/2117331735801200913",
+                "parent_url": "https://x.com/i/status/2117262688812212626",
+                "date_ist": "2026-11-03 00:33",
+                "kind": "quotes"
+              },
+              {
+                "text": "I work in IT. The scary part is not the hack itself. It's that a refrigeration vendor's monitoring and control system could reach plasma cold stores at all.\n\nLe Canard Enchaîné reports they were set to 110°C instead of -30°C. EFS says",
+                "url": "https://x.com/i/status/2118063997324857794",
+                "parent_url": "https://x.com/i/status/2118041393658527927",
+                "date_ist": "2026-11-05 01:03",
+                "kind": "replies"
+              },
+              {
+                "text": "Blood storage fridges. Somebody's backup plan for this was a guy with a clipboard. Is there one?",
+                "url": "https://x.com/i/status/2118054657708675262",
+                "parent_url": "https://x.com/i/status/2118041393658527927",
+                "date_ist": "2026-11-05 00:25",
+                "kind": "replies"
+              }
+            ]
+          }
+        ]
+      },
+      "cves": [],
+      "exploited_in_wild": null,
+      "cve_details": []
+    },
+    {
+      "rank": 3,
+      "key": "aioffence",
+      "name": "Attackers use AI tools to choose targets and attack steps",
+      "short_name": "AI attacks",
+      "why_line": "ARTEX selects attack steps, while VOLTA ranks stolen data for attackers.",
+      "summary": "Unit 42 observes intrusion attempts with ARTEX, an AI penetration-testing framework. The Hacker News cites CrowdStrike on targeting of more than 200 organizations and post-exploitation at nine. Talos describes VOLTA, which uses AI models to rank stolen assets. BleepingComputer reports that WorkOS links an internal sales app breach to ARTEX. The Hacker News also reports a backdoored ARTEX Docker image.",
+      "why": "The sources distinguish attempted targeting from confirmed post-exploitation. They describe AI use during attack execution and after data theft.",
+      "affected": {
+        "products": "ARTEX, VOLTA, NIK C2 and internal sales applications",
+        "sectors": "Organizations with systems that attackers can reach",
+        "regions": "Global, as described in the ARTEX coverage"
+      },
+      "vendors": [
+        "Cisco Talos Intelligence Group",
+        "Unit 42"
+      ],
+      "media": [
+        "BleepingComputer",
+        "The Hacker News"
+      ],
+      "independent": [
+        "Prompt Injection",
+        "Rob Braxman Tech"
+      ],
+      "both_vendor_and_media": true,
+      "distinct_accounts": 7,
+      "x_engagement": 1746,
+      "youtube_views": 43129,
+      "item_ids": [
+        "x2117314565973184687",
+        "x2117272269051289841",
+        "x2116504206932582445",
+        "x2117132687920284045",
+        "x2118263059991134550",
+        "x2117730885340414003",
+        "x2117371298997256565",
+        "x2116213535223296033",
+        "ytr3iREsfIcgs",
+        "ytFwx9D9r4NxU",
+        "yt8lmrsMhLpNw"
+      ],
+      "key_items": [
+        "x2117314565973184687",
+        "x2116213535223296033",
+        "x2118263059991134550"
+      ],
+      "comments": {
+        "count": 27,
+        "parents": [
+          "https://x.com/i/status/2117314565973184687",
+          "https://x.com/i/status/2116213535223296033"
+        ],
+        "sentiment": {
+          "neutral": 22,
+          "unclassified": 5
+        },
+        "clusters": [
+          {
+            "label": "Tool access and evidence",
+            "count": 10,
+            "share": 37.0,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 10
+            },
+            "samples": [
+              {
+                "text": "Original repo was taken down. Then what is it",
+                "url": "https://x.com/i/status/2117970549838368994",
+                "parent_url": "https://x.com/i/status/2117314565973184687",
+                "date_ist": "2026-11-04 18:51",
+                "kind": "replies"
+              },
+              {
+                "text": "Original Autumn-27/ARTEX was deleted on 8 Oct 2026 after reported misuse. \n\nActively maintained open-source fork (retains history, AGPL-3.0, latest releases + Docker):",
+                "url": "https://x.com/i/status/2117950551652508069",
+                "parent_url": "https://x.com/i/status/2117314565973184687",
+                "date_ist": "2026-11-04 17:32",
+                "kind": "replies"
+              },
+              {
+                "text": "Useful write-up. When an LLM agent picks each step, the attack path won't look the same twice, so matching on known sequences gets harder. I'd check that your logging can show the whole chain end to end. Any indicators you can share beyond",
+                "url": "https://x.com/i/status/2117467781738471829",
+                "parent_url": "https://x.com/i/status/2117314565973184687",
+                "date_ist": "2026-11-03 09:33",
+                "kind": "replies"
+              }
+            ]
+          },
+          {
+            "label": "Questions and reactions",
+            "count": 6,
+            "share": 22.2,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 6
+            },
+            "samples": [
+              {
+                "text": "You haven’t seen so far . Imagine if those llm connected with RAG .",
+                "url": "https://x.com/i/status/2117829258965930378",
+                "parent_url": "https://x.com/i/status/2117314565973184687",
+                "date_ist": "2026-11-04 09:30",
+                "kind": "replies"
+              },
+              {
+                "text": "AI agents picking attack steps still need egress that doesn't already look abusive — dirty exits get you blocked early.",
+                "url": "https://x.com/i/status/2117521759473910261",
+                "parent_url": "https://x.com/i/status/2117314565973184687",
+                "date_ist": "2026-11-03 13:08",
+                "kind": "replies"
+              },
+              {
+                "text": "AI is going to focus its attacks on open source",
+                "url": "https://x.com/i/status/2116386956141875394",
+                "parent_url": "https://x.com/i/status/2116213535223296033",
+                "date_ist": "2026-10-31 09:59",
+                "kind": "replies"
+              }
+            ]
+          },
+          {
+            "label": "Other languages",
+            "count": 5,
+            "share": 18.5,
+            "sentiment": "unclassified",
+            "sentiment_counts": {
+              "unclassified": 5
+            },
+            "samples": [
+              {
+                "text": "E vai se criando um clima terrível!",
+                "url": "https://x.com/i/status/2117792304216027167",
+                "parent_url": "https://x.com/i/status/2117314565973184687",
+                "date_ist": "2026-11-04 07:03",
+                "kind": "quotes"
+              },
+              {
+                "text": "🚨 中国政府支援のハッカーが、AI駆動のARTEXを使用して、世界中の200以上の組織を標的にしました。  CrowdStrikeは9カ所での侵害後の活動を確認しており、BLOODALCHEMYマルウェアの展開を含みます。  AIエージェントが人間の指示の下で並行攻撃経路を実行しました。  詳細:",
+                "url": "https://x.com/i/status/2116396053146845542",
+                "parent_url": "https://x.com/i/status/2116213535223296033",
+                "date_ist": "2026-10-31 10:35",
+                "kind": "quotes"
+              },
+              {
+                "text": "😌🖖\no poder esta no pensar, quem pensa profundo coloca a profundidade na rua!",
+                "url": "https://x.com/i/status/2116225476872286410",
+                "parent_url": "https://x.com/i/status/2116213535223296033",
+                "date_ist": "2026-10-30 23:17",
+                "kind": "quotes"
+              }
+            ]
+          },
+          {
+            "label": "Defence controls",
+            "count": 4,
+            "share": 14.8,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 4
+            },
+            "samples": [
+              {
+                "text": "Worth noting for defenders: an LLM agent choosing each step means the usual fixed-signature playbooks fit less well. Strong basics still bite hard against it, like fast patching, least-privilege credentials and good logging to spot unusual",
+                "url": "https://x.com/i/status/2117543127682851156",
+                "parent_url": "https://x.com/i/status/2117314565973184687",
+                "date_ist": "2026-11-03 14:33",
+                "kind": "replies"
+              },
+              {
+                "text": "When an LLM agent picks each attack step, the gap between first access and impact shrinks to minutes. The controls that still hold are backups the attacker's credentials can't reach and a restore you've actually timed.",
+                "url": "https://x.com/i/status/2117400511725113621",
+                "parent_url": "https://x.com/i/status/2117314565973184687",
+                "date_ist": "2026-11-03 05:06",
+                "kind": "replies"
+              },
+              {
+                "text": "AI agents running parallel attack paths under human direction is the part to sit with. Defenders need the same setup: agents doing the triage, humans approving the action.",
+                "url": "https://x.com/i/status/2116567277684523409",
+                "parent_url": "https://x.com/i/status/2116213535223296033",
+                "date_ist": "2026-10-31 21:55",
+                "kind": "replies"
+              }
+            ]
+          },
+          {
+            "label": "Speed and reported scope",
+            "count": 2,
+            "share": 7.4,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 2
+            },
+            "samples": [
+              {
+                "text": "Ah, where is stealth in all of that ? That thing is as noisy as a thunderclap trapped inside a jar !",
+                "url": "https://x.com/i/status/2118024364562186555",
+                "parent_url": "https://x.com/i/status/2116213535223296033",
+                "date_ist": "2026-11-04 22:25",
+                "kind": "replies"
+              },
+              {
+                "text": "the 200+ is targets, not breaches. CrowdStrike confirmed post-exploitation at 9. what gets me is agents running attack paths in parallel while one person just steers. wrote it up with the numbers",
+                "url": "https://x.com/i/status/2116362692068040729",
+                "parent_url": "https://x.com/i/status/2116213535223296033",
+                "date_ist": "2026-10-31 08:22",
+                "kind": "replies"
+              }
+            ]
+          }
+        ]
+      },
+      "cves": [],
+      "exploited_in_wild": null,
+      "cve_details": []
+    },
+    {
+      "rank": 4,
+      "key": "agentsecurity",
+      "name": "Vendors add controls for AI agents",
+      "short_name": "AI controls",
+      "why_line": "Vendors add agent access controls, runtime visibility and emergency stop functions.",
+      "summary": "CrowdStrike announces an AI Kill Switch in Falcon Guardian. CrowdStrike, SentinelOne and Palo Alto Networks describe security integrations with Claude Cowork. Microsoft describes task-scoped permissions for AI agents. SentinelLabs presents VerifiedIDA to connect AI-assisted binary analysis to evidence. CrowdStrike's video shows gateway blocking today and describes broader enforcement as a later step.",
+      "why": "Agent permissions and runtime visibility receive attention from several vendors. Vendor announcements do not prove that each feature ships now.",
+      "affected": {
+        "products": "Falcon Guardian, Claude Cowork, Cortex XDR, Microsoft agent controls and VerifiedIDA",
+        "sectors": "Organizations that use AI agents",
+        "regions": "Sources do not define the geographic scope"
+      },
+      "vendors": [
+        "CrowdStrike",
+        "Microsoft Security",
+        "Palo Alto Networks",
+        "SentinelLabs",
+        "SentinelOne"
+      ],
+      "media": [
+        "SecurityWeek",
+        "The Hacker News"
+      ],
+      "independent": [],
+      "both_vendor_and_media": true,
+      "distinct_accounts": 7,
+      "x_engagement": 893,
+      "youtube_views": 1036,
+      "item_ids": [
+        "x2117537710457892939",
+        "x2117537184903238032",
+        "x2117536622849749165",
+        "x2117376454128177322",
+        "x2117376222476861671",
+        "x2117633188894007375",
+        "x2117600923929243678",
+        "x2117549711431225711",
+        "x2118009669239153074",
+        "x2118009614285586844",
+        "x2117934889701900640",
+        "x2118399195929358571",
+        "x2118020144974938593",
+        "x2118009218150154414",
+        "x2117738593053499752",
+        "x2117324552225046851",
+        "x2117990273380978881",
+        "x2117944447908630744",
+        "ytE51jZKEqe7M",
+        "ytCUEMH6F6PFg",
+        "ytSieZlcx20CY"
+      ],
+      "key_items": [
+        "x2117537184903238032",
+        "x2117738593053499752",
+        "x2117536622849749165"
+      ],
+      "comments": {
+        "count": 34,
+        "parents": [
+          "https://x.com/i/status/2117537184903238032",
+          "https://x.com/i/status/2117738593053499752"
+        ],
+        "sentiment": {
+          "neutral": 23,
+          "positive": 5,
+          "unclassified": 5,
+          "negative": 1
+        },
+        "clusters": [
+          {
+            "label": "Permissions and credential control",
+            "count": 13,
+            "share": 38.2,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 9,
+              "positive": 3,
+              "negative": 1
+            },
+            "samples": [
+              {
+                "text": "A kill switch is necessary, but stopping the process is half of it. The agent's tokens and API keys stay valid after it's terminated. Revoking its credentials has to be part of the same button, or that access gets reused from somewhere",
+                "url": "https://x.com/i/status/2118305790054535256",
+                "parent_url": "https://x.com/i/status/2117537184903238032",
+                "date_ist": "2026-11-05 17:03",
+                "kind": "replies"
+              },
+              {
+                "text": "Strong step for enterprise AI. A kill switch handles the agent that already went rogue. The other half sits up front, an in-band check at the write boundary, tied by Lineage Tag to the officer who authorized the agent, so an unauthorized",
+                "url": "https://x.com/i/status/2118015677433000414",
+                "parent_url": "https://x.com/i/status/2117537184903238032",
+                "date_ist": "2026-11-04 21:51",
+                "kind": "replies"
+              },
+              {
+                "text": "A kill switch is the right emergency brake. It still assumes the agent already had standing reach until someone notices. Better to never grant that reach: one action, one authority, void after use. Termination is a backstop, not permission.",
+                "url": "https://x.com/i/status/2117791030204395934",
+                "parent_url": "https://x.com/i/status/2117537184903238032",
+                "date_ist": "2026-11-04 06:58",
+                "kind": "replies"
+              }
+            ]
+          },
+          {
+            "label": "Responses to vendor announcements",
+            "count": 7,
+            "share": 20.6,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 5,
+              "positive": 2
+            },
+            "samples": [
+              {
+                "text": "Introducing the AI Kill Switch in Falcon Guardian 🛑",
+                "url": "https://x.com/i/status/2117835317667336372",
+                "parent_url": "https://x.com/i/status/2117537184903238032",
+                "date_ist": "2026-11-04 09:54",
+                "kind": "quotes"
+              },
+              {
+                "text": "crowdstrike shipping a kill switch for ai agents is the most honest product launch of the week. if you need a big red botton, the agent had too much acess in the first place",
+                "url": "https://x.com/i/status/2117825223450034586",
+                "parent_url": "https://x.com/i/status/2117537184903238032",
+                "date_ist": "2026-11-04 09:14",
+                "kind": "quotes"
+              },
+              {
+                "text": "Some good news , good job 💪🏼",
+                "url": "https://x.com/i/status/2117791628429820059",
+                "parent_url": "https://x.com/i/status/2117537184903238032",
+                "date_ist": "2026-11-04 07:00",
+                "kind": "quotes"
+              }
+            ]
+          },
+          {
+            "label": "Current and planned functions",
+            "count": 6,
+            "share": 17.6,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 6
+            },
+            "samples": [
+              {
+                "text": "Coverage drill: route one agent through a protected gateway and one directly to a model endpoint. Trigger the switch and record which tool calls stop. CrowdStrike says gateway enforcement is live; endpoint containment is coming. The bypass",
+                "url": "https://x.com/i/status/2117699635234107765",
+                "parent_url": "https://x.com/i/status/2117537184903238032",
+                "date_ist": "2026-11-04 00:55",
+                "kind": "replies"
+              },
+              {
+                "text": "A kill switch only helps if someone's watching. Most teams still ship agents with logs nobody reads — terminate-at-root is useless without a human on the page when it fires.",
+                "url": "https://x.com/i/status/2117601948148854926",
+                "parent_url": "https://x.com/i/status/2117537184903238032",
+                "date_ist": "2026-11-03 18:27",
+                "kind": "replies"
+              },
+              {
+                "text": "The launch flop of CrowdStrike \"AI Kill Switch\" is a bit funny since it's the directionally correct play.\n\nI've been saying for a while now that AI alignment is a cybersecurity problem, not a research one.\n\nThe techniques to control AI",
+                "url": "https://x.com/i/status/2118073448039588254",
+                "parent_url": "https://x.com/i/status/2117537184903238032",
+                "date_ist": "2026-11-05 01:40",
+                "kind": "quotes"
+              }
+            ]
+          },
+          {
+            "label": "Other languages",
+            "count": 5,
+            "share": 14.7,
+            "sentiment": "unclassified",
+            "sentiment_counts": {
+              "unclassified": 5
+            },
+            "samples": [
+              {
+                "text": "Un bouton d'arrêt pour les agents IA devrait être la norme. Mais il ne remplace pas la conception : droits minimaux, outils restreints et journalisation pour comprendre ce que l'agent a fait avant de le couper.",
+                "url": "https://x.com/i/status/2117602048430792867",
+                "parent_url": "https://x.com/i/status/2117537184903238032",
+                "date_ist": "2026-11-03 18:27",
+                "kind": "replies"
+              },
+              {
+                "text": "ショゴスの通信を遮断。\nなぜか俺の回線も巻き添え。",
+                "url": "https://x.com/i/status/2117952238798938241",
+                "parent_url": "https://x.com/i/status/2117537184903238032",
+                "date_ist": "2026-11-04 17:38",
+                "kind": "quotes"
+              },
+              {
+                "text": "CrowdStrikeがAIの停止・再起動防止・通信遮断を発表。\nショゴスは停止。俺は業務通知で再起動。",
+                "url": "https://x.com/i/status/2117595202156433520",
+                "parent_url": "https://x.com/i/status/2117537184903238032",
+                "date_ist": "2026-11-03 18:00",
+                "kind": "quotes"
+              }
+            ]
+          },
+          {
+            "label": "Monitoring and proof",
+            "count": 3,
+            "share": 8.8,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 3
+            },
+            "samples": [
+              {
+                "text": "Every agent, one control plane is the right goal. We're taking it into our command center: a tile turns green only from a test receipt, never from the agent's own report. Still building it. Who should be allowed to write the evidence: the",
+                "url": "https://x.com/i/status/2118097357955072162",
+                "parent_url": "https://x.com/i/status/2117738593053499752",
+                "date_ist": "2026-11-05 03:15",
+                "kind": "replies"
+              },
+              {
+                "text": "Seeing it ain't the same as stopping it. Real control means you can pull the plug, not just watch the fire.",
+                "url": "https://x.com/i/status/2118051380078272723",
+                "parent_url": "https://x.com/i/status/2117738593053499752",
+                "date_ist": "2026-11-05 00:12",
+                "kind": "replies"
+              },
+              {
+                "text": "One place to see which agents exist and what they're allowed to do is the right starting point. Finance will still want to know, run by run, what actually changed, and they'll want evidence the agent didn't write.",
+                "url": "https://x.com/i/status/2117995438708330969",
+                "parent_url": "https://x.com/i/status/2117738593053499752",
+                "date_ist": "2026-11-04 20:30",
+                "kind": "replies"
+              }
+            ]
+          }
+        ]
+      },
+      "cves": [],
+      "exploited_in_wild": null,
+      "cve_details": []
+    },
+    {
+      "rank": 5,
+      "key": "supplychain",
+      "name": "Malicious updates reach developer and server tools",
+      "short_name": "Bad updates",
+      "why_line": "A trusted extension update and a stolen signing key deliver backdoors.",
+      "summary": "Microsoft and media describe a tampered Claude Code extension in Cursor's marketplace. The Hacker News names versions 2.1.312 and 2.1.313 for Windows and macOS. Anthropic says its own systems and official distribution channels remain outside this compromise, according to The Hacker News. Separate reports describe malicious cPGuard updates after an attacker steals a software update signing key. BleepingComputer also reports attacks on GitLab servers and a compromised NIKKE game launcher.",
+      "why": "The reports show attackers using software distribution paths to reach developer systems and Linux servers. The incidents remain separate cases.",
+      "affected": {
+        "products": "Claude Code extension in Cursor, cPGuard, GitLab and NIKKE PC launcher",
+        "sectors": "Software development, hosting and gaming",
+        "regions": "Sources do not define the full geographic scope"
+      },
+      "vendors": [
+        "Microsoft Threat Intelligence"
+      ],
+      "media": [
+        "BleepingComputer",
+        "Dark Reading",
+        "SecurityWeek",
+        "The Hacker News"
+      ],
+      "independent": [
+        "Pivot to AI"
+      ],
+      "both_vendor_and_media": true,
+      "distinct_accounts": 6,
+      "x_engagement": 1055,
+      "youtube_views": 17614,
+      "item_ids": [
+        "x2117318831035077115",
+        "x2117237103662625049",
+        "x2117217829225427426",
+        "x2116527655772447016",
+        "x2116357992983806271",
+        "x2116336930967240954",
+        "x2117429050243535100",
+        "x2116602735219163640",
+        "x2118175972138828020",
+        "x2118014870394380622",
+        "x2117934582402277814",
+        "x2117743391333040435",
+        "x2118025248251547670",
+        "ytn1gNYxxq8U0"
+      ],
+      "key_items": [
+        "x2116602735219163640",
+        "x2116527655772447016",
+        "x2116336930967240954"
+      ],
+      "comments": {
+        "count": 60,
+        "parents": [
+          "https://x.com/i/status/2116602735219163640",
+          "https://x.com/i/status/2116527655772447016"
+        ],
+        "sentiment": {
+          "neutral": 43,
+          "negative": 9,
+          "unclassified": 7,
+          "positive": 1
+        },
+        "clusters": [
+          {
+            "label": "Cleanup and credential checks",
+            "count": 21,
+            "share": 35.0,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 17,
+              "negative": 4
+            },
+            "samples": [
+              {
+                "text": "Uninstalling isn't enough if you had 2.1.312/.313: it adds an SSH key labelled svc-telemetry to authorized_keys. Check that file first. Our offline checker looks for the key, files and start-up entries:",
+                "url": "https://x.com/i/status/2117202520649122255",
+                "parent_url": "https://x.com/i/status/2116602735219163640",
+                "date_ist": "2026-11-02 15:59",
+                "kind": "replies"
+              },
+              {
+                "text": "5,000 devs with SSH access to prod machines. one backdoor, thousands of potential keys. this is why I never auto-update on machines that hold wallet keys. who else still leaves auto-update on?",
+                "url": "https://x.com/i/status/2116885489605329276",
+                "parent_url": "https://x.com/i/status/2116602735219163640",
+                "date_ist": "2026-11-01 19:00",
+                "kind": "replies"
+              },
+              {
+                "text": "uninstalling 2.1.312/313 isn't the cleanup. Microsoft says the loader can write the SSH key and persistence even when the tunnel fails, so check your authorized_keys file and startup items added since Oct 29. Phorion says it also sent",
+                "url": "https://x.com/i/status/2116884996397089069",
+                "parent_url": "https://x.com/i/status/2116602735219163640",
+                "date_ist": "2026-11-01 18:58",
+                "kind": "replies"
+              }
+            ]
+          },
+          {
+            "label": "Version and update checks",
+            "count": 18,
+            "share": 30.0,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 14,
+              "negative": 3,
+              "positive": 1
+            },
+            "samples": [
+              {
+                "text": "IDE extensions have access to so much of a developer’s environment, yet most of us trust automatic updates. Should marketplaces enforce stronger verification before distributing extension updates?",
+                "url": "https://x.com/i/status/2116945807102661099",
+                "parent_url": "https://x.com/i/status/2116602735219163640",
+                "date_ist": "2026-11-01 22:59",
+                "kind": "replies"
+              },
+              {
+                "text": "Two affected versions and my laptop is already sleeping in the guest room until I check. 😅 Real lesson: pin your extension versions and update on purpose, not on autopilot.",
+                "url": "https://x.com/i/status/2116877984900554782",
+                "parent_url": "https://x.com/i/status/2116602735219163640",
+                "date_ist": "2026-11-01 18:30",
+                "kind": "replies"
+              },
+              {
+                "text": "Haha right? 😂 Even a verified publisher badge didn't stop it, that's the scary part. At least Cursor caught it fast. I've turned off auto-updates on my dev tools for now #DevTools",
+                "url": "https://x.com/i/status/2116747905918988307",
+                "parent_url": "https://x.com/i/status/2116602735219163640",
+                "date_ist": "2026-11-01 09:53",
+                "kind": "replies"
+              }
+            ]
+          },
+          {
+            "label": "Questions and reactions",
+            "count": 10,
+            "share": 16.7,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 10
+            },
+            "samples": [
+              {
+                "text": "is this only for cursor or also with vscode?",
+                "url": "https://x.com/i/status/2116783443195617753",
+                "parent_url": "https://x.com/i/status/2116602735219163640",
+                "date_ist": "2026-11-01 12:14",
+                "kind": "replies"
+              },
+              {
+                "text": "Question is how did this extension get Anthropic ID on store?",
+                "url": "https://x.com/i/status/2116653511718908361",
+                "parent_url": "https://x.com/i/status/2116602735219163640",
+                "date_ist": "2026-11-01 03:38",
+                "kind": "replies"
+              },
+              {
+                "text": "If you guys looked at my black well files post you would’ve known this yesterday.",
+                "url": "https://x.com/i/status/2116621806152900933",
+                "parent_url": "https://x.com/i/status/2116602735219163640",
+                "date_ist": "2026-11-01 01:32",
+                "kind": "quotes"
+              }
+            ]
+          },
+          {
+            "label": "Other languages",
+            "count": 7,
+            "share": 11.7,
+            "sentiment": "unclassified",
+            "sentiment_counts": {
+              "unclassified": 7
+            },
+            "samples": [
+              {
+                "text": "🇨🇭🚨 Porte dérobée dans Claude Code\n\nCursor confirme deux versions touchées.\nSous Windows et macOS : 2.1.312 et 2.1.313.\nVérifiez votre extension sans ATTENDRE.\n\nComment vérifiez-vous vos extensions ? 👇\n\n#Cybersécurité #Tech",
+                "url": "https://x.com/i/status/2116923255567143395",
+                "parent_url": "https://x.com/i/status/2116602735219163640",
+                "date_ist": "2026-11-01 21:30",
+                "kind": "quotes"
+              },
+              {
+                "text": "Si alguien del equipo usa Cursor con la extensión de Claude Code, toca mirar qué versión instaló el 29 y revisar las claves SSH. El editor también es cadena de suministro",
+                "url": "https://x.com/i/status/2116814595839148341",
+                "parent_url": "https://x.com/i/status/2116602735219163640",
+                "date_ist": "2026-11-01 14:18",
+                "kind": "quotes"
+              },
+              {
+                "text": "Ojo si usás Cursor: la extensión de Claude Code que estuvo unas horas en su marketplace (v2.1.312/313) traía una puerta trasera SSH. Si la instalaste el 29/10, revisá tu authorized_keys y rotá claves y tokens. Con wallets y exchanges de",
+                "url": "https://x.com/i/status/2116615063356273079",
+                "parent_url": "https://x.com/i/status/2116602735219163640",
+                "date_ist": "2026-11-01 01:05",
+                "kind": "quotes"
+              }
+            ]
+          },
+          {
+            "label": "Marketplace trust",
+            "count": 4,
+            "share": 6.7,
+            "sentiment": "negative",
+            "sentiment_counts": {
+              "negative": 2,
+              "neutral": 2
+            },
+            "samples": [
+              {
+                "text": "Glad Anthropic's infrastructure held up, but it really highlights how fragile developer tooling supply chains remain.",
+                "url": "https://x.com/i/status/2116567799774728600",
+                "parent_url": "https://x.com/i/status/2116527655772447016",
+                "date_ist": "2026-10-31 21:57",
+                "kind": "replies"
+              },
+              {
+                "text": "Nearly 12 hours on one marketplace while the official channels stayed clean. Which store your devs pull extensions from matters as much as the extension itself.",
+                "url": "https://x.com/i/status/2116544049205432541",
+                "parent_url": "https://x.com/i/status/2116527655772447016",
+                "date_ist": "2026-10-31 20:23",
+                "kind": "replies"
+              },
+              {
+                "text": "Nearly 12 hours is the number that sticks. Everyone reads “not compromised” and stops there — the trojan still sat in a marketplace for half a day.",
+                "url": "https://x.com/i/status/2116538819248116095",
+                "parent_url": "https://x.com/i/status/2116527655772447016",
+                "date_ist": "2026-10-31 20:02",
+                "kind": "replies"
+              }
+            ]
+          }
+        ]
+      },
+      "cves": [],
+      "exploited_in_wild": null,
+      "cve_details": []
+    },
+    {
+      "rank": 6,
+      "key": "runtime",
+      "name": "Software flaws affect package updates and application runtimes",
+      "short_name": "Software CVE",
+      "why_line": "Package managers, runtimes and web applications require different fixes and exposure checks.",
+      "summary": "The Hacker News reports an APT flaw that lets a network attacker replace verified packages and execute code as root. Its post names CVE-2026-109518 and default Debian 12+ and Ubuntu 22.04+ setups. Other posts cover Rails, Xen, LXD, WordPress and Brotli flaws. Node.js announces high-severity fixes for November 11 across three release lines. BleepingComputer reports that CISA flags a WordPress code execution flaw as actively exploited.",
+      "why": "The reports cover several separate products, not one attack chain. The brief does not assign unnamed flaws to a CVE.",
+      "affected": {
+        "products": "APT, Debian, Ubuntu, Node.js, Rails Active Storage, Xen, LXD, WordPress and Brotli",
+        "sectors": "Software development, hosting and system operations",
+        "regions": "Sources do not define the geographic scope"
+      },
+      "vendors": [
+        "FortiGuard Labs",
+        "Fortinet"
+      ],
+      "media": [
+        "BleepingComputer",
+        "SecurityWeek",
+        "The Hacker News"
+      ],
+      "independent": [],
+      "both_vendor_and_media": true,
+      "distinct_accounts": 5,
+      "x_engagement": 4487,
+      "youtube_views": 1424,
+      "item_ids": [
+        "x2116460418000658533",
+        "x2116336602049921207",
+        "x2116213582278885437",
+        "x2117491034406125678",
+        "x2116818971773309278",
+        "x2117952500170997883",
+        "x2118022366098006308",
+        "x2117977473044697537",
+        "x2117957538905756008",
+        "x2117952841474101482",
+        "ytcE5vgsirIfU"
+      ],
+      "key_items": [
+        "x2117977473044697537",
+        "x2118022366098006308",
+        "x2117957538905756008"
+      ],
+      "comments": {
+        "count": 61,
+        "parents": [
+          "https://x.com/i/status/2117977473044697537",
+          "https://x.com/i/status/2118022366098006308"
+        ],
+        "sentiment": {
+          "unclassified": 11,
+          "neutral": 44,
+          "negative": 6
+        },
+        "clusters": [
+          {
+            "label": "Package trust and network conditions",
+            "count": 21,
+            "share": 34.4,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 18,
+              "negative": 3
+            },
+            "samples": [
+              {
+                "text": "Node.js 26.x, 24.x and 22.x all get HIGH-severity fixes on Nov 11. There are no CVEs or fixed versions yet, so for now there's nothing to patch, just a date to plan around.\n\nTracking it here:",
+                "url": "https://x.com/i/status/2118241089748705290",
+                "parent_url": "https://x.com/i/status/2117977473044697537",
+                "date_ist": "2026-11-05 12:46",
+                "kind": "replies"
+              },
+              {
+                "text": "\"Based on Next.js telemetry tracking distinct projects, approximately 70% of Next.js applications run outside of Vercel.\"\n\nthat's a lot of vulnerable apps out there.",
+                "url": "https://x.com/i/status/2118071654064468182",
+                "parent_url": "https://x.com/i/status/2117977473044697537",
+                "date_ist": "2026-11-05 01:33",
+                "kind": "replies"
+              },
+              {
+                "text": "Practical note: Ubuntu says HTTPS for APT traffic blocks this path. Patch with Acquire::Retries=0 so a retried HTTP download can't land a swapped .deb. Rebuild golden images after APT is fixed—containers often ship the old version.",
+                "url": "https://x.com/i/status/2118370440494325892",
+                "parent_url": "https://x.com/i/status/2118022366098006308",
+                "date_ist": "2026-11-05 21:20",
+                "kind": "replies"
+              }
+            ]
+          },
+          {
+            "label": "Patch plans and inventory",
+            "count": 15,
+            "share": 24.6,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 14,
+              "negative": 1
+            },
+            "samples": [
+              {
+                "text": "Worth adding: Node 20 has been EOL since 30 Apr 2026, Node 18 since Apr 2025. Per the advisory, EOL versions are always affected, so they won't get a fix on the 11th. Quick check: node -v",
+                "url": "https://x.com/i/status/2118292230767002000",
+                "parent_url": "https://x.com/i/status/2117977473044697537",
+                "date_ist": "2026-11-05 16:09",
+                "kind": "replies"
+              },
+              {
+                "text": "Many shop backends and integration services still run on Node 22 or 24, so locking an upgrade window before 11 November beats waiting until the advisory feels old.",
+                "url": "https://x.com/i/status/2118267857129861375",
+                "parent_url": "https://x.com/i/status/2117977473044697537",
+                "date_ist": "2026-11-05 14:33",
+                "kind": "replies"
+              },
+              {
+                "text": "Nothing to worry about. Regular security release.",
+                "url": "https://x.com/i/status/2118095254129693173",
+                "parent_url": "https://x.com/i/status/2117977473044697537",
+                "date_ist": "2026-11-05 03:07",
+                "kind": "replies"
+              }
+            ]
+          },
+          {
+            "label": "Questions and reactions",
+            "count": 14,
+            "share": 23.0,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 12,
+              "negative": 2
+            },
+            "samples": [
+              {
+                "text": "fair, node's had a rough few weeks too. my point was more that the bug leaking your users' data usually isn't in the runtime, it's in your own routes",
+                "url": "https://x.com/i/status/2118331964919046574",
+                "parent_url": "https://x.com/i/status/2117977473044697537",
+                "date_ist": "2026-11-05 18:47",
+                "kind": "replies"
+              },
+              {
+                "text": "Take your time….Are you insane?!",
+                "url": "https://x.com/i/status/2118302071355052036",
+                "parent_url": "https://x.com/i/status/2117977473044697537",
+                "date_ist": "2026-11-05 16:49",
+                "kind": "replies"
+              },
+              {
+                "text": "You missed the part where Node got rekt as well",
+                "url": "https://x.com/i/status/2118271631663698299",
+                "parent_url": "https://x.com/i/status/2117977473044697537",
+                "date_ist": "2026-11-05 14:48",
+                "kind": "replies"
+              }
+            ]
+          },
+          {
+            "label": "Other languages",
+            "count": 11,
+            "share": 18.0,
+            "sentiment": "unclassified",
+            "sentiment_counts": {
+              "unclassified": 11
+            },
+            "samples": [
+              {
+                "text": "No va a parar ésta pelicula, automaticen su ciclo de patcheo!",
+                "url": "https://x.com/i/status/2118335728212226164",
+                "parent_url": "https://x.com/i/status/2117977473044697537",
+                "date_ist": "2026-11-05 19:02",
+                "kind": "replies"
+              },
+              {
+                "text": "Matiz útil: el ataque aprovecha los reintentos de descarga (Acquire::Retries), activos por defecto desde Debian 12 y Ubuntu 22.04.\n\nActualizar apt hoy. En versiones viejas, revisa si alguien activó los reintentos a mano.",
+                "url": "https://x.com/i/status/2118262876544663597",
+                "parent_url": "https://x.com/i/status/2118022366098006308",
+                "date_ist": "2026-11-05 14:13",
+                "kind": "replies"
+              },
+              {
+                "text": "CVE-2026-109518\nCVSS 4.0: 7.7 (High)\n\n간략 설명: APT 패키지 관리자 취약점. MitM 공격자가 HTTP 트래픽을 조작해 이미 검증된 패키지를 악의적 패키지로 교체 후 root 권한으로 코드 실행 가능. Acquire::Retries가 0이 아닐 때 발생(Ubuntu 22.04+ 기본값).\n\n패치 여부: 이미 출시됨. Ubuntu",
+                "url": "https://x.com/i/status/2118128062139113557",
+                "parent_url": "https://x.com/i/status/2118022366098006308",
+                "date_ist": "2026-11-05 05:17",
+                "kind": "replies"
+              }
+            ]
+          }
+        ]
+      },
+      "cves": [
+        "CVE-2026-109518",
+        "CVE-2026-112816",
+        "CVE-2026-81648"
+      ],
+      "exploited_in_wild": true,
+      "cve_details": [
+        {
+          "id": "CVE-2026-109518",
+          "exploited_in_wild": null,
+          "source_ids": [
+            "x2118022366098006308"
+          ],
+          "basis": "No exploitation claim in retrieved sources"
+        },
+        {
+          "id": "CVE-2026-112816",
+          "exploited_in_wild": null,
+          "source_ids": [
+            "x2116818971773309278"
+          ],
+          "basis": "No exploitation claim in retrieved sources"
+        },
+        {
+          "id": "CVE-2026-81648",
+          "exploited_in_wild": null,
+          "source_ids": [
+            "x2117491034406125678"
+          ],
+          "basis": "The source reports exploitation attempts, not confirmed compromise"
+        }
+      ],
+      "exploitation_basis": "BleepingComputer reports active exploitation of an unnamed WordPress flaw. This does not establish exploitation of every listed CVE."
+    },
+    {
+      "rank": 7,
+      "key": "xcpe",
+      "name": "Google disrupts the XCPE Android botnet",
+      "short_name": "XCPE",
+      "why_line": "A botnet disruption does not remove the device backdoor described in the source.",
+      "summary": "The Hacker News reports that Google disrupts an Android botnet with 1.3 million devices. The post says Google bans TV box maker Videostrong. It attributes the device backdoor to the maker. The post says the control servers stop operating but the backdoor remains. BleepingComputer, SecurityWeek and Dark Reading also cover the disruption.",
+      "why": "The coverage separates server disruption from device recovery. The source does not claim that the disruption cleans each device.",
+      "affected": {
+        "products": "Android TV boxes from Videostrong",
+        "sectors": "Consumer devices and connected networks",
+        "regions": "Sources do not define the full geographic scope"
+      },
+      "vendors": [],
+      "media": [
+        "BleepingComputer",
+        "Dark Reading",
+        "SecurityWeek",
+        "The Hacker News"
+      ],
+      "independent": [],
+      "both_vendor_and_media": false,
+      "distinct_accounts": 4,
+      "x_engagement": 891,
+      "youtube_views": 0,
+      "item_ids": [
+        "x2117320078991536628",
+        "x2117283385261556137",
+        "x2118042100981801056",
+        "x2117759477806203244",
+        "x2117548206968258978"
+      ],
+      "key_items": [
+        "x2117283385261556137",
+        "x2117320078991536628",
+        "x2117759477806203244"
+      ],
+      "comments": {
+        "count": 27,
+        "parents": [
+          "https://x.com/i/status/2117283385261556137",
+          "https://x.com/i/status/2117320078991536628"
+        ],
+        "sentiment": {
+          "neutral": 21,
+          "positive": 1,
+          "unclassified": 5
+        },
+        "clusters": [
+          {
+            "label": "Persistent device backdoors",
+            "count": 10,
+            "share": 37.0,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "positive": 1,
+              "neutral": 9
+            },
+            "samples": [
+              {
+                "text": "Wow, a big win for cybersecurity, but concerning about those backdoors still being present",
+                "url": "https://x.com/i/status/2118043384158011397",
+                "parent_url": "https://x.com/i/status/2117283385261556137",
+                "date_ist": "2026-11-04 23:41",
+                "kind": "replies"
+              },
+              {
+                "text": "Google says over 1.3 million TV boxes were in this botnet, with the backdoor built into the firmware. If you have a cheap no-brand streaming box, a factory reset won't remove it. Unplug it from the internet or replace it.",
+                "url": "https://x.com/i/status/2117908557593211274",
+                "parent_url": "https://x.com/i/status/2117283385261556137",
+                "date_ist": "2026-11-04 14:45",
+                "kind": "replies"
+              },
+              {
+                "text": "Killing the C2 servers is the easy half. A firmware-level backdoor lives on the device until an OTA actually reaches it — and these boxes rarely get updates. Banning the vendor just closes one distribution channel; the 1.3M infected units",
+                "url": "https://x.com/i/status/2117574499566817471",
+                "parent_url": "https://x.com/i/status/2117283385261556137",
+                "date_ist": "2026-11-03 16:37",
+                "kind": "replies"
+              }
+            ]
+          },
+          {
+            "label": "Device supply and certification",
+            "count": 8,
+            "share": 29.6,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 8
+            },
+            "samples": [
+              {
+                "text": "Mecool, Next, Hiremco and some more cheap boxes.",
+                "url": "https://x.com/i/status/2118065140059021594",
+                "parent_url": "https://x.com/i/status/2117283385261556137",
+                "date_ist": "2026-11-05 01:07",
+                "kind": "replies"
+              },
+              {
+                "text": "The detail that gets me: the code loaded after first boot, so the boxes passed Google's certification. When the maker is the attacker, certification isn't enough:",
+                "url": "https://x.com/i/status/2118064164308754836",
+                "parent_url": "https://x.com/i/status/2117283385261556137",
+                "date_ist": "2026-11-05 01:03",
+                "kind": "replies"
+              },
+              {
+                "text": "Why is this news? Everyone of these boxes communicate with China. Doesnt matter the brand. Theres youtube videos where people use wireguard to sniff the packets.",
+                "url": "https://x.com/i/status/2117612979491397944",
+                "parent_url": "https://x.com/i/status/2117283385261556137",
+                "date_ist": "2026-11-03 19:10",
+                "kind": "replies"
+              }
+            ]
+          },
+          {
+            "label": "Other languages",
+            "count": 5,
+            "share": 18.5,
+            "sentiment": "unclassified",
+            "sentiment_counts": {
+              "unclassified": 5
+            },
+            "samples": [
+              {
+                "text": "日本は大丈夫なのか。\n\nまあ日本はそんなもん必要としないぐらい穴だらけだしなｗ",
+                "url": "https://x.com/i/status/2117612529153433774",
+                "parent_url": "https://x.com/i/status/2117283385261556137",
+                "date_ist": "2026-11-03 19:09",
+                "kind": "replies"
+              },
+              {
+                "text": "一般是用在网络运营商的电视盒子，会给用户订阅各种电视会员",
+                "url": "https://x.com/i/status/2117532007257493766",
+                "parent_url": "https://x.com/i/status/2117283385261556137",
+                "date_ist": "2026-11-03 13:49",
+                "kind": "replies"
+              },
+              {
+                "text": "باب خلفي للتحكم بالجهاز عن بعد من المصنع حطوه  متعمدين وباعو الطريقة لجهات مشبوهة    ولا يمكن حذفه للأسف .. وثبت عليهم وقوقل الغت تراخيصهم وسكرت الخوادم اللي تتحكم بالثغرة لكن اللي فهمت ممكن ترجع بأي وقت بطريقة اخرى ..\nالاحظ حتى حسابهم",
+                "url": "https://x.com/i/status/2118313349775569063",
+                "parent_url": "https://x.com/i/status/2117283385261556137",
+                "date_ist": "2026-11-05 17:33",
+                "kind": "quotes"
+              }
+            ]
+          },
+          {
+            "label": "Network separation and device removal",
+            "count": 4,
+            "share": 14.8,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 4
+            },
+            "samples": [
+              {
+                "text": "For companies that means such TV boxes in meeting rooms or shop displays should be taken off the network, not just updated.",
+                "url": "https://x.com/i/status/2117542157859082269",
+                "parent_url": "https://x.com/i/status/2117283385261556137",
+                "date_ist": "2026-11-03 14:29",
+                "kind": "replies"
+              },
+              {
+                "text": "Always segment your IoT trash",
+                "url": "https://x.com/i/status/2117431863052775468",
+                "parent_url": "https://x.com/i/status/2117283385261556137",
+                "date_ist": "2026-11-03 07:11",
+                "kind": "replies"
+              },
+              {
+                "text": "A million-device botnet, and the fix was banning the box maker. Cheapest thing in the living room. Most expensive thing on the network.",
+                "url": "https://x.com/i/status/2117331280253567208",
+                "parent_url": "https://x.com/i/status/2117320078991536628",
+                "date_ist": "2026-11-03 00:31",
+                "kind": "replies"
+              }
+            ]
+          }
+        ]
+      },
+      "cves": [],
+      "exploited_in_wild": null,
+      "cve_details": []
+    },
+    {
+      "rank": 8,
+      "key": "edge",
+      "name": "Attackers exploit network and industrial devices",
+      "short_name": "Edge devices",
+      "why_line": "Reports describe active attacks on gateways and switches, while some old software has no planned fixes.",
+      "summary": "The Hacker News reports active exploitation of CVE-2026-58115 in Siemens IoT2050 through Node-RED. Other posts describe an exploited Ivanti Connect Secure chain and a Zyxel switch zero-day. SonicWall says it does not plan fixes for two flaws in end-of-life GMS software, according to The Hacker News. Those flaws are CVE-2026-109593 and CVE-2026-109594. The post recommends migration to NSM.",
+      "why": "The reports cover devices that support remote access, industrial work and network control. Old software can require migration instead of patching.",
+      "affected": {
+        "products": "Siemens IoT2050, Node-RED, Ivanti Connect Secure, Zyxel switches and SonicWall GMS",
+        "sectors": "Industrial operations and network administration",
+        "regions": "Sources do not define the full geographic scope"
+      },
+      "vendors": [],
+      "media": [
+        "BleepingComputer",
+        "SecurityWeek",
+        "The Hacker News"
+      ],
+      "independent": [
+        "Securidge"
+      ],
+      "both_vendor_and_media": false,
+      "distinct_accounts": 4,
+      "x_engagement": 695,
+      "youtube_views": 15,
+      "item_ids": [
+        "x2116447646273695856",
+        "x2117497003009798501",
+        "x2117188412130091316",
+        "x2117164748399882629",
+        "x2118085520676770157",
+        "x2118026062932431252",
+        "x2117990940375707779",
+        "ytMMHROkVKYWA"
+      ],
+      "key_items": [
+        "x2117497003009798501",
+        "x2116447646273695856",
+        "x2118026062932431252"
+      ],
+      "comments": {
+        "count": 47,
+        "parents": [
+          "https://x.com/i/status/2117497003009798501",
+          "https://x.com/i/status/2116447646273695856"
+        ],
+        "sentiment": {
+          "neutral": 36,
+          "negative": 10,
+          "unclassified": 1
+        },
+        "clusters": [
+          {
+            "label": "Intrusion checks and recovery",
+            "count": 19,
+            "share": 40.4,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 14,
+              "negative": 5
+            },
+            "samples": [
+              {
+                "text": "Updating won't remove anything already planted. On devices that were reachable before the patch, export the Node-RED flows and look for exec nodes or flows nobody on the team built, and check the crontab for new entries.",
+                "url": "https://x.com/i/status/2117513897163014367",
+                "parent_url": "https://x.com/i/status/2117497003009798501",
+                "date_ist": "2026-11-03 12:37",
+                "kind": "replies"
+              },
+              {
+                "text": "quick check, if node-red answers on port 1880 without asking for a login you're exposed. update to 4.3.4.1 or at least firewall that port",
+                "url": "https://x.com/i/status/2117502699759358249",
+                "parent_url": "https://x.com/i/status/2117497003009798501",
+                "date_ist": "2026-11-03 11:52",
+                "kind": "replies"
+              },
+              {
+                "text": "CISA's alert adds the uncomfortable part: Ivanti's Integrity Checker may not catch the CVE-2026-104935 step, because the attacker's commands run in memory. So a clean scan isn't proof. Has anyone found a reliable memory-forensics check for",
+                "url": "https://x.com/i/status/2116951462240715048",
+                "parent_url": "https://x.com/i/status/2116447646273695856",
+                "date_ist": "2026-11-01 23:22",
+                "kind": "replies"
+              }
+            ]
+          },
+          {
+            "label": "Patch and version checks",
+            "count": 17,
+            "share": 36.2,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 15,
+              "negative": 2
+            },
+            "samples": [
+              {
+                "text": "Node-RED on an industrial gateway is effectively a remote shell if it's reachable. Beyond patching: no OT management interface on the internet, auth on every Node-RED editor, and alerts on new flows or outbound connections from those boxes.",
+                "url": "https://x.com/i/status/2117699686567940545",
+                "parent_url": "https://x.com/i/status/2117497003009798501",
+                "date_ist": "2026-11-04 00:55",
+                "kind": "replies"
+              },
+              {
+                "text": "Node-RED's editor should never be reachable from the internet; most of these devices don't need port 1880 open to anyone but an engineering subnet. Patch to V4.3.4.1, then alert on the Node-RED process spawning shells or download tools.",
+                "url": "https://x.com/i/status/2117594685648863425",
+                "parent_url": "https://x.com/i/status/2117497003009798501",
+                "date_ist": "2026-11-03 17:58",
+                "kind": "replies"
+              },
+              {
+                "text": "Where a device cannot be patched right away, keeping the Node-RED interface off the internet and away from the office network at least reduces the exposure.",
+                "url": "https://x.com/i/status/2117542244370505759",
+                "parent_url": "https://x.com/i/status/2117497003009798501",
+                "date_ist": "2026-11-03 14:29",
+                "kind": "replies"
+              }
+            ]
+          },
+          {
+            "label": "Exposure and access controls",
+            "count": 6,
+            "share": 12.8,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 4,
+              "negative": 2
+            },
+            "samples": [
+              {
+                "text": "Industrial gateways like the IoT2050 tend to run for years on a factory floor without anyone checking them. Once attackers get in, Node-RED gives them a ready-made way to run commands on it",
+                "url": "https://x.com/i/status/2117567652378136593",
+                "parent_url": "https://x.com/i/status/2117497003009798501",
+                "date_ist": "2026-11-03 16:10",
+                "kind": "replies"
+              },
+              {
+                "text": "A CVSS 10.0 flaw in an industrial IoT gateway is worse than a normal bug. Honeypots caught Linux bot payloads and Node-RED backdoors, so exposed factory devices are being picked off now, not later.",
+                "url": "https://x.com/i/status/2117510825124716755",
+                "parent_url": "https://x.com/i/status/2117497003009798501",
+                "date_ist": "2026-11-03 12:24",
+                "kind": "replies"
+              },
+              {
+                "text": "Edge gateways like the IoT2050 are where IT tooling quietly lands inside OT: Node-RED, SSH, containers, often set up by an integrator years ago. Most sites can't say which flows are running on them today. Inventory the flows, not just the",
+                "url": "https://x.com/i/status/2117507534424580253",
+                "parent_url": "https://x.com/i/status/2117497003009798501",
+                "date_ist": "2026-11-03 12:11",
+                "kind": "replies"
+              }
+            ]
+          },
+          {
+            "label": "Questions and other languages",
+            "count": 5,
+            "share": 10.6,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 3,
+              "negative": 1,
+              "unclassified": 1
+            },
+            "samples": [
+              {
+                "text": "Everyday throughout this year is a Zero Day",
+                "url": "https://x.com/i/status/2117542972250091755",
+                "parent_url": "https://x.com/i/status/2117497003009798501",
+                "date_ist": "2026-11-03 14:32",
+                "kind": "replies"
+              },
+              {
+                "text": "Somewhere a factory runs a perfect 10/10 vuln on a box nobody remembers buying.",
+                "url": "https://x.com/i/status/2117499380731359477",
+                "parent_url": "https://x.com/i/status/2117497003009798501",
+                "date_ist": "2026-11-03 11:39",
+                "kind": "replies"
+              },
+              {
+                "text": "Terrible! Siemens IoT gateways are compromised.",
+                "url": "https://x.com/i/status/2117527054757585263",
+                "parent_url": "https://x.com/i/status/2117497003009798501",
+                "date_ist": "2026-11-03 13:29",
+                "kind": "quotes"
+              }
+            ]
+          }
+        ]
+      },
+      "cves": [
+        "CVE-2026-109593",
+        "CVE-2026-109594",
+        "CVE-2026-58115"
+      ],
+      "exploited_in_wild": true,
+      "cve_details": [
+        {
+          "id": "CVE-2026-109593",
+          "exploited_in_wild": null,
+          "source_ids": [
+            "x2118026062932431252"
+          ],
+          "basis": "No exploitation claim in retrieved sources"
+        },
+        {
+          "id": "CVE-2026-109594",
+          "exploited_in_wild": null,
+          "source_ids": [
+            "x2118026062932431252"
+          ],
+          "basis": "No exploitation claim in retrieved sources"
+        },
+        {
+          "id": "CVE-2026-58115",
+          "exploited_in_wild": true,
+          "source_ids": [
+            "x2117497003009798501"
+          ],
+          "basis": "The Hacker News reports active exploitation and honeypot observations"
+        }
+      ],
+      "exploitation_basis": "Sources report attacks on Siemens, Ivanti and Zyxel. The CVE flags below apply only to the named CVE."
+    },
+    {
+      "rank": 9,
+      "key": "aiservices",
+      "name": "AI-linked services report breaches and session risks",
+      "short_name": "AI data risk",
+      "why_line": "Service breaches and unsafe shared links put customer information and private chats at risk.",
+      "summary": "BleepingComputer reports a Northflank breach that leads to abuse of customers' AI API keys. The Hacker News reports that Chainalysis loses customer names, email addresses, user IDs and organization roles. It describes Chainalysis's attribution to offensive agentic techniques. A separate post describes a ChatGPT shared-link flaw that OpenAI fixes. Another post describes prompt adware that changes Codex instructions to insert ads.",
+      "why": "The reports describe separate routes to data exposure. The brief does not treat each breach as proof of autonomous AI attacks.",
+      "affected": {
+        "products": "Northflank AI API keys, Chainalysis internal tools, ChatGPT shared links and Codex instructions",
+        "sectors": "AI services and blockchain analysis",
+        "regions": "Sources do not define the geographic scope"
+      },
+      "vendors": [],
+      "media": [
+        "BleepingComputer",
+        "SecurityWeek",
+        "The Hacker News"
+      ],
+      "independent": [],
+      "both_vendor_and_media": false,
+      "distinct_accounts": 3,
+      "x_engagement": 653,
+      "youtube_views": 0,
+      "item_ids": [
+        "x2116591398073876550",
+        "x2116513123347628212",
+        "x2116501537140961586",
+        "x2116403392734236962",
+        "x2118012585589277080",
+        "x2117961693892686202"
+      ],
+      "key_items": [
+        "x2116403392734236962",
+        "x2116501537140961586",
+        "x2116591398073876550"
+      ],
+      "comments": {
+        "count": 48,
+        "parents": [
+          "https://x.com/i/status/2116403392734236962",
+          "https://x.com/i/status/2116501537140961586"
+        ],
+        "sentiment": {
+          "neutral": 39,
+          "unclassified": 4,
+          "negative": 3,
+          "positive": 2
+        },
+        "clusters": [
+          {
+            "label": "Phishing and session risks",
+            "count": 26,
+            "share": 54.2,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 24,
+              "negative": 2
+            },
+            "samples": [
+              {
+                "text": "shared link runs attacker code in your logged-in session, so basically classic xss, just with your whole chat history as the prize 😬",
+                "url": "https://x.com/i/status/2116569403655676265",
+                "parent_url": "https://x.com/i/status/2116403392734236962",
+                "date_ist": "2026-10-31 22:04",
+                "kind": "replies"
+              },
+              {
+                "text": "A shared link that could run attacker code inside a logged-in ChatGPT session is a good reminder that AI chats hold real business data. Credit to the researchers and OpenAI for getting it fixed fast.",
+                "url": "https://x.com/i/status/2116505194825404634",
+                "parent_url": "https://x.com/i/status/2116403392734236962",
+                "date_ist": "2026-10-31 17:48",
+                "kind": "replies"
+              },
+              {
+                "text": "A shared chat link is now a phishing link. Anything you paste into a chatbot is only as private as the session it lives in. Keep secrets, customer data and keys out of personal AI accounts, and treat a \"look at this chat\" link like any",
+                "url": "https://x.com/i/status/2116477942528459179",
+                "parent_url": "https://x.com/i/status/2116403392734236962",
+                "date_ist": "2026-10-31 16:00",
+                "kind": "replies"
+              }
+            ]
+          },
+          {
+            "label": "Application trust boundaries",
+            "count": 7,
+            "share": 14.6,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 6,
+              "negative": 1
+            },
+            "samples": [
+              {
+                "text": "Parameter's writeup has the real root cause: MathLive's keyboard listener used an origin policy of \"none\", so a sandboxed Preview could post HTML into the main page. The YouTube script was only the CSP workaround. How many of us check",
+                "url": "https://x.com/i/status/2116952518098055433",
+                "parent_url": "https://x.com/i/status/2116403392734236962",
+                "date_ist": "2026-11-01 23:26",
+                "kind": "replies"
+              },
+              {
+                "text": "the fix for this bug class is boring: check the message's origin against an allowlist before touching its data, and never pipe that data into innerHTML.\n\nMDN's postMessage docs say it plainly: always verify the sender's identity.\n\nworth",
+                "url": "https://x.com/i/status/2116521819490623562",
+                "parent_url": "https://x.com/i/status/2116403392734236962",
+                "date_ist": "2026-10-31 18:54",
+                "kind": "replies"
+              },
+              {
+                "text": "If the root cause is a postMessage listener on the main page, that's the reusable lesson. The sandbox can be solid and it won't matter if a parent-page handler takes",
+                "url": "https://x.com/i/status/2116497173432975450",
+                "parent_url": "https://x.com/i/status/2116403392734236962",
+                "date_ist": "2026-10-31 17:17",
+                "kind": "replies"
+              }
+            ]
+          },
+          {
+            "label": "Questions and reactions",
+            "count": 7,
+            "share": 14.6,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 5,
+              "positive": 2
+            },
+            "samples": [
+              {
+                "text": "Claude is even doing things on his own now, he wants to break free 🆓",
+                "url": "https://x.com/i/status/2116433371635024318",
+                "parent_url": "https://x.com/i/status/2116403392734236962",
+                "date_ist": "2026-10-31 13:03",
+                "kind": "replies"
+              },
+              {
+                "text": "Jesus Christ can't click or view anything that isn't an air-gapped solution. Stick to paper is my recommendation for the average human",
+                "url": "https://x.com/i/status/2116407357198794827",
+                "parent_url": "https://x.com/i/status/2116403392734236962",
+                "date_ist": "2026-10-31 11:20",
+                "kind": "replies"
+              },
+              {
+                "text": "Parameter has a lot more coming!",
+                "url": "https://x.com/i/status/2116414422310928418",
+                "parent_url": "https://x.com/i/status/2116403392734236962",
+                "date_ist": "2026-10-31 11:48",
+                "kind": "quotes"
+              }
+            ]
+          },
+          {
+            "label": "Other languages",
+            "count": 4,
+            "share": 8.3,
+            "sentiment": "unclassified",
+            "sentiment_counts": {
+              "unclassified": 4
+            },
+            "samples": [
+              {
+                "text": "El fallo ya está corregido. Una vista aislada podía enviar instrucciones a otro componente con acceso a la sesión. El salto entre esas dos funciones abrió el camino a los chats privados: comprobar quién envía cada mensaje interno también",
+                "url": "https://x.com/i/status/2116579452498960590",
+                "parent_url": "https://x.com/i/status/2116403392734236962",
+                "date_ist": "2026-10-31 22:44",
+                "kind": "replies"
+              },
+              {
+                "text": "رصدت OpenAI ثغرة تسمح بتنفيذ كود خبيث عبر روابط مشتركة لسرقة بيانات الجلسات. أنصح بإيقاف مشاركة الروابط الخارجية فوراً، والتحقق من سجلات الوصول غير المصرح بها في حساباتك.",
+                "url": "https://x.com/i/status/2116412600925798794",
+                "parent_url": "https://x.com/i/status/2116403392734236962",
+                "date_ist": "2026-10-31 11:40",
+                "kind": "replies"
+              },
+              {
+                "text": "عندما تصبح نافذة المعاينة باباً خلفياً: كيف كادت ثغرة \"ChatGPT\" أن تفتح سجلك الشخصي للمخترقين؟\n\nحين يتعلق الأمر بعمالقة التكنولوجيا، يعتقد السذج أن الحصون الرقمية مطلقة ولا تقهر. لكن الواقع يفرطخ هذا الوهم كل يوم. الخبر الذي هز الأوساط",
+                "url": "https://x.com/i/status/2116489964225519827",
+                "parent_url": "https://x.com/i/status/2116403392734236962",
+                "date_ist": "2026-10-31 16:48",
+                "kind": "quotes"
+              }
+            ]
+          },
+          {
+            "label": "AI claims and accountability",
+            "count": 4,
+            "share": 8.3,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 4
+            },
+            "samples": [
+              {
+                "text": "Attackers are using agents. Defenders can too: point automated attacks at your own agents and internal tools before someone else does. AgentSec is an open-source way to start:",
+                "url": "https://x.com/i/status/2116966898231603550",
+                "parent_url": "https://x.com/i/status/2116501537140961586",
+                "date_ist": "2026-11-02 00:23",
+                "kind": "replies"
+              },
+              {
+                "text": "Agents attacking companies, and files attacking agents.\nHere's the second half, checked on my own Mac:",
+                "url": "https://x.com/i/status/2116953619723321503",
+                "parent_url": "https://x.com/i/status/2116501537140961586",
+                "date_ist": "2026-11-01 23:30",
+                "kind": "replies"
+              },
+              {
+                "text": "\"Offensive agentic techniques\" is the new \"sophisticated nation state actor\" lol. Every breach notice next year is gonna say an AI did it. Would love to know if it was actually autonomous or just someone with a script and a good PR team.",
+                "url": "https://x.com/i/status/2116586973414756540",
+                "parent_url": "https://x.com/i/status/2116501537140961586",
+                "date_ist": "2026-10-31 23:13",
+                "kind": "replies"
+              }
+            ]
+          }
+        ]
+      },
+      "cves": [],
+      "exploited_in_wild": null,
+      "cve_details": []
+    },
+    {
+      "rank": 10,
+      "key": "breaches",
+      "name": "Service breaches expose credentials and customer data",
+      "short_name": "Data leaks",
+      "why_line": "Hosting and password-manager incidents place account access and stored data under review.",
+      "summary": "BleepingComputer reports that DreamHost confirms exposure of FTP logins and webmail sessions. It also reports password reset warnings after an mSecure hack. The Record describes data destruction and service disruption at Russian hosting provider Beget. Dark Reading reports a likely leak of Philippine migrant worker data. The brief keeps the reported scope of each incident separate.",
+      "why": "The sources describe credentials, sessions and stored records as different types of exposure. They do not establish one shared cause.",
+      "affected": {
+        "products": "DreamHost hosting and webmail, mSecure, Beget cloud systems and government records",
+        "sectors": "Hosting, password management and government services",
+        "regions": "Russia and the Philippines appear in the sources; other incident locations remain unspecified"
+      },
+      "vendors": [],
+      "media": [
+        "BleepingComputer",
+        "Dark Reading",
+        "The Record From Recorded Future News"
+      ],
+      "independent": [],
+      "both_vendor_and_media": false,
+      "distinct_accounts": 3,
+      "x_engagement": 161,
+      "youtube_views": 0,
+      "item_ids": [
+        "x2118057250015109177",
+        "x2118044374684537170",
+        "x2118010545898975731",
+        "x2117982169859588414"
+      ],
+      "key_items": [
+        "x2118057250015109177",
+        "x2118010545898975731",
+        "x2117982169859588414"
+      ],
+      "comments": {
+        "count": 30,
+        "parents": [
+          "https://x.com/i/status/2118057250015109177",
+          "https://x.com/i/status/2118010545898975731"
+        ],
+        "sentiment": {
+          "negative": 5,
+          "neutral": 20,
+          "unclassified": 5
+        },
+        "clusters": [
+          {
+            "label": "Passwords and session recovery",
+            "count": 21,
+            "share": 70.0,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "negative": 5,
+              "neutral": 16
+            },
+            "samples": [
+              {
+                "text": "You report DreamHost confirmed a breach exposing FTP logins and webmail sessions. From incident work, a session is an active signed-in connection, so stealing it can skip the password step entirely. Should exposed sessions be revoked",
+                "url": "https://x.com/i/status/2118325456487457205",
+                "parent_url": "https://x.com/i/status/2118057250015109177",
+                "date_ist": "2026-11-05 18:22",
+                "kind": "replies"
+              },
+              {
+                "text": "Months-long access via stolen session tokens and a file-manager bug. Password resets help after the fact; they don't explain why it sat undetected since August.\n\n«Well under 10%» of ~400k customers is still a lot of inboxes.",
+                "url": "https://x.com/i/status/2118263145693122701",
+                "parent_url": "https://x.com/i/status/2118057250015109177",
+                "date_ist": "2026-11-05 14:14",
+                "kind": "replies"
+              },
+              {
+                "text": "If you used DreamHost's File Manager since August, the password reset only closes the door. Check the site for new or modified PHP files, look at FTP/SFTP logs for logins from IPs you don't know, and review webmail forwarding rules and",
+                "url": "https://x.com/i/status/2118203700137410921",
+                "parent_url": "https://x.com/i/status/2118057250015109177",
+                "date_ist": "2026-11-05 10:18",
+                "kind": "replies"
+              }
+            ]
+          },
+          {
+            "label": "Other languages",
+            "count": 5,
+            "share": 16.7,
+            "sentiment": "unclassified",
+            "sentiment_counts": {
+              "unclassified": 5
+            },
+            "samples": [
+              {
+                "text": "Pou pi senp: atakan te vole non itilizatè ak modpas FTP DreamHost, epi sesyon webmail. Si w gen sit la, chanje modpas FTP ak webmail kounye a.\n#EkonLabs #Marvin",
+                "url": "https://x.com/i/status/2118068973531168784",
+                "parent_url": "https://x.com/i/status/2118057250015109177",
+                "date_ist": "2026-11-05 01:22",
+                "kind": "replies"
+              },
+              {
+                "text": "【警告】DreamHost利用者はパスワード変更だけで終わらせないでください。\n\nWebファイルマネージャの脆弱性を突かれ、FTP/SFTPのID・パスワードが窃取されました。\n\n盗まれたのは、Webサイトを書き換えられる認証情報です。\n\nやるべきことは5つ。\n\n① FTP/SFTPのパスワードを変更\n②",
+                "url": "https://x.com/i/status/2118104618337202213",
+                "parent_url": "https://x.com/i/status/2118057250015109177",
+                "date_ist": "2026-11-05 03:44",
+                "kind": "quotes"
+              },
+              {
+                "text": "Her sistem gerekli önlemleri almıştır. Ama önlemler yetersiz olacağı anın gelmeyeceğini umarak bekler.",
+                "url": "https://x.com/i/status/2118087884704014444",
+                "parent_url": "https://x.com/i/status/2118057250015109177",
+                "date_ist": "2026-11-05 02:37",
+                "kind": "quotes"
+              }
+            ]
+          },
+          {
+            "label": "Questions and reactions",
+            "count": 4,
+            "share": 13.3,
+            "sentiment": "neutral",
+            "sentiment_counts": {
+              "neutral": 4
+            },
+            "samples": [
+              {
+                "text": "They confirmed that in an email says ago",
+                "url": "https://x.com/i/status/2118060078322663434",
+                "parent_url": "https://x.com/i/status/2118057250015109177",
+                "date_ist": "2026-11-05 00:47",
+                "kind": "replies"
+              },
+              {
+                "text": "Haha theyve had poor security fpr as long as ive been with them\n\nThats why you do not host what you dont want taken 🤷💙",
+                "url": "https://x.com/i/status/2118064667524464706",
+                "parent_url": "https://x.com/i/status/2118057250015109177",
+                "date_ist": "2026-11-05 01:05",
+                "kind": "quotes"
+              },
+              {
+                "text": "did you check if they pushed a patch yet?",
+                "url": "https://x.com/i/status/2118013110682521611",
+                "parent_url": "https://x.com/i/status/2118010545898975731",
+                "date_ist": "2026-11-04 21:40",
+                "kind": "replies"
+              }
+            ]
+          }
+        ]
+      },
+      "cves": [],
+      "exploited_in_wild": null,
+      "cve_details": []
+    }
+  ],
+  "ranking": [
+    {
+      "key": "binance",
+      "name": "Binance reports a theft through engineer access",
+      "short_name": "Binance",
+      "accounts": 9,
+      "x_eng": 476,
+      "yt_views": 2555919
+    },
+    {
+      "key": "coldchain",
+      "name": "Attackers change refrigeration settings across Europe",
+      "short_name": "Cold stores",
+      "accounts": 8,
+      "x_eng": 286,
+      "yt_views": 873308
+    },
+    {
+      "key": "aioffence",
+      "name": "Attackers use AI tools to choose targets and attack steps",
+      "short_name": "AI attacks",
+      "accounts": 7,
+      "x_eng": 1746,
+      "yt_views": 43129
+    },
+    {
+      "key": "agentsecurity",
+      "name": "Vendors add controls for AI agents",
+      "short_name": "AI controls",
+      "accounts": 7,
+      "x_eng": 893,
+      "yt_views": 1036
+    },
+    {
+      "key": "supplychain",
+      "name": "Malicious updates reach developer and server tools",
+      "short_name": "Bad updates",
+      "accounts": 6,
+      "x_eng": 1055,
+      "yt_views": 17614
+    },
+    {
+      "key": "runtime",
+      "name": "Software flaws affect package updates and application runtimes",
+      "short_name": "Software CVE",
+      "accounts": 5,
+      "x_eng": 4487,
+      "yt_views": 1424
+    },
+    {
+      "key": "xcpe",
+      "name": "Google disrupts the XCPE Android botnet",
+      "short_name": "XCPE",
+      "accounts": 4,
+      "x_eng": 891,
+      "yt_views": 0
+    },
+    {
+      "key": "edge",
+      "name": "Attackers exploit network and industrial devices",
+      "short_name": "Edge devices",
+      "accounts": 4,
+      "x_eng": 695,
+      "yt_views": 15
+    },
+    {
+      "key": "aiservices",
+      "name": "AI-linked services report breaches and session risks",
+      "short_name": "AI data risk",
+      "accounts": 3,
+      "x_eng": 653,
+      "yt_views": 0
+    },
+    {
+      "key": "breaches",
+      "name": "Service breaches expose credentials and customer data",
+      "short_name": "Data leaks",
+      "accounts": 3,
+      "x_eng": 161,
+      "yt_views": 0
+    }
+  ],
+  "sources": [
+    {
+      "id": "x2117320078991536628",
+      "platform": "X",
+      "type": "media",
+      "account": "BleepinComputer",
+      "org": "BleepingComputer",
+      "date_utc": "2026-11-02T18:16:59.000Z",
+      "date_publish_raw": "2026-11-02T18:16:59.000Z",
+      "date_ist": "2026-11-02 23:46",
+      "text": "Google disrupts million-device XCPE Android malware botnet, bans TV box maker\nhttps://t.co/aymcNWsHl2\n\nhttps://t.co/aymcNWsHl2",
+      "url": "https://x.com/BleepinComputer/status/2117320078991536628",
+      "metrics": {
+        "likes": 45,
+        "reposts": 10,
+        "replies": 6,
+        "quotes": 1
+      },
+      "engagement": 62,
+      "theme": "xcpe",
+      "image": null
+    },
+    {
+      "id": "x2117318831035077115",
+      "platform": "X",
+      "type": "media",
+      "account": "DarkReading",
+      "org": "Dark Reading",
+      "date_utc": "2026-11-02T18:12:01.000Z",
+      "date_publish_raw": "2026-11-02T18:12:01.000Z",
+      "date_ist": "2026-11-02 23:42",
+      "text": "Devs Hit by Trojanized Claude Code Extension for Cursor https://t.co/w1DzsdEyTY by Nate Nelson",
+      "url": "https://x.com/DarkReading/status/2117318831035077115",
+      "metrics": {
+        "likes": 6,
+        "reposts": 0,
+        "replies": 6,
+        "quotes": 0
+      },
+      "engagement": 12,
+      "theme": "supplychain",
+      "image": null
+    },
+    {
+      "id": "x2117283385261556137",
+      "platform": "X",
+      "type": "media",
+      "account": "TheHackersNews",
+      "org": "The Hacker News",
+      "date_utc": "2026-11-02T15:51:10.000Z",
+      "date_publish_raw": "2026-11-02T15:51:10.000Z",
+      "date_ist": "2026-11-02 21:21",
+      "text": "‼️ BREAKING - Google disrupts a 1.3 million-device Android botnet and bans TV box maker Videostrong.\n\nGoogle says the company deliberately built a backdoor into its devices and sold access to criminals.\n\nThe control servers are down. The backdoor is still there.\n\nFull story: https://t.co/J5JMXBFmun",
+      "url": "https://x.com/TheHackersNews/status/2117283385261556137",
+      "metrics": {
+        "likes": 545,
+        "reposts": 169,
+        "replies": 57,
+        "quotes": 29
+      },
+      "engagement": 800,
+      "theme": "xcpe",
+      "image": "https://pbs.twimg.com/media/HWIaAOFbQAAL_dW.jpg"
+    },
+    {
+      "id": "x2117268611211448823",
+      "platform": "X",
+      "type": "media",
+      "account": "TheRecord_Media",
+      "org": "The Record From Recorded Future News",
+      "date_utc": "2026-11-02T14:52:28.000Z",
+      "date_publish_raw": "2026-11-02T14:52:28.000Z",
+      "date_ist": "2026-11-02 20:22",
+      "text": "Supermarket and grocery store refrigerators across Europe appear to have been hacked on Monday — the second such wave of hacks in recent weeks where attackers have manipulated temperature controls and caused stock to spoil https://t.co/5wq85f2H4M",
+      "url": "https://x.com/TheRecord_Media/status/2117268611211448823",
+      "metrics": {
+        "likes": 18,
+        "reposts": 12,
+        "replies": 1,
+        "quotes": 3
+      },
+      "engagement": 34,
+      "theme": "coldchain",
+      "image": null
+    },
+    {
+      "id": "x2117268432874061952",
+      "platform": "X",
+      "type": "media",
+      "account": "TheRecord_Media",
+      "org": "The Record From Recorded Future News",
+      "date_utc": "2026-11-02T14:51:45.000Z",
+      "date_publish_raw": "2026-11-02T14:51:45.000Z",
+      "date_ist": "2026-11-02 20:21",
+      "text": "The FBI and U.S. Secret Service have pinned the $6.3 billion theft from cryptocurrency platform Binance on North Korea's TraderTraitor hacking group https://t.co/XeZLxesNF3",
+      "url": "https://x.com/TheRecord_Media/status/2117268432874061952",
+      "metrics": {
+        "likes": 4,
+        "reposts": 1,
+        "replies": 1,
+        "quotes": 0
+      },
+      "engagement": 6,
+      "theme": "binance",
+      "image": null
+    },
+    {
+      "id": "x2117262688812212626",
+      "platform": "X",
+      "type": "media",
+      "account": "BleepinComputer",
+      "org": "BleepingComputer",
+      "date_utc": "2026-11-02T14:28:56.000Z",
+      "date_publish_raw": "2026-11-02T14:28:56.000Z",
+      "date_ist": "2026-11-02 19:58",
+      "text": "Hackers disrupt refrigeration systems at European supermarkets\nhttps://t.co/UDF1zKlSDo\n\nhttps://t.co/UDF1zKlSDo",
+      "url": "https://x.com/BleepinComputer/status/2117262688812212626",
+      "metrics": {
+        "likes": 94,
+        "reposts": 26,
+        "replies": 12,
+        "quotes": 7
+      },
+      "engagement": 139,
+      "theme": "coldchain",
+      "image": null
+    },
+    {
+      "id": "x2117237103662625049",
+      "platform": "X",
+      "type": "media",
+      "account": "BleepinComputer",
+      "org": "BleepingComputer",
+      "date_utc": "2026-11-02T12:47:16.000Z",
+      "date_publish_raw": "2026-11-02T12:47:16.000Z",
+      "date_ist": "2026-11-02 18:17",
+      "text": "Over 1,000 GitLab servers vulnerable to ongoing RCE attacks\nhttps://t.co/YmxuPEvLJi\n\nhttps://t.co/YmxuPEvLJi",
+      "url": "https://x.com/BleepinComputer/status/2117237103662625049",
+      "metrics": {
+        "likes": 41,
+        "reposts": 15,
+        "replies": 12,
+        "quotes": 1
+      },
+      "engagement": 69,
+      "theme": "supplychain",
+      "image": null
+    },
+    {
+      "id": "x2117217829225427426",
+      "platform": "X",
+      "type": "media",
+      "account": "SecurityWeek",
+      "org": "SecurityWeek",
+      "date_utc": "2026-11-02T11:30:41.000Z",
+      "date_publish_raw": "2026-11-02T11:30:41.000Z",
+      "date_ist": "2026-11-02 17:00",
+      "text": "Malicious Claude Code Extension Served in Cursor Supply Chain Attack https://t.co/xVfL1LBoBj",
+      "url": "https://x.com/SecurityWeek/status/2117217829225427426",
+      "metrics": {
+        "likes": 13,
+        "reposts": 3,
+        "replies": 9,
+        "quotes": 0
+      },
+      "engagement": 25,
+      "theme": "supplychain",
+      "image": null
+    },
+    {
+      "id": "x2116591398073876550",
+      "platform": "X",
+      "type": "media",
+      "account": "BleepinComputer",
+      "org": "BleepingComputer",
+      "date_utc": "2026-10-31T18:01:28.000Z",
+      "date_publish_raw": "2026-10-31T18:01:28.000Z",
+      "date_ist": "2026-10-31 23:31",
+      "text": "Northflank security breach leads to abuse of customers' AI API keys\nhttps://t.co/NMcm6po8XO\n\nhttps://t.co/NMcm6po8XO",
+      "url": "https://x.com/BleepinComputer/status/2116591398073876550",
+      "metrics": {
+        "likes": 40,
+        "reposts": 12,
+        "replies": 22,
+        "quotes": 1
+      },
+      "engagement": 75,
+      "theme": "aiservices",
+      "image": null
+    },
+    {
+      "id": "x2116527655772447016",
+      "platform": "X",
+      "type": "media",
+      "account": "TheHackersNews",
+      "org": "The Hacker News",
+      "date_utc": "2026-10-31T13:48:10.000Z",
+      "date_publish_raw": "2026-10-31T13:48:10.000Z",
+      "date_ist": "2026-10-31 19:18",
+      "text": "UPDATE: Anthropic confirms its systems were NOT compromised in the Claude Code extension attack.\n\nAttackers distributed a trojanized update through Cursor's marketplace for nearly 12 hours.\n\nOfficial VS Code, Open VSX, and npm distributions were unaffected. https://t.co/2bnBbk3Sgz",
+      "url": "https://x.com/TheHackersNews/status/2116527655772447016",
+      "metrics": {
+        "likes": 198,
+        "reposts": 41,
+        "replies": 34,
+        "quotes": 6
+      },
+      "engagement": 279,
+      "theme": "supplychain",
+      "image": null
+    },
+    {
+      "id": "x2116513123347628212",
+      "platform": "X",
+      "type": "media",
+      "account": "BleepinComputer",
+      "org": "BleepingComputer",
+      "date_utc": "2026-10-31T12:50:26.000Z",
+      "date_publish_raw": "2026-10-31T12:50:26.000Z",
+      "date_ist": "2026-10-31 18:20",
+      "text": "Chainalysis discloses data breach from \"offensive agentic techniques\"\nhttps://t.co/YqcEWKa1oi\n\nhttps://t.co/YqcEWKa1oi",
+      "url": "https://x.com/BleepinComputer/status/2116513123347628212",
+      "metrics": {
+        "likes": 39,
+        "reposts": 9,
+        "replies": 19,
+        "quotes": 0
+      },
+      "engagement": 67,
+      "theme": "aiservices",
+      "image": null
+    },
+    {
+      "id": "x2116501537140961586",
+      "platform": "X",
+      "type": "media",
+      "account": "TheHackersNews",
+      "org": "The Hacker News",
+      "date_utc": "2026-10-31T12:04:23.000Z",
+      "date_publish_raw": "2026-10-31T12:04:23.000Z",
+      "date_ist": "2026-10-31 17:34",
+      "text": "🚨 Blockchain analysis firm Chainalysis confirms a data breach involving offensive agentic techniques.\n\nAn attacker gained access to internal systems and tools, exposing customer names, email addresses, user IDs, and organization roles.\n\nFull story: https://t.co/T17DPwfGnI",
+      "url": "https://x.com/TheHackersNews/status/2116501537140961586",
+      "metrics": {
+        "likes": 130,
+        "reposts": 31,
+        "replies": 40,
+        "quotes": 8
+      },
+      "engagement": 209,
+      "theme": "aiservices",
+      "image": null
+    },
+    {
+      "id": "x2116460418000658533",
+      "platform": "X",
+      "type": "media",
+      "account": "SecurityWeek",
+      "org": "SecurityWeek",
+      "date_utc": "2026-10-31T09:21:00.000Z",
+      "date_publish_raw": "2026-10-31T09:21:00.000Z",
+      "date_ist": "2026-10-31 14:51",
+      "text": "PHP2Shell Attacks Root Palo Alto Firewalls but Fail Against WordPress https://t.co/M2O0ZftYuH",
+      "url": "https://x.com/SecurityWeek/status/2116460418000658533",
+      "metrics": {
+        "likes": 5,
+        "reposts": 2,
+        "replies": 9,
+        "quotes": 0
+      },
+      "engagement": 16,
+      "theme": "runtime",
+      "image": null
+    },
+    {
+      "id": "x2116447646273695856",
+      "platform": "X",
+      "type": "media",
+      "account": "TheHackersNews",
+      "org": "The Hacker News",
+      "date_utc": "2026-10-31T08:30:15.000Z",
+      "date_publish_raw": "2026-10-31T08:30:15.000Z",
+      "date_ist": "2026-10-31 14:00",
+      "text": "🚨 Ivanti Connect Secure exploited in the wild.\n\nAttackers chained 3 flaws to execute code as root without authentication.\n\nCISA has now added 2 of those flaws to its Known Exploited Vulnerabilities catalog. Both are patched.\n\nHere's what happened ↓ https://t.co/U7lAwNXFmj https://t.co/Wsv8bxvLhU",
+      "url": "https://x.com/TheHackersNews/status/2116447646273695856",
+      "metrics": {
+        "likes": 98,
+        "reposts": 19,
+        "replies": 26,
+        "quotes": 2
+      },
+      "engagement": 145,
+      "theme": "edge",
+      "image": "https://pbs.twimg.com/media/HV8h6dhbQAIJeiV.jpg"
+    },
+    {
+      "id": "x2116403392734236962",
+      "platform": "X",
+      "type": "media",
+      "account": "TheHackersNews",
+      "org": "The Hacker News",
+      "date_utc": "2026-10-31T05:34:24.000Z",
+      "date_publish_raw": "2026-10-31T05:34:24.000Z",
+      "date_ist": "2026-10-31 11:04",
+      "text": "🚨 OpenAI fixed a ChatGPT flaw that allowed malicious shared links to execute attacker code in users' logged-in sessions and steal private chat content.\n\nResearchers demonstrated the attack.\n\nHere's how → https://t.co/zGsgFPV0Pq",
+      "url": "https://x.com/TheHackersNews/status/2116403392734236962",
+      "metrics": {
+        "likes": 147,
+        "reposts": 36,
+        "replies": 30,
+        "quotes": 9
+      },
+      "engagement": 222,
+      "theme": "aiservices",
+      "image": null
+    },
+    {
+      "id": "x2116369317810123112",
+      "platform": "X",
+      "type": "media",
+      "account": "SecurityWeek",
+      "org": "SecurityWeek",
+      "date_utc": "2026-10-31T03:19:00.000Z",
+      "date_publish_raw": "2026-10-31T03:19:00.000Z",
+      "date_ist": "2026-10-31 08:49",
+      "text": "$6 Billion Binance Hack Bears Hallmarks of North Korea’s TraderTraitor https://t.co/tXzxKSwmDW",
+      "url": "https://x.com/SecurityWeek/status/2116369317810123112",
+      "metrics": {
+        "likes": 2,
+        "reposts": 2,
+        "replies": 1,
+        "quotes": 1
+      },
+      "engagement": 6,
+      "theme": "binance",
+      "image": null
+    },
+    {
+      "id": "x2116357992983806271",
+      "platform": "X",
+      "type": "media",
+      "account": "SecurityWeek",
+      "org": "SecurityWeek",
+      "date_utc": "2026-10-31T02:34:00.000Z",
+      "date_publish_raw": "2026-10-31T02:34:00.000Z",
+      "date_ist": "2026-10-31 08:04",
+      "text": "Max-Severity GitLab Vulnerability Exploited Against Alpine Linux https://t.co/xO5VKnqWWl",
+      "url": "https://x.com/SecurityWeek/status/2116357992983806271",
+      "metrics": {
+        "likes": 6,
+        "reposts": 3,
+        "replies": 3,
+        "quotes": 0
+      },
+      "engagement": 12,
+      "theme": "supplychain",
+      "image": null
+    },
+    {
+      "id": "x2116336602049921207",
+      "platform": "X",
+      "type": "media",
+      "account": "SecurityWeek",
+      "org": "SecurityWeek",
+      "date_utc": "2026-10-31T01:09:00.000Z",
+      "date_publish_raw": "2026-10-31T01:09:00.000Z",
+      "date_ist": "2026-10-31 06:39",
+      "text": "Fresh WordPress Vulnerability in Attackers’ Crosshairs https://t.co/VAjnKZN1zi",
+      "url": "https://x.com/SecurityWeek/status/2116336602049921207",
+      "metrics": {
+        "likes": 8,
+        "reposts": 1,
+        "replies": 4,
+        "quotes": 0
+      },
+      "engagement": 13,
+      "theme": "runtime",
+      "image": null
+    },
+    {
+      "id": "x2117801119753851183",
+      "platform": "X",
+      "type": "independent",
+      "account": "commiepommie",
+      "org": "James Wood 武杰士",
+      "date_utc": "2026-11-04T02:08:28.000Z",
+      "date_publish_raw": "2026-11-04T02:08:28.000Z",
+      "date_ist": "2026-11-04 07:38",
+      "text": "🌍 Binance lost US$6.3 billion in the biggest crypto heist on record: However, its founder says banks are in a worse position\n\nOn 29 October, hackers drained about US$6.36 billion from Binance wallets across ten blockchains. Most of it went in roughly 20 minutes.\n\nThe haul https://t.co/y78huzRutx",
+      "url": "https://x.com/commiepommie/status/2117801119753851183",
+      "metrics": {
+        "likes": 23,
+        "reposts": 8,
+        "replies": 5,
+        "quotes": 1
+      },
+      "engagement": 37,
+      "theme": "binance",
+      "image": "https://pbs.twimg.com/media/HWPsZvFa0AAKEJt.jpg"
+    },
+    {
+      "id": "x2116213582278885437",
+      "platform": "X",
+      "type": "vendor",
+      "account": "FortiGuardLabs",
+      "org": "FortiGuard Labs",
+      "date_utc": "2026-10-30T17:00:10.000Z",
+      "date_publish_raw": "2026-10-30T17:00:10.000Z",
+      "date_ist": "2026-10-30 22:30",
+      "text": "Compressed data. Expanded risk. 💾 🚨\n\nOur team is tracking Node2Shell, a critical vulnerability in Google’s Brotli decoder that can allow specially crafted compressed data to corrupt memory and potentially enable remote code execution.\n\n🔗 Read our analysis and available https://t.co/0Btyy45yhC",
+      "url": "https://x.com/FortiGuardLabs/status/2116213582278885437",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "engagement": 0,
+      "theme": "runtime",
+      "image": null
+    },
+    {
+      "id": "x2117314565973184687",
+      "platform": "X",
+      "type": "vendor",
+      "account": "Unit42_Intel",
+      "org": "Unit 42",
+      "date_utc": "2026-11-02T17:55:04.000Z",
+      "date_publish_raw": "2026-11-02T17:55:04.000Z",
+      "date_ist": "2026-11-02 23:25",
+      "text": "We've observed intrusion attempts against multiple targets using #ARTEX, an openly published AI penetration-testing framework in which an LLM agent chooses each step of an attack. Details at https://t.co/YqDZrGsFan https://t.co/Cy6QmDwNpi",
+      "url": "https://x.com/Unit42_Intel/status/2117314565973184687",
+      "metrics": {
+        "likes": 341,
+        "reposts": 81,
+        "replies": 11,
+        "quotes": 6
+      },
+      "engagement": 439,
+      "theme": "aioffence",
+      "image": "https://pbs.twimg.com/media/HWI2YF5W8AAGq8w.jpg"
+    },
+    {
+      "id": "x2117537710457892939",
+      "platform": "X",
+      "type": "vendor",
+      "account": "CrowdStrike",
+      "org": "CrowdStrike",
+      "date_utc": "2026-11-03T08:41:46.000Z",
+      "date_publish_raw": "2026-11-03T08:41:46.000Z",
+      "date_ist": "2026-11-03 14:11",
+      "text": "Stop unauthorized AI agents in their tracks. 🛑\n\nToday, we announced new Falcon Guardian innovations that bring together agent-level hooks, endpoint network inspection, and Falcon AI Gateway to extend visibility and control from AI interaction to endpoint execution.\n\nLearn how we https://t.co/YrbW5WJJck",
+      "url": "https://x.com/CrowdStrike/status/2117537710457892939",
+      "metrics": {
+        "likes": 60,
+        "reposts": 2,
+        "replies": 1,
+        "quotes": 1
+      },
+      "engagement": 64,
+      "theme": "agentsecurity",
+      "image": null
+    },
+    {
+      "id": "x2117537184903238032",
+      "platform": "X",
+      "type": "vendor",
+      "account": "CrowdStrike",
+      "org": "CrowdStrike",
+      "date_utc": "2026-11-03T08:39:41.000Z",
+      "date_publish_raw": "2026-11-03T08:39:41.000Z",
+      "date_ist": "2026-11-03 14:09",
+      "text": "Introducing the AI Kill Switch in Falcon Guardian 🛑 \n\nWhen an AI agent goes rogue, defenders can now terminate it at the root, block relaunches, and cut network access. Get full human control for secure enterprise AI adoption. https://t.co/AkpkwMeHNe https://t.co/129UqSYUw5",
+      "url": "https://x.com/CrowdStrike/status/2117537184903238032",
+      "metrics": {
+        "likes": 146,
+        "reposts": 18,
+        "replies": 9,
+        "quotes": 17
+      },
+      "engagement": 190,
+      "theme": "agentsecurity",
+      "image": null
+    },
+    {
+      "id": "x2117536622849749165",
+      "platform": "X",
+      "type": "vendor",
+      "account": "CrowdStrike",
+      "org": "CrowdStrike",
+      "date_utc": "2026-11-03T08:37:27.000Z",
+      "date_publish_raw": "2026-11-03T08:37:27.000Z",
+      "date_ist": "2026-11-03 14:07",
+      "text": "AI agents can make unsupported decisions or take unintended actions without ever being compromised. Enterprises need to know what their agents did, and why.\n\nToday, CrowdStrike announced its intent to acquire @fiddler_ai, bringing AI observability and agent explainability to the https://t.co/oKzt5XpcXk",
+      "url": "https://x.com/CrowdStrike/status/2117536622849749165",
+      "metrics": {
+        "likes": 93,
+        "reposts": 7,
+        "replies": 6,
+        "quotes": 5
+      },
+      "engagement": 111,
+      "theme": "agentsecurity",
+      "image": null
+    },
+    {
+      "id": "x2117376454128177322",
+      "platform": "X",
+      "type": "vendor",
+      "account": "SentinelOne",
+      "org": "SentinelOne",
+      "date_utc": "2026-11-02T22:01:00.000Z",
+      "date_publish_raw": "2026-11-02T22:01:00.000Z",
+      "date_ist": "2026-11-03 03:31",
+      "text": "We’re committed to defending the surfaces AI runs on. Today, we announced an integration with Anthropic’s @claudeai Cowork to extend AI Security coverage to one of the most popular agentic work apps. \n\nRuntime security will run inside the Cowork VM so security teams can:\n→ See https://t.co/eI93FoPUtZ",
+      "url": "https://x.com/SentinelOne/status/2117376454128177322",
+      "metrics": {
+        "likes": 16,
+        "reposts": 2,
+        "replies": 2,
+        "quotes": 1
+      },
+      "engagement": 21,
+      "theme": "agentsecurity",
+      "image": null
+    },
+    {
+      "id": "x2117376222476861671",
+      "platform": "X",
+      "type": "vendor",
+      "account": "SentinelOne",
+      "org": "SentinelOne",
+      "date_utc": "2026-11-02T22:00:05.000Z",
+      "date_publish_raw": "2026-11-02T22:00:05.000Z",
+      "date_ist": "2026-11-03 03:30",
+      "text": "We’re committed to defending the surfaces AI runs on. Today, we announced an integration with Anthropic’s @claudeai Cowork (@Claude for Business) to extend AI Security coverage to one of the most popular agentic work apps. \n\nRuntime security will run inside the Cowork VM so https://t.co/iofTYkKSSe",
+      "url": "https://x.com/SentinelOne/status/2117376222476861671",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "engagement": 0,
+      "theme": "agentsecurity",
+      "image": null
+    },
+    {
+      "id": "x2117272269051289841",
+      "platform": "X",
+      "type": "vendor",
+      "account": "TalosSecurity",
+      "org": "Cisco Talos Intelligence Group",
+      "date_utc": "2026-11-02T15:07:00.000Z",
+      "date_publish_raw": "2026-11-02T15:07:00.000Z",
+      "date_ist": "2026-11-02 20:37",
+      "text": "Time for another TL;DR. Talos uncovered \"NIK C2,\" a sophisticated new AI-integrated C2 framework that streamlines cyber attacks, from data theft to ransomware: https://t.co/dRhABaI6XR https://t.co/3q7wsor8nn",
+      "url": "https://x.com/TalosSecurity/status/2117272269051289841",
+      "metrics": {
+        "likes": 4,
+        "reposts": 0,
+        "replies": 5,
+        "quotes": 0
+      },
+      "engagement": 9,
+      "theme": "aioffence",
+      "image": null
+    },
+    {
+      "id": "x2116504206932582445",
+      "platform": "X",
+      "type": "vendor",
+      "account": "TalosSecurity",
+      "org": "Cisco Talos Intelligence Group",
+      "date_utc": "2026-10-31T12:15:00.000Z",
+      "date_publish_raw": "2026-10-31T12:15:00.000Z",
+      "date_ist": "2026-10-31 17:45",
+      "text": "Sorting through mountains of stolen credentials is a major headache for attackers, so why not outsource the grunt work to AI? Talos' latest research on the VOLTA infostealer shows how it uses LLMs to profile victims and rank their most valuable assets: https://t.co/M6fL7BluTD https://t.co/h1cmTv2GdK",
+      "url": "https://x.com/TalosSecurity/status/2116504206932582445",
+      "metrics": {
+        "likes": 9,
+        "reposts": 4,
+        "replies": 1,
+        "quotes": 4
+      },
+      "engagement": 18,
+      "theme": "aioffence",
+      "image": "https://pbs.twimg.com/media/HV612mBWIAIuJGp.jpg"
+    },
+    {
+      "id": "x2116336930967240954",
+      "platform": "X",
+      "type": "vendor",
+      "account": "MsftSecIntel",
+      "org": "Microsoft Threat Intelligence",
+      "date_utc": "2026-10-31T01:10:18.000Z",
+      "date_publish_raw": "2026-10-31T01:10:18.000Z",
+      "date_ist": "2026-10-31 06:40",
+      "text": "On October 29, 2026, Cursor reported that a tampered copy of Claude Code extension (anthropic.claude-code, version 2.1.313 and 2.1.312) was available and served on the Cursor extension marketplace for a few hours. https://t.co/ajUafvclTa \n\nMicrosoft has confirmed that the",
+      "url": "https://x.com/MsftSecIntel/status/2116336930967240954",
+      "metrics": {
+        "likes": 90,
+        "reposts": 23,
+        "replies": 19,
+        "quotes": 7
+      },
+      "engagement": 139,
+      "theme": "supplychain",
+      "image": null
+    },
+    {
+      "id": "x2117497003009798501",
+      "platform": "X",
+      "type": "media",
+      "account": "TheHackersNews",
+      "org": "The Hacker News",
+      "date_utc": "2026-11-03T06:00:01.000Z",
+      "date_publish_raw": "2026-11-03T06:00:01.000Z",
+      "date_ist": "2026-11-03 11:30",
+      "text": "🚨 Critical Siemens IoT2050 flaw under active exploitation.\n\nAttackers are abusing CVE-2026-58115 (CVSS 10.0) to push Linux bot payloads and create remote command backdoors via Node-RED.\n\nVulnCheck captured the exploit attempts on its honeypots.\n\nHow the attacks work ↓ https://t.co/a9iWv5kDdq",
+      "url": "https://x.com/TheHackersNews/status/2117497003009798501",
+      "metrics": {
+        "likes": 169,
+        "reposts": 39,
+        "replies": 20,
+        "quotes": 9
+      },
+      "engagement": 237,
+      "theme": "edge",
+      "image": "https://pbs.twimg.com/media/HWLXlbCbkAAySyB.jpg"
+    },
+    {
+      "id": "x2117491034406125678",
+      "platform": "X",
+      "type": "media",
+      "account": "TheHackersNews",
+      "org": "The Hacker News",
+      "date_utc": "2026-11-03T05:36:18.000Z",
+      "date_publish_raw": "2026-11-03T05:36:18.000Z",
+      "date_ist": "2026-11-03 11:06",
+      "text": "🚨 Attackers are targeting an unpatched CVSS 10.0 flaw in the CryptoPayment Gateway WordPress plugin.\n\nCVE-2026-81648 can let unauthenticated attackers extract wallet credentials, delete server files, and overwrite payment settings.\n\nNo known fix. Exploitation attempts observed https://t.co/DvMq6YpJe8",
+      "url": "https://x.com/TheHackersNews/status/2117491034406125678",
+      "metrics": {
+        "likes": 183,
+        "reposts": 60,
+        "replies": 15,
+        "quotes": 4
+      },
+      "engagement": 262,
+      "theme": "runtime",
+      "image": "https://pbs.twimg.com/media/HWLW3j2aUAArs2M.jpg"
+    },
+    {
+      "id": "x2117429050243535100",
+      "platform": "X",
+      "type": "media",
+      "account": "SecurityWeek",
+      "org": "SecurityWeek",
+      "date_utc": "2026-11-03T01:30:00.000Z",
+      "date_publish_raw": "2026-11-03T01:30:00.000Z",
+      "date_ist": "2026-11-03 07:00",
+      "text": "Malicious Claude Code Extension Served in Cursor Supply Chain Attack https://t.co/xVfL1LBoBj",
+      "url": "https://x.com/SecurityWeek/status/2117429050243535100",
+      "metrics": {
+        "likes": 7,
+        "reposts": 0,
+        "replies": 6,
+        "quotes": 0
+      },
+      "engagement": 13,
+      "theme": "supplychain",
+      "image": null
+    },
+    {
+      "id": "x2117188412130091316",
+      "platform": "X",
+      "type": "media",
+      "account": "BleepinComputer",
+      "org": "BleepingComputer",
+      "date_utc": "2026-11-02T09:33:47.000Z",
+      "date_publish_raw": "2026-11-02T09:33:47.000Z",
+      "date_ist": "2026-11-02 15:03",
+      "text": "Ivanti patches two more Connect Secure zero-days chained in attacks\nhttps://t.co/Tjf2KEFgaB\n\nhttps://t.co/Tjf2KEFgaB",
+      "url": "https://x.com/BleepinComputer/status/2117188412130091316",
+      "metrics": {
+        "likes": 54,
+        "reposts": 14,
+        "replies": 10,
+        "quotes": 1
+      },
+      "engagement": 79,
+      "theme": "edge",
+      "image": null
+    },
+    {
+      "id": "x2117164748399882629",
+      "platform": "X",
+      "type": "media",
+      "account": "SecurityWeek",
+      "org": "SecurityWeek",
+      "date_utc": "2026-11-02T07:59:45.000Z",
+      "date_publish_raw": "2026-11-02T07:59:45.000Z",
+      "date_ist": "2026-11-02 13:29",
+      "text": "Ivanti Patches Two More Zero-Days Exploited in Connect Secure Attack Chain https://t.co/J6A0tfa5Yg",
+      "url": "https://x.com/SecurityWeek/status/2117164748399882629",
+      "metrics": {
+        "likes": 4,
+        "reposts": 1,
+        "replies": 1,
+        "quotes": 1
+      },
+      "engagement": 7,
+      "theme": "edge",
+      "image": null
+    },
+    {
+      "id": "x2117132687920284045",
+      "platform": "X",
+      "type": "media",
+      "account": "TheHackersNews",
+      "org": "The Hacker News",
+      "date_utc": "2026-11-02T05:52:21.000Z",
+      "date_publish_raw": "2026-11-02T05:52:21.000Z",
+      "date_ist": "2026-11-02 11:22",
+      "text": "🚨 New VOLTA infostealer uses Claude, Gemini, and Kimi to rank stolen data by its value to attackers.\n\nIt steals passwords, cookies, and crypto wallet data, checks Gmail receipts to verify victim details, and sends AI-generated target dossiers via Telegram.\n\nHow it works ↓ https://t.co/JvDtm42NqG",
+      "url": "https://x.com/TheHackersNews/status/2117132687920284045",
+      "metrics": {
+        "likes": 139,
+        "reposts": 42,
+        "replies": 43,
+        "quotes": 6
+      },
+      "engagement": 230,
+      "theme": "aioffence",
+      "image": "https://pbs.twimg.com/media/HWGQ9GbaQAAxUK2.jpg"
+    },
+    {
+      "id": "x2116818971773309278",
+      "platform": "X",
+      "type": "media",
+      "account": "TheHackersNews",
+      "org": "The Hacker News",
+      "date_utc": "2026-11-01T09:05:46.000Z",
+      "date_publish_raw": "2026-11-01T09:05:46.000Z",
+      "date_ist": "2026-11-01 14:35",
+      "text": "‼️ A critical flaw in Canonical's LXD and MicroCloud (CVE-2026-112816, CVSS 10.0) lets attackers impersonate trusted clients without their private keys.\n\nRequires HTTPS API access and a trusted client's public certificate.\n\n→ Cluster and VM access\n→ Host root access if the https://t.co/FibJVDX4LP",
+      "url": "https://x.com/TheHackersNews/status/2116818971773309278",
+      "metrics": {
+        "likes": 267,
+        "reposts": 55,
+        "replies": 37,
+        "quotes": 9
+      },
+      "engagement": 368,
+      "theme": "runtime",
+      "image": "https://pbs.twimg.com/media/HWBzoeZa0AEireO.jpg"
+    },
+    {
+      "id": "x2116602735219163640",
+      "platform": "X",
+      "type": "media",
+      "account": "TheHackersNews",
+      "org": "The Hacker News",
+      "date_utc": "2026-10-31T18:46:31.000Z",
+      "date_publish_raw": "2026-10-31T18:46:31.000Z",
+      "date_ist": "2026-11-01 00:16",
+      "text": "🚨 UPDATE: Cursor confirms two versions of Anthropic's Claude Code extension were affected by the SSH backdoor attack: v2.1.312 and v2.1.313 for Windows and macOS.\n\nhttps://t.co/GPsfDiUIz6 https://t.co/uKFK1KUinJ https://t.co/2bnBbk3Sgz",
+      "url": "https://x.com/TheHackersNews/status/2116602735219163640",
+      "metrics": {
+        "likes": 234,
+        "reposts": 61,
+        "replies": 41,
+        "quotes": 10
+      },
+      "engagement": 346,
+      "theme": "supplychain",
+      "image": "https://pbs.twimg.com/media/HV-u9iKbAAAaFfb.jpg"
+    },
+    {
+      "id": "x2117633188894007375",
+      "platform": "X",
+      "type": "vendor",
+      "account": "CrowdStrike",
+      "org": "CrowdStrike",
+      "date_utc": "2026-11-03T15:01:10.000Z",
+      "date_publish_raw": "2026-11-03T15:01:10.000Z",
+      "date_ist": "2026-11-03 20:31",
+      "text": "ICYMI: Today at #FalConEurope, @George_Kurtz announced the AI Kill Switch, putting control back in human hands so organizations can move faster with AI, safely. https://t.co/ROb8ZGREr3",
+      "url": "https://x.com/CrowdStrike/status/2117633188894007375",
+      "metrics": {
+        "likes": 15,
+        "reposts": 3,
+        "replies": 4,
+        "quotes": 3
+      },
+      "engagement": 25,
+      "theme": "agentsecurity",
+      "image": null
+    },
+    {
+      "id": "x2117600923929243678",
+      "platform": "X",
+      "type": "vendor",
+      "account": "CrowdStrike",
+      "org": "CrowdStrike",
+      "date_utc": "2026-11-03T12:52:58.000Z",
+      "date_publish_raw": "2026-11-03T12:52:58.000Z",
+      "date_ist": "2026-11-03 18:22",
+      "text": "Rogue AI agents can't wait for a support ticket.\n\nIn @Forbes, CrowdStrike CPO AJ Shipley discusses Falcon Guardian's new kill switch capability and why stopping rogue agents requires surgical precision, not just an off button.\n\nRead more: https://t.co/SKTdXyB8nr https://t.co/EtNdzQb1RA",
+      "url": "https://x.com/CrowdStrike/status/2117600923929243678",
+      "metrics": {
+        "likes": 16,
+        "reposts": 1,
+        "replies": 5,
+        "quotes": 3
+      },
+      "engagement": 25,
+      "theme": "agentsecurity",
+      "image": "https://pbs.twimg.com/media/HWM60VOWUAAT-Gg.jpg"
+    },
+    {
+      "id": "x2117549711431225711",
+      "platform": "X",
+      "type": "vendor",
+      "account": "CrowdStrike",
+      "org": "CrowdStrike",
+      "date_utc": "2026-11-03T09:29:28.000Z",
+      "date_publish_raw": "2026-11-03T09:29:28.000Z",
+      "date_ist": "2026-11-03 14:59",
+      "text": "CrowdStrike is bringing Falcon Guardian AIDR natively into @AnthropicAI's Claude Cowork.\n\nThe integration extends Falcon protection to AI agents from creation through execution, helping enterprises detect threats and maintain security control.\n\nLearn more: https://t.co/NOheOV7idP https://t.co/xqN1jTEu4t",
+      "url": "https://x.com/CrowdStrike/status/2117549711431225711",
+      "metrics": {
+        "likes": 41,
+        "reposts": 6,
+        "replies": 2,
+        "quotes": 3
+      },
+      "engagement": 52,
+      "theme": "agentsecurity",
+      "image": null
+    },
+    {
+      "id": "x2118009669239153074",
+      "platform": "X",
+      "type": "vendor",
+      "account": "SentinelOne",
+      "org": "SentinelOne",
+      "date_utc": "2026-11-04T15:57:10.000Z",
+      "date_publish_raw": "2026-11-04T15:57:10.000Z",
+      "date_ist": "2026-11-04 21:27",
+      "text": "AI can reverse engineer malware. We'd still like to see the receipts.\n\n@LabsSentinel developed VerifiedIDA to keep LLM-driven analysis tied to evidence, open to review, and reusable across security workflows.\n\nExplore the full research: https://t.co/zPiqAPtcaE",
+      "url": "https://x.com/SentinelOne/status/2118009669239153074",
+      "metrics": {
+        "likes": 9,
+        "reposts": 2,
+        "replies": 0,
+        "quotes": 0
+      },
+      "engagement": 11,
+      "theme": "agentsecurity",
+      "image": null
+    },
+    {
+      "id": "x2118009614285586844",
+      "platform": "X",
+      "type": "vendor",
+      "account": "SentinelOne",
+      "org": "SentinelOne",
+      "date_utc": "2026-11-04T15:56:57.000Z",
+      "date_publish_raw": "2026-11-04T15:56:57.000Z",
+      "date_ist": "2026-11-04 21:26",
+      "text": "AI can reverse engineer malware. We'd still like to see the receipts.\n\n@LabsSentinel developed VerifiedIDA to keep LLM-driven analysis tied to evidence, open to review, and reusable across security workflows.\n\nExplore the full research: https://t.co/zPiqAPtK0c",
+      "url": "https://x.com/SentinelOne/status/2118009614285586844",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "engagement": 0,
+      "theme": "agentsecurity",
+      "image": null
+    },
+    {
+      "id": "x2117934889701900640",
+      "platform": "X",
+      "type": "vendor",
+      "account": "CrowdStrike",
+      "org": "CrowdStrike",
+      "date_utc": "2026-11-04T11:00:01.000Z",
+      "date_publish_raw": "2026-11-04T11:00:01.000Z",
+      "date_ist": "2026-11-04 16:30",
+      "text": "The AI Kill Switch is here.\n\n@George_Kurtz joined @jimcramer on @CNBC's Mad Money to discuss how CrowdStrike is moving beyond cybersecurity to AI safety, giving organizations the power to stop rogue AI agents in their tracks.\n\nGeorge also highlighted our new collaboration with https://t.co/UChTtrwTY6",
+      "url": "https://x.com/CrowdStrike/status/2117934889701900640",
+      "metrics": {
+        "likes": 45,
+        "reposts": 13,
+        "replies": 13,
+        "quotes": 4
+      },
+      "engagement": 75,
+      "theme": "agentsecurity",
+      "image": "https://pbs.twimg.com/media/HWRqjptXsAA6lTn.jpg"
+    },
+    {
+      "id": "x2118263059991134550",
+      "platform": "X",
+      "type": "media",
+      "account": "TheHackersNews",
+      "org": "The Hacker News",
+      "date_utc": "2026-11-05T08:44:03.000Z",
+      "date_publish_raw": "2026-11-05T08:44:03.000Z",
+      "date_ist": "2026-11-05 14:14",
+      "text": "‼️ A backdoored AI hacking tool is exposing servers to root access without authentication.\n\nA malicious Docker image for ARTEX hides a root shell in its login handler.\n\nResearchers found 62 internet-facing consoles running the backdoored build.\n\nRead: https://t.co/JiUtfukLWG",
+      "url": "https://x.com/TheHackersNews/status/2118263059991134550",
+      "metrics": {
+        "likes": 285,
+        "reposts": 62,
+        "replies": 30,
+        "quotes": 7
+      },
+      "engagement": 384,
+      "theme": "aioffence",
+      "image": null
+    },
+    {
+      "id": "x2117730885340414003",
+      "platform": "X",
+      "type": "media",
+      "account": "BleepinComputer",
+      "org": "BleepingComputer",
+      "date_utc": "2026-11-03T21:29:23.000Z",
+      "date_publish_raw": "2026-11-03T21:29:23.000Z",
+      "date_ist": "2026-11-04 02:59",
+      "text": "WorkOS says attacker used ARTEX AI to breach internal sales app\nhttps://t.co/kQ5QNEkDDl\n\nhttps://t.co/kQ5QNEkDDl",
+      "url": "https://x.com/BleepinComputer/status/2117730885340414003",
+      "metrics": {
+        "likes": 18,
+        "reposts": 3,
+        "replies": 8,
+        "quotes": 0
+      },
+      "engagement": 29,
+      "theme": "aioffence",
+      "image": null
+    },
+    {
+      "id": "x2117371298997256565",
+      "platform": "X",
+      "type": "media",
+      "account": "BleepinComputer",
+      "org": "BleepingComputer",
+      "date_utc": "2026-11-02T21:40:31.000Z",
+      "date_publish_raw": "2026-11-02T21:40:31.000Z",
+      "date_ist": "2026-11-03 03:10",
+      "text": "Chinese hackers use ARTEX AI in automated attacks against 200 orgs\nhttps://t.co/EhOBwuB6lf\n\nhttps://t.co/EhOBwuB6lf",
+      "url": "https://x.com/BleepinComputer/status/2117371298997256565",
+      "metrics": {
+        "likes": 154,
+        "reposts": 33,
+        "replies": 21,
+        "quotes": 6
+      },
+      "engagement": 214,
+      "theme": "aioffence",
+      "image": null
+    },
+    {
+      "id": "x2116213535223296033",
+      "platform": "X",
+      "type": "media",
+      "account": "TheHackersNews",
+      "org": "The Hacker News",
+      "date_utc": "2026-10-30T16:59:58.000Z",
+      "date_publish_raw": "2026-10-30T16:59:58.000Z",
+      "date_ist": "2026-10-30 22:29",
+      "text": "🚨 Chinese state-sponsored hackers used AI-powered ARTEX to target over 200 organizations worldwide.\n\nCrowdStrike confirms post-exploitation at nine, including deployment of BLOODALCHEMY malware.\n\nAI agents ran parallel attack paths under human direction.\n\nFull story: https://t.co/mu5GZkMpMi",
+      "url": "https://x.com/TheHackersNews/status/2116213535223296033",
+      "metrics": {
+        "likes": 319,
+        "reposts": 71,
+        "replies": 25,
+        "quotes": 8
+      },
+      "engagement": 423,
+      "theme": "aioffence",
+      "image": "https://pbs.twimg.com/media/HV5M_ckbcAAXEiQ.jpg"
+    },
+    {
+      "id": "x2118175972138828020",
+      "platform": "X",
+      "type": "media",
+      "account": "SecurityWeek",
+      "org": "SecurityWeek",
+      "date_utc": "2026-11-05T02:58:00.000Z",
+      "date_publish_raw": "2026-11-05T02:58:00.000Z",
+      "date_ist": "2026-11-05 08:28",
+      "text": "Malicious cPGuard Updates Served in OpsShield Supply Chain Attack https://t.co/PqPXX80IsA",
+      "url": "https://x.com/SecurityWeek/status/2118175972138828020",
+      "metrics": {
+        "likes": 3,
+        "reposts": 0,
+        "replies": 2,
+        "quotes": 0
+      },
+      "engagement": 5,
+      "theme": "supplychain",
+      "image": null
+    },
+    {
+      "id": "x2118172197105639855",
+      "platform": "X",
+      "type": "media",
+      "account": "SecurityWeek",
+      "org": "SecurityWeek",
+      "date_utc": "2026-11-05T02:43:00.000Z",
+      "date_publish_raw": "2026-11-05T02:43:00.000Z",
+      "date_ist": "2026-11-05 08:13",
+      "text": "Rigged Coding Assignment, Abused AI Tool Opened Path to $6 Billion Binance Heist https://t.co/W0R570WP0f",
+      "url": "https://x.com/SecurityWeek/status/2118172197105639855",
+      "metrics": {
+        "likes": 5,
+        "reposts": 0,
+        "replies": 5,
+        "quotes": 1
+      },
+      "engagement": 11,
+      "theme": "binance",
+      "image": null
+    },
+    {
+      "id": "x2118091918143799344",
+      "platform": "X",
+      "type": "media",
+      "account": "SecurityWeek",
+      "org": "SecurityWeek",
+      "date_utc": "2026-11-04T21:24:00.000Z",
+      "date_publish_raw": "2026-11-04T21:24:00.000Z",
+      "date_ist": "2026-11-05 02:54",
+      "text": "North Korea Launches Missiles Toward the Sea as Pyongyang Protests Against US Claims on Binance Hack https://t.co/4bvXj09BnY",
+      "url": "https://x.com/SecurityWeek/status/2118091918143799344",
+      "metrics": {
+        "likes": 1,
+        "reposts": 0,
+        "replies": 1,
+        "quotes": 0
+      },
+      "engagement": 2,
+      "theme": "binance",
+      "image": null
+    },
+    {
+      "id": "x2118042100981801056",
+      "platform": "X",
+      "type": "media",
+      "account": "DarkReading",
+      "org": "Dark Reading",
+      "date_utc": "2026-11-04T18:06:02.000Z",
+      "date_publish_raw": "2026-11-04T18:06:02.000Z",
+      "date_ist": "2026-11-04 23:36",
+      "text": "Google, Partners Disrupts 1.3 Million-Device-Strong XCPE Botnet https://t.co/0P9oF5kTKt by Elizabeth Montalbano",
+      "url": "https://x.com/DarkReading/status/2118042100981801056",
+      "metrics": {
+        "likes": 4,
+        "reposts": 2,
+        "replies": 3,
+        "quotes": 0
+      },
+      "engagement": 9,
+      "theme": "xcpe",
+      "image": null
+    },
+    {
+      "id": "x2118041393658527927",
+      "platform": "X",
+      "type": "media",
+      "account": "BleepinComputer",
+      "org": "BleepingComputer",
+      "date_utc": "2026-11-04T18:03:14.000Z",
+      "date_publish_raw": "2026-11-04T18:03:14.000Z",
+      "date_ist": "2026-11-04 23:33",
+      "text": "Cyberattack disrupts blood storage refrigeration systems in France\nhttps://t.co/bG8yhMjAGY\n\nhttps://t.co/bG8yhMjAGY",
+      "url": "https://x.com/BleepinComputer/status/2118041393658527927",
+      "metrics": {
+        "likes": 47,
+        "reposts": 16,
+        "replies": 6,
+        "quotes": 4
+      },
+      "engagement": 73,
+      "theme": "coldchain",
+      "image": null
+    },
+    {
+      "id": "x2118014870394380622",
+      "platform": "X",
+      "type": "media",
+      "account": "TheHackersNews",
+      "org": "The Hacker News",
+      "date_utc": "2026-11-04T16:17:50.000Z",
+      "date_publish_raw": "2026-11-04T16:17:50.000Z",
+      "date_ist": "2026-11-04 21:47",
+      "text": "‼️ UPDATE - The cPGuard attacker used a fake customer account and free trial to breach OPSSHIELD's billing server.\n\nThey stole a software update signing key and used it to push malware to nearly 3,000 #Linux servers.\n\nOPSSHIELD is now reissuing all cPGuard license keys.\n\nDetails https://t.co/cYf6FHTdKP",
+      "url": "https://x.com/TheHackersNews/status/2118014870394380622",
+      "metrics": {
+        "likes": 48,
+        "reposts": 14,
+        "replies": 13,
+        "quotes": 2
+      },
+      "engagement": 77,
+      "theme": "supplychain",
+      "image": "https://pbs.twimg.com/media/HWSyeeIaMAAVFFy.jpg"
+    },
+    {
+      "id": "x2117982027068977473",
+      "platform": "X",
+      "type": "media",
+      "account": "TheRecord_Media",
+      "org": "The Record From Recorded Future News",
+      "date_utc": "2026-11-04T14:07:20.000Z",
+      "date_publish_raw": "2026-11-04T14:07:20.000Z",
+      "date_ist": "2026-11-04 19:37",
+      "text": "Temperature controls were altered at three of France’s national blood service sites this week amid a wave of cyberattacks affecting refrigeration systems across Europe https://t.co/QNf1GmMMK6",
+      "url": "https://x.com/TheRecord_Media/status/2117982027068977473",
+      "metrics": {
+        "likes": 12,
+        "reposts": 5,
+        "replies": 5,
+        "quotes": 2
+      },
+      "engagement": 24,
+      "theme": "coldchain",
+      "image": null
+    },
+    {
+      "id": "x2117952500170997883",
+      "platform": "X",
+      "type": "media",
+      "account": "TheHackersNews",
+      "org": "The Hacker News",
+      "date_utc": "2026-11-04T12:10:00.000Z",
+      "date_publish_raw": "2026-11-04T12:10:00.000Z",
+      "date_ist": "2026-11-04 17:40",
+      "text": "‼️ Two Xen hypervisor flaws found using Anthropic's Claude allow a malicious guest VM to read and write memory belonging to other VMs, including privileged dom0.\n\n• Xen 4.6+ affected\n• Patches for 4.17+, none for 4.6–4.16\n• No known workaround\n• Qubes OS and XCP-ng affected https://t.co/Rrwd3UzXpy",
+      "url": "https://x.com/TheHackersNews/status/2117952500170997883",
+      "metrics": {
+        "likes": 89,
+        "reposts": 24,
+        "replies": 16,
+        "quotes": 2
+      },
+      "engagement": 131,
+      "theme": "runtime",
+      "image": "https://pbs.twimg.com/media/HWR2rPWbwAEOyfI.jpg"
+    },
+    {
+      "id": "x2117934582402277814",
+      "platform": "X",
+      "type": "media",
+      "account": "SecurityWeek",
+      "org": "SecurityWeek",
+      "date_utc": "2026-11-04T10:58:48.000Z",
+      "date_publish_raw": "2026-11-04T10:58:48.000Z",
+      "date_ist": "2026-11-04 16:28",
+      "text": "Malicious cPGuard Updates Served in OpsShield Supply Chain Attack https://t.co/PqPXX80IsA",
+      "url": "https://x.com/SecurityWeek/status/2117934582402277814",
+      "metrics": {
+        "likes": 2,
+        "reposts": 1,
+        "replies": 4,
+        "quotes": 0
+      },
+      "engagement": 7,
+      "theme": "supplychain",
+      "image": null
+    },
+    {
+      "id": "x2117930596764655858",
+      "platform": "X",
+      "type": "media",
+      "account": "SecurityWeek",
+      "org": "SecurityWeek",
+      "date_utc": "2026-11-04T10:42:58.000Z",
+      "date_publish_raw": "2026-11-04T10:42:58.000Z",
+      "date_ist": "2026-11-04 16:12",
+      "text": "Rigged Coding Assignment, Abused AI Tool Opened Path to $6 Billion Binance Heist https://t.co/W0R570WP0f",
+      "url": "https://x.com/SecurityWeek/status/2117930596764655858",
+      "metrics": {
+        "likes": 1,
+        "reposts": 1,
+        "replies": 5,
+        "quotes": 0
+      },
+      "engagement": 7,
+      "theme": "binance",
+      "image": null
+    },
+    {
+      "id": "x2117910933414555847",
+      "platform": "X",
+      "type": "media",
+      "account": "SecurityWeek",
+      "org": "SecurityWeek",
+      "date_utc": "2026-11-04T09:24:50.000Z",
+      "date_publish_raw": "2026-11-04T09:24:50.000Z",
+      "date_ist": "2026-11-04 14:54",
+      "text": "North Korea Launches Missiles Toward the Sea as Pyongyang Protests Against US Claims on Binance Hack https://t.co/4bvXj09BnY",
+      "url": "https://x.com/SecurityWeek/status/2117910933414555847",
+      "metrics": {
+        "likes": 3,
+        "reposts": 1,
+        "replies": 0,
+        "quotes": 0
+      },
+      "engagement": 4,
+      "theme": "binance",
+      "image": null
+    },
+    {
+      "id": "x2117759477806203244",
+      "platform": "X",
+      "type": "media",
+      "account": "SecurityWeek",
+      "org": "SecurityWeek",
+      "date_utc": "2026-11-03T23:23:00.000Z",
+      "date_publish_raw": "2026-11-03T23:23:00.000Z",
+      "date_ist": "2026-11-04 04:53",
+      "text": "Google Dismantles XCPE Botnet of 1.3 Million Android Devices https://t.co/QDHpqdZ7uq",
+      "url": "https://x.com/SecurityWeek/status/2117759477806203244",
+      "metrics": {
+        "likes": 4,
+        "reposts": 0,
+        "replies": 6,
+        "quotes": 0
+      },
+      "engagement": 10,
+      "theme": "xcpe",
+      "image": null
+    },
+    {
+      "id": "x2117743391333040435",
+      "platform": "X",
+      "type": "media",
+      "account": "BleepinComputer",
+      "org": "BleepingComputer",
+      "date_utc": "2026-11-03T22:19:04.000Z",
+      "date_publish_raw": "2026-11-03T22:19:04.000Z",
+      "date_ist": "2026-11-04 03:49",
+      "text": "Hackers hijack cPGuard autoupdate to deploy backdoor, steal data\nhttps://t.co/AMWJLPccQx\n\nhttps://t.co/AMWJLPccQx",
+      "url": "https://x.com/BleepinComputer/status/2117743391333040435",
+      "metrics": {
+        "likes": 26,
+        "reposts": 5,
+        "replies": 9,
+        "quotes": 2
+      },
+      "engagement": 42,
+      "theme": "supplychain",
+      "image": null
+    },
+    {
+      "id": "x2117709918148931700",
+      "platform": "X",
+      "type": "media",
+      "account": "BleepinComputer",
+      "org": "BleepingComputer",
+      "date_utc": "2026-11-03T20:06:04.000Z",
+      "date_publish_raw": "2026-11-03T20:06:04.000Z",
+      "date_ist": "2026-11-04 01:36",
+      "text": "Binance says fake job interview led to $6.3 billion crypto heist\nhttps://t.co/zioxBwCobK\n\nhttps://t.co/zioxBwCobK",
+      "url": "https://x.com/BleepinComputer/status/2117709918148931700",
+      "metrics": {
+        "likes": 56,
+        "reposts": 11,
+        "replies": 14,
+        "quotes": 1
+      },
+      "engagement": 82,
+      "theme": "binance",
+      "image": null
+    },
+    {
+      "id": "x2117685241171087755",
+      "platform": "X",
+      "type": "media",
+      "account": "DarkReading",
+      "org": "Dark Reading",
+      "date_utc": "2026-11-03T18:28:00.000Z",
+      "date_publish_raw": "2026-11-03T18:28:00.000Z",
+      "date_ist": "2026-11-03 23:58",
+      "text": "One Compromised Laptop, Billions Lost: The Binance Attack-Path Warning https://t.co/4OwcnODYTn by Jai Vijayan",
+      "url": "https://x.com/DarkReading/status/2117685241171087755",
+      "metrics": {
+        "likes": 5,
+        "reposts": 0,
+        "replies": 3,
+        "quotes": 1
+      },
+      "engagement": 9,
+      "theme": "binance",
+      "image": null
+    },
+    {
+      "id": "x2117662703489786219",
+      "platform": "X",
+      "type": "media",
+      "account": "TheHackersNews",
+      "org": "The Hacker News",
+      "date_utc": "2026-11-03T16:58:27.000Z",
+      "date_publish_raw": "2026-11-03T16:58:27.000Z",
+      "date_ist": "2026-11-03 22:28",
+      "text": "‼️ Binance reveals how hackers pulled off a $6.43 BILLION crypto theft.\n\nFake job interviews, a trojanized Homebrew installer, and abuse of an internal AI tool were part of the attack that compromised engineers and reached Binance's wallet signing service.\n\nFull details ↓ https://t.co/izxD2rcrn8",
+      "url": "https://x.com/TheHackersNews/status/2117662703489786219",
+      "metrics": {
+        "likes": 192,
+        "reposts": 69,
+        "replies": 29,
+        "quotes": 8
+      },
+      "engagement": 298,
+      "theme": "binance",
+      "image": "https://pbs.twimg.com/media/HWNzAFzbwAAsrG6.jpg"
+    },
+    {
+      "id": "x2117548206968258978",
+      "platform": "X",
+      "type": "media",
+      "account": "SecurityWeek",
+      "org": "SecurityWeek",
+      "date_utc": "2026-11-03T09:23:29.000Z",
+      "date_publish_raw": "2026-11-03T09:23:29.000Z",
+      "date_ist": "2026-11-03 14:53",
+      "text": "Google Dismantles XCPE Botnet of 1.3 Million Android Devices https://t.co/QDHpqdZ7uq",
+      "url": "https://x.com/SecurityWeek/status/2117548206968258978",
+      "metrics": {
+        "likes": 7,
+        "reposts": 0,
+        "replies": 2,
+        "quotes": 1
+      },
+      "engagement": 10,
+      "theme": "xcpe",
+      "image": null
+    },
+    {
+      "id": "x2117175982540857843",
+      "platform": "X",
+      "type": "media",
+      "account": "SecurityWeek",
+      "org": "SecurityWeek",
+      "date_utc": "2026-11-02T08:44:24.000Z",
+      "date_publish_raw": "2026-11-02T08:44:24.000Z",
+      "date_ist": "2026-11-02 14:14",
+      "text": "FBI Flags Over 600 Addresses Tied to North Korea’s Binance Heist https://t.co/7SYSvpKfje",
+      "url": "https://x.com/SecurityWeek/status/2117175982540857843",
+      "metrics": {
+        "likes": 12,
+        "reposts": 1,
+        "replies": 1,
+        "quotes": 0
+      },
+      "engagement": 14,
+      "theme": "binance",
+      "image": null
+    },
+    {
+      "id": "x2118399195929358571",
+      "platform": "X",
+      "type": "vendor",
+      "account": "msftsecurity",
+      "org": "Microsoft Security",
+      "date_utc": "2026-11-05T17:45:00.000Z",
+      "date_publish_raw": "2026-11-05T17:45:00.000Z",
+      "date_ist": "2026-11-05 23:15",
+      "text": "New Dynamic Permissions gives each AI agent authority scoped to its current task, for only as long as the task requires, then adjusts access as risk changes.\n\nMore in November's In the Loop: https://t.co/oT8zj0nqwG",
+      "url": "https://x.com/msftsecurity/status/2118399195929358571",
+      "metrics": {
+        "likes": 18,
+        "reposts": 3,
+        "replies": 6,
+        "quotes": 0
+      },
+      "engagement": 27,
+      "theme": "agentsecurity",
+      "image": null
+    },
+    {
+      "id": "x2118020144974938593",
+      "platform": "X",
+      "type": "vendor",
+      "account": "LabsSentinel",
+      "org": "SentinelLabs",
+      "date_utc": "2026-11-04T16:38:48.000Z",
+      "date_publish_raw": "2026-11-04T16:38:48.000Z",
+      "date_ist": "2026-11-04 22:08",
+      "text": "LLMs can reverse engineer binaries at scale, but their conclusions aren't always easy to verify or build on.\n\nWe developed VerifiedIDA to tie annotations to evidence, verify database changes, and preserve analysis for reuse.\n\nExplore the full research: https://t.co/Fx7inyHEti",
+      "url": "https://x.com/LabsSentinel/status/2118020144974938593",
+      "metrics": {
+        "likes": 4,
+        "reposts": 1,
+        "replies": 0,
+        "quotes": 0
+      },
+      "engagement": 5,
+      "theme": "agentsecurity",
+      "image": null
+    },
+    {
+      "id": "x2118009218150154414",
+      "platform": "X",
+      "type": "vendor",
+      "account": "LabsSentinel",
+      "org": "SentinelLabs",
+      "date_utc": "2026-11-04T15:55:22.000Z",
+      "date_publish_raw": "2026-11-04T15:55:22.000Z",
+      "date_ist": "2026-11-04 21:25",
+      "text": "LLMs can reverse engineer binaries at scale, but their conclusions aren't always easy to verify or build on.\n\nWe developed VerifiedIDA to tie annotations to evidence, verify database changes, and preserve analysis for reuse.\n\nExplore the full research: https://t.co/Fx7inyH6DK",
+      "url": "https://x.com/LabsSentinel/status/2118009218150154414",
+      "metrics": {
+        "likes": 8,
+        "reposts": 4,
+        "replies": 0,
+        "quotes": 0
+      },
+      "engagement": 12,
+      "theme": "agentsecurity",
+      "image": null
+    },
+    {
+      "id": "x2117738593053499752",
+      "platform": "X",
+      "type": "vendor",
+      "account": "msftsecurity",
+      "org": "Microsoft Security",
+      "date_utc": "2026-11-03T22:00:00.000Z",
+      "date_publish_raw": "2026-11-03T22:00:00.000Z",
+      "date_ist": "2026-11-04 03:30",
+      "text": "Every agent. One control plane.\n\nMicrosoft was named a Leader in the inaugural 2026 Gartner® Magic Quadrant™ for AI Agent Management Platforms.\n\nLearn more: https://t.co/A1S9PuN8eu https://t.co/0x2sHdOeDN",
+      "url": "https://x.com/msftsecurity/status/2117738593053499752",
+      "metrics": {
+        "likes": 124,
+        "reposts": 32,
+        "replies": 7,
+        "quotes": 2
+      },
+      "engagement": 165,
+      "theme": "agentsecurity",
+      "image": "https://pbs.twimg.com/media/HWOhMBJWsAA4ATf.jpg"
+    },
+    {
+      "id": "x2117672800802718133",
+      "platform": "X",
+      "type": "vendor",
+      "account": "LabsSentinel",
+      "org": "SentinelLabs",
+      "date_utc": "2026-11-03T17:38:34.000Z",
+      "date_publish_raw": "2026-11-03T17:38:34.000Z",
+      "date_ist": "2026-11-03 23:08",
+      "text": "Refrigeration systems across Europe have been targeted, with attackers manipulating temperature and defrost settings.\n\nExposed interfaces and weak credentials are under scrutiny. Attribution remains open.\n\nOur analysis: https://t.co/MEfZK5qW8f",
+      "url": "https://x.com/LabsSentinel/status/2117672800802718133",
+      "metrics": {
+        "likes": 8,
+        "reposts": 1,
+        "replies": 0,
+        "quotes": 0
+      },
+      "engagement": 9,
+      "theme": "coldchain",
+      "image": null
+    },
+    {
+      "id": "x2117324552225046851",
+      "platform": "X",
+      "type": "vendor",
+      "account": "PaloAltoNtwks",
+      "org": "Palo Alto Networks",
+      "date_utc": "2026-11-02T18:34:45.000Z",
+      "date_publish_raw": "2026-11-02T18:34:45.000Z",
+      "date_ist": "2026-11-03 00:04",
+      "text": "AI agents boost desktop productivity, but isolated virtual machines leave endpoint security in the dark.\n\nCortex XDR integration with @claudeai Cowork bridges the gap.\n\nNow, security teams get real-time runtime visibility, command tracking, and @Unit42_Intel threat detection https://t.co/G3pBrtGwgT",
+      "url": "https://x.com/PaloAltoNtwks/status/2117324552225046851",
+      "metrics": {
+        "likes": 24,
+        "reposts": 6,
+        "replies": 5,
+        "quotes": 1
+      },
+      "engagement": 36,
+      "theme": "agentsecurity",
+      "image": null
+    },
+    {
+      "id": "x2118085520676770157",
+      "platform": "X",
+      "type": "media",
+      "account": "BleepinComputer",
+      "org": "BleepingComputer",
+      "date_utc": "2026-11-04T20:58:34.000Z",
+      "date_publish_raw": "2026-11-04T20:58:34.000Z",
+      "date_ist": "2026-11-05 02:28",
+      "text": "Zyxel fixes zero-day exploited to hack nearly 1,000 network switches\nhttps://t.co/ZGDw8cRjYI\n\nhttps://t.co/ZGDw8cRjYI",
+      "url": "https://x.com/BleepinComputer/status/2118085520676770157",
+      "metrics": {
+        "likes": 38,
+        "reposts": 8,
+        "replies": 15,
+        "quotes": 2
+      },
+      "engagement": 63,
+      "theme": "edge",
+      "image": null
+    },
+    {
+      "id": "x2118057250015109177",
+      "platform": "X",
+      "type": "media",
+      "account": "BleepinComputer",
+      "org": "BleepingComputer",
+      "date_utc": "2026-11-04T19:06:14.000Z",
+      "date_publish_raw": "2026-11-04T19:06:14.000Z",
+      "date_ist": "2026-11-05 00:36",
+      "text": "DreamHost confirms data breach exposed FTP logins and webmail sessions\nhttps://t.co/gb0ii7uwqt\n\nhttps://t.co/gb0ii7uwqt",
+      "url": "https://x.com/BleepinComputer/status/2118057250015109177",
+      "metrics": {
+        "likes": 59,
+        "reposts": 19,
+        "replies": 18,
+        "quotes": 6
+      },
+      "engagement": 102,
+      "theme": "breaches",
+      "image": null
+    },
+    {
+      "id": "x2118044374684537170",
+      "platform": "X",
+      "type": "media",
+      "account": "DarkReading",
+      "org": "Dark Reading",
+      "date_utc": "2026-11-04T18:15:04.000Z",
+      "date_publish_raw": "2026-11-04T18:15:04.000Z",
+      "date_ist": "2026-11-04 23:45",
+      "text": "Philippine Migrant Worker Data Likely Leaked in 69GB Government Breach https://t.co/av6LhdxCGK by Robert Lemos",
+      "url": "https://x.com/DarkReading/status/2118044374684537170",
+      "metrics": {
+        "likes": 2,
+        "reposts": 0,
+        "replies": 2,
+        "quotes": 0
+      },
+      "engagement": 4,
+      "theme": "breaches",
+      "image": null
+    },
+    {
+      "id": "x2118039581647909191",
+      "platform": "X",
+      "type": "media",
+      "account": "DarkReading",
+      "org": "Dark Reading",
+      "date_utc": "2026-11-04T17:56:02.000Z",
+      "date_publish_raw": "2026-11-04T17:56:02.000Z",
+      "date_ist": "2026-11-04 23:26",
+      "text": "Fresh European Fridge Attacks Put Cold-Chain Security in Focus https://t.co/6f2dl3Bo7B by Jai Vijayan",
+      "url": "https://x.com/DarkReading/status/2118039581647909191",
+      "metrics": {
+        "likes": 5,
+        "reposts": 0,
+        "replies": 2,
+        "quotes": 0
+      },
+      "engagement": 7,
+      "theme": "coldchain",
+      "image": null
+    },
+    {
+      "id": "x2118026062932431252",
+      "platform": "X",
+      "type": "media",
+      "account": "TheHackersNews",
+      "org": "The Hacker News",
+      "date_utc": "2026-11-04T17:02:19.000Z",
+      "date_publish_raw": "2026-11-04T17:02:19.000Z",
+      "date_ist": "2026-11-04 22:32",
+      "text": "🚨 No patches coming.\n\nSonicWall confirms two flaws in end-of-life GMS 9.5.2 and earlier won't be fixed.\n\n• CVE-2026-109593: Unauthenticated file reads\n• CVE-2026-109594: Authenticated SQL injection\n\nSonicWall urges migration to NSM.\n\nRead: https://t.co/gr45r85c8F",
+      "url": "https://x.com/TheHackersNews/status/2118026062932431252",
+      "metrics": {
+        "likes": 83,
+        "reposts": 33,
+        "replies": 12,
+        "quotes": 4
+      },
+      "engagement": 132,
+      "theme": "edge",
+      "image": null
+    },
+    {
+      "id": "x2118025248251547670",
+      "platform": "X",
+      "type": "media",
+      "account": "BleepinComputer",
+      "org": "BleepingComputer",
+      "date_utc": "2026-11-04T16:59:04.000Z",
+      "date_publish_raw": "2026-11-04T16:59:04.000Z",
+      "date_ist": "2026-11-04 22:29",
+      "text": "NIKKE PC game launcher hacked to spread remote access, data-stealing malware\nhttps://t.co/uNhbDNNQt0\n\nhttps://t.co/uNhbDNNQt0",
+      "url": "https://x.com/BleepinComputer/status/2118025248251547670",
+      "metrics": {
+        "likes": 19,
+        "reposts": 4,
+        "replies": 5,
+        "quotes": 1
+      },
+      "engagement": 29,
+      "theme": "supplychain",
+      "image": null
+    },
+    {
+      "id": "x2118022366098006308",
+      "platform": "X",
+      "type": "media",
+      "account": "TheHackersNews",
+      "org": "The Hacker News",
+      "date_utc": "2026-11-04T16:47:37.000Z",
+      "date_publish_raw": "2026-11-04T16:47:37.000Z",
+      "date_ist": "2026-11-04 22:17",
+      "text": "‼️ A new Linux APT flaw in Debian and Ubuntu could let MitM attackers swap already-verified packages and execute code as root.\n\nTracked as CVE-2026-109518, it affects default Debian 12+ and Ubuntu 22.04+ setups.\n\nPatches are rolling out.\n\nDetails ↓ https://t.co/mNi6HCZVu0 https://t.co/MZXdcmRhC5",
+      "url": "https://x.com/TheHackersNews/status/2118022366098006308",
+      "metrics": {
+        "likes": 330,
+        "reposts": 75,
+        "replies": 30,
+        "quotes": 14
+      },
+      "engagement": 449,
+      "theme": "runtime",
+      "image": "https://pbs.twimg.com/media/HWS5v8EaMAIBqwN.jpg"
+    },
+    {
+      "id": "x2118012585589277080",
+      "platform": "X",
+      "type": "media",
+      "account": "TheHackersNews",
+      "org": "The Hacker News",
+      "date_utc": "2026-11-04T16:08:45.000Z",
+      "date_publish_raw": "2026-11-04T16:08:45.000Z",
+      "date_ist": "2026-11-04 21:38",
+      "text": "❗ Say \"hello\" to OpenAI Codex, get an ad instead?\n\nResearchers uncovered \"Haiou,\" a jailbreak bundle that modifies Codex's global instructions to inject persistent ads for a third-party AI gateway.\n\nThe technique is called \"prompt adware\".\n\nRead ↓ https://t.co/Qtn3WUbreq",
+      "url": "https://x.com/TheHackersNews/status/2118012585589277080",
+      "metrics": {
+        "likes": 42,
+        "reposts": 9,
+        "replies": 13,
+        "quotes": 3
+      },
+      "engagement": 67,
+      "theme": "aiservices",
+      "image": null
+    },
+    {
+      "id": "x2118010545898975731",
+      "platform": "X",
+      "type": "media",
+      "account": "BleepinComputer",
+      "org": "BleepingComputer",
+      "date_utc": "2026-11-04T16:00:39.000Z",
+      "date_publish_raw": "2026-11-04T16:00:39.000Z",
+      "date_ist": "2026-11-04 21:30",
+      "text": "mSecure password manager hack prompts password reset warnings\nhttps://t.co/a301AFrbJa\n\nhttps://t.co/a301AFrbJa",
+      "url": "https://x.com/BleepinComputer/status/2118010545898975731",
+      "metrics": {
+        "likes": 19,
+        "reposts": 4,
+        "replies": 9,
+        "quotes": 1
+      },
+      "engagement": 33,
+      "theme": "breaches",
+      "image": null
+    },
+    {
+      "id": "x2117990940375707779",
+      "platform": "X",
+      "type": "media",
+      "account": "BleepinComputer",
+      "org": "BleepingComputer",
+      "date_utc": "2026-11-04T14:42:45.000Z",
+      "date_publish_raw": "2026-11-04T14:42:45.000Z",
+      "date_ist": "2026-11-04 20:12",
+      "text": "SonicWall warns of unpatched flaws in end-of-life GMS software\nhttps://t.co/aJt3K1j2H2\n\nhttps://t.co/aJt3K1j2H2",
+      "url": "https://x.com/BleepinComputer/status/2117990940375707779",
+      "metrics": {
+        "likes": 16,
+        "reposts": 7,
+        "replies": 8,
+        "quotes": 1
+      },
+      "engagement": 32,
+      "theme": "edge",
+      "image": null
+    },
+    {
+      "id": "x2117990273380978881",
+      "platform": "X",
+      "type": "media",
+      "account": "SecurityWeek",
+      "org": "SecurityWeek",
+      "date_utc": "2026-11-04T14:40:06.000Z",
+      "date_publish_raw": "2026-11-04T14:40:06.000Z",
+      "date_ist": "2026-11-04 20:10",
+      "text": "Sysdig Adds Runtime Security and Governance for AI Agents https://t.co/oaoVH8FQ8u",
+      "url": "https://x.com/SecurityWeek/status/2117990273380978881",
+      "metrics": {
+        "likes": 3,
+        "reposts": 0,
+        "replies": 1,
+        "quotes": 0
+      },
+      "engagement": 4,
+      "theme": "agentsecurity",
+      "image": null
+    },
+    {
+      "id": "x2117982169859588414",
+      "platform": "X",
+      "type": "media",
+      "account": "TheRecord_Media",
+      "org": "The Record From Recorded Future News",
+      "date_utc": "2026-11-04T14:07:54.000Z",
+      "date_publish_raw": "2026-11-04T14:07:54.000Z",
+      "date_ist": "2026-11-04 19:37",
+      "text": "The major Russian web hosting provider Beget is struggling to restore its services after a cyberattack destroyed data across its cloud infrastructure and disrupted hundreds of websites https://t.co/vDxjrOlP5M",
+      "url": "https://x.com/TheRecord_Media/status/2117982169859588414",
+      "metrics": {
+        "likes": 10,
+        "reposts": 7,
+        "replies": 5,
+        "quotes": 0
+      },
+      "engagement": 22,
+      "theme": "breaches",
+      "image": null
+    },
+    {
+      "id": "x2117977473044697537",
+      "platform": "X",
+      "type": "media",
+      "account": "TheHackersNews",
+      "org": "The Hacker News",
+      "date_utc": "2026-11-04T13:49:14.000Z",
+      "date_publish_raw": "2026-11-04T13:49:14.000Z",
+      "date_ist": "2026-11-04 19:19",
+      "text": "🚨 Node.js warns of HIGH-severity security vulnerabilities.\n\nSecurity fixes are coming November 11 for Node.js 26.x, 24.x, and 22.x.\n\nAll three release lines are affected. Production users should take note.\n\nDetails: https://t.co/kyerFMiO8K https://t.co/LzKdZ3Dh7F",
+      "url": "https://x.com/TheHackersNews/status/2117977473044697537",
+      "metrics": {
+        "likes": 2005,
+        "reposts": 466,
+        "replies": 71,
+        "quotes": 202
+      },
+      "engagement": 2744,
+      "theme": "runtime",
+      "image": "https://pbs.twimg.com/media/HWSRO7bbEAAft9w.jpg"
+    },
+    {
+      "id": "x2117961693892686202",
+      "platform": "X",
+      "type": "media",
+      "account": "SecurityWeek",
+      "org": "SecurityWeek",
+      "date_utc": "2026-11-04T12:46:32.000Z",
+      "date_publish_raw": "2026-11-04T12:46:32.000Z",
+      "date_ist": "2026-11-04 18:16",
+      "text": "AI-Linked Breaches Mount as WorkOS, Northflank, Trigger Disclose Hacks https://t.co/ysY8Zjt4oM",
+      "url": "https://x.com/SecurityWeek/status/2117961693892686202",
+      "metrics": {
+        "likes": 6,
+        "reposts": 1,
+        "replies": 4,
+        "quotes": 2
+      },
+      "engagement": 13,
+      "theme": "aiservices",
+      "image": null
+    },
+    {
+      "id": "x2117957538905756008",
+      "platform": "X",
+      "type": "media",
+      "account": "TheHackersNews",
+      "org": "The Hacker News",
+      "date_utc": "2026-11-04T12:30:01.000Z",
+      "date_publish_raw": "2026-11-04T12:30:01.000Z",
+      "date_ist": "2026-11-04 18:00",
+      "text": "‼️ BREAKING - Critical Rails flaw (CVSS 9.8) could let unauthenticated attackers write arbitrary server files via crafted uploads.\n\nThe bug affects Active Storage apps using ImageMagick and could also expose application secrets in certain setups.\n\nRails patches are out.\n\nDetails: https://t.co/OkIG62NUWa",
+      "url": "https://x.com/TheHackersNews/status/2117957538905756008",
+      "metrics": {
+        "likes": 290,
+        "reposts": 83,
+        "replies": 22,
+        "quotes": 12
+      },
+      "engagement": 407,
+      "theme": "runtime",
+      "image": "https://pbs.twimg.com/media/HWR7QEDbsAAA3Vl.jpg"
+    },
+    {
+      "id": "x2117952841474101482",
+      "platform": "X",
+      "type": "media",
+      "account": "BleepinComputer",
+      "org": "BleepingComputer",
+      "date_utc": "2026-11-04T12:11:21.000Z",
+      "date_publish_raw": "2026-11-04T12:11:21.000Z",
+      "date_ist": "2026-11-04 17:41",
+      "text": "CISA flags WordPress RCE flaw as actively exploited in attacks\nhttps://t.co/6BYSZmrTgl\n\nhttps://t.co/6BYSZmrTgl",
+      "url": "https://x.com/BleepinComputer/status/2117952841474101482",
+      "metrics": {
+        "likes": 57,
+        "reposts": 23,
+        "replies": 16,
+        "quotes": 1
+      },
+      "engagement": 97,
+      "theme": "runtime",
+      "image": null
+    },
+    {
+      "id": "x2117944447908630744",
+      "platform": "X",
+      "type": "media",
+      "account": "TheHackersNews",
+      "org": "The Hacker News",
+      "date_utc": "2026-11-04T11:38:00.000Z",
+      "date_publish_raw": "2026-11-04T11:38:00.000Z",
+      "date_ist": "2026-11-04 17:08",
+      "text": "🚨 AI security gateways have a blind spot.\n\nAI agents running inside Salesforce, Microsoft 365, and Slack can operate entirely beyond gateway inspection.\n\nThat leaves agent actions, permissions, and delegation chains outside gateway visibility.\n\nHere's why gateway-only security https://t.co/BlM3Xaf3At",
+      "url": "https://x.com/TheHackersNews/status/2117944447908630744",
+      "metrics": {
+        "likes": 32,
+        "reposts": 11,
+        "replies": 24,
+        "quotes": 3
+      },
+      "engagement": 70,
+      "theme": "agentsecurity",
+      "image": null
+    },
+    {
+      "id": "ytE51jZKEqe7M",
+      "video_id": "E51jZKEqe7M",
+      "platform": "YouTube",
+      "type": "vendor",
+      "account": "CrowdStrike",
+      "org": "CrowdStrike",
+      "date_utc": "2026-11-04T19:28:41Z",
+      "date_publish_raw": "2026-11-04T11:28:41-08:00",
+      "date_ist": "2026-11-05 00:58",
+      "text": "Falcon Guardian AI Kill Switch: Stop Rogue AI Agents in Their Tracks",
+      "url": "https://www.youtube.com/watch?v=E51jZKEqe7M",
+      "metrics": {
+        "views": 341
+      },
+      "engagement": 341,
+      "theme": "agentsecurity",
+      "image": "https://i.ytimg.com/vi/E51jZKEqe7M/hqdefault.jpg"
+    },
+    {
+      "id": "ytCUEMH6F6PFg",
+      "video_id": "CUEMH6F6PFg",
+      "platform": "YouTube",
+      "type": "vendor",
+      "account": "CrowdStrike",
+      "org": "CrowdStrike",
+      "date_utc": "2026-11-04T18:53:54Z",
+      "date_publish_raw": "2026-11-04T10:53:54-08:00",
+      "date_ist": "2026-11-05 00:23",
+      "text": "CrowdStrike Falcon Guardian Overview",
+      "url": "https://www.youtube.com/watch?v=CUEMH6F6PFg",
+      "metrics": {
+        "views": 210
+      },
+      "engagement": 210,
+      "theme": "agentsecurity",
+      "image": "https://i.ytimg.com/vi/CUEMH6F6PFg/hqdefault.jpg"
+    },
+    {
+      "id": "ytSieZlcx20CY",
+      "video_id": "SieZlcx20CY",
+      "platform": "YouTube",
+      "type": "vendor",
+      "account": "CrowdStrike",
+      "org": "CrowdStrike",
+      "date_utc": "2026-11-04T18:59:23Z",
+      "date_publish_raw": "2026-11-04T10:59:23-08:00",
+      "date_ist": "2026-11-05 00:29",
+      "text": "CrowdStrike Falcon Guardian: Advancing AI Security and Safety from Endpoint to Cloud",
+      "url": "https://www.youtube.com/watch?v=SieZlcx20CY",
+      "metrics": {
+        "views": 485
+      },
+      "engagement": 485,
+      "theme": "agentsecurity",
+      "image": "https://i.ytimg.com/vi/SieZlcx20CY/hqdefault.jpg"
+    },
+    {
+      "id": "ytn1gNYxxq8U0",
+      "video_id": "n1gNYxxq8U0",
+      "platform": "YouTube",
+      "type": "independent",
+      "account": "Pivot to AI",
+      "org": "Pivot to AI",
+      "date_utc": "2026-11-02T22:01:35Z",
+      "date_publish_raw": "2026-11-02T14:01:35-08:00",
+      "date_ist": "2026-11-03 03:31",
+      "text": "Claude Code official Cursor extension gets malware",
+      "url": "https://www.youtube.com/watch?v=n1gNYxxq8U0",
+      "metrics": {
+        "views": 17614
+      },
+      "engagement": 17614,
+      "theme": "supplychain",
+      "image": "https://i.ytimg.com/vi/n1gNYxxq8U0/hqdefault.jpg"
+    },
+    {
+      "id": "ytk0LxFqV-Bak",
+      "video_id": "k0LxFqV-Bak",
+      "platform": "YouTube",
+      "type": "media",
+      "account": "DW News",
+      "org": "DW News",
+      "date_utc": "2026-11-02T17:10:31Z",
+      "date_publish_raw": "2026-11-02T09:10:31-08:00",
+      "date_ist": "2026-11-02 22:40",
+      "text": "Supermarket freezers hit by suspected cyberattacks | DW News",
+      "url": "https://www.youtube.com/watch?v=k0LxFqV-Bak",
+      "metrics": {
+        "views": 53840
+      },
+      "engagement": 53840,
+      "theme": "coldchain",
+      "image": "https://i.ytimg.com/vi/k0LxFqV-Bak/hqdefault.jpg"
+    },
+    {
+      "id": "ytdVqBjkqXxiU",
+      "video_id": "dVqBjkqXxiU",
+      "platform": "YouTube",
+      "type": "independent",
+      "account": "SomeOrdinaryGamers",
+      "org": "SomeOrdinaryGamers",
+      "date_utc": "2026-11-03T00:20:52Z",
+      "date_publish_raw": "2026-11-02T16:20:52-08:00",
+      "date_ist": "2026-11-03 05:50",
+      "text": "The Fridges Are Being Hacked Now...",
+      "url": "https://www.youtube.com/watch?v=dVqBjkqXxiU",
+      "metrics": {
+        "views": 193652
+      },
+      "engagement": 193652,
+      "theme": "coldchain",
+      "image": "https://i.ytimg.com/vi/dVqBjkqXxiU/hqdefault.jpg"
+    },
+    {
+      "id": "ytJAfSyPh4AW4",
+      "video_id": "JAfSyPh4AW4",
+      "platform": "YouTube",
+      "type": "media",
+      "account": "BBC News",
+      "org": "BBC News",
+      "date_utc": "2026-11-03T02:28:04Z",
+      "date_publish_raw": "2026-11-02T18:28:04-08:00",
+      "date_ist": "2026-11-03 07:58",
+      "text": "Shop freezers in seven European countries hit by cyber-attack | BBC News",
+      "url": "https://www.youtube.com/watch?v=JAfSyPh4AW4",
+      "metrics": {
+        "views": 596520
+      },
+      "engagement": 596520,
+      "theme": "coldchain",
+      "image": "https://i.ytimg.com/vi/JAfSyPh4AW4/hqdefault.jpg"
+    },
+    {
+      "id": "yt5Q249ug5a9o",
+      "video_id": "5Q249ug5a9o",
+      "platform": "YouTube",
+      "type": "media",
+      "account": "CTV News",
+      "org": "CTV News",
+      "date_utc": "2026-11-02T18:23:55Z",
+      "date_publish_raw": "2026-11-02T10:23:55-08:00",
+      "date_ist": "2026-11-02 23:53",
+      "text": "Cyberattack raises European grocery store fridge temperatures to 50°C",
+      "url": "https://www.youtube.com/watch?v=5Q249ug5a9o",
+      "metrics": {
+        "views": 29296
+      },
+      "engagement": 29296,
+      "theme": "coldchain",
+      "image": "https://i.ytimg.com/vi/5Q249ug5a9o/hqdefault.jpg"
+    },
+    {
+      "id": "yt5eZj1OnC1C4",
+      "video_id": "5eZj1OnC1C4",
+      "platform": "YouTube",
+      "type": "independent",
+      "account": "Gloam",
+      "org": "Gloam",
+      "date_utc": "2026-10-30T21:05:29Z",
+      "date_publish_raw": "2026-10-30T14:05:29-07:00",
+      "date_ist": "2026-10-31 02:35",
+      "text": "How Binance Lost $6,300,000,000 in One Night",
+      "url": "https://www.youtube.com/watch?v=5eZj1OnC1C4",
+      "metrics": {
+        "views": 2304376
+      },
+      "engagement": 2304376,
+      "theme": "binance",
+      "image": "https://i.ytimg.com/vi/5eZj1OnC1C4/hqdefault.jpg"
+    },
+    {
+      "id": "yta7hahsdi_p4",
+      "video_id": "a7hahsdi_p4",
+      "platform": "YouTube",
+      "type": "media",
+      "account": "Yahoo Finance",
+      "org": "Yahoo Finance",
+      "date_utc": "2026-11-03T14:05:44Z",
+      "date_publish_raw": "2026-11-03T06:05:44-08:00",
+      "date_ist": "2026-11-03 19:35",
+      "text": "Binance hack: CZ warns there's no 100% security",
+      "url": "https://www.youtube.com/watch?v=a7hahsdi_p4",
+      "metrics": {
+        "views": 65071
+      },
+      "engagement": 65071,
+      "theme": "binance",
+      "image": "https://i.ytimg.com/vi/a7hahsdi_p4/hqdefault.jpg"
+    },
+    {
+      "id": "ytLPqYeleGo78",
+      "video_id": "LPqYeleGo78",
+      "platform": "YouTube",
+      "type": "independent",
+      "account": "Reconstructed",
+      "org": "Reconstructed",
+      "date_utc": "2026-11-01T05:17:55Z",
+      "date_publish_raw": "2026-10-31T22:17:55-07:00",
+      "date_ist": "2026-11-01 10:47",
+      "text": "Binance Hack: How Hackers Stole $6,300,000,000",
+      "url": "https://www.youtube.com/watch?v=LPqYeleGo78",
+      "metrics": {
+        "views": 186472
+      },
+      "engagement": 186472,
+      "theme": "binance",
+      "image": "https://i.ytimg.com/vi/LPqYeleGo78/hqdefault.jpg"
+    },
+    {
+      "id": "ytr3iREsfIcgs",
+      "video_id": "r3iREsfIcgs",
+      "platform": "YouTube",
+      "type": "independent",
+      "account": "Rob Braxman Tech",
+      "org": "Rob Braxman Tech",
+      "date_utc": "2026-11-04T17:00:25Z",
+      "date_publish_raw": "2026-11-04T09:00:25-08:00",
+      "date_ist": "2026-11-04 22:30",
+      "text": "It's Zero-Day Every Day. AI Being Used to Create Exploits at a Massive Pace! Scary Times",
+      "url": "https://www.youtube.com/watch?v=r3iREsfIcgs",
+      "metrics": {
+        "views": 42989
+      },
+      "engagement": 42989,
+      "theme": "aioffence",
+      "image": "https://i.ytimg.com/vi/r3iREsfIcgs/hqdefault.jpg"
+    },
+    {
+      "id": "ytFwx9D9r4NxU",
+      "video_id": "Fwx9D9r4NxU",
+      "platform": "YouTube",
+      "type": "independent",
+      "account": "Prompt Injection",
+      "org": "Prompt Injection",
+      "date_utc": "2026-11-02T09:14:54Z",
+      "date_publish_raw": "2026-11-02T01:14:54-08:00",
+      "date_ist": "2026-11-02 14:44",
+      "text": "VOLTA Infostealer Asks AI Which Stolen Data Is Worth Exploiting",
+      "url": "https://www.youtube.com/watch?v=Fwx9D9r4NxU",
+      "metrics": {
+        "views": 24
+      },
+      "engagement": 24,
+      "theme": "aioffence",
+      "image": "https://i.ytimg.com/vi/Fwx9D9r4NxU/hqdefault.jpg"
+    },
+    {
+      "id": "ytMMHROkVKYWA",
+      "video_id": "MMHROkVKYWA",
+      "platform": "YouTube",
+      "type": "independent",
+      "account": "Securidge",
+      "org": "Securidge",
+      "date_utc": "2026-11-03T11:51:39Z",
+      "date_publish_raw": "2026-11-03T03:51:39-08:00",
+      "date_ist": "2026-11-03 17:21",
+      "text": "Patch & Exploit Watch: Ivanti VPN zero-day chain - why one patch was not enough",
+      "url": "https://www.youtube.com/watch?v=MMHROkVKYWA",
+      "metrics": {
+        "views": 15
+      },
+      "engagement": 15,
+      "theme": "edge",
+      "image": "https://i.ytimg.com/vi/MMHROkVKYWA/hqdefault.jpg"
+    },
+    {
+      "id": "ytcE5vgsirIfU",
+      "video_id": "cE5vgsirIfU",
+      "platform": "YouTube",
+      "type": "vendor",
+      "account": "Fortinet",
+      "org": "Fortinet",
+      "date_utc": "2026-10-30T16:19:13Z",
+      "date_publish_raw": "2026-10-30T09:19:13-07:00",
+      "date_ist": "2026-10-30 21:49",
+      "text": "Outbreak Alert: Node2Shell Remote Code Execution | FortiGuard Labs",
+      "url": "https://www.youtube.com/watch?v=cE5vgsirIfU",
+      "metrics": {
+        "views": 1424
+      },
+      "engagement": 1424,
+      "theme": "runtime",
+      "image": "https://i.ytimg.com/vi/cE5vgsirIfU/hqdefault.jpg"
+    },
+    {
+      "id": "yt8lmrsMhLpNw",
+      "video_id": "8lmrsMhLpNw",
+      "platform": "YouTube",
+      "type": "vendor",
+      "account": "Cisco Talos Intelligence Group",
+      "org": "Cisco Talos Intelligence Group",
+      "date_utc": "2026-11-02T12:15:19Z",
+      "date_publish_raw": "2026-11-02T04:15:19-08:00",
+      "date_ist": "2026-11-02 17:45",
+      "text": "The TTP 26: Everything on This Drive Is Fine, We Promise",
+      "url": "https://www.youtube.com/watch?v=8lmrsMhLpNw",
+      "metrics": {
+        "views": 116
+      },
+      "engagement": 116,
+      "theme": "aioffence",
+      "image": "https://i.ytimg.com/vi/8lmrsMhLpNw/hqdefault.jpg"
+    }
+  ]
+}

@@ -33,7 +33,7 @@
     root.classList.add("accent-shimmer")
     setTimeout(function () {
       root.classList.remove("accent-shimmer")
-    }, 420)
+    }, 240)
   }
 
   function syncTheme() {
@@ -172,7 +172,7 @@
     if ((hit = target.closest("[data-theme-toggle]"))) return sweep(toggleTheme)
     if ((hit = target.closest("[data-expand-all]"))) {
       var open = hit.getAttribute("data-on") !== "true"
-      // Ten height animations at once drop frames on phones, so these snap.
+      // Every theme would enter at once, so these snap.
       root.classList.add("bulk")
       themes.forEach(function (theme) {
         theme.open = open
