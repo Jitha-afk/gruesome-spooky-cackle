@@ -513,13 +513,25 @@ test("weeks chain: the newest week compares with the one before it", () => {
       fs.mkdirSync(path.join(dir, name))
       fs.writeFileSync(path.join(dir, name, "data.json"), JSON.stringify(data))
     }
-    for (const week of weekFolders()) put(week.name, week.data)
-    put("2026-10-30_2026-11-05", COMPLETE)
-    put("2026-11-06_2026-11-12", MINIMAL)
+    const published = weekFolders()
+    for (const week of published) put(week.name, week.data)
+    // complete.json's window is 30 Oct–5 Nov, now a published week, and a later
+    // report would take the newest slot. Park both examples after every report.
+    const day = 24 * 60 * 60 * 1000
+    const latest = published.reduce((max, week) => {
+      const end = Date.parse(`${week.name.slice(-10)}T00:00:00Z`)
+      return Number.isFinite(end) ? Math.max(max, end) : max
+    }, Date.parse("2026-01-01T00:00:00Z"))
+    const iso = (ms) => new Date(ms).toISOString().slice(0, 10)
+    const span = (start) => `${iso(start)}_${iso(start + 6 * day)}`
+    const previousName = span(latest + day)
+    const newestName = span(latest + 8 * day)
+    put(previousName, COMPLETE)
+    put(newestName, MINIMAL)
     const weeks = loadWeeks(dir)
-    assert.equal(weeks[0].name, "2026-11-06_2026-11-12")
+    assert.equal(weeks[0].name, newestName)
     const previous = previousDataWeek(weeks, weeks[0].name)
-    assert.equal(previous.name, "2026-10-30_2026-11-05")
+    assert.equal(previous.name, previousName)
     const delta = weekDelta(weeks[0].data, previous.data)
     assert.equal(delta.label, windowLabel(COMPLETE))
     assert.deepEqual(
