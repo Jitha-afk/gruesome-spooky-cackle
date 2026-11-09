@@ -32,6 +32,15 @@ import { logIntensityLevel } from "../lib/scale.mjs"
 import { ACCENT_KEY, DEFAULT_ACCENT, accentBoot, accents } from "../lib/accent.mjs"
 
 const REAL = path.join(import.meta.dirname, "..", "reports")
+// loadWeeks sorts newest first. These checks were written for this week.
+const PINNED_WEEK = "2026-10-23_2026-10-29"
+
+function pinnedWeek() {
+  const week = loadWeeks(REAL).find((item) => item.name === PINNED_WEEK)
+  assert.ok(week, `missing reports/${PINNED_WEEK}`)
+  assert.equal(week.kind, "data")
+  return week
+}
 
 function minimal() {
   return {
@@ -98,11 +107,8 @@ function minimal() {
 }
 
 test("real week validates and keeps each CVE state", () => {
-  const weeks = loadWeeks(REAL)
-  assert.equal(weeks.length, 1)
-  assert.equal(weeks[0].kind, "data")
-  assert.equal(weeks[0].name, "2026-10-23_2026-10-29")
-  const views = weeks[0].data.themes.flatMap((theme) => cveViews(theme))
+  const week = pinnedWeek()
+  const views = week.data.themes.flatMap((theme) => cveViews(theme))
   assert.equal(views.length, 8)
   assert.equal(views.filter((row) => row.tag === "EXPLOITED").length, 7)
   assert.equal(views.filter((row) => row.tag === "NOT CONFIRMED").length, 1)
@@ -112,18 +118,18 @@ test("real week validates and keeps each CVE state", () => {
   assert.equal(later.tag, "NOT CONFIRMED")
   assert.ok(brotli.basis)
   assert.ok(later.basis)
-  const row = indexRow(weeks[0])
+  const row = indexRow(week)
   assert.equal(row.shortName, "PHP2Shell")
   assert.equal(row.themeCount, 10)
-  assert.match(heroLead(weeks[0].data), /^Attackers exploit \d+ of the \d+ CVEs in this report\. PHP2Shell is the top theme, with \d+ accounts\. PHP runs .+\.$/)
-  const ranks = rankRows(weeks[0].data)
+  assert.match(heroLead(week.data), /^Attackers exploit \d+ of the \d+ CVEs in this report\. PHP2Shell is the top theme, with \d+ accounts\. PHP runs .+\.$/)
+  const ranks = rankRows(week.data)
   assert.deepEqual(
     ranks.map((item) => item.key),
-    weeks[0].data.ranking.map((item) => item.key),
+    week.data.ranking.map((item) => item.key),
   )
   assert.equal(ranks.find((item) => item.key === "uefi").label, "UEFI boot")
   assert.equal(ranks.find((item) => item.key === "linuxkernel").label, "Linux kernel")
-  const agents = weeks[0].data.themes.find((theme) => theme.key === "aiagents")
+  const agents = week.data.themes.find((theme) => theme.key === "aiagents")
   assert.equal(commentModel(agents)[0].label, "Trust boundary: treat instruction files as untrusted input")
   const sample = commentModel(agents)[0].samples[0]
   assert.deepEqual(Object.keys(sample).sort(), ["date", "href", "text"])
@@ -157,7 +163,7 @@ test("short_name and basis are optional and extra fields are allowed", () => {
 })
 
 test("heroLead prefers bottom_line, then counts and the top why_line", () => {
-  const data = structuredClone(loadWeeks(REAL)[0].data)
+  const data = structuredClone(pinnedWeek().data)
   const top = data.themes.find((theme) => theme.rank === 1)
   top.why_line = "Patch is not enough"
   assert.match(heroLead(data), /accounts\. Patch is not enough\.$/)
@@ -194,7 +200,7 @@ test("nameDetail drops a leading label only at a word boundary", () => {
 })
 
 test("week graphs use only data.json", () => {
-  const data = loadWeeks(REAL)[0].data
+  const data = pinnedWeek().data
   const stats = headlineStats(data)
   assert.equal(stats.themes, 10)
   assert.equal(stats.sources, data.sources.length)
@@ -227,7 +233,7 @@ test("week graphs use only data.json", () => {
 })
 
 test("theme rows hold the small multiples for each theme", () => {
-  const data = loadWeeks(REAL)[0].data
+  const data = pinnedWeek().data
   const rows = themeRows(data)
   assert.equal(rows.length, 10)
   assert.deepEqual(
