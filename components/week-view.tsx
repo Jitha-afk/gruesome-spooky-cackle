@@ -159,7 +159,18 @@ function Kpis({ data, rows, delta }: { data: WeekData; rows: ThemeRow[]; delta: 
   )
 }
 
-function Leads({ themes, rows, days }: { themes: Theme[]; rows: ThemeRow[]; days: { label: string }[] }) {
+function Leads({
+  themes,
+  rows,
+  days,
+  compact = false,
+}: {
+  themes: Theme[]
+  rows: ThemeRow[]
+  days: { label: string }[]
+  /** The phone copy: rank, name, why and accounts. It has no corners, CVEs, bar or spark. */
+  compact?: boolean
+}) {
   const byKey = new Map(rows.map((row) => [row.key, row]))
   return (
     <ol className="leads">
@@ -171,7 +182,7 @@ function Leads({ themes, rows, days }: { themes: Theme[]; rows: ThemeRow[]; days
         const style: Vars = { "--i": index }
         return (
           <li className="frame lead-card" key={theme.key} style={style}>
-            <Corners />
+            {compact ? null : <Corners />}
             <p aria-hidden="true" className="lead-rank num">
               {pad(theme.rank)}
             </p>
@@ -184,7 +195,7 @@ function Leads({ themes, rows, days }: { themes: Theme[]; rows: ThemeRow[]; days
             <p className={why.clamp ? "lead-why is-clamped" : "lead-why"}>
               <KeepCves text={why.text} />
             </p>
-            {preview.shown.length > 0 ? (
+            {compact ? null : preview.shown.length > 0 ? (
               <ul aria-label="CVEs" className="lead-cves">
                 {preview.shown.map((cve) => (
                   <li key={cve.id}>
@@ -202,11 +213,11 @@ function Leads({ themes, rows, days }: { themes: Theme[]; rows: ThemeRow[]; days
             )}
             <div className="lead-foot">
               <span className="lead-acc">
-                <Bar value={row.share} />
+                {compact ? null : <Bar value={row.share} />}
                 <span className="num">{formatCount(row.accounts)}</span>
                 <span className="muted">accounts</span>
               </span>
-              <Spark label={sparkSummary(row.spark, days)} series={row.spark} />
+              {compact ? null : <Spark label={sparkSummary(row.spark, days)} series={row.spark} />}
             </div>
           </li>
         )
@@ -386,14 +397,14 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
     { id: "notes", label: "notes" },
   ]
 
-  const leads =
+  // Phones show this compact copy under the title, so the top themes finish inside the first
+  // screen. Wider layouts show the full cards under the KPIs. CSS shows one copy at a time, so
+  // the reading and focus order always match the layout.
+  const foldLeads =
     themes.length > 0 ? (
       <div className="fold-leads">
-        <p className="kicker sub-kicker">top {Math.min(3, themes.length)}</p>
-        <Leads days={days} rows={rows} themes={themes} />
-        {themes.slice(0, 3).some((theme) => previewCves(theme).shown.length > 0) ? (
-          <CveKey className="leads-key" />
-        ) : null}
+        <h2 className="kicker sub-kicker">top {Math.min(3, themes.length)}</h2>
+        <Leads compact days={days} rows={rows} themes={themes} />
       </div>
     ) : null
 
@@ -405,27 +416,34 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
           <Toc items={toc} label="Sections" />
         </div>
         <main className="main" id="main" tabIndex={-1}>
-          <div className="week-fold">
-            <Hero
-              afterTitle={leads}
-              kicker={data.meta.title}
-              lead={<KeepCves text={heroLead(data)} />}
-              title={windowLabel(data)}
-            >
-              {data.meta.generated ? (
-                <span>
-                  generated <span className="date-unit">{data.meta.generated}</span>
-                </span>
-              ) : null}
-            </Hero>
+          <Hero
+            afterTitle={foldLeads}
+            kicker={data.meta.title}
+            lead={<KeepCves text={heroLead(data)} />}
+            title={windowLabel(data)}
+          >
+            {data.meta.generated ? (
+              <span>
+                generated <span className="date-unit">{data.meta.generated}</span>
+              </span>
+            ) : null}
+          </Hero>
 
-            <section aria-labelledby="overview-title" className="sec sec-first" id="overview">
-              <h2 className="sr-only" id="overview-title">
-                Overview
-              </h2>
-              <Kpis data={data} delta={delta} rows={rows} />
-            </section>
-          </div>
+          <section aria-labelledby="overview-title" className="sec sec-first" id="overview">
+            <h2 className="sr-only" id="overview-title">
+              Overview
+            </h2>
+            <Kpis data={data} delta={delta} rows={rows} />
+            {themes.length > 0 ? (
+              <div className="wide-leads">
+                <p className="kicker sub-kicker">top {Math.min(3, themes.length)}</p>
+                <Leads days={days} rows={rows} themes={themes} />
+                {themes.slice(0, 3).some((theme) => previewCves(theme).shown.length > 0) ? (
+                  <CveKey className="leads-key" />
+                ) : null}
+              </div>
+            ) : null}
+          </section>
 
           <section aria-labelledby="cves-title" className="sec" id="cves">
             <SectionHead

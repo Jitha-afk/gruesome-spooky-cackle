@@ -476,8 +476,12 @@ html:not(.dark) .only-dark {
 .date-unit {
   white-space: nowrap;
 }
+/* Each date stays whole while it fits the line. A date wider than the line wraps inside, so it
+   cannot widen the page. */
 @media (max-width: 30rem) {
-  .date-unit {
+  span.date-unit {
+    display: inline-block;
+    max-width: 100%;
     white-space: normal;
   }
 }
@@ -1537,6 +1541,8 @@ details .split,
   overflow-wrap: anywhere;
 }
 .kpi-note > span {
+  display: inline-block;
+  max-width: 100%;
   white-space: normal;
 }
 .kpi-part:not(:last-child)::after {
@@ -1660,9 +1666,19 @@ details .split,
     display: none;
   }
 }
-/* Phones: the three theme rows sit under the title, as compact rank / name / why / accounts
-   lines, so they finish inside an 844px fold. Wider layouts put that block back under the KPIs. */
+/* Phones get a compact copy of the top themes under the title: rank / name / why / accounts
+   rows that finish inside an 844px fold. Wider layouts show the full cards under the KPIs.
+   One copy shows at a time, so the reading and focus order match the layout. */
+.fold-leads {
+  display: none;
+}
 @media (max-width: 30rem) {
+  .fold-leads {
+    display: block;
+  }
+  .wide-leads {
+    display: none;
+  }
   .fold-leads .sub-kicker {
     margin: 1.25rem 0 0.5rem;
   }
@@ -1687,9 +1703,6 @@ details .split,
   .fold-leads .lead-card:last-child {
     background-image: none;
   }
-  .fold-leads .cn {
-    display: none;
-  }
   .fold-leads .lead-rank {
     grid-area: rank;
   }
@@ -1704,59 +1717,12 @@ details .split,
     -webkit-line-clamp: 2;
     overflow: hidden;
   }
-  .fold-leads .lead-cves {
-    display: none;
-  }
   .fold-leads .lead-foot {
     grid-area: accounts;
     margin: 0;
     padding: 0;
     background: none;
     justify-content: flex-start;
-  }
-  .fold-leads .lead-foot > .spark,
-  .fold-leads .lead-acc .bar {
-    display: none;
-  }
-}
-@media (min-width: 30.01rem) {
-  .week-fold {
-    display: flex;
-    flex-direction: column;
-  }
-  .week-fold > .hero {
-    display: contents;
-  }
-  .week-fold .hero > .kicker {
-    order: 1;
-    padding-top: 3rem;
-  }
-  .week-fold .hero > h1 {
-    order: 2;
-  }
-  .week-fold .hero > .lead {
-    order: 3;
-  }
-  .week-fold .hero > .intro {
-    order: 4;
-  }
-  .week-fold .hero-meta {
-    order: 5;
-    margin-bottom: 2.25rem;
-  }
-  .week-fold > #overview {
-    order: 6;
-  }
-  .week-fold .fold-leads {
-    order: 7;
-  }
-}
-@media (min-width: 48rem) {
-  .week-fold .hero > .kicker {
-    padding-top: 4.5rem;
-  }
-  .week-fold .hero-meta {
-    margin-bottom: 2.75rem;
   }
 }
 
@@ -1803,7 +1769,7 @@ details .split,
 }
 @media (max-width: 29.99rem) {
   .tab-list label {
-    padding: 0 0.25rem;
+    padding: 0 0.125rem;
     letter-spacing: -0.01em;
   }
 }
@@ -3017,7 +2983,7 @@ html.deep details[open] > * {
     flex: 1 1 100%;
   }
   .src-search .btn {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     max-width: 100%;
     min-width: 0;
     height: auto;
@@ -3365,6 +3331,11 @@ html.deep details[open] > * {
   height: auto;
   min-height: 2.25rem;
   white-space: normal;
+}
+@media (pointer: coarse) {
+  .latest .btn {
+    min-height: 2.75rem;
+  }
 }
 @media (max-width: 39.99rem) {
   .log-label {

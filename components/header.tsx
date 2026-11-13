@@ -150,7 +150,7 @@ export function Hero({
   kicker: ReactNode
   title: string
   lead?: ReactNode
-  /** Sits under the title. Week pages use it for the phone fold; wide layouts move it below the KPIs. */
+  /** Sits under the title. Week pages put their phone-only copy of the top themes here. */
   afterTitle?: ReactNode
   children?: ReactNode
 }) {
