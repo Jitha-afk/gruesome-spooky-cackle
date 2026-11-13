@@ -386,6 +386,17 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
     { id: "notes", label: "notes" },
   ]
 
+  const leads =
+    themes.length > 0 ? (
+      <div className="fold-leads">
+        <p className="kicker sub-kicker">top {Math.min(3, themes.length)}</p>
+        <Leads days={days} rows={rows} themes={themes} />
+        {themes.slice(0, 3).some((theme) => previewCves(theme).shown.length > 0) ? (
+          <CveKey className="leads-key" />
+        ) : null}
+      </div>
+    ) : null
+
   return (
     <>
       <SiteHeader crumb={windowLabel(data)} toc={toc} />
@@ -394,29 +405,27 @@ export function WeekView({ data, previous = null }: { data: WeekData; previous?:
           <Toc items={toc} label="Sections" />
         </div>
         <main className="main" id="main" tabIndex={-1}>
-          <Hero kicker={data.meta.title} lead={<KeepCves text={heroLead(data)} />} title={windowLabel(data)}>
-            {data.meta.generated ? (
-              <span>
-                generated <span className="date-unit">{data.meta.generated}</span>
-              </span>
-            ) : null}
-          </Hero>
+          <div className="week-fold">
+            <Hero
+              afterTitle={leads}
+              kicker={data.meta.title}
+              lead={<KeepCves text={heroLead(data)} />}
+              title={windowLabel(data)}
+            >
+              {data.meta.generated ? (
+                <span>
+                  generated <span className="date-unit">{data.meta.generated}</span>
+                </span>
+              ) : null}
+            </Hero>
 
-          <section aria-labelledby="overview-title" className="sec sec-first" id="overview">
-            <h2 className="sr-only" id="overview-title">
-              Overview
-            </h2>
-            <Kpis data={data} delta={delta} rows={rows} />
-            {themes.length > 0 ? (
-              <>
-                <p className="kicker sub-kicker">top {Math.min(3, themes.length)}</p>
-                <Leads days={days} rows={rows} themes={themes} />
-                {themes.slice(0, 3).some((theme) => previewCves(theme).shown.length > 0) ? (
-                  <CveKey className="leads-key" />
-                ) : null}
-              </>
-            ) : null}
-          </section>
+            <section aria-labelledby="overview-title" className="sec sec-first" id="overview">
+              <h2 className="sr-only" id="overview-title">
+                Overview
+              </h2>
+              <Kpis data={data} delta={delta} rows={rows} />
+            </section>
+          </div>
 
           <section aria-labelledby="cves-title" className="sec" id="cves">
             <SectionHead

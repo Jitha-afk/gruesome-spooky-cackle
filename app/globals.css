@@ -476,6 +476,11 @@ html:not(.dark) .only-dark {
 .date-unit {
   white-space: nowrap;
 }
+@media (max-width: 30rem) {
+  .date-unit {
+    white-space: normal;
+  }
+}
 .kicker {
   margin: 0;
   font: 500 0.75rem/1.3 var(--font-mono);
@@ -1003,13 +1008,13 @@ html[data-accent-kind="gradient"] .hero .intro-name:hover {
 .rise {
   animation: rise 0.24s var(--ease-out) both;
 }
-.hero > :nth-child(3) {
+.hero > .lead {
   animation-delay: 40ms;
 }
-.hero > :nth-child(4) {
+.hero > .intro {
   animation-delay: 80ms;
 }
-.hero > :nth-child(5) {
+.hero > .hero-meta {
   animation-delay: 120ms;
 }
 @keyframes rise {
@@ -1150,9 +1155,9 @@ details:not([open]) > summary .when-open {
   overflow: hidden;
   font: 500 0.75rem/1.4 var(--font-mono);
   letter-spacing: 0.08em;
+  text-align: center;
   text-transform: uppercase;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  white-space: normal;
   background: var(--background);
 }
 .cn {
@@ -1383,10 +1388,17 @@ details .split,
 }
 .meter {
   display: inline-flex;
+  flex-wrap: wrap;
+  max-width: 100%;
   font-size: 0.8125rem;
   line-height: 1;
   letter-spacing: 0.14em;
-  white-space: nowrap;
+  white-space: normal;
+}
+.meter-on,
+.meter-off {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .meter-on {
   color: var(--destructive);
@@ -1525,7 +1537,7 @@ details .split,
   overflow-wrap: anywhere;
 }
 .kpi-note > span {
-  white-space: nowrap;
+  white-space: normal;
 }
 .kpi-part:not(:last-child)::after {
   content: " ·";
@@ -1648,6 +1660,105 @@ details .split,
     display: none;
   }
 }
+/* Phones: the three theme rows sit under the title, as compact rank / name / why / accounts
+   lines, so they finish inside an 844px fold. Wider layouts put that block back under the KPIs. */
+@media (max-width: 30rem) {
+  .fold-leads .sub-kicker {
+    margin: 1.25rem 0 0.5rem;
+  }
+  .fold-leads .leads {
+    gap: 0;
+  }
+  .fold-leads .lead-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "rank title"
+      "why why"
+      "accounts accounts";
+    gap: 0.25rem 0.75rem;
+    align-items: baseline;
+    padding: 0.75rem 0;
+    background-image: var(--rule-x);
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+  }
+  .fold-leads .lead-card:last-child {
+    background-image: none;
+  }
+  .fold-leads .cn {
+    display: none;
+  }
+  .fold-leads .lead-rank {
+    grid-area: rank;
+  }
+  .fold-leads .lead-title {
+    grid-area: title;
+    font-size: 1rem;
+  }
+  .fold-leads .lead-why {
+    grid-area: why;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+  .fold-leads .lead-cves {
+    display: none;
+  }
+  .fold-leads .lead-foot {
+    grid-area: accounts;
+    margin: 0;
+    padding: 0;
+    background: none;
+    justify-content: flex-start;
+  }
+  .fold-leads .lead-foot > .spark,
+  .fold-leads .lead-acc .bar {
+    display: none;
+  }
+}
+@media (min-width: 30.01rem) {
+  .week-fold {
+    display: flex;
+    flex-direction: column;
+  }
+  .week-fold > .hero {
+    display: contents;
+  }
+  .week-fold .hero > .kicker {
+    order: 1;
+    padding-top: 3rem;
+  }
+  .week-fold .hero > h1 {
+    order: 2;
+  }
+  .week-fold .hero > .lead {
+    order: 3;
+  }
+  .week-fold .hero > .intro {
+    order: 4;
+  }
+  .week-fold .hero-meta {
+    order: 5;
+    margin-bottom: 2.25rem;
+  }
+  .week-fold > #overview {
+    order: 6;
+  }
+  .week-fold .fold-leads {
+    order: 7;
+  }
+}
+@media (min-width: 48rem) {
+  .week-fold .hero > .kicker {
+    padding-top: 4.5rem;
+  }
+  .week-fold .hero-meta {
+    margin-bottom: 2.75rem;
+  }
+}
 
 /* ───────────────────────── tabs ───────────────────────── */
 .tab-input {
@@ -1672,11 +1783,15 @@ details .split,
   z-index: 1;
   display: grid;
   place-items: center;
-  height: 2.125rem;
-  padding: 0 0.5rem;
-  font: 500 0.75rem var(--font-mono);
+  min-width: 0;
+  min-height: 2.125rem;
+  height: auto;
+  padding: 0.25rem 0.5rem;
+  font: 500 0.75rem/1.15 var(--font-mono);
   color: var(--muted-foreground);
-  white-space: nowrap;
+  white-space: normal;
+  text-align: center;
+  overflow-wrap: anywhere;
   cursor: pointer;
   user-select: none;
   transition: color 0.15s var(--ease-out);
@@ -1766,7 +1881,7 @@ a.row-label {
 }
 .rank-list {
   display: grid;
-  grid-template-columns: minmax(4.5rem, max-content) minmax(0, 1fr) 2.5rem;
+  grid-template-columns: minmax(0, max-content) minmax(0, 1fr) auto;
   gap: 0.5rem 0.875rem;
   align-items: center;
 }
@@ -1788,7 +1903,7 @@ a.row-label {
   color: var(--muted-foreground);
 }
 .latest-rank {
-  grid-template-columns: 1.5rem minmax(4.5rem, max-content) minmax(0, 1fr) 2.5rem;
+  grid-template-columns: auto minmax(0, max-content) minmax(0, 1fr) auto;
 }
 .latest-rank .num.muted {
   text-align: left;
@@ -2338,6 +2453,8 @@ html.deep details[open] > * {
 /* ───────────────────────── theme body ───────────────────────── */
 .theme-body {
   padding: 1rem 1.25rem 1.75rem calc(1.25rem + 1.75rem + 1rem);
+  max-width: 100%;
+  overflow-x: clip;
 }
 @media (max-width: 47.99rem) {
   .theme-body {
@@ -2419,12 +2536,15 @@ html.deep details[open] > * {
   display: flex;
   flex-direction: column;
   gap: 0.875rem;
+  min-width: 0;
+  max-width: 100%;
 }
 .item {
   display: grid;
-  grid-template-columns: 6rem minmax(0, 1fr);
+  grid-template-columns: minmax(0, 6rem) minmax(0, 1fr);
   gap: 0.875rem;
   align-items: start;
+  max-width: 100%;
 }
 @media (min-width: 40rem) {
   .item {
@@ -2434,6 +2554,8 @@ html.deep details[open] > * {
 .thumb {
   position: relative;
   display: block;
+  min-width: 0;
+  max-width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
   background: var(--wash);
@@ -2723,6 +2845,9 @@ html.deep details[open] > * {
   padding: 0.25rem 1.25rem 1.5rem;
   font-size: 0.875rem;
   line-height: 1.7;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: clip;
 }
 .faq-body .prose-text {
   max-width: 72ch;
@@ -2759,6 +2884,12 @@ html.deep details[open] > * {
   grid-column: 1 / -1;
   grid-template-columns: subgrid;
   align-items: center;
+  min-width: 0;
+}
+@media (max-width: 39.99rem) {
+  .funnels {
+    grid-template-columns: minmax(0, max-content) minmax(0, 1fr) auto auto;
+  }
 }
 .funnel-block,
 .funnel {
@@ -2862,9 +2993,24 @@ html.deep details[open] > * {
 }
 .src-search {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
   flex: 1 1 20rem;
   min-width: 0;
+}
+@media (max-width: 30rem) {
+  .src-search {
+    flex: 1 1 100%;
+  }
+  .src-search .btn {
+    flex: 1 1 auto;
+    max-width: 100%;
+    min-width: 0;
+    height: auto;
+    min-height: 2.25rem;
+    white-space: normal;
+    padding-block: 0.5rem;
+  }
 }
 .search {
   display: flex;
@@ -3084,9 +3230,10 @@ html.deep details[open] > * {
 }
 @media (max-width: 30rem) {
   .mini-kpis {
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     justify-content: start;
-    gap: 0.75rem 2.5rem;
+    width: 100%;
+    gap: 0.75rem 1.25rem;
   }
 }
 .mini-kpis dt {
@@ -3177,8 +3324,11 @@ html.deep details[open] > * {
 }
 .log-stat {
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
+  max-width: 100%;
+  min-width: 0;
 }
 .log-stat .bar {
   width: 4rem;
@@ -3194,7 +3344,18 @@ html.deep details[open] > * {
     color 0.15s var(--ease-out),
     translate 0.16s var(--ease-out);
 }
+.latest .btn {
+  max-width: 100%;
+  min-width: 0;
+  flex-shrink: 1;
+  height: auto;
+  min-height: 2.25rem;
+  white-space: normal;
+}
 @media (max-width: 39.99rem) {
+  .log-label {
+    white-space: normal;
+  }
   .log::before {
     left: calc(0.5rem + 4px);
   }
