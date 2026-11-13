@@ -456,11 +456,11 @@
         "platform": {
           "type": "string",
           "description": "Case-sensitive. A new platform shows with a spare colour.",
-          "examples": ["X", "YouTube"]
+          "examples": ["X", "YouTube", "web"]
         },
         "type": {
           "type": "string",
-          "description": "Case-sensitive. A new type shows with a spare colour.",
+          "description": "Case-sensitive. A new type shows with a spare colour. For a web page, use the kind of outlet that published it.",
           "examples": ["vendor", "media", "independent"]
         },
         "account": { "type": "string", "description": "Display name. Up to 48 characters." },
@@ -469,11 +469,11 @@
           "description": "\"YYYY-MM-DD HH:MM\" in IST, inside the window. The by-day chart uses the date.",
           "examples": ["2026-10-23 07:59"]
         },
-        "text": { "type": "string", "description": "Post text or video title." },
+        "text": { "type": "string", "description": "Post text, video title or page excerpt." },
         "url": { "type": "string", "description": "http or https. Anything else shows without a link." },
         "engagement": {
           "type": "number",
-          "description": "Interactions on X, views on YouTube. A whole number from 0."
+          "description": "Interactions on X, views on YouTube. A whole number from 0. Web pages have no metric, so use 0. Their rows show a dash."
         },
         "theme": {
           "type": "string",
@@ -486,6 +486,10 @@
         "image": {
           "$ref": "#/$defs/optionalText",
           "description": "Thumbnail URL, http or https, about 16:9."
+        },
+        "title": {
+          "$ref": "#/$defs/optionalText",
+          "description": "Page title, for web pages. The link shows it, and text follows as an excerpt."
         },
         "video_id": { "$comment": "soft", "type": "string", "description": "Kept for the record." },
         "org": { "$comment": "soft", "type": "string", "description": "Kept for the record." },

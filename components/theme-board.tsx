@@ -10,6 +10,7 @@ import {
   nameDetail,
   platformUnits,
   safeHref,
+  sourceTitle,
   sparkSummary,
   themeActions,
   windowDays,
@@ -106,6 +107,9 @@ function Item({ source }: { source: Source }) {
   const href = safeHref(source.url)
   const image = safeHref(source.image)
   const unit = platformUnits(source.platform).metric
+  const title = sourceTitle(source)
+  const lead = title ?? source.text
+  const excerpt = title && source.text.trim() && source.text.trim() !== title ? source.text : null
   return (
     <li className="item">
       {image ? (
@@ -136,16 +140,23 @@ function Item({ source }: { source: Source }) {
         </p>
         {href ? (
           <a className="item-text" dir="auto" href={href} rel="noreferrer">
-            {source.text}
+            {lead}
           </a>
         ) : (
           <p className="item-text" dir="auto">
-            {source.text}
+            {lead}
           </p>
         )}
-        <p className="item-eng num">
-          {formatCount(source.engagement)} {unit}
-        </p>
+        {excerpt ? (
+          <p className="item-excerpt" dir="auto">
+            {excerpt}
+          </p>
+        ) : null}
+        {unit ? (
+          <p className="item-eng num">
+            {formatCount(source.engagement)} {unit}
+          </p>
+        ) : null}
       </div>
     </li>
   )

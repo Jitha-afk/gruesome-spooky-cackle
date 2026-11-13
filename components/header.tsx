@@ -144,17 +144,21 @@ export function Hero({
   kicker,
   title,
   lead,
+  afterTitle,
   children,
 }: {
   kicker: ReactNode
   title: string
   lead?: ReactNode
+  /** Sits under the title. Week pages put their phone-only copy of the top themes here. */
+  afterTitle?: ReactNode
   children?: ReactNode
 }) {
   return (
     <header className="hero">
       <p className="kicker rise">{kicker}</p>
       <h1>{title}</h1>
+      {afterTitle}
       {lead ? <p className="lead rise">{lead}</p> : null}
       <Intro />
       {children ? <div className="hero-meta rise">{children}</div> : null}

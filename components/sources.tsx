@@ -8,6 +8,7 @@ import {
   safeHref,
   sourceFacets,
   sourceRows,
+  sourceTitle,
   type Facet,
   type Source,
   type WeekData,
@@ -54,7 +55,7 @@ export function Sources({ data }: { data: WeekData }) {
   return (
     <>
       <div className="src-tools js-only">
-        <Chips facets={facets.type} name="type" />
+        {facets.type.length > 0 ? <Chips facets={facets.type} name="type" /> : null}
         <Chips facets={facets.platform} name="platform" />
         <div className="src-search">
           <label className="search">
@@ -94,19 +95,22 @@ export function Sources({ data }: { data: WeekData }) {
               const label = labels.get(source.theme)
               const unit = platformUnits(source.platform).metric
               const metrics = metricsText(source)
+              const type = String(source.type).trim()
+              const platform = String(source.platform).trim()
+              const title = sourceTitle(source)
+              const lead = title ?? source.text
+              const excerpt = title && source.text.trim() && source.text.trim() !== title ? source.text : null
               return (
                 <tr
                   data-engagement={String(source.engagement)}
-                  data-platform={String(source.platform).trim()}
-                  data-type={String(source.type).trim()}
+                  data-platform={platform}
+                  data-type={type}
                   key={source.id}
                 >
                   <td className="src-date date-unit">{String(source.date_ist).slice(0, 10)}</td>
                   <td className="src-acc">
                     <span className="src-name">{source.account}</span>
-                    <span className="src-kind">
-                      {source.type} · {source.platform}
-                    </span>
+                    <span className="src-kind">{type === platform ? type : `${type} · ${platform}`}</span>
                   </td>
                   <td className="src-post">
                     <span className="src-meta-m">
@@ -114,13 +118,18 @@ export function Sources({ data }: { data: WeekData }) {
                     </span>
                     {href ? (
                       <a className="src-text" dir="auto" href={href} rel="noreferrer">
-                        {source.text}
+                        {lead}
                       </a>
                     ) : (
                       <span className="src-text" dir="auto">
-                        {source.text}
+                        {lead}
                       </span>
                     )}
+                    {excerpt ? (
+                      <span className="src-excerpt" dir="auto">
+                        {excerpt}
+                      </span>
+                    ) : null}
                     {label ? (
                       themes.has(source.theme) ? (
                         <a className="src-theme" href={`#theme-${source.theme}`}>
@@ -132,13 +141,24 @@ export function Sources({ data }: { data: WeekData }) {
                     ) : null}
                   </td>
                   <td className="src-eng" title={metrics || undefined}>
-                    <span className="num">{formatCount(source.engagement)}</span>
-                    <span className="sr-only">
-                      {" "}
-                      {unit}
-                      {metrics ? `. ${metrics}` : ""}
-                    </span>
-                    <Bar value={Math.log10(1 + Math.max(0, source.engagement)) / peak} />
+                    {unit ? (
+                      <>
+                        <span className="num">{formatCount(source.engagement)}</span>
+                        <span className="sr-only">
+                          {" "}
+                          {unit}
+                          {metrics ? `. ${metrics}` : ""}
+                        </span>
+                        <Bar value={Math.log10(1 + Math.max(0, source.engagement)) / peak} />
+                      </>
+                    ) : (
+                      <span className="muted">
+                        <span aria-hidden="true" className="num">
+                          —
+                        </span>
+                        <span className="sr-only">No engagement metric.</span>
+                      </span>
+                    )}
                   </td>
                 </tr>
               )

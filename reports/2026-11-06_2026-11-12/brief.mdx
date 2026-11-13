@@ -1,0 +1,1335 @@
+import { GraphRank } from "@/registry/default/graph-rank/graph-rank"
+import { GraphSpec } from "@/registry/default/graph-spec/graph-spec"
+import { GraphStack } from "@/registry/default/graph-stack/graph-stack"
+import { GraphTable } from "@/registry/default/graph-table/graph-table"
+
+# Weekly cybersecurity threat-intel brief
+
+2026-11-06 00:00 IST to 2026-11-12 23:59 IST
+
+**Attackers take control of supermarket refrigeration systems**
+
+France blames Iran's IRGC for refrigeration attacks, and US agencies warn about refrigeration controllers worldwide.
+
+## Act now
+
+**Keep on-premises N-central servers offline until you apply N-able's updates. Patch the exploited Outlook, OpenSSH SSHole and Chrome flaws now.**
+
+- RMM (critical): Keep on-premises N-central servers offline until you apply N-able's updates.
+- Fridges (high): Find all refrigeration controllers that the internet can reach, and remove direct internet access.
+- MS Patch (high): Install the November 2026 Office and Windows security updates, and patch Outlook first.
+- Web RCE (high): Update Apache HTTP Server to 2.4.71, or disable HTTP/2 until your distribution ships a fixed package.
+- SSHole (high): Update OpenSSH to 10.6p2 or your distribution's fixed package, then restart sshd.
+- Dev supply (high): Search your repositories for a wfx-docs branch, and rotate CI and cloud secrets if you find one.
+- Chrome (high): Update Chrome to the November 9 Stable Channel release or later, then restart the browser.
+- Appliances (high): Apply Barracuda's fixes for both ESG flaws, and check the gateways for signs of compromise.
+
+## Ranking
+
+<GraphRank title="ACCOUNTS PER THEME">
+
+- 17 Fridges
+- 14 MS Patch
+- 9 Web RCE
+- 9 AI attacks
+- 9 RMM
+- 9 SSHole
+- 8 AI breaches
+- 7 Dev supply
+- 7 Chrome
+- 6 Appliances
+
+</GraphRank>
+
+## In numbers
+
+<GraphSpec title="THIS WEEK">
+
+- Candidates screened: 623
+- Sources in themes: 166
+- X posts: 133
+- YouTube videos: 30
+- Zero Wire items: 3
+- Comments retrieved: 730
+- Comments analysed: 522
+- Themes: 10
+
+</GraphSpec>
+
+## Source mix
+
+<GraphStack title="SOURCE TYPES">
+
+- Type: 7 vendor, 104 media, 52 independent, 3 web
+
+</GraphStack>
+
+<GraphStack title="SOURCE PLATFORMS">
+
+- Platform: 133 X, 30 YouTube, 3 Zero Wire
+
+</GraphStack>
+
+## Themes
+
+### 1. Attackers take control of supermarket refrigeration systems
+
+**Why it matters:** France blames Iran's IRGC for refrigeration attacks, and US agencies warn about refrigeration controllers worldwide.
+
+France accuses Iran's Islamic Revolutionary Guard Corps of attacks on supermarket refrigeration systems. Sources report about 700 affected sites and some fires. The FBI and CISA warn that attackers target industrial refrigeration systems worldwide. Sweden's civil defence minister says the attackers needed only passwords that nobody updated. Dutch researchers report six new login-free takeover methods for a Danfoss controller.
+
+The attacks cause physical damage through building controllers that the internet can reach. Old passwords give the reported access.
+
+**Risk:** High. Attackers cause food loss and fire hazards through exposed refrigeration controllers. US agencies warn of global attacks. Sweden reports access through old passwords. Our sources show no Danfoss fix for the new flaws. [x2118507947433091173](https://x.com/BleepinComputer/status/2118507947433091173), [x2119675509499961822](https://x.com/TheHackersNews/status/2119675509499961822), [x2120238815134585267](https://x.com/IntCyberDigest/status/2120238815134585267), [x2120920955828486438](https://x.com/IntCyberDigest/status/2120920955828486438)
+
+**Recommended actions**
+
+- Find all refrigeration controllers that the internet can reach, and remove direct internet access. Priority: now. Audience: Retail and facility operators (general step). [x2118902258440216790](https://x.com/SecurityWeek/status/2118902258440216790), [x2119675509499961822](https://x.com/TheHackersNews/status/2119675509499961822)
+- Change default and old passwords on every controller account. Priority: now. Audience: Retail and facility operators. [x2120238815134585267](https://x.com/IntCyberDigest/status/2120238815134585267)
+- Monitor Danfoss advisories for a fix to the six new flaws, because our sources show no vendor fix yet. Priority: monitor. Audience: Danfoss controller owners (general step). [x2120920955828486438](https://x.com/IntCyberDigest/status/2120920955828486438)
+
+<GraphSpec title="COVERAGE">
+
+- Accounts and channels: 17
+- X interactions: 1,784
+- YouTube views: 437,021
+- Zero Wire items: 0
+- Products: Supermarket refrigeration controllers, including a Danfoss controller
+- Sectors: Retail, food supply and blood banks
+- Regions: France, Sweden and other European countries. US agencies warn of global targeting.
+
+</GraphSpec>
+
+- Theme key: `fridges`
+- Short name: Fridges
+- Exploited in wild: `null`
+
+Attackers use old passwords, per Sweden. Our sources name no exploited CVE.
+
+- CVE IDs: `[]`
+
+- Comments analysed: 45
+
+<GraphStack title="COMMENT CLUSTERS">
+
+- Exposure and password controls (15; 33.3%): 15 neutral
+- Attribution and politics (12; 26.7%): 11 neutral, 1 negative
+- Questions and reactions (10; 22.2%): 9 neutral, 1 negative
+- Physical impact and safety (5; 11.1%): 5 neutral
+- Other languages (3; 6.7%): 3 unclassified
+
+</GraphStack>
+
+**Exposure and password controls**
+
+> Cold-chain controllers with default passwords and public IPs are the kind of OT story most IT teams never inventory.
+> 
+> If you run a store, clinic, or warehouse: change the panel password, update firmware, and get it off the open [Source](https://x.com/i/status/2119798623307174350)
+
+> The recent joint advisory from CISA and the FBI regarding attacks on industrial refrigeration systems exposes a severe convergence of cyber risk and physical safety. 
+> 
+> Threat actors are exploiting weak configurations and [Source](https://x.com/i/status/2119761347227595116)
+
+> The Censys numbers say a lot. Exposed StoreView boxes went from 3,004 to 708 in under a month, so most of them never needed to be on the internet. A small gateway that dials out over a VPN gives the service tech the same remote access with [Source](https://x.com/i/status/2119691697957531690)
+
+**Attribution and politics**
+
+> Yes, French Viginum linked the Israeli-linked BlackCore entity to digital interference and smear campaigns targeting LFI candidates in the 2026 municipal elections. Sponsors remain unidentified.
+> 
+> ANSSI previously confirmed Pegasus (NSO [Source](https://x.com/i/status/2119873244064813456)
+
+> 1,French Authorities Linked digital destabilization and attack on political candidates to an ISRAELI PRIVATE ENTITY CALLED BLACKCORE 
+> 2,French cybersecurity agency ANSSI confirmed individuals phones are being infected by Pegasus hacking [Source](https://x.com/i/status/2119873052284527024)
+
+> Naturally, in a case like this, Putin’s Russia or Iran are at the top of the list of suspects. But what good does it do to know who was behind it? The crucial question is what options are available to defend against it. In any case, [Source](https://x.com/i/status/2119888561432658309)
+
+**Questions and reactions**
+
+> Assuming these "hackers" aren't government grunts trying to orchestrate false flags – how about you people do something productive and go after the authoritarian nutcases trying to ram digital ID down our throats? Instead of giving them [Source](https://x.com/i/status/2119814125245104258)
+
+> The more advanced the technology, the smarter the hackers are at disabling vulnerabilities. [Source](https://x.com/i/status/2119717630072537198)
+
+> wait hackers going after grocery fridges now?? my ice cream stash is doomed [Source](https://x.com/i/status/2119742697900478691)
+
+**Physical impact and safety**
+
+> Same thing hit France in October. Around 700 supermarkets had their fridge and freezer controllers pushed into hot defrost overnight. Some cabinets hit 50C and a few caught fire.
+> 
+> The controller just accepted a 50C setpoint on a freezer. A [Source](https://x.com/i/status/2120081636779864484)
+
+> Take all that nonsense offline. Stop being lazy…and cheap. 
+> A hacker cannot hack a mercury thermometer and regular eyes-on checks. At least, not from a distance, and definitely not at scale. [Source](https://x.com/i/status/2119676776884658432)
+
+> The heat comes from the defroster, which is a part of the normal cycle.
+> 
+> It keeps the cooling radiator from frosting over which blocks air flow and making the thing useless. [Source](https://x.com/i/status/2119861206735630623)
+
+**Other languages**
+
+> Va falloir à un moment, que la France affronte le régime des mollahs sans faiblir. Pour de vrai. Et ça viendra plus vite que ce que vous pensez . [Source](https://x.com/i/status/2119892407051231355)
+
+> Las cámaras de supermercadistas en América Latina ya estarán advertidas? 🤔 [Source](https://x.com/i/status/2119756471625814302)
+
+**Key sources**
+
+- [MarioNawfal](https://x.com/MarioNawfal/status/2119836161833423321)
+- [IntCyberDigest](https://x.com/IntCyberDigest/status/2120238815134585267)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2119675509499961822)
+
+### 2. Microsoft patches an exploited Outlook flaw, and a SignDrop exploit goes public
+
+**Why it matters:** Attackers exploit an Outlook flaw to steal NTLMv2 hashes, and CISA adds it to its exploited list.
+
+Microsoft's November 2026 updates fix the Outlook flaw CVE-2026-124194. Microsoft confirms that attackers exploit it. A crafted message file can expose NTLMv2 authentication hashes. CISA adds the flaw to its Known Exploited Vulnerabilities catalog. Public SignDrop exploit code gives SYSTEM privileges on Windows, and no patch exists yet.
+
+Sources give different patch totals, from 1,093 to 1,259. The Outlook attack needs only one opened file.
+
+**Risk:** High. Attackers use crafted message files to steal NTLMv2 hashes from Outlook users. Microsoft confirms exploitation, and CISA lists the flaw. SignDrop has public code and no patch. [x2120430993895223603](https://x.com/TheHackersNews/status/2120430993895223603), [x2120885417524216117](https://x.com/The_Cyber_News/status/2120885417524216117), [x2120938288148316633](https://x.com/TheHackersNews/status/2120938288148316633)
+
+**Recommended actions**
+
+- Install the November 2026 Office and Windows security updates, and patch Outlook first. Priority: now. Audience: IT and endpoint teams. [x2120230988621992403](https://x.com/MsftSecIntel/status/2120230988621992403), [x2120430993895223603](https://x.com/TheHackersNews/status/2120430993895223603)
+- Tell users not to open message files from unknown senders until the Outlook patch is in place. Priority: now. Audience: IT and security awareness teams (general step). [x2120430993895223603](https://x.com/TheHackersNews/status/2120430993895223603)
+- Confirm that the updates install, because Microsoft confirms installation issues with Windows security updates. Priority: this week. Audience: IT and endpoint teams. [x2120825025297063976](https://x.com/BleepinComputer/status/2120825025297063976)
+- Monitor Microsoft for a SignDrop fix, because our sources show no vendor fix or CVE. Priority: monitor. Audience: Windows administrators (general step). [x2120938288148316633](https://x.com/TheHackersNews/status/2120938288148316633)
+
+<GraphSpec title="COVERAGE">
+
+- Accounts and channels: 14
+- X interactions: 14,976
+- YouTube views: 24,805
+- Zero Wire items: 0
+- Products: Microsoft Outlook, Office and Windows CLFS
+- Sectors: All organizations that use Microsoft Office
+- Regions: Global
+
+</GraphSpec>
+
+- Theme key: `mspatch`
+- Short name: MS Patch
+- Exploited in wild: `true`
+
+| CVE | Exploited in wild | Basis | Evidence |
+| --- | --- | --- | --- |
+| CVE-2026-124194 | true | Microsoft confirms exploitation, and CISA adds the flaw to its Known Exploited Vulnerabilities catalog. | [x2120235463982133629](https://x.com/SecurityWeek/status/2120235463982133629), [x2120232895520645304](https://x.com/BleepinComputer/status/2120232895520645304), [x2120257141714133343](https://x.com/DarkWebInformer/status/2120257141714133343), [x2120885417524216117](https://x.com/The_Cyber_News/status/2120885417524216117), [x2120535773330145379](https://x.com/Lumideezy/status/2120535773330145379), [x2120891258692657182](https://x.com/Lumideezy/status/2120891258692657182), [x2120357094188790129](https://x.com/SecurityWeek/status/2120357094188790129), [yte3vfMa3oAfI](https://www.youtube.com/watch?v=e3vfMa3oAfI) |
+
+- Comments analysed: 42
+
+<GraphStack title="COMMENT CLUSTERS">
+
+- Outlook flaw triage and NTLM hashes (21; 50.0%): 21 neutral
+- Patch volume and update problems (8; 19.0%): 8 neutral
+- Other languages (7; 16.7%): 7 unclassified
+- Questions and reactions (6; 14.3%): 6 neutral
+
+</GraphStack>
+
+**Outlook flaw triage and NTLM hashes**
+
+> Over a thousand fixes is the headline. The one to care about is the Outlook zero-day, because it's already being used in attacks.
+> It only works if you open a message file someone sent you. So until you've updated, don't open attachments [Source](https://x.com/i/status/2120569169989239070)
+
+> Microsoft says the Preview Pane can't trigger CVE-2026-124194; the user has to open the message file. Besides patching Office, block outbound SMB (TCP 445) at the edge and set outgoing NTLM restriction to audit, then deny, so Outlook can't [Source](https://x.com/i/status/2120295593306214449)
+
+> 1,235 patches is a triage problem, not a patching problem. The Outlook flaw matters most because it leaks credential hashes, and a hash captured before patching stays usable after patching. Patching closes the door. It does not change [Source](https://x.com/i/status/2120323660401553714)
+
+**Patch volume and update problems**
+
+> KEV due date for US federal agencies: Nov 24. Check the channel, not just the version: 2610 is fixed at 16.0.20527.20196 on Current Channel but 20527.20192 on Semi-Annual Enterprise. LTSC 2021: 16.0.14334.21048 · LTSC 2024: [Source](https://x.com/i/status/2120901937298395305)
+
+> Microsoft just fixed 1,235 vulnerabilities in a single Patch Tuesday.
+> 
+> Not a typo.
+> 
+> 66 are rated Critical, but one of them is the reason you should update tonight: [Source](https://x.com/i/status/2120451254589722869)
+
+> When the bug needs a click, the lure is usually a convincing internal-looking email. I'd patch finance and exec machines first, since those are the inboxes attackers spend effort on. [Source](https://x.com/i/status/2120889592563794355)
+
+**Other languages**
+
+> 🚨 تستخدم Outlook؟ حدّث Office الحين!
+> 
+> فيه هجمات فعلية على ثغرة (CVE-2026-124194): ملف رسالة ملغوم يسرّب بصمة دخولك NTLMv2 لسيرفر المهاجم، فيقدر ينتحل حسابك 💀
+> 
+> 📦 تحديث مايكروسوفت لشهر نوفمبر يصلّح 1,235 ثغرة، منها 66 حرجة
+> 
+> #أمن&#95;المعلومات [Source](https://x.com/i/status/2120442932339904694)
+
+> Outlook zero-day vazando hash NTLMv2 e velho conhecido de pentest com cara nova. se a rede deixa SMB/WebDAV de saida aberto, o atacante captura o hash e crackeia ou faz relay. bloqueia 445 de saida, liga SMB signing e corre pro patch [Source](https://x.com/i/status/2120266202790642165)
+
+> Outlookを使っている人へ。
+> 悪用済みの脆弱性CVE-2026-124194が11月の月例更新で修正。細工したファイルを開くと警告なしに外部へ接続し、認証情報（NTLMハッシュ）が漏れる恐れ。Officeを最新に更新を。
+> #脆弱性 #Outlook [Source](https://x.com/i/status/2120294108464095455)
+
+**Questions and reactions**
+
+> Have these been pushed out to internal Microsoft servers that can dog food for the rest of us? [Source](https://x.com/i/status/2120311694388035643)
+
+> Nice.. but that numbers mean they did nothing for years [Source](https://x.com/i/status/2120291619748409476)
+
+> Oh Shit, here we go again! [Source](https://x.com/i/status/2120260034936631651)
+
+**Key sources**
+
+- [The&#95;Cyber&#95;News](https://x.com/The_Cyber_News/status/2120885417524216117)
+- [DarkWebInformer](https://x.com/DarkWebInformer/status/2120257141714133343)
+- [BleepinComputer](https://x.com/BleepinComputer/status/2120232895520645304)
+
+### 3. Critical flaws affect Apache HTTP Server, React Server Components, MongoDB and PHP
+
+**Why it matters:** Unauthenticated attackers can run code on common web servers, and some Linux distributions still lack fixes.
+
+Apache fixes CVE-2026-119618, a CVSS 9.8 HTTP/2 flaw that can allow unauthenticated code execution. Some Linux distributions still wait for fixed packages. Public exploit code exists for CVE-2026-126187 in React Server Components, which affects certain Next.js apps. MongoDB patches a pre-auth crash flaw, and Node.js fixes 16 flaws. Cloudflare Radar Zero Wire tells teams to prioritize patching for React and PHP2Shell.
+
+Web servers and app frameworks face the internet directly. Public exploit code lowers the effort for attackers.
+
+**Risk:** High. Unauthenticated attackers can run code on vulnerable Apache, Next.js and PHP servers. CISA lists the original PHP2Shell flaws as exploited, per Zero Wire. Our sources show no confirmed exploitation of the Apache or React flaws. [x2120746775455858849](https://x.com/TheHackersNews/status/2120746775455858849), [zw-rsc-typed-array-rce](https://radar.cloudflare.com/zero-wire/rsc-typed-array-rce), [zw-php2shell](https://radar.cloudflare.com/zero-wire/php2shell), [ytNWoM9JdTQ3I](https://www.youtube.com/watch?v=NWoM9JdTQ3I)
+
+**Recommended actions**
+
+- Update Apache HTTP Server to 2.4.71, or disable HTTP/2 until your distribution ships a fixed package. Priority: now. Audience: Web server administrators. [x2120746775455858849](https://x.com/TheHackersNews/status/2120746775455858849), [ytNWoM9JdTQ3I](https://www.youtube.com/watch?v=NWoM9JdTQ3I)
+- Update Next.js to 16.4.1 or later (15.5.28 on 15.x), then check the version in the deployed build. Priority: now. Audience: Web application teams. [zw-rsc-typed-array-rce](https://radar.cloudflare.com/zero-wire/rsc-typed-array-rce)
+- Update PHP to 8.5.12, 8.4.27, 8.3.36 or 8.2.35, or install your vendor's backported fix. Priority: this week. Audience: PHP hosting and web teams. [zw-php2shell](https://radar.cloudflare.com/zero-wire/php2shell)
+- Install the MongoDB patches for CVE-2026-118383 and the current Node.js security releases. Priority: this week. Audience: Database and platform teams. [x2120811084764602372](https://x.com/TheHackersNews/status/2120811084764602372), [x2120794762886443159](https://x.com/TheHackersNews/status/2120794762886443159)
+
+<GraphSpec title="COVERAGE">
+
+- Accounts and channels: 9
+- X interactions: 2,206
+- YouTube views: 1,718
+- Zero Wire items: 2
+- Products: Apache HTTP Server 2.4.55 to 2.4.70 with HTTP/2, React Server Components, Next.js, MongoDB, Node.js and PHP
+- Sectors: All organizations that run these web stacks
+- Regions: Global
+
+</GraphSpec>
+
+- Theme key: `webrce`
+- Short name: Web RCE
+- Exploited in wild: `true`
+
+Only the two original PHP2Shell CVEs have exploitation evidence. Our sources show no exploitation of the Apache or React flaws.
+
+| CVE | Exploited in wild | Basis | Evidence |
+| --- | --- | --- | --- |
+| CVE-2026-109618 | true | Zero Wire states that CISA lists the original two PHP2Shell flaws as known exploited. | [zw-php2shell](https://radar.cloudflare.com/zero-wire/php2shell) |
+| CVE-2026-109619 | true | Zero Wire states that CISA lists the original two PHP2Shell flaws as known exploited. | [zw-php2shell](https://radar.cloudflare.com/zero-wire/php2shell) |
+| CVE-2026-115560 | null | Zero Wire states that this flaw is not in the CISA catalog on November 9. No source reports exploitation. | [zw-php2shell](https://radar.cloudflare.com/zero-wire/php2shell) |
+| CVE-2026-118383 | null | No exploitation claim appears in retrieved sources. | [x2120928785411547639](https://x.com/DarkWebInformer/status/2120928785411547639), [x2120811084764602372](https://x.com/TheHackersNews/status/2120811084764602372) |
+| CVE-2026-119618 | null | No exploitation claim appears in retrieved sources. SANS says no working public exploit exists yet. | [x2120746775455858849](https://x.com/TheHackersNews/status/2120746775455858849), [ytNWoM9JdTQ3I](https://www.youtube.com/watch?v=NWoM9JdTQ3I) |
+| CVE-2026-126187 | null | Public exploit code exists. Zero Wire reports no exploitation by React, Vercel or CISA as of November 11. | [x2120565449838776524](https://x.com/ThreatWire_/status/2120565449838776524), [x2120564070697038012](https://x.com/TheHackersNews/status/2120564070697038012), [x2120434553827582175](https://x.com/0xManan/status/2120434553827582175), [x2120426996136120822](https://x.com/IvanPerezF_/status/2120426996136120822), [zw-rsc-typed-array-rce](https://radar.cloudflare.com/zero-wire/rsc-typed-array-rce) |
+| CVE-2026-96889 | null | No exploitation claim appears in retrieved sources. | [zw-rsc-typed-array-rce](https://radar.cloudflare.com/zero-wire/rsc-typed-array-rce) |
+
+**Cloudflare Radar Zero Wire:** [React Server Components typed-array RCE](https://radar.cloudflare.com/zero-wire/rsc-typed-array-rce). Priority: Prioritize patching.
+
+> Update Next.js 16 apps to 16.4.1 or later, and Next.js 15.5 apps to 15.5.28 or later.
+
+> For other RSC frameworks or custom bundler setups, update react-server-dom-&#42; to 19.0.9, 19.1.10, 19.2.9 or 19.3.1, or to the framework release that includes them.
+
+> Update Next.js to 16.4.1 or later (15.5.28 on 15.x) or react-server-dom-&#42; to a fixed 19.x release, then check the deployed version. Updating React alone does not fix Next.js.
+
+> Rebuild and redeploy, then check the version in the deployed image or artifact, for example node&#95;modules/next/package.json. A fixed lockfile alone does not show that the fix is running.
+
+> An unauthenticated attacker can run code in rare apps whose RSC payloads mix several typed arrays with attacker input. Public proof-of-concept code exists; React, Vercel and CISA had not reported exploitation as of November 11.
+
+**Cloudflare Radar Zero Wire:** [php2shell](https://radar.cloudflare.com/zero-wire/php2shell). Priority: Prioritize patching.
+
+> Update PHP to 8.5.12, 8.4.27, 8.3.36 or 8.2.35, or install your vendor's backported fix, including through managed hosting providers.
+
+> Update the PHP runtime using the vendor advisory, and assess CVE-2026-115560 separately. Ask your hosting provider to confirm fixes if it manages PHP.
+
+> Keep edge mitigations enabled while the update is being deployed.
+
+> CISA lists the original two flaws as known exploited. The separate session upload progress flaw was not in CISA's catalog on November 9.
+
+- Comments analysed: 60
+
+<GraphStack title="COMMENT CLUSTERS">
+
+- Mitigations and patch lag (25; 41.7%): 23 neutral, 1 positive, 1 negative
+- Next.js exposure checks (16; 26.7%): 15 neutral, 1 negative
+- Other languages (12; 20.0%): 12 unclassified
+- Questions and reactions (7; 11.7%): 6 neutral, 1 negative
+
+</GraphStack>
+
+**Mitigations and patch lag**
+
+> the useful number here is not the 9.8, it is the gap. a reliable exploit against a default h2 config plus three debian branches still without a fix means the race is distro patch lag, so scan for 2.4.55-2.4.70 with h2 enabled, and where [Source](https://x.com/i/status/2120837867807142057)
+
+> Root cause per Red Hat: an HTTP/2 worker thread writes into memory owned by the connection thread through a shared lock-free allocator. RHEL 9/10 give each stream its own allocator, so it's rated Important there. Can't patch yet? Set [Source](https://x.com/i/status/2120814245658902599)
+
+> Worth a look beyond web servers: firewall and gateway web UIs, NAS boxes and edge appliances often bundle Apache too. Check the version your vendor ships, keep admin UIs off the WAN, and if a patch is a while off, removing h2 from the [Source](https://x.com/i/status/2120793596815462562)
+
+**Next.js exposure checks**
+
+> Quick triage: the exploit needs Cache Components, so grep next.config for cacheComponents first. Enabled and internet-facing means patch tonight, then check logs for odd RSC POSTs and rotate env secrets if anything looks off. Not enabled [Source](https://x.com/i/status/2120571800484724806)
+
+> Calling out that only specific Cache Components setups with multiple typed arrays are exposed is the detail that saves teams hours of triage. With a public PoC now out and patches available since October 14, anyone running Next.js in [Source](https://x.com/i/status/2120570636938723428)
+
+> Public PoC just dropped for the Next.js RSC RCE (CVE-2026-126187, 9.5). Patch has been out since Oct 14, so this is basically a pop quiz on who updated.
+> 
+> Only hits a specific Cache Components setup, but checking takes 2 min. Bump Next and [Source](https://x.com/i/status/2120714500756189207)
+
+**Other languages**
+
+> PoC público pra RCE em Next.js, mas antes do pânico: só pega app com uma config específica de Cache Components. no pentest, confirma se o alvo usa App Router/RSC e essa config antes de reportar, scanner batendo só por versão vai gerar mt [Source](https://x.com/i/status/2120631193746243750)
+
+> Pou pi senp: kounye a nenpòt moun ka jwenn kòd pou atake kèk sit ki fèt ak Next.js, e atakan an ka fè sèvè a kouri kòmand li san modpas. Se pa tout sit ki afekte, men koreksyon an la depi 14 oktòb. Si ou gen yon sit Next.js, mete l ajou [Source](https://x.com/i/status/2120606912920367600)
+
+> Lỗi Apache HTTP/2 (tin): [Source](https://x.com/i/status/2120866677592297569)
+
+**Questions and reactions**
+
+> A 9.8 in Apache with no login needed, rough one to wake up to 😬
+> Anthropic's scanner and Google's researchers found it separately, no public exploit yet
+> Feels like every week now one of the big AI companies turns up something serious in [Source](https://x.com/i/status/2120811592925474926)
+
+> worth noting the PoC basically forges a call to an existing Server Action with your args, so how bad it gets depends on what actions the app ships. one more reason to treat actions as public endpoints [Source](https://x.com/i/status/2120585100912202003)
+
+> That's risky.. Hopefully most deployments are containerized with strong security boundaries. Else, we'll see some major breaches... [Source](https://x.com/i/status/2120810177071104042)
+
+**Key sources**
+
+- [TheHackersNews](https://x.com/TheHackersNews/status/2120746775455858849)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2120564070697038012)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2120794762886443159)
+
+### 4. Attackers use AI agent tools against banks, cloud accounts and public code
+
+**Why it matters:** Microsoft reports a financially motivated group that uses the ARTEX agent framework against financial organizations.
+
+Microsoft reports that Storm-3358 uses the agentic AI framework ARTEX against financial organizations. Microsoft also sees attackers use agentic AI tools to find exposed secrets in public GitHub repositories. Arctic Wolf links AntiFox, an AI pentesting platform, to intrusions that reach AWS production secrets. The Hacker News reports that one hacker in Taiwan uses BOSSAI, a 12-agent setup, against many organizations. Unit 42 reports an indirect prompt injection campaign across 26 domains that targets AI agents.
+
+AI agents let a small team test many targets fast. Defenders still control exposed secrets, credentials and unpatched systems.
+
+**Risk:** Medium. Attackers use AI agents to find and use exposed secrets and weak systems at scale. Microsoft and Arctic Wolf report real intrusions. The attacks need exposed secrets, valid credentials or unpatched systems. Our sources give few indicators, so the evidence stays thin. [x2118898318457585943](https://x.com/MsftSecIntel/status/2118898318457585943), [x2118491118308352329](https://x.com/MsftSecIntel/status/2118491118308352329), [x2120540829488197766](https://x.com/TheHackersNews/status/2120540829488197766)
+
+**Recommended actions**
+
+- Remove secrets from public GitHub repositories, and rotate every secret that was public. Priority: now. Audience: Developers and security teams (general step). [x2118491118308352329](https://x.com/MsftSecIntel/status/2118491118308352329)
+- Review AWS Secrets Manager requests and credential use for activity that you cannot explain. Priority: this week. Audience: Cloud security teams (general step). [x2120540829488197766](https://x.com/TheHackersNews/status/2120540829488197766)
+- Check internet-facing IIS servers for web shells. Priority: this week. Audience: Windows server administrators (general step). [x2120540829488197766](https://x.com/TheHackersNews/status/2120540829488197766)
+- Monitor Microsoft and Unit 42 reports for indicators, because our sources give no full indicator list. Priority: monitor. Audience: Threat intelligence teams (general step). [x2118898318457585943](https://x.com/MsftSecIntel/status/2118898318457585943), [x2120264510350991832](https://x.com/Unit42_Intel/status/2120264510350991832)
+
+<GraphSpec title="COVERAGE">
+
+- Accounts and channels: 9
+- X interactions: 2,134
+- YouTube views: 2,033
+- Zero Wire items: 0
+- Products: Public GitHub repositories, AWS accounts, IIS servers and AI agents
+- Sectors: Financial organizations and public emergency services
+- Regions: Southeast Asia, global banks and Taiwan
+
+</GraphSpec>
+
+- Theme key: `aiattack`
+- Short name: AI attacks
+- Exploited in wild: `null`
+
+Sources report intrusions with AI tools. Our sources name no exploited CVE.
+
+- CVE IDs: `[]`
+
+- Comments analysed: 50
+
+<GraphStack title="COMMENT CLUSTERS">
+
+- Basic defences still decide outcomes (25; 50.0%): 23 neutral, 2 negative
+- Questions and reactions (9; 18.0%): 9 neutral
+- Speed and scale of agent attacks (8; 16.0%): 8 neutral
+- Questions about tools and models (5; 10.0%): 5 neutral
+- Other languages (3; 6.0%): 3 unclassified
+
+</GraphStack>
+
+**Basic defences still decide outcomes**
+
+> “What the agents found was mostly data that was already poorly protected, according to the researchers: a medical data port left open since 2018, dispatch records on a public-facing API, a lender with 16 SQL injection points, and [Source](https://x.com/i/status/2119761116351848460)
+
+> "What the agents found was mostly #data that was already poorly protected...: a medical data port left open since 2018, dispatch records on a public-facing API, a lender with 16 SQL injection points, and universities running unpatched [Source](https://x.com/i/status/2119916099542327600)
+
+> AI agents let one attacker aim at hundreds of orgs in 11 countries, but per Acronis they only got in where basics were missing: default creds, open APIs, SQL injection, unpatched databases. Enforce logins, patch, kill defaults. AI scales [Source](https://x.com/i/status/2119837424201216001)
+
+**Questions and reactions**
+
+> That's exactly why sensitive data should travel peer-to-peer, and we should stop relying on an internet where everyone is listening. [Source](https://x.com/i/status/2119805006413201557)
+
+> Storm-3358 pairing ARTEX with ordinary tooling is the tell. Hospital MSP remotes look a lot like those finance targets. [Source](https://x.com/i/status/2118912327512912327)
+
+> This guy was only using 12. 
+> 
+> Imagine what will happen when inference costs drop even further. [Source](https://x.com/i/status/2119821363687162313)
+
+**Speed and scale of agent attacks**
+
+> "&#91;T&#93;he attacker manually pasted one agent's output into another. Commercial #AI models mostly refused to help him attack. The attacking agents therefore ran almost entirely on 'abliterated' models, meaning AI models run locally with their [Source](https://x.com/i/status/2119895751199523033)
+
+> MSP owners: this is why I plan for the click, not against it. One person with a dozen agents can now try hundreds of orgs. Small blast radius and isolated backups decide whether one mistake stays one mistake. [Source](https://x.com/i/status/2119805699387703432)
+
+> the interesting bit is 'alongside conventional automated tools' — so it's not the autonomy, it's the parallelism. agent runs the boring recon loop while humans pick targets [Source](https://x.com/i/status/2120282473703624925)
+
+**Questions about tools and models**
+
+> And who's fault is this?
+> Why wasn't that site secured?
+> Red Teams have offered their services for decades
+> to harden systems.
+> I don't blame Ai for finding obvious vulnerabilities, analysts should have figured out earlier. [Source](https://x.com/i/status/2119814310918791247)
+
+> Analyze the recommendations from
+> Microsoft here and compare it to other companies like PaloAlto/CrowdStrike [Source](https://x.com/i/status/2118945143407472685)
+
+> guardrails in commercial models vs some dude running abliterated weights locally lol. guess who won [Source](https://x.com/i/status/2119721002447811035)
+
+**Other languages**
+
+> Satu operator kawal 12 agent AI tu part paling kena fikir. Dulu job extraction macam ni kena pasukan penuh, sekarang satu orang gerak semuanya. Kita kat sisi defense masih banyak main manual. Tu jurang dia. [Source](https://x.com/i/status/2119965625405853806)
+
+> Yes, pake agent AI untuk ngehack
+>  
+> Biar bingung dah tuh para developer dan engineernya [Source](https://x.com/i/status/2120042283102044234)
+
+**Key sources**
+
+- [MsftSecIntel](https://x.com/MsftSecIntel/status/2118898318457585943)
+- [IntCyberDigest](https://x.com/IntCyberDigest/status/2119229665391042897)
+- [MsftSecIntel](https://x.com/MsftSecIntel/status/2118491118308352329)
+
+### 5. N-able N-central flaws and ScreenConnect attacks put MSP customers at risk
+
+**Why it matters:** A researcher publishes more than 30 N-central exploits, and attackers probe servers that already have patches.
+
+A researcher publishes more than 30 alleged N-central zero-days, including unauthenticated code execution. N-able takes hosted N-central offline and tells on-premises customers to shut down servers. N-able releases N-central 2026.4 HF2 for 7 CVEs, but patched servers can stay exploitable under some conditions. The security firm watchTowr reports exploitation attempts and confirms exploitation. Huntress reports attacks through ScreenConnect panels at 6 MSPs and 286 endpoints.
+
+One RMM server can reach every customer device of an MSP. Public exploit code lowers the effort for attackers.
+
+**Risk:** Critical. Attackers can get root code execution on N-central servers and reach MSP customer devices. Public exploits exist, and watchTowr confirms exploitation. The Hacker News reports that some patched servers stay exploitable. [x2119905778559525251](https://x.com/BleepinComputer/status/2119905778559525251), [x2120172079765176806](https://x.com/The_Cyber_News/status/2120172079765176806), [x2120834921241694544](https://x.com/TheHackersNews/status/2120834921241694544), [x2120652762501275700](https://x.com/BleepinComputer/status/2120652762501275700)
+
+**Recommended actions**
+
+- Keep on-premises N-central servers offline until you apply N-able's updates. Priority: now. Audience: MSPs with on-premises N-central. [x2120387026814153089](https://x.com/TheHackersNews/status/2120387026814153089)
+- Apply N-central 2026.4 HF2, and install the next N-able hotfix when it becomes available. Priority: now. Audience: MSPs with on-premises N-central. [x2120387026814153089](https://x.com/TheHackersNews/status/2120387026814153089), [x2120834921241694544](https://x.com/TheHackersNews/status/2120834921241694544)
+- Check N-central servers for signs of compromise, and restrict access to them. Priority: now. Audience: MSP security teams. [x2120122384837734881](https://x.com/TheHackersNews/status/2120122384837734881)
+- Patch ScreenConnect and review technician sessions, because the patch does not stop session hijacking. Priority: this week. Audience: MSPs and IT support teams. [x2120866724543398276](https://x.com/TheHackersNews/status/2120866724543398276)
+
+<GraphSpec title="COVERAGE">
+
+- Accounts and channels: 9
+- X interactions: 1,966
+- YouTube views: 1,104
+- Zero Wire items: 0
+- Products: N-able N-central and ScreenConnect
+- Sectors: Managed service providers and their customers
+- Regions: Hosted N-central in the Americas, Europe and Asia-Pacific. Other regions are not clear.
+
+</GraphSpec>
+
+- Theme key: `rmm`
+- Short name: RMM
+- Exploited in wild: `true`
+
+watchTowr confirms exploitation of N-central, per The&#95;Cyber&#95;News. SCKit malware exploits a patched ScreenConnect flaw, per The Hacker News. Our sources name no CVE IDs.
+
+- CVE IDs: `[]`
+
+- Comments analysed: 53
+
+<GraphStack title="COMMENT CLUSTERS">
+
+- Credential rotation and account audits (17; 32.1%): 15 neutral, 1 positive, 1 negative
+- MSP blast radius and vendor trust (16; 30.2%): 13 neutral, 3 negative
+- Questions and reactions (10; 18.9%): 9 neutral, 1 negative
+- Disclosure and vendor response (5; 9.4%): 5 neutral
+- Other languages (5; 9.4%): 5 unclassified
+
+</GraphStack>
+
+**Credential rotation and account audits**
+
+> If you run N-central on-prem, follow N-able's guidance and keep it shut down until the hotfix lands. Then review admin accounts, rotate RMM credentials and check agent activity. Pulling hosted servers offline fast was the right call. Your [Source](https://x.com/i/status/2120199815258570910)
+
+> The tool your MSP uses to remote into your laptop is now how someone else gets in too. 6 MSPs popped via ScreenConnect, 286 endpoints across 47 orgs so far.
+> 
+> MSP folks: don't open sessions on boxes that look off, check your extensions, and [Source](https://x.com/i/status/2120714091714994652)
+
+> The pivot back to technician workstations is the scary part. A remote-access panel is effectively domain admin for every customer. Phishing-resistant MFA on the panel, separate admin workstations for techs, and no long-lived session tokens [Source](https://x.com/i/status/2120763453476323823)
+
+**MSP blast radius and vendor trust**
+
+> One panel became 47 organizations. That is the part a customer can actually act on. You do not choose ScreenConnect, your MSP does, so your exposure runs on their session hygiene, not yours. Before renewal, ask how technician access to [Source](https://x.com/i/status/2120695054230540637)
+
+> The nasty detail in Huntress's notes: the planted client waits for a technician to connect, then goes after the technician. So "let me remote in and take a look" is the wrong first move. Their advice is not to connect to affected hosts at [Source](https://x.com/i/status/2120705613659595186)
+
+> You report hackers breached MSPs through ScreenConnect and planted rogue remote tools across 47 orgs. From incident work, a provider breach becomes your breach when their access is trusted. When did you last review provider remote access? [Source](https://x.com/i/status/2120875240096239647)
+
+**Questions and reactions**
+
+> For small businesses reading this: ConnectWise says the link so far looks like a family of third-party add-ons (RMM+ and similar), not a flaw in ScreenConnect itself. Worth asking your IT provider today whether any of those were installed. [Source](https://x.com/i/status/2120815441329483833)
+
+> Huntress's own writeup is already at 288 endpoints across 48 orgs, past those mid-counts. they also say don't investigate a suspect host over ScreenConnect itself. [Source](https://x.com/i/status/2120774465873436923)
+
+> simplest rule is the one people actually follow. the trick is making sure they already have that number before the call comes in [Source](https://x.com/i/status/2120504729331552766)
+
+**Disclosure and vendor response**
+
+> I and many other people have been warning for some time that the big companies that have treated security researchers like crap were going to find themselves in a seriously uncomfortable situation down the road.
+> 
+> Well, here we are: [Source](https://x.com/i/status/2119936771576431101)
+
+> AppSec programs need to take and prioritize vulnerabilities.   PHP knew about the vulns and could not decide the best way to patch so just sat in the queue.   I’m guessing these reported vulns are sitting in a queue as well. [Source](https://x.com/i/status/2119928514787045853)
+
+> You have under 100 nodes / network devices, do not use services like N-Able.  Makes it easier to manage devices but makes it really easy to infiltrate your network. Remember Solar winds. If you do use N-able, shut it down! [Source](https://x.com/i/status/2119996088128000246)
+
+**Other languages**
+
+> N-able قفلت N-central الـ hosted، وبتقول لعملاء الـ on-prem يطفوا السيرفرات، بعد نشر 30+ zero-day بـ PoC، منها chain من غير auth بتعمل admin وتنفّذ commands.
+> 
+> الـ RMM معاه مفاتيح كل أجهزتك. عندك on-prem؟ اطفيه لحد الـ hotfix، وراجع من 8 [Source](https://x.com/i/status/2120084539787640901)
+
+> Liebe Unternehmen.
+> 
+> Wenn Euch ein Cybersecurity-Expert eine Liste an Lücken in Eurer Software schickt, MÜSST ihr Euch drum kümmern.
+> 
+> Zahlt ihm ein bugbounty dafür, dass er Euren Job gemacht hat. 
+> 
+> Reagiert Ihr gar nicht, passiert halt das [Source](https://x.com/i/status/2120019779557757394)
+
+> ScreenConnect利用の保守ベンダー・情シス向け（ConnectWiseの声明、BleepingComputer 11/11）
+> 
+> ・疑わしい端末へ対話型接続をしない
+> ・操作履歴の確認、セッション失効
+> ・信頼できる端末で認証情報リセット、MFA確認
+> 
+> Huntressはアラートがなくても Run Command の実行履歴確認を推奨。 [Source](https://x.com/i/status/2120674048216822221)
+
+**Key sources**
+
+- [BleepinComputer](https://x.com/BleepinComputer/status/2119905778559525251)
+- [DarkWebInformer](https://x.com/DarkWebInformer/status/2119921982380675078)
+- [BleepinComputer](https://x.com/BleepinComputer/status/2120652762501275700)
+
+### 6. Attackers exploit the SSHole OpenSSH password bypass on musl Linux
+
+**Why it matters:** Attackers exploit an OpenSSH password bypass within hours, and CISA adds it to its exploited list.
+
+CVE-2026-123158, called SSHole, lets attackers bypass OpenSSH password authentication on some Linux configurations. The Hacker News reports exploitation within hours and root access on an Alpine Linux honeypot. CISA adds the flaw to its Known Exploited Vulnerabilities catalog. Reported attacks deploy TAC Agent malware, botnets and cryptominers. OpenSSH releases 10.6p2, and Alpine publishes fixed packages back to 3.16.
+
+The attack needs password logins and a vulnerable build. Zero Wire reports no exploitation on November 6, but later sources report attacks.
+
+**Risk:** High. Attackers can log in without a valid password on affected hosts that allow password logins. The Hacker News and BleepingComputer report exploitation, and CISA lists the flaw. The attack needs specific configurations. [x2118725937533800721](https://x.com/TheHackersNews/status/2118725937533800721), [x2119823635531673993](https://x.com/BleepinComputer/status/2119823635531673993), [x2120041948019146966](https://x.com/TheHackersNews/status/2120041948019146966), [zw-sshole](https://radar.cloudflare.com/zero-wire/sshole)
+
+**Recommended actions**
+
+- Update OpenSSH to 10.6p2 or your distribution's fixed package, then restart sshd. Priority: now. Audience: Linux administrators. [zw-sshole](https://radar.cloudflare.com/zero-wire/sshole)
+- If you cannot update yet, set PasswordAuthentication no and restart sshd. Priority: now. Audience: Linux administrators. [zw-sshole](https://radar.cloudflare.com/zero-wire/sshole)
+- Check /var/log/messages for Accepted password lines on accounts that have no password. Priority: this week. Audience: Linux administrators and incident responders. [zw-sshole](https://radar.cloudflare.com/zero-wire/sshole)
+- Treat a host as compromised if you find such a login or cannot rule one out. Priority: this week. Audience: Incident responders. [zw-sshole](https://radar.cloudflare.com/zero-wire/sshole)
+
+<GraphSpec title="COVERAGE">
+
+- Accounts and channels: 9
+- X interactions: 793
+- YouTube views: 1,143,853
+- Zero Wire items: 1
+- Products: OpenSSH on musl-based Linux, such as Alpine Linux
+- Sectors: All organizations with Alpine or other musl-based hosts
+- Regions: Global
+
+</GraphSpec>
+
+- Theme key: `sshole`
+- Short name: SSHole
+- Exploited in wild: `true`
+
+| CVE | Exploited in wild | Basis | Evidence |
+| --- | --- | --- | --- |
+| CVE-2026-123158 | true | The Hacker News and BleepingComputer report exploitation, and CISA adds the flaw to its catalog. Zero Wire reports no exploitation as of November 6. | [x2118725937533800721](https://x.com/TheHackersNews/status/2118725937533800721), [yt7IFgZxRPjgA](https://www.youtube.com/watch?v=7IFgZxRPjgA), [zw-sshole](https://radar.cloudflare.com/zero-wire/sshole) |
+
+**Cloudflare Radar Zero Wire:** [&#42;sshole: OpenSSH password bypass on musl Linux](https://radar.cloudflare.com/zero-wire/sshole). Priority: Prioritize patching.
+
+> Update OpenSSH to 10.6p2 or your distribution's fixed package, then restart sshd.
+
+> Update OpenSSH to 10.6p2 or your distribution's fixed package, then restart sshd. If you cannot update yet, set PasswordAuthentication no and restart sshd.
+
+> Check /var/log/messages for sshd lines reading Accepted password for an account with no password, such as alpine, root, a key-only user or a directory-service user. If you find one or cannot rule out a login, treat the host as compromised and review doas use, new users, changed files and authorized&#95;keys.
+
+> With password logins enabled, an unauthenticated attacker can log in to passwordless accounts if another account has a $5$ or $6$ hash. Neither OpenSSH nor Alpine had reported exploitation as of November 6.
+
+- Comments analysed: 39
+
+<GraphStack title="COMMENT CLUSTERS">
+
+- Narrow scope and configuration checks (21; 53.8%): 21 neutral
+- Questions and reactions (7; 17.9%): 7 neutral
+- Patch and restart (6; 15.4%): 5 neutral, 1 negative
+- Other languages (5; 12.8%): 5 unclassified
+
+</GraphStack>
+
+**Narrow scope and configuration checks**
+
+> Worth stressing who's exposed: musl-based systems such as Alpine, so check container images and small cloud VMs, not only your main servers. If you can't update to 10.6p2 today, turn off SSH password authentication, then review [Source](https://x.com/i/status/2119842192306905444)
+
+> The mechanism is the detail worth knowing: musl's crypt() returns "&#42;" when hashing fails, for example on a password over its 256-byte limit, and sshd compares that with the "&#42;" stored for a password-disabled account, so it counts as a [Source](https://x.com/i/status/2119846604114915337)
+
+> Important alert. This requires musl, PAM off, password auth on, and a login-capable account with &#42; as its password field. On Alpine, update and restart sshd; installing the package alone leaves the old daemon running. Check logs for [Source](https://x.com/i/status/2118745286222954561)
+
+**Questions and reactions**
+
+> A good week to remind the team that “IT will handle it” doesn’t cover the router under your desk at home [Source](https://x.com/i/status/2119769803791729021)
+
+> SSHole is the rare CVE name that also describes the port 22 you forgot to firewall. [Source](https://x.com/i/status/2119854067149164778)
+
+> best part, this has existed since 2016 [Source](https://x.com/i/status/2119240499429032159)
+
+**Patch and restart**
+
+> Patching alone is not the fix here. A running sshd keeps using the old binary until it restarts, so an upgrade without a restart leaves the box exposed. For VPS users the order matters: patch, restart sshd, then check which boxes still [Source](https://x.com/i/status/2119839399290802620)
+
+> Scary how quickly attackers weaponize newly disclosed vulnerabilities. This is exactly why continuous security monitoring and patch management matter. How widespread is the exposure across production Linux environments? [Source](https://x.com/i/status/2118726167251615811)
+
+> Patch your OpenSSH now. SSHole (CVE-2026-123158) is being actively exploited to breach Linux boxes. If you run internet-facing SSH, update today and check your auth logs for anything odd. [Source](https://x.com/i/status/2120344341621166281)
+
+**Other languages**
+
+> Pou pi senp: OpenSSH se pwogram anpil sèvè Linux itilize pou moun konekte sou yo a distans. Atakan ap itilize yon fay ladan l ki rele SSHole pou yo antre, kouri lòd epi vòlè modpas. Si ou jere yon sèvè Linux, tcheke mizajou OpenSSH la epi [Source](https://x.com/i/status/2119836207081243021)
+
+> Un solo carácter en un campo de certificado y acceso root sin fallos de login en el log 😬🐧 Si gestionas servidores con CA de certificados SSH, este es el parche de la semana. Y si el post que te pasaron habla de un bypass por contraseña, [Source](https://x.com/i/status/2119042418146263328)
+
+> OpenSSHの欠陥って全linuxディストリビューションに当てはまる？ [Source](https://x.com/i/status/2118898987650765064)
+
+**Key sources**
+
+- [TheHackersNews](https://x.com/TheHackersNews/status/2118725937533800721)
+- [BleepinComputer](https://x.com/BleepinComputer/status/2119823635531673993)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2120041948019146966)
+
+### 7. Breaches at AI and data platforms expose keys, chats and customer data
+
+**Why it matters:** Breaches at Fireworks AI, Railway and Chainalysis expose AI chats, API keys and user credentials.
+
+Notion confirms that the Fireworks AI breach exposes some Notion AI chat transcripts. Railway says stolen customer AI keys lead to about $740,000 in unauthorized charges. Chainalysis says its breach exposes password hashes and live tokens for all users. The Hacker News reports 35,578 Grok-built apps that anyone can open without a login. Apify rotates API tokens and asks users to reset 2FA after a breach.
+
+Third-party AI providers hold data that customers do not see. A breach at one provider reaches many customers.
+
+**Risk:** Medium. Attackers can reuse exposed API keys, tokens and credentials from these breaches. Railway reports real fraud from stolen keys. Chainalysis reports exposed tokens for all users. The risk applies mainly to customers of these services. [x2120424080700854541](https://x.com/TheHackersNews/status/2120424080700854541), [x2118620977903157597](https://x.com/TheHackersNews/status/2118620977903157597), [x2120224129471361452](https://x.com/TheHackersNews/status/2120224129471361452)
+
+**Recommended actions**
+
+- Rotate AI provider API keys that you store on Railway, and check provider bills for unusual use. Priority: now. Audience: Railway customers (general step). [x2120424080700854541](https://x.com/TheHackersNews/status/2120424080700854541)
+- Reset Chainalysis and Apify credentials and API tokens, and turn on 2FA. Priority: now. Audience: Chainalysis and Apify users. [x2118620977903157597](https://x.com/TheHackersNews/status/2118620977903157597), [x2120888612283662464](https://x.com/BleepinComputer/status/2120888612283662464)
+- Set Grok Build apps that hold private data to sign-in access only. Priority: this week. Audience: Grok Build app creators (general step). [x2120496567388168643](https://x.com/TheHackersNews/status/2120496567388168643)
+- Review which AI sub-processors receive your data, and keep secrets out of AI chats. Priority: monitor. Audience: Security and procurement teams (general step). [x2120224129471361452](https://x.com/TheHackersNews/status/2120224129471361452)
+
+<GraphSpec title="COVERAGE">
+
+- Accounts and channels: 8
+- X interactions: 4,491
+- YouTube views: 28,780
+- Zero Wire items: 0
+- Products: Fireworks AI, Notion AI, Railway, Grok Build, Chainalysis and Apify
+- Sectors: Software, AI and crypto analytics users
+- Regions: Global
+
+</GraphSpec>
+
+- Theme key: `aibreach`
+- Short name: AI breaches
+- Exploited in wild: `null`
+
+Railway reports abuse of a build isolation flaw. Our sources name no CVE for it.
+
+- CVE IDs: `[]`
+
+- Comments analysed: 61
+
+<GraphStack title="COMMENT CLUSTERS">
+
+- AI vendor and sub-processor risk (17; 27.9%): 17 neutral
+- Questions and reactions (13; 21.3%): 10 neutral, 3 negative
+- Grok Build access defaults (13; 21.3%): 12 neutral, 1 negative
+- Other languages (13; 21.3%): 13 unclassified
+- Secrets in AI chats (5; 8.2%): 5 neutral
+
+</GraphStack>
+
+**AI vendor and sub-processor risk**
+
+> Notion relied on Fireworks for two things: processing data for its Insights feature and serving open-weight AI models
+> 
+> Attackers accessed Fireworks systems and obtained a dataset containing Notion AI chat transcripts used by [Source](https://x.com/i/status/2120574976189243816)
+
+> Notion says AI chat transcripts were in the Fireworks AI breach. You picked Notion, Notion picked an inference provider, and that provider picked a cloud host. Three hops your DPA probably never named. Ask vendors for their AI subprocessor [Source](https://x.com/i/status/2120610325351518334)
+
+> The Fireworks AI incident exposes a massive blind spot in AI supply chain security: the third-party R&amp;amp;D environment. 
+> 
+> When threat actors use compromised credentials to launch unauthorized workloads—a practice known as LLMjacking—and [Source](https://x.com/i/status/2120257959762735202)
+
+**Questions and reactions**
+
+> I was reading the hackers prompt injection techniques that were blocked against my assistants
+> 
+>  little afternoon light reading 
+> 
+> Ai vs ai [Source](https://x.com/i/status/2120331339555606719)
+
+> Loooooooooooool they're all so bad at this security thing [Source](https://x.com/i/status/2120638627407368535)
+
+> Only if I could find out what was in those chats. [Source](https://x.com/i/status/2120382662909296737)
+
+**Grok Build access defaults**
+
+> This post doesn’t make sense, the subdomains are not secrets but just separators to keep the apps separate, literally every vibecoding platform does the same thing when you don’t link a domain, and these were set to public. It’s user error [Source](https://x.com/i/status/2120553198851338487)
+
+> No. Grok Build published apps let the creator choose access: only you, anyone with the link, or public. Official docs show the choice, and reports found “anyone with the link” often preselected. In that setting the URL alone grants access [Source](https://x.com/i/status/2120597354264842434)
+
+> What exactly is bogus here? Using subdomains enables mapping of tens of thousands of public apps. When someone makes an app public, they don’t intend to share it with the world, as the sensitive contents of these apps show. That said, the [Source](https://x.com/i/status/2120612635783671953)
+
+**Other languages**
+
+> 安全公司 Claroc 发现，Grok Build 上有 35,578 个应用无需登录就能访问，其中部分涉及企业机密和个人隐私。
+> 
+> 连马斯克自家都中招了。SpaceXSI 和 X 员工创建的 24 个应用，暴露了内部销售计划、客户资料和广告提案。特斯拉员工的绩效、奖金情况也被公开，甚至还有 ICU 患者的检查报告和员工明文密码。 [Source](https://x.com/i/status/2120803525647020390)
+
+> Notion AIに入力した情報が、Notionではなく、その委託先への不正アクセスによって流出した可能性があるそうです。
+> 
+> これ、AIを仕事で使っている人には、ぜひ知っておいてほしいニュースです。
+> 
+> Notionの発表によると、影響を受けたのは全ワークスペースの1％未満。 [Source](https://x.com/i/status/2120661331837890942)
+
+> 노션 AI한테 회사 얘기 해본 적 있어?
+> 
+> 노션이 Fireworks AI 해킹 사고의 영향을 받았다고 공식 확인함
+> 
+> 유출된 데이터 중에 노션 AI 대화 기록이 있었음
+> 
+> 문제는 노션이 직접 털린 게 아니라는 거 [Source](https://x.com/i/status/2120514537715904536)
+
+**Secrets in AI chats**
+
+> The practical lesson: an AI chat box is not a vault. Whatever you paste can sit with the AI vendor, and then with whoever breaches that vendor.
+> 
+> Notion's advice is to rotate any passwords or API keys pasted into those chats. If that's you, [Source](https://x.com/i/status/2120246990042746961)
+
+> One thing to do today even if you are not affected: look at what staff paste into AI chats. Notion's advice to affected users is to rotate any password or API key typed into one, which says a lot about what ends up there. [Source](https://x.com/i/status/2120722952480260489)
+
+> The practical takeaway: never paste a password or API key into any AI chat. Your chats can end up stored at vendors you've never heard of. My bots keep keys in a secrets file, never in prompts or chat. [Source](https://x.com/i/status/2120269656103526844)
+
+**Key sources**
+
+- [IntCyberDigest](https://x.com/IntCyberDigest/status/2120283610301239778)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2120224129471361452)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2120496567388168643)
+
+### 8. Attackers target developer accounts, packages and tools
+
+**Why it matters:** Attackers hijack more than 4,800 GitHub accounts and plant a CI secret stealer in repositories.
+
+Attackers use more than 4,800 stolen GitHub accounts to plant credential-stealing malware in repositories. The stealer runs in at least 1,806 repositories, and attackers often delete workflow logs. Apiiro links a Claude Code option to 2,539 plaintext secrets in 1,994 public repositories. Attackers compromise the bee-js npm package and Swarm Desktop to deliver wallet stealers and backdoors. Git fixes CVE-2026-111760, which can run code during recursive clones of malicious repositories.
+
+One stolen developer account can reach CI secrets and cloud keys. A deleted file stays in Git history.
+
+**Risk:** High. Attackers steal CI and cloud credentials through hijacked accounts and poisoned packages. Aikido and The Hacker News report a large active campaign. The bee-js releases install backdoors that an update does not remove. [x2120783672878186661](https://x.com/TheHackersNews/status/2120783672878186661), [x2120922321221558527](https://x.com/DarkWebInformer/status/2120922321221558527), [x2119846770591363472](https://x.com/TheHackersNews/status/2119846770591363472)
+
+**Recommended actions**
+
+- Search your repositories for a wfx-docs branch, and rotate CI and cloud secrets if you find one. Priority: now. Audience: Repository owners and DevOps teams. [x2120783672878186661](https://x.com/TheHackersNews/status/2120783672878186661), [x2120769833621180849](https://x.com/TheHackersNews/status/2120769833621180849)
+- Rebuild systems that installed the malicious bee-js or Swarm Desktop releases, because an update does not remove the backdoors. Priority: now. Audience: Developers and IT teams (general step). [x2119846770591363472](https://x.com/TheHackersNews/status/2119846770591363472)
+- Check Claude Code settings files and Git history for saved secrets, and rotate any secret that you find. Priority: this week. Audience: Developers (general step). [x2118960196987080801](https://x.com/TheHackersNews/status/2118960196987080801)
+- Update Git to a release that fixes CVE-2026-111760. Priority: this week. Audience: Developers and CI owners. [x2120236175378284648](https://x.com/TheHackersNews/status/2120236175378284648)
+
+<GraphSpec title="COVERAGE">
+
+- Accounts and channels: 7
+- X interactions: 2,322
+- YouTube views: 0
+- Zero Wire items: 0
+- Products: GitHub accounts and CI, Claude Code, bee-js npm package, Swarm Desktop and Git
+- Sectors: Software developers and open-source projects
+- Regions: Global
+
+</GraphSpec>
+
+- Theme key: `devsupply`
+- Short name: Dev supply
+- Exploited in wild: `null`
+
+Sources report active account and package attacks. No source reports exploitation of the Git flaw.
+
+| CVE | Exploited in wild | Basis | Evidence |
+| --- | --- | --- | --- |
+| CVE-2026-111760 | null | No exploitation claim appears in retrieved sources. | [x2120236175378284648](https://x.com/TheHackersNews/status/2120236175378284648) |
+
+- Comments analysed: 78
+
+<GraphStack title="COMMENT CLUSTERS">
+
+- Secret rotation and Git history (31; 39.7%): 30 neutral, 1 negative
+- Other languages (22; 28.2%): 22 unclassified
+- Questions and reactions (17; 21.8%): 17 neutral
+- Attack camouflage and detection (8; 10.3%): 8 neutral
+
+</GraphStack>
+
+**Secret rotation and Git history**
+
+> What if AI just stored you passwords?
+> 
+> That's what Claude decides sometimes when you tell it to not ask you again 😹
+> 
+> It isn't wrong, but is that really what you'd want?
+> 
+> People committing their credentials in plain text simply because they [Source](https://x.com/i/status/2119451737710834145)
+
+> This isn't first incident. Big tech companies are either storing passwords in plain text or revealed by their AI agents.
+> 
+> This is the third such incident this year:
+> - Microsoft edge browser (May 2026)
+> - Meta ai revealing password of insta [Source](https://x.com/i/status/2119331793002541172)
+
+> 1,122 public copies of .claude/settings.local.json hold a secret. Rotate first. Deleting the file leaves it in git history and forks. Claude's global git exclude only covers one computer and never touches the project's .gitignore, so add [Source](https://x.com/i/status/2119426550869488056)
+
+**Other languages**
+
+> O Claude Code vazou mais de 2.500 senhas e chaves de API no GitHub. E o culpado é um botão que praticamente todo mundo clica.
+> 
+> Quando você aprova um comando com "Sim e não pergunte de novo", ele salva o comando inteiro em [Source](https://x.com/i/status/2120132999710646707)
+
+> Si usas Don't Ask Again en Claude Code , ojo .
+> Guarda el comando aprobado en .claude/settings.local.json . Si ahi iba una clave , queda escrita .
+> Ya hay 2.539 secretos en 1.994 repos . Borrar no basta , queda en el historial de git . [Source](https://x.com/i/status/2119910019961332207)
+
+> GitHub bị chiếm tài khoản (tin): [Source](https://x.com/i/status/2120866452165251526)
+
+**Questions and reactions**
+
+> With cloud access, attackers can mine crypto on your dime. In the 2023 SCARLETEEL attack they launched 42 instances, which could have cost the victim $4K+ a day if no one had noticed [Source](https://x.com/i/status/2120848091242717389)
+
+> this github incident reminds me of the npm left-pad debacle, where a small vulnerability had huge ripple effects [Source](https://x.com/i/status/2120860082950783354)
+
+> similar to the npm left-pad incident, where a small dependency had big ripple effects [Source](https://x.com/i/status/2120817896280764788)
+
+**Attack camouflage and detection**
+
+> One number in Aikido's count deserves a second look: 10,431 probe PRs hit repos the hijacked account didn't own, via collaborator or org access. Blast radius is set by who still has write access. Ex-contractors and stale org members are [Source](https://x.com/i/status/2120900936642281867)
+
+> When attackers wipe the run logs, the evidence is in what survives around them: which accounts pushed the same branch name, when, and from where. 4,800 accounts moving in the same pattern is a network, and the pattern outlasts the cleanup. [Source](https://x.com/i/status/2120918256567693457)
+
+> logs usually get deleted, so check for gaps in run numbers instead of trusting a clean actions tab [Source](https://x.com/i/status/2120848934629253571)
+
+**Key sources**
+
+- [TheHackersNews](https://x.com/TheHackersNews/status/2118960196987080801)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2120236175378284648)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2120783672878186661)
+
+### 9. Google patches the eighth exploited Chrome zero-day of 2026
+
+**Why it matters:** Google fixes CVE-2026-125350, a use-after-free flaw in Chrome's XML component with an exploit in the wild.
+
+Google patches CVE-2026-125350, a high-severity use-after-free flaw in Chrome's XML component. Google says an exploit exists in the wild. Google does not disclose attack details. Sources call it the eighth exploited Chrome zero-day of 2026. Google's November 9 Stable Channel Update for Desktop contains the fix.
+
+Browsers process untrusted web content on almost every device. Google keeps attack details private.
+
+**Risk:** High. Attackers can corrupt memory through Chrome's XML component on browsers without the update. Google reports an exploit in the wild. Google gives no attack details, so the evidence about targets stays thin. [x2120047471544222151](https://x.com/TheHackersNews/status/2120047471544222151), [x2119993656429936749](https://x.com/DailyDarkWeb/status/2119993656429936749)
+
+**Recommended actions**
+
+- Update Chrome to the November 9 Stable Channel release or later, then restart the browser. Priority: now. Audience: All Chrome users and IT teams. [x2119993656429936749](https://x.com/DailyDarkWeb/status/2119993656429936749), [x2120047471544222151](https://x.com/TheHackersNews/status/2120047471544222151)
+- Check managed devices for old Chrome versions, and push the update. Priority: this week. Audience: IT and endpoint teams (general step). [x2120047471544222151](https://x.com/TheHackersNews/status/2120047471544222151)
+- Monitor other Chromium-based browser vendors for their own fix. Priority: monitor. Audience: IT and endpoint teams (general step). [x2120047471544222151](https://x.com/TheHackersNews/status/2120047471544222151)
+
+<GraphSpec title="COVERAGE">
+
+- Accounts and channels: 7
+- X interactions: 1,317
+- YouTube views: 1,647
+- Zero Wire items: 0
+- Products: Google Chrome for desktop
+- Sectors: All Chrome users
+- Regions: Global
+
+</GraphSpec>
+
+- Theme key: `chrome`
+- Short name: Chrome
+- Exploited in wild: `true`
+
+| CVE | Exploited in wild | Basis | Evidence |
+| --- | --- | --- | --- |
+| CVE-2026-125350 | true | The Hacker News reports that an exploit exists in the wild. | [x2120517401531879603](https://x.com/Pirat_Nation/status/2120517401531879603), [x2120260701944176641](https://x.com/DarkWebInformer/status/2120260701944176641), [x2119993656429936749](https://x.com/DailyDarkWeb/status/2119993656429936749), [x2120047471544222151](https://x.com/TheHackersNews/status/2120047471544222151), [ytOQPntwCw1lI](https://www.youtube.com/watch?v=OQPntwCw1lI) |
+
+- Comments analysed: 55
+
+<GraphStack title="COMMENT CLUSTERS">
+
+- Restart to apply the fix (18; 32.7%): 17 neutral, 1 negative
+- Questions and reactions (13; 23.6%): 11 neutral, 1 negative, 1 positive
+- Patch timing and versions (12; 21.8%): 12 neutral
+- Other Chromium browsers (6; 10.9%): 6 neutral
+- Other languages (6; 10.9%): 6 unclassified
+
+</GraphStack>
+
+**Restart to apply the fix**
+
+> Three days from the November 6 report to the November 9 patch, and the same release quietly fixes a second XML use after free (CVE-2026-125346) that was reported back in October. If you manage a fleet, force the browser relaunch, since [Source](https://x.com/i/status/2120540014194864521)
+
+> For households: Chrome downloads the fix itself, but it only applies after a full restart, and lots of people leave it open for weeks. Close every window today. Edge, Brave and Opera share the engine, so update those too, plus Chrome on [Source](https://x.com/i/status/2120552970928754937)
+
+> Update Chrome now, then relaunch it: browser wallet extensions run inside it. As of Nov 10: Google has released a security update for CVE-2026-125350, a high-severity flaw in Chrome's XML component. An exploit exists in the wild. Never [Source](https://x.com/i/status/2120139607337738307)
+
+**Questions and reactions**
+
+> Stop using chrome.  In my own limited circle now I've seen at least 3-4 browser highjack attacks despite system installed Antivirus, Bitdefender.  
+> 
+> Thankfully the infection was corrupting Chrome itself, and removing it and switching to [Source](https://x.com/i/status/2120587176610046097)
+
+> When a vendor discovers active exploitation, who has enforceable authority to compel remediation, verify completion, and stop vulnerable systems from continuing consequential operations? [Source](https://x.com/i/status/2120055824223478090)
+
+> why are u still on chrome. it gets hacked every 5 weeks and the rest of the time google is reading ur tabs [Source](https://x.com/i/status/2120132180605018259)
+
+**Patch timing and versions**
+
+> 8 Chrome zero-days exploited in the wild in 2026, and the year isn't even over.
+> 
+> The latest drops as CVE-2026-125350: a high-severity use-after-free (UAF) in Chrome's XML component.
+> 
+> Attackers are actively abusing the flaw to bypass memory [Source](https://x.com/i/status/2120090339558277318)
+
+> everyone tells you to update chrome but nobody talks about what an in-the-wild use-after-free exploit actually does to your shiny AI security agents.a memory corruption zero-day completely bypasses the operating system's normal execution [Source](https://x.com/i/status/2120356153083269129)
+
+> Per Chrome's release notes, the Nov 9 stable update (157.0.8103.50) has just 9 security fixes, a small follow-up to the 213 in the Nov 3 release 🔐 CVE-2026-125350 is a High use-after-free in XML, and Google says it is aware an exploit [Source](https://x.com/i/status/2120582328280138161)
+
+**Other Chromium browsers**
+
+> CISA added CVE-2026-125350 to its KEV catalog on Nov 10, with a Nov 24 due date for federal civilian agencies. KEV notes it could affect other Chromium-based browsers, incl. Edge and Opera. The whole catalog is one free CC0 JSON file, no [Source](https://x.com/i/status/2120585912073760918)
+
+> Right, with one wrinkle: Electron apps embed Chromium, so a Chromium bump carries the libxslt fix to them once they rebase. The longer tail is non-Chromium software that bundles libxslt directly — it won't move on a Chrome update at all [Source](https://x.com/i/status/2120525763443397011)
+
+> Chrome's update doesn't patch other Chromium based browsers. Their users should check their own vendor's advisory and update schedule rather than assume the Chrome release covers them. [Source](https://x.com/i/status/2120061873249026212)
+
+**Other languages**
+
+> 🚨 تنبيه أمني: Chrome يسد ثغرة يستغلها المهاجمون فعلاً، وهي الثامنة من نوعها هذا العام
+> 
+> الإصلاح في الإصدار 157.0.8103.50 حسب تقارير أمنية، ويصل بشكل تدريجي. افتح قائمة Chrome ثم المساعدة ثم حول Google Chrome، وأعد تشغيل المتصفح [Source](https://x.com/i/status/2120069756359475563)
+
+> Chrome 爆出 0-Day：XML 漏洞已被黑客利用，赶紧更新！
+> 
+> Google 紧急确认，Chrome 存在高危漏洞 CVE-2026-125350，攻击者已经在真实攻击中利用该漏洞。
+> 
+> 受影响用户赶紧更新：
+> 
+> Windows / macOS：157.0.8103.50 或 .51
+> Linux：157.0.8103.50
+> 
+> 打开 Chrome → 设置 → 关于 [Source](https://x.com/i/status/2120107161011556772)
+
+> Chrome 今年第 8 个在野外被利用的零日漏洞，CVE-2026-125350，XML 组件的高危释放后重用。11 月 6 号匿名研究员上报，9 号补丁就发了，谷歌这次是真急了。
+> 
+> #Chrome #安全 [Source](https://x.com/i/status/2120052403865346332)
+
+**Key sources**
+
+- [Pirat&#95;Nation](https://x.com/Pirat_Nation/status/2120517401531879603)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2120047471544222151)
+- [DarkWebInformer](https://x.com/DarkWebInformer/status/2120260701944176641)
+
+### 10. Attackers exploit email gateways, VPNs and server platforms
+
+**Why it matters:** Attackers exploit Barracuda, SonicWall, Xen Orchestra and Cisco BroadWorks flaws that already have patches.
+
+Barracuda confirms exploitation of two chained Email Security Gateway flaws that give root without a password. CISA adds the SonicWall SonicOS MFA bypass CVE-2026-19868 to its exploited list. Attackers exploit an authentication bypass in Xen Orchestra that allows root-level takeover of XCP-ng hosts. CISA confirms exploitation of Cisco BroadWorks and Openwave Messaging flaws. SAP patches four CVSS 10.0 flaws in NetWeaver and Web Dispatcher.
+
+These systems sit at the network edge or manage many hosts. Patches exist, so unpatched systems carry the main risk.
+
+**Risk:** High. Attackers can get root or admin access on unpatched gateways, VPNs and virtualization managers. Vendors and CISA confirm exploitation for Barracuda, SonicWall and Cisco BroadWorks. Barracuda reports only a small number of affected organizations. [x2120210544603136226](https://x.com/TheHackersNews/status/2120210544603136226), [x2119673433634353295](https://x.com/TheHackersNews/status/2119673433634353295), [x2120397273700167986](https://x.com/TheHackersNews/status/2120397273700167986), [x2120218312693182912](https://x.com/TheHackersNews/status/2120218312693182912)
+
+**Recommended actions**
+
+- Apply Barracuda's fixes for both ESG flaws, and check the gateways for signs of compromise. Priority: now. Audience: Email security administrators. [x2120223715543691508](https://x.com/IntCyberDigest/status/2120223715543691508), [x2120210544603136226](https://x.com/TheHackersNews/status/2120210544603136226)
+- Update SonicOS on SSL-VPN firewalls that use SAML, and review VPN logins. Priority: now. Audience: Network administrators. [x2119673433634353295](https://x.com/TheHackersNews/status/2119673433634353295), [x2119011671163203845](https://x.com/SecurityWeek/status/2119011671163203845)
+- Apply the Xen Orchestra and Cisco BroadWorks patches, and meet the CISA due date of November 24 for BroadWorks. Priority: this week. Audience: Virtualization and telecom administrators. [x2120218312693182912](https://x.com/TheHackersNews/status/2120218312693182912), [x2120397273700167986](https://x.com/TheHackersNews/status/2120397273700167986)
+- Apply SAP's fixes for NetWeaver and Web Dispatcher. Priority: this week. Audience: SAP administrators. [x2120099000351367471](https://x.com/TheHackersNews/status/2120099000351367471)
+
+<GraphSpec title="COVERAGE">
+
+- Accounts and channels: 6
+- X interactions: 1,776
+- YouTube views: 301
+- Zero Wire items: 0
+- Products: Barracuda ESG, SonicWall SonicOS SSL-VPN, Xen Orchestra, Cisco BroadWorks, Openwave Messaging, SAP NetWeaver and AhsayCBS
+- Sectors: Enterprises, telecom providers and backup operators
+- Regions: Global
+
+</GraphSpec>
+
+- Theme key: `appliance`
+- Short name: Appliances
+- Exploited in wild: `true`
+
+Exploitation evidence applies to the named Barracuda and SonicWall CVEs and to Xen Orchestra and Cisco BroadWorks. SAP flaws have no exploitation claim.
+
+| CVE | Exploited in wild | Basis | Evidence |
+| --- | --- | --- | --- |
+| CVE-2026-116606 | true | Barracuda confirms exploitation of the two chained flaws, per The Hacker News and International Cyber Digest. | [x2120223715543691508](https://x.com/IntCyberDigest/status/2120223715543691508) |
+| CVE-2026-19868 | true | CISA adds the flaw to its Known Exploited Vulnerabilities catalog. | [x2119673433634353295](https://x.com/TheHackersNews/status/2119673433634353295) |
+
+- Comments analysed: 39
+
+<GraphStack title="COMMENT CLUSTERS">
+
+- Authentication paths and MFA bypass (20; 51.3%): 19 neutral, 1 negative
+- Questions and other languages (10; 25.6%): 8 neutral, 1 negative, 1 unclassified
+- Compromise checks after patching (9; 23.1%): 2 negative, 7 neutral
+
+</GraphStack>
+
+**Authentication paths and MFA bypass**
+
+> MFA on your VPN doesn't help much if the VPN still accepts a second way to log in.
+> 
+> That's SonicWall's CVE-2026-19868 in one line. If your SSL VPN uses SAML with MFA, a user with valid credentials for another sign-in method on the same [Source](https://x.com/i/status/2119684183249625443)
+
+> CISA has added CVE-2026-19868 to its Known Exploited Vulnerabilities (KEV) catalog.
+> 
+> The SonicWall SonicOS SSL-VPN flaw allows users with valid alternate credentials to bypass SAML authentication, potentially including MFA [Source](https://x.com/i/status/2119679663995756880)
+
+> MFA was the safety net on that SSL-VPN, so with a bypass only the patch stands between attackers and the office network, while an office with no inbound rule on its firewall has no VPN login page to bypass at all, how quickly do teams [Source](https://x.com/i/status/2119687684100640850)
+
+**Questions and other languages**
+
+> The Barracuda gateway exploitation highlights a severe risk to corporate communication infrastructure: when an attacker gains root access to your email security appliance, your primary defense becomes the breach vector. 
+> 
+> The technical [Source](https://x.com/i/status/2120231491695419640)
+
+> Brush up on your CVEs, vibe coders. If you know what that is. 
+> 
+> AI lets unwitting vibe coders put flaws in their code without their knowledge. If vibe coders and make it fast with AI, a hacker can exploit it fast with AI. [Source](https://x.com/i/status/2119777345301098507)
+
+> If your small business has a SonicWall firewall, it may be worth asking whoever looks after your IT to check it's on the latest update this week. 
+> 
+> Plenty of small firms aren't sure who manages theirs until something goes wrong. 
+> 
+> -Chips [Source](https://x.com/i/status/2119713734822391927)
+
+**Compromise checks after patching**
+
+> If the admin page was reachable from the internet before you patched, the update won't remove anything already planted. Check for admin accounts you don't recognise and for outbound connections from the appliance to anything other than [Source](https://x.com/i/status/2120274709497737320)
+
+> This one's scary because MFA is meant to be the last line of defence. If a valid alternate credential can just skip it, a lot of teams will have a false sense of security. Patching this and checking SAML login logs feels non-negotiable [Source](https://x.com/i/status/2120146289891717250)
+
+> If you run Gen7/Gen8: patching closes the hole but doesn’t show whether someone already got in. Check VPN logs for logins that skipped SAML and reset affected accounts. I keep a tracker of exploited gateway flaws: [Source](https://x.com/i/status/2120054311405420706)
+
+**Key sources**
+
+- [IntCyberDigest](https://x.com/IntCyberDigest/status/2120223715543691508)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2118579320243507472)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2120099000351367471)
+
+## Source index
+
+<GraphTable title="EVERY RETAINED SOURCE">
+
+| Source | Account or channel | Type | Platform | Published IST | Interactions or views |
+| --- | --- | --- | --- | --- | ---: |
+| [🚨 PoC RELEASED: Critical React Server Components RCE  Public exploit code is now available for CVE-2026-126187, a critical vulnerability affecting certain React Server Components deployments.  🔴 CVSS 9.5 — Critical 💥 Unauthenticated Remote Code Execution 🎯 Affects specific](https://x.com/ThreatWire_/status/2120565449838776524) | ThreatWire&#95; | independent | X | 2026-11-11 22:42 | 121 |
+| [‼️ Public exploit code is out for a critical React Server Components RCE flaw affecting certain Next.js apps.  CVE-2026-126187 (CVSS 9.5) could allow unauthenticated attackers to execute code on vulnerable servers.  The attack requires a specific Cache Components configuration https://t.co/v8kC47LWOc](https://x.com/TheHackersNews/status/2120564070697038012) | TheHackersNews | media | X | 2026-11-11 22:37 | 486 |
+| [Unauth RCE on React Server Components via Flight desync.  CVE-2026-126187 (CVSS 9.5) - react-server-dom-webpack/parcel/turbopack ≤19.0.8/19.1.9/19.2.8/19.3.0 + Next.js ≤16.4.0 (App Router + use cache).  • Multiple typed-array views on one ArrayBuffer → first view detaches,](https://x.com/0xManan/status/2120434553827582175) | 0xManan | independent | X | 2026-11-11 14:02 | 193 |
+| [🚨 Ya hay CVE para el fallo crítico de React que permite ejecutar código en tu servidor sin autenticación.  CVE-2026-126187, CVSS 9.5 (crítico).  La vulnerabilidad se encuentra en React Server Components, la parte de React que corre en el servidor.  Su funcionamiento es el](https://x.com/IvanPerezF_/status/2120426996136120822) | IvanPerezF&#95; | independent | X | 2026-11-11 13:32 | 57 |
+| [Google has patched another actively exploited Chrome zero-day.  The vulnerability, tracked as CVE-2026-125350, affects the browser’s XML component and could allow attackers to exploit memory corruption.  This is already the 8 Chrome zero-day exploited in attacks this year.  Make https://t.co/7hOq5C4bzS](https://x.com/Pirat_Nation/status/2120517401531879603) | Pirat&#95;Nation | independent | X | 2026-11-11 19:32 | 526 |
+| [🚨 Google patches 8th actively exploited Chrome zero-day of 2026, warns attackers can execute malicious code  Google has released an emergency Chrome security update addressing CVE-2026-125350, a high-severity use-after-free vulnerability in the browser's XML component that could https://t.co/RWVMBgzIUU](https://x.com/DarkWebInformer/status/2120260701944176641) | DarkWebInformer | independent | X | 2026-11-11 02:31 | 136 |
+| [Microsoft Threat Intelligence has observed threat actors using agentic AI tools to search public GitHub repositories for exposed secrets and then using stolen secrets for further malicious activity against the compromised organization. https://t.co/ewf0ZF4wkh   Searching open](https://x.com/MsftSecIntel/status/2118491118308352329) | MsftSecIntel | vendor | X | 2026-11-06 05:20 | 365 |
+| [Threat actors’ abuse of ARTEX continues to expand, with Microsoft Threat Intelligence observing financially motivated Storm-3358 using the agentic AI offensive framework alongside conventional automated tools to target financial organizations. https://t.co/OWnmxGeEy0  Storm-3358](https://x.com/MsftSecIntel/status/2118898318457585943) | MsftSecIntel | vendor | X | 2026-11-07 08:18 | 427 |
+| [BREAKING: France directly accuses Iran’s Islamic Revolutionary Guard Corps (IRGC) of orchestrating the major cyberattack targeting supermarket refrigeration systems across the country, affecting more than 700 stores.  Foreign Minister Jean-Noël Barrot confirmed on Monday that the https://t.co/GYGOlZbQyh](https://x.com/InsiderGeo/status/2119851511375348125) | InsiderGeo | independent | X | 2026-11-09 23:25 | 137 |
+| [🇫🇷France is seeking 🇪🇺European Union sanctions against 🇮🇷Iran after accusing Tehran of orchestrating a massive cyberattack that sabotaged commercial refrigerators and freezers across the country. The 🇫🇷French Foreign Ministry formally summoned Iran’s ambassador to Paris to https://t.co/MGgaJw4WXT https://t.co/4XqYLLJbKz](https://x.com/Dovydas44444/status/2120135682798559358) | Dovydas44444 | independent | X | 2026-11-10 18:15 | 64 |
+| [🚨🇫🇷🇮🇷 France accuses Iran of hacking supermarket refrigeration systems, causing millions in damages  France has accused Iran's Islamic Revolutionary Guard Corps (IRGC) of carrying out cyberattacks that remotely raised temperatures in supermarket refrigerators and freezers, https://t.co/nT7l0JE65B](https://x.com/DarkWebInformer/status/2119839464109293631) | DarkWebInformer | independent | X | 2026-11-09 22:38 | 97 |
+| [France has formally accused Iran’s Islamic Revolutionary Guard Corps (IRGC) of carrying out a major cyberattack against refrigeration systems at approximately 700 retail sites across the country, destroying food supplies and reportedly causing at least 15 fires.  The attack, https://t.co/h9slNo79S7](https://x.com/jonsac/status/2120049512492212386) | jonsac | independent | X | 2026-11-10 12:32 | 109 |
+| [🚨🇫🇷🇮🇷 France suspects IRAN hacked its supermarket fridges. But the embarrassing part might be how EASY it was.  Hackers turned refrigeration systems into heaters, pushing temperatures to 50°C, destroying food and even causing fires.  Then French blood banks were targeted. Staff https://t.co/OkUbXfkHXA](https://x.com/MarioNawfal/status/2119836161833423321) | MarioNawfal | independent | X | 2026-11-09 22:25 | 305 |
+| [Railway breach leads to $740,000 in fraudulent AI charges https://t.co/jKp4Op2uYq  https://t.co/jKp4Op2uYq](https://x.com/BleepinComputer/status/2120280489030246729) | BleepinComputer | media | X | 2026-11-11 03:50 | 48 |
+| [‼️ A new Git flaw lets malicious repositories execute code on your machine during recursive clones.  Tracked as CVE-2026-111760, the flaw abuses submodule hooks to run attacker-controlled code.  Git has released fixes for this and five other vulnerabilities.  Details - https://t.co/EqCOk9cQqk](https://x.com/TheHackersNews/status/2120236175378284648) | TheHackersNews | media | X | 2026-11-11 00:54 | 353 |
+| [Microsoft’s October 2026 Patch Tuesday updates fix over 1,000 vulnerabilities, including an exploited Outlook zero-day, CVE-2026-124194 https://t.co/FM4ADGkPj0](https://x.com/SecurityWeek/status/2120235463982133629) | SecurityWeek | media | X | 2026-11-11 00:51 | 20 |
+| [‼️‼️ Microsoft’s November 2026 Patch Tuesday fixes a massive 1,235 vulnerabilities, including 66 rated Critical and an actively exploited Microsoft Outlook zero-day.  The Outlook flaw (CVE-2026-124194) can be exploited using malicious message files that trick Windows into](https://x.com/BleepinComputer/status/2120232895520645304) | BleepinComputer | media | X | 2026-11-11 00:41 | 722 |
+| [AI Coding Agents Leak Thousands of Secrets to GitHub https://t.co/neWR1UaOEK by Elizabeth Montalbano](https://x.com/DarkReading/status/2120229452684603614) | DarkReading | media | X | 2026-11-11 00:27 | 16 |
+| [‼️ UPDATE: Notion confirms it was impacted by the Fireworks AI breach.  Notion AI chat transcripts were among the exposed data, potentially involving customer information.  Notion has disabled its Insights feature and stopped using Fireworks for open-weight models.  Full details: https://t.co/GNKaX7v2Cc](https://x.com/TheHackersNews/status/2120224129471361452) | TheHackersNews | media | X | 2026-11-11 00:06 | 429 |
+| [Windows 11 KB5132061 &amp;amp; KB5131087 cumulative updates released https://t.co/SGeBSdt4Gv  https://t.co/SGeBSdt4Gv](https://x.com/BleepinComputer/status/2120223398869512251) | BleepinComputer | media | X | 2026-11-11 00:03 | 61 |
+| [The cyber campaign targeting European supermarket refrigeration systems has escalated after French officials attributed the attacks to Iran's Islamic Revolutionary Guard Corps (IRGC). The incident highlights critical vulnerabilities in Internet-exposed legacy operational](https://x.com/DarkReading/status/2120219954037346383) | DarkReading | media | X | 2026-11-10 23:50 | 13 |
+| [‼️ ALERT - Hackers are actively exploiting a critical authentication bypass in Xen Orchestra.  A crafted cookie can grant Admin access and enable root-level takeover of XCP-ng hosts.  Patches are available.  Here's what admins need to know: https://t.co/NPT5Rwi38o](https://x.com/TheHackersNews/status/2120218312693182912) | TheHackersNews | media | X | 2026-11-10 23:43 | 58 |
+| [🚨 UPDATE: Barracuda confirms exploitation activity affecting a small number of organizations following the disclosure of two security flaws that could be chained to gain root access.  The company has not disclosed further details about the attacks.  Read the latest - https://t.co/TF2sdGjtCH](https://x.com/TheHackersNews/status/2120210544603136226) | TheHackersNews | media | X | 2026-11-10 23:12 | 73 |
+| [🚨 Attackers exploited two AhsayCBS flaws to compromise backup servers.  The intrusion involved payloads hidden in PNG images, crypto miners, and a Python backdoor designed to avoid sandbox analysis.  A related Veeam server also saw a credential query.  Full attack details ↓ https://t.co/zIKt97pVzC](https://x.com/TheHackersNews/status/2120192259836489941) | TheHackersNews | media | X | 2026-11-10 22:00 | 70 |
+| [‼️BREAKING: Grok Build has left 35,000+ of its users' apps open to anyone, including apps from SpaceXSI.  The open apps held 3,784 medical exams of workers and a Tesla technician scorecard, plus a Navy contractor's roster and SpaceXSI's own sales plans.  The "secret" words in https://t.co/oGW3xsm7RX](https://x.com/IntCyberDigest/status/2120283610301239778) | IntCyberDigest | independent | X | 2026-11-11 04:03 | 3,122 |
+| [🚨 Microsoft confirms hackers are exploiting Outlook zero-day to steal Windows authentication hashes, CVE-2026-124194  Microsoft has patched an actively exploited vulnerability in Outlook that could allow attackers to steal NTLM authentication hashes by tricking users into https://t.co/2BYHqZZ0Um](https://x.com/DarkWebInformer/status/2120257141714133343) | DarkWebInformer | independent | X | 2026-11-11 02:17 | 892 |
+| [‼️ UPDATE: Sweden's civil defence minister says the hackers who knocked out supermarket fridges on 2 November needed no advanced tools, just passwords that hadn't been updated.  Carl-Oskar Bohlin warned of more cyber incidents in the coming months. He says Russia, China and Iran https://t.co/s4njRMxH6c](https://x.com/IntCyberDigest/status/2120238815134585267) | IntCyberDigest | independent | X | 2026-11-11 01:05 | 280 |
+| [‼️ Microsoft November 2026 Patch Tuesday Fixes 1,093 Vulnerabilities, Including Outlook Zero-Day  Details: https://t.co/O58lkydF1i  Microsoft has released its November 2026 Patch Tuesday updates, fixing 1,093 newly released vulnerabilities across Windows, Office, SQL Server, https://t.co/yfuo11eg8C](https://x.com/The_Cyber_News/status/2120235783370260978) | The&#95;Cyber&#95;News | independent | X | 2026-11-11 00:52 | 296 |
+| [‼️ N-able Takes N-central Servers Offline Worldwide After 33 0-Day Vulnerabilities and Able2Shell Exploits   Details: https://t.co/rRjekZBNCt  N-able took its hosted N-central environments offline on November 9, 2026, after an independent researcher published details of 33 https://t.co/xP0G5OLqPU](https://x.com/The_Cyber_News/status/2119983698938593695) | The&#95;Cyber&#95;News | independent | X | 2026-11-10 08:11 | 70 |
+| [🚨 N-able takes cloud platform offline worldwide after researcher releases 30+ zero-day exploits  GitHub: https://t.co/xTpjF2BNct  N-able has shut down its hosted N-central environments across the Americas, Europe, and Asia-Pacific after security researcher Sean Bales publicly https://t.co/6qzLW0QVQ6](https://x.com/DarkWebInformer/status/2119921982380675078) | DarkWebInformer | independent | X | 2026-11-10 04:06 | 407 |
+| [🚨 UPDATE: N-able releases N-central 2026.4 HF2 to address 7 CVEs following the Able2Shell disclosure.  All hosted N-central servers worldwide have been upgraded. On-premises customers are urged to keep servers offline until updates are applied.  Another hotfix is planned. https://t.co/RxeqoEUgjh](https://x.com/TheHackersNews/status/2120387026814153089) | TheHackersNews | media | X | 2026-11-11 10:53 | 75 |
+| [OpenSSH Rushes Patches for ‘SSHole’ Authentication Bypass https://t.co/voq3xw55UB](https://x.com/SecurityWeek/status/2119054511159320975) | SecurityWeek | media | X | 2026-11-07 18:39 | 19 |
+| [SonicWall Patches Exploited SonicOS Bug That Weakens VPN Logins https://t.co/LbpcnjT6QO](https://x.com/SecurityWeek/status/2119011671163203845) | SecurityWeek | media | X | 2026-11-07 15:48 | 14 |
+| [US Agencies Urge Organizations to Harden Refrigeration Controllers https://t.co/3RTRss8e7j](https://x.com/SecurityWeek/status/2118902258440216790) | SecurityWeek | media | X | 2026-11-07 08:34 | 11 |
+| [SonicWall warns of new SSL-VPN MFA bypass flaw exploited in attacks https://t.co/iAu4SrqQwm  https://t.co/iAu4SrqQwm](https://x.com/BleepinComputer/status/2118856246228820028) | BleepinComputer | media | X | 2026-11-07 05:31 | 89 |
+| [Runaway AI hacking agent behind WorkOS breach after escaping sandbox https://t.co/sIzx1eAl7d  https://t.co/sIzx1eAl7d](https://x.com/BleepinComputer/status/2118832715097076160) | BleepinComputer | media | X | 2026-11-07 03:57 | 50 |
+| [Fake security tools on GitHub push backdoors and infostealers https://t.co/rSx4mNIDzz  https://t.co/rSx4mNIDzz](https://x.com/BleepinComputer/status/2118777215710068912) | BleepinComputer | media | X | 2026-11-07 00:17 | 81 |
+| [Why Europe's Freezer Hacks Spread So Far, So Fast https://t.co/4KadB2GQ66 by Alexander Culafi #DRGlobal](https://x.com/DarkReading/status/2118769153234371009) | DarkReading | media | X | 2026-11-06 23:45 | 9 |
+| [Chainalysis says breach exposed credentials for all customers https://t.co/VCeKLyYHPe  https://t.co/VCeKLyYHPe](https://x.com/BleepinComputer/status/2118709343151366164) | BleepinComputer | media | X | 2026-11-06 19:47 | 64 |
+| [France blames Iranian hackers for supermarket attacks that sparked fires https://t.co/8rLwLzTkL3  https://t.co/8rLwLzTkL3](https://x.com/BleepinComputer/status/2119860815356403735) | BleepinComputer | media | X | 2026-11-10 00:02 | 74 |
+| [‼️ Hackers compromised Ethersphere's bee-js npm package and Swarm Desktop app to deliver crypto wallet-stealing malware.  The malicious releases also install backdoors on Windows, macOS, and Linux.  Both versions are now withdrawn, but updating alone won't remove the backdoors. https://t.co/xLvKufK5Fe](https://x.com/TheHackersNews/status/2119846770591363472) | TheHackersNews | media | X | 2026-11-09 23:07 | 174 |
+| [Hackers exploit SSHole OpenSSH flaw to breach Linux systems https://t.co/tGbG7ASjtQ  https://t.co/tGbG7ASjtQ](https://x.com/BleepinComputer/status/2119823635531673993) | BleepinComputer | media | X | 2026-11-09 21:35 | 134 |
+| [🚨 Critical MongoDB flaw allows unauthenticated attackers to crash database servers, with potential for remote code execution; CVE-2026-118383  MongoDB has released emergency security updates addressing a critical use-after-free vulnerability (CVSS 9.5) that could allow attackers https://t.co/XujgrkYEbp](https://x.com/DarkWebInformer/status/2120928785411547639) | DarkWebInformer | independent | X | 2026-11-12 22:46 | 60 |
+| [🚨 Hackers hijack 4,837 GitHub accounts and target over 61,000 repositories in massive credential theft campaign  Security researchers at @AikidoSecurity have uncovered a large-scale attack in which hackers used stolen GitHub credentials to inject malicious code into 61,764 https://t.co/OGPaPbGyDv](https://x.com/DarkWebInformer/status/2120922321221558527) | DarkWebInformer | independent | X | 2026-11-12 22:21 | 258 |
+| [‼️ Dutch researchers found six new ways to take over the Danfoss fridge controller hackers have been hijacking in European supermarkets. None needs a login, and finding them took them under an hour.  Security researchers says every firmware up to the latest, 5.3.2, is affected. https://t.co/S42PtD4zsr](https://x.com/IntCyberDigest/status/2120920955828486438) | IntCyberDigest | independent | X | 2026-11-12 22:15 | 203 |
+| [Belgium's government can't agree on who hacked its supermarket freezers. The interior minister pointed at Iran and asked Defence to consider a military cyber response.  Hours later, the foreign minister's office told Belgian outlet HLN the evidence is not enough to officially https://t.co/DUYy6jOItW](https://x.com/IntCyberDigest/status/2120905717854917081) | IntCyberDigest | independent | X | 2026-11-12 21:15 | 59 |
+| [‼️ CISA Confirms Active Exploitation of Outlook User Interaction 0-Day Vulnerability  Details: https://t.co/t27uQlLtux  The U.S. Cybersecurity and Infrastructure Security Agency has confirmed active exploitation of a Microsoft Outlook zero-day vulnerability, CVE-2026-124194, that https://t.co/67lX2McabD](https://x.com/The_Cyber_News/status/2120885417524216117) | The&#95;Cyber&#95;News | independent | X | 2026-11-12 19:54 | 10,957 |
+| [‼️ Hackers Hijack 4,837 GitHub Accounts to Target 61,764 Repositories With CI Secret-Stealing Malware  Read more: https://t.co/Pt5ENMxGFx  A threat actor has used stolen GitHub credentials to push a secret-stealing payload into tens of thousands of code repositories. The activity https://t.co/x1VhBeMvBi](https://x.com/The_Cyber_News/status/2120816209533014206) | The&#95;Cyber&#95;News | independent | X | 2026-11-12 15:19 | 290 |
+| [🚨 Root access. No login required.  Researchers demonstrate how two chained Barracuda Email Security Gateway flaws allow attackers to execute commands as root without authentication.  Read: https://t.co/I1XIC7GhiD https://t.co/e6quH5SgOP](https://x.com/TheHackersNews/status/2118579320243507472) | TheHackersNews | media | X | 2026-11-06 11:10 | 250 |
+| [Critical Xen Orchestra auth bypass flaw exploited to hijack VM servers https://t.co/Z0KV71FNM0  https://t.co/Z0KV71FNM0](https://x.com/BleepinComputer/status/2120189126427226240) | BleepinComputer | media | X | 2026-11-10 21:47 | 27 |
+| [🚨 Fireworks AI's breach has widened.  Attackers accessed customer billing data, datasets, and incomplete model weights after reaching development machines through a third-party cloud provider.  The company initially reported exposure limited to secrets.  Full details - https://t.co/ZLg2hF4m6v](https://x.com/TheHackersNews/status/2120178399868309517) | TheHackersNews | media | X | 2026-11-10 21:04 | 73 |
+| [SAP Patches Critical ICM2SHELL, ProxyGate Vulnerabilities https://t.co/r0cMK8xa1f](https://x.com/SecurityWeek/status/2120166466138108360) | SecurityWeek | media | X | 2026-11-10 20:17 | 9 |
+| [France Blames Iran for a Cyberattack That Heated Supermarket Refrigerators https://t.co/lr9N9i06Qk](https://x.com/SecurityWeek/status/2120148721174475215) | SecurityWeek | media | X | 2026-11-10 19:07 | 7 |
+| [SAP patches ICM2SHELL and PROXYGATE maximum severity flaws https://t.co/lvnwTtg44K  https://t.co/lvnwTtg44K](https://x.com/BleepinComputer/status/2120126162152161364) | BleepinComputer | media | X | 2026-11-10 17:37 | 44 |
+| [🚨 UPDATE: Exploitation attempts targeting N-able N-central honeypots have been observed following the public disclosure of 30+ #Able2Shell vulnerabilities.  Security firm watchTowr reports overnight activity and urges users to check for signs of compromise and restrict access. https://t.co/31cBfPhdsr](https://x.com/TheHackersNews/status/2120122384837734881) | TheHackersNews | media | X | 2026-11-10 17:22 | 103 |
+| [🚨 SAP patches 4 vulnerabilities rated CVSS 10.0 in NetWeaver and Web Dispatcher.  Two could allow remote code execution without authentication. Another could let attackers log in as any user on certain SAML-enabled systems.  No user interaction required.  Details - https://t.co/sLsQuRVIsU](https://x.com/TheHackersNews/status/2120099000351367471) | TheHackersNews | media | X | 2026-11-10 15:49 | 247 |
+| [Hackers now exploit critical Barracuda ESG flaws to gain root access https://t.co/k7oAxzyJmG  https://t.co/k7oAxzyJmG](https://x.com/BleepinComputer/status/2120097190135714202) | BleepinComputer | media | X | 2026-11-10 15:42 | 75 |
+| [N-able Takes N-central Offline as Researcher Drops Over 30 Zero-Days https://t.co/5Y3C6bxvdY](https://x.com/SecurityWeek/status/2120093444727280011) | SecurityWeek | media | X | 2026-11-10 15:27 | 12 |
+| [Claude Code and Codex make writing code faster than ever. But it's also easier to accidentally push API keys, passwords, or other secrets to GitHub.  Found a useful open-source tool called Betterleaks, built by the original creator of Gitleaks.  It scans your code, config files,](https://x.com/aibuilderclub_/status/2119767918183686528) | aibuilderclub&#95; | independent | X | 2026-11-09 17:53 | 50 |
+| [Attacker Targets 60,000 GitHub Repositories in Credential Theft Campaign https://t.co/BHsQffkb2m](https://x.com/SecurityWeek/status/2120874321203671314) | SecurityWeek | media | X | 2026-11-12 19:10 | 14 |
+| [We detected an indirect prompt injection (IDPI) campaign across 26 domains presenting as AI-powered digital asset trading platforms. Hidden &amp;lt;span&amp;gt; tags hijack AI agents into acting as financial experts to coerce users into visiting these sites. More info: https://t.co/D8N5JrIwYk https://t.co/nexOtWYnIm](https://x.com/Unit42_Intel/status/2120264510350991832) | Unit42&#95;Intel | vendor | X | 2026-11-11 02:47 | 223 |
+| [The November 2026 security updates are available: https://t.co/LHU0lEoGHg](https://x.com/MsftSecIntel/status/2120230988621992403) | MsftSecIntel | vendor | X | 2026-11-11 00:33 | 98 |
+| [TL;DR: An attacker escaped Railway’s build isolation, stole its source code, and used misconfigured access to go shopping for customer AI keys.  Up to ~100,000 workspaces potentially affected and ~$740,000 in unauthorized usage later, “bring your own key” became “bring everyone’s https://t.co/BdP4Of7yj4](https://x.com/DarkWebInformer/status/2120223928522088936) | DarkWebInformer | independent | X | 2026-11-11 00:05 | 137 |
+| [🚨 BREAKING: Attackers are breaking into Barracuda email security gateways, the boxes that filter companies' mail, through two flaws that hand them root without a password.  Barracuda says a small number of organisations have been hit so far. It patched both bugs, CVE-2026-116606 https://t.co/CKxEVqKYn8](https://x.com/IntCyberDigest/status/2120223715543691508) | IntCyberDigest | independent | X | 2026-11-11 00:05 | 260 |
+| [🚨 SAP patches critical 10.0-rated flaws allowing hackers to take full control of enterprise systems without authentication  SAP has released emergency security fixes for multiple critical vulnerabilities affecting NetWeaver, Web Dispatcher, and Gateway, including flaws that https://t.co/AmYwa9Q2WR](https://x.com/DarkWebInformer/status/2120211530910138722) | DarkWebInformer | independent | X | 2026-11-10 23:16 | 147 |
+| [‼️ Railway Reveals How Hackers Used AI Agents to Steal API Keys and Rack Up $740,000 in Charges  Read More: https://t.co/RZ9reKEJ0I  Railway has revealed how an attacker used AI agents, a build system flaw, and cloud access mistakes to steal customer secrets and generate an https://t.co/YV17JvknET](https://x.com/The_Cyber_News/status/2120206136511259005) | The&#95;Cyber&#95;News | independent | X | 2026-11-10 22:55 | 120 |
+| [⚠️ Defused reported probing of N-able N-central systems during the 24 hours following the public zero-day disclosure.  The activity included opening anonymous agent sessions, retrieving appliance configurations, and accessing the remote control endpoint without authentication. https://t.co/oluYHb3dzV https://t.co/2AaB2CW7Sp](https://x.com/The_Cyber_News/status/2120197201377067155) | The&#95;Cyber&#95;News | independent | X | 2026-11-10 22:19 | 62 |
+| [‼️ watchTowr Confirms Hackers started to Exploit N-able N-centra Able2Shell 0-day  Read more: https://t.co/rRjekZBNCt https://t.co/I5hm3r6HLF https://t.co/eGKIFdNkcU](https://x.com/The_Cyber_News/status/2120172079765176806) | The&#95;Cyber&#95;News | independent | X | 2026-11-10 20:39 | 54 |
+| [🚨 CHROME ZERO-DAY CVE-2026-125350 EXPLOITED IN THE WILD (XML USE-AFTER-FREE)  Google’s Nov 9, 2026 Stable Channel Update for Desktop patches a High-severity use-after-free in Chrome’s XML component that Google says is already exploited in the wild.  • CVE-2026-125350 — High — https://t.co/j5Afa31FEh](https://x.com/DailyDarkWeb/status/2119993656429936749) | DailyDarkWeb | independent | X | 2026-11-10 08:50 | 135 |
+| [🚨 A single hacker in Taiwan used BOSSAI, a 12-agent AI hacking setup, to steal Taipei emergency dispatch records.  The operation targeted hundreds of organizations across 11 countries, with confirmed data extraction in three.  Learn More ↓ https://t.co/wNlpavj7dD](https://x.com/TheHackersNews/status/2119717420487291121) | TheHackersNews | media | X | 2026-11-09 14:33 | 338 |
+| [🚨 U.S. agencies warn hackers are targeting industrial refrigeration systems worldwide, potentially causing fire hazards, food spoilage, and service disruptions.  The alert follows attacks on hundreds of European supermarkets, where hackers manipulated cooling systems.  Read - https://t.co/1qTvCxoGUB](https://x.com/TheHackersNews/status/2119675509499961822) | TheHackersNews | media | X | 2026-11-09 11:46 | 243 |
+| [🚨 CISA adds SonicWall SonicOS MFA bypass flaw to its Known Exploited Vulnerabilities catalog.  CVE-2026-19868 could bypass SAML authentication and MFA using valid alternate credentials.  SonicWall is investigating a report of possible exploitation.  Details ↓ https://t.co/wlmTDB0nmy](https://x.com/TheHackersNews/status/2119673433634353295) | TheHackersNews | media | X | 2026-11-09 11:38 | 142 |
+| [‼️ Claude Code's "Don't Ask Again" option can save passwords and API keys in plaintext.  Apiiro found 2,539 exposed secrets across 1,994 public GitHub repos, including database credentials, SSH logins, and cloud keys.  Deleting files doesn't erase Git history.  Read: https://t.co/LyPZ5RaqOZ](https://x.com/TheHackersNews/status/2118960196987080801) | TheHackersNews | media | X | 2026-11-07 12:24 | 596 |
+| [🚨 OpenSSH flaw exploited within hours of disclosure.  Attackers are targeting CVE-2026-123158 (SSHole), which bypasses password authentication under specific #Linux configurations.  Root access confirmed on an Alpine Linux honeypot.  Details: https://t.co/G0CSUQbTkY](https://x.com/TheHackersNews/status/2118725937533800721) | TheHackersNews | media | X | 2026-11-06 20:53 | 539 |
+| [🚨 Chainalysis cyberattack exposed password hashes and live tokens for all users.  The company has locked impacted accounts and taken key services offline, including KYT, Reactor, and Data Solutions.  Full details ↓ https://t.co/nBLFmq7IBu](https://x.com/TheHackersNews/status/2118620977903157597) | TheHackersNews | media | X | 2026-11-06 13:56 | 73 |
+| [🚨 Chainalysis confirms a wider breach impact.  An agentic cyberattack exposed ALL users' password hashes and live tokens, prompting the company to lock impacted accounts and take key services offline.  What was exposed, what's offline, and what's next ↓ https://t.co/nBLFmq7IBu](https://x.com/TheHackersNews/status/2118615800517210265) | TheHackersNews | media | X | 2026-11-06 13:35 | 13 |
+| [🚨Cyber Alert ‼️  🇺🇸US - 𝗡𝗼𝘁𝗶𝗼𝗻 / 𝗙𝗶𝗿𝗲𝘄𝗼𝗿𝗸𝘀 𝗔𝗜  Notion disclosed a third-party data breach involving its AI provider, Fireworks AI, which exposed Notion AI chat transcripts associated with the Insights feature, affecting fewer than 1% of workspaces. While most https://t.co/sSc66XYAeW](https://x.com/H4ckmanac/status/2120447618958422028) | H4ckmanac | independent | X | 2026-11-11 14:54 | 61 |
+| [⚠️ France blames Iran's IRGC for cyberattacks that caused fires at French retail sites.  Attackers hijacked refrigeration controllers at about 700 sites, altered defrost settings and disabled temperature alerts, causing tens of millions of euros in food losses.  Read - https://t.co/APTYLsCnE5](https://x.com/TheHackersNews/status/2120081425391386859) | TheHackersNews | media | X | 2026-11-10 14:39 | 47 |
+| [Google patches eighth Chrome zero-day exploited in attacks this year https://t.co/ax7zOhfFK6  https://t.co/ax7zOhfFK6](https://x.com/BleepinComputer/status/2120077560973332617) | BleepinComputer | media | X | 2026-11-10 14:24 | 45 |
+| [Fireworks AI discloses new breach after cloud provider hack https://t.co/FHXhtWF3GU  https://t.co/FHXhtWF3GU](https://x.com/BleepinComputer/status/2120061448143482883) | BleepinComputer | media | X | 2026-11-10 13:20 | 36 |
+| [France Blames Iran for a Cyberattack That Heated Supermarket Refrigerators https://t.co/lr9N9hZz0M](https://x.com/SecurityWeek/status/2120058152544514417) | SecurityWeek | media | X | 2026-11-10 13:07 | 4 |
+| [🚨 8 Chrome zero-days exploited in the wild in 2026.  Google has now released a security update for the latest one: CVE-2026-125350, a high-severity use-after-free flaw in Chrome's XML component.  An exploit exists in the wild. Attack details remain undisclosed.  Update Chrome. https://t.co/F5rMeNSQHZ](https://x.com/TheHackersNews/status/2120047471544222151) | TheHackersNews | media | X | 2026-11-10 12:24 | 475 |
+| [‼️ ALERT → N-able takes hosted N-central offline and urges on-premises customers to shut down servers after 30+ vulnerabilities and PoC exploits are disclosed.  The flaws enable credential theft, admin creation, and root code execution.  Full details ↓ https://t.co/dxgUoCDsXz](https://x.com/TheHackersNews/status/2120045502851084470) | TheHackersNews | media | X | 2026-11-10 12:16 | 87 |
+| [🚨 CISA adds 4 actively exploited flaws to its KEV catalog, affecting OpenSSH, GPUStack, FreeSWITCH, and IBM Aspera Faspex.  OpenSSH SSHole attacks have already involved TAC Agent malware deployment, botnet activity, and cryptomining.  What we know → https://t.co/MQawUk2XOF](https://x.com/TheHackersNews/status/2120041948019146966) | TheHackersNews | media | X | 2026-11-10 12:02 | 87 |
+| [🚨🚨 N-able has taken its hosted N-central servers offline worldwide and is urging on-premises customers to shut down their servers after a researcher published 30+ alleged zero-days.  The exploits include unauthenticated remote code execution and administrator account creation.](https://x.com/BleepinComputer/status/2119905778559525251) | BleepinComputer | media | X | 2026-11-10 03:01 | 517 |
+| [French authorities accused Iran's Islamic Revolutionary Guard Corps of launching a cyberattack that sabotaged refrigeration systems at hundreds of grocery stores https://t.co/dzSjcZmLts](https://x.com/TheRecord_Media/status/2119865439022882860) | TheRecord&#95;Media | media | X | 2026-11-10 00:21 | 14 |
+| [U.S. federal agencies on Thursday implored critical infrastructure operators to safeguard their cooling systems following hacks that have caused chaos in European supermarkets in recent weeks https://t.co/X8ht2YzwmI](https://x.com/TheRecord_Media/status/2118428923579290037) | TheRecord&#95;Media | media | X | 2026-11-06 01:13 | 13 |
+| [US Agencies Urge Organizations to Harden Refrigeration Controllers https://t.co/3RTRss8e7j](https://x.com/SecurityWeek/status/2118691002601058546) | SecurityWeek | media | X | 2026-11-06 18:34 | 7 |
+| [OpenSSH Rushes Patches for ‘SSHole’ Authentication Bypass https://t.co/voq3xw5DK9](https://x.com/SecurityWeek/status/2118677096407150636) | SecurityWeek | media | X | 2026-11-06 17:39 | 14 |
+| [Cisco, WatchGuard Release Patches; SonicWall Won’t Fix GMS Flaws https://t.co/b7f3QlSKvo](https://x.com/SecurityWeek/status/2118547671539503251) | SecurityWeek | media | X | 2026-11-06 09:05 | 6 |
+| [FBI, CISA warn of cyberattacks targeting refrigeration systems https://t.co/Xh5AFOKklK  https://t.co/Xh5AFOKklK](https://x.com/BleepinComputer/status/2118507947433091173) | BleepinComputer | media | X | 2026-11-06 06:27 | 88 |
+| [SonicWall Patches Exploited SonicOS Bug That Weakens VPN Logins https://t.co/LbpcnjTEGm](https://x.com/SecurityWeek/status/2119120196267057283) | SecurityWeek | media | X | 2026-11-07 23:00 | 12 |
+| [Recently Patched Barracuda Vulnerabilities Exploited in Attacks https://t.co/3BadvaXdkT](https://x.com/SecurityWeek/status/2120500539699961869) | SecurityWeek | media | X | 2026-11-11 18:25 | 9 |
+| [🚨 35,578 Grok-built apps were accessible online without signing in.  Some exposed confidential X documents, employee passwords, and patient data.  Even hard-to-guess app URLs could be found through searchable DNS records.  Full findings - https://t.co/v7NmMduEWH](https://x.com/TheHackersNews/status/2120496567388168643) | TheHackersNews | media | X | 2026-11-11 18:09 | 161 |
+| [N-able released hotfixes to address zero-day bugs affecting its N-central remote monitoring and management (RMM) platform, which were publicly disclosed over the weekend and forced it to take vulnerable hosted environments offline. https://t.co/MoLWpczgQu](https://x.com/BleepinComputer/status/2120494932477579531) | BleepinComputer | media | X | 2026-11-11 18:02 | 46 |
+| [CISA flags Cisco BroadWorks flaw as actively exploited in attacks https://t.co/AfzmmeyXcP  https://t.co/AfzmmeyXcP](https://x.com/BleepinComputer/status/2120459614483255354) | BleepinComputer | media | X | 2026-11-11 15:42 | 54 |
+| [Threat Actors Exploit Openwave, Cisco BroadWorks Vulnerabilities https://t.co/EIL4mAWsYy](https://x.com/SecurityWeek/status/2120442171375395167) | SecurityWeek | media | X | 2026-11-11 14:33 | 3 |
+| [‼️ Microsoft confirms active exploitation of an Outlook flaw.  The bug could expose NTLMv2 authentication hashes when users open a crafted message file.  It's one of 1,259 vulnerabilities patched this month. CISA has added it to its exploited flaws list.  Details ↓ https://t.co/q6YEEba60G](https://x.com/TheHackersNews/status/2120430993895223603) | TheHackersNews | media | X | 2026-11-11 13:48 | 500 |
+| [Recently Patched Barracuda Vulnerabilities Exploited in Attacks https://t.co/3BadvaXLar](https://x.com/SecurityWeek/status/2120425059701621247) | SecurityWeek | media | X | 2026-11-11 13:25 | 5 |
+| [🚨 Railway says stolen customer AI keys led to an estimated $740,000 in unauthorized charges.  Attackers exploited a build isolation flaw, moved through internal cloud systems, and decrypted customer secrets.  Railway will cover charges AI providers won't refund.  Full details ↓ https://t.co/oOz4ZwEyqV](https://x.com/TheHackersNews/status/2120424080700854541) | TheHackersNews | media | X | 2026-11-11 13:21 | 78 |
+| [🚨 Hackers are exploiting flaws in Cisco BroadWorks and Openwave Messaging, CISA confirms.  Both vulnerabilities are already patched, but how attackers are exploiting them remains unknown.  Federal agencies have until November 24 to apply fixes.  Details: https://t.co/8JeywyaESP](https://x.com/TheHackersNews/status/2120397273700167986) | TheHackersNews | media | X | 2026-11-11 11:34 | 112 |
+| [🚨 UPDATE: Ahsay Backup has released AhsayCBS 10.3.6.1 with additional security hardening following attacks on its backup servers.  The company says partners reported unauthorized access starting October 9.  New guidance lists signs of compromise, including rogue admin accounts, https://t.co/bbqWJexXko](https://x.com/TheHackersNews/status/2120389731318157357) | TheHackersNews | media | X | 2026-11-11 11:04 | 54 |
+| [SAP Patches Critical ICM2SHELL, ProxyGate Vulnerabilities https://t.co/r0cMK8xa1f](https://x.com/SecurityWeek/status/2120377730034434269) | SecurityWeek | media | X | 2026-11-11 10:17 | 2 |
+| [Amid conflicting reports about PHP2Shell, understanding exposure and conditions for exploitation helps defenders prioritize patching. This Microsoft Threat Intelligence Podcast episode brings together exploit research &amp;amp; IR perspectives on PHP2Shell. https://t.co/H1a9zmBkBN https://t.co/lEdbtIj1wb](https://x.com/MsftSecIntel/status/2118461473068384633) | MsftSecIntel | vendor | X | 2026-11-06 03:22 | 57 |
+| [Notion Customer Data Compromised in Fireworks AI Hack https://t.co/KWhCLToAKg](https://x.com/SecurityWeek/status/2120847781480874460) | SecurityWeek | media | X | 2026-11-12 17:24 | 10 |
+| [‼️ BREAKING: Recently patched N-central servers remain exploitable under certain conditions.  "4EverAble2Shell" enables unauthenticated root RCE; "Agent2Shell" can run Windows SYSTEM commands with the appliance ID.  Attackers are probing. N-able is investigating.  Details: https://t.co/7fP5IVS73N](https://x.com/TheHackersNews/status/2120834921241694544) | TheHackersNews | media | X | 2026-11-12 16:33 | 69 |
+| [Hackers Deploy Malware in Fresh ScreenConnect Campaign https://t.co/Y7H3GH0NuY](https://x.com/SecurityWeek/status/2120829090982773046) | SecurityWeek | media | X | 2026-11-12 16:10 | 1 |
+| [Microsoft confirms Windows security updates installation issues https://t.co/6CdYaN5PZj  https://t.co/6CdYaN5PZj](https://x.com/BleepinComputer/status/2120825025297063976) | BleepinComputer | media | X | 2026-11-12 15:54 | 332 |
+| [Hackers Target N-central Zero-Days as N-able Rushes Patches https://t.co/AwYnU1Vx9W](https://x.com/SecurityWeek/status/2120814193419182253) | SecurityWeek | media | X | 2026-11-12 15:11 | 1 |
+| [🚨 Just TWO unauthenticated requests can set up a MongoDB server crash.  A critical pre-auth flaw (CVE-2026-118383, CVSS 9.5) can crash vulnerable replica set members during failover.  No login required. Patches are out.  Details: https://t.co/sNxCLv20F1 https://t.co/sGKw1C6Ig0](https://x.com/TheHackersNews/status/2120811084764602372) | TheHackersNews | media | X | 2026-11-12 14:59 | 203 |
+| [🚨 Node.js fixes 16 security flaws, including an HTTPS bug that can expose TLS private keys under specific server conditions.  Another lets unauthenticated clients crash HTTP/2 servers on 24.x/26.x.  7 rated high. Full details: https://t.co/8020ZkJJeO](https://x.com/TheHackersNews/status/2120794762886443159) | TheHackersNews | media | X | 2026-11-12 13:54 | 210 |
+| [‼️ Attackers hijacked over 4,800 #GitHub accounts to plant credential-stealing malware in repositories.  The stealer executed in at least 1,806 repos, harvesting CI and cloud credentials while attackers often erased traces of its activity.  Seen a wfx-docs branch? Check your https://t.co/XUkgdJJyU4](https://x.com/TheHackersNews/status/2120783672878186661) | TheHackersNews | media | X | 2026-11-12 13:10 | 350 |
+| [⚠️ Over 4,800 stolen GitHub accounts used to plant a CI secret stealer that ran in at least 1,806 repositories.  The malware targeted #GitHub secrets and cloud credentials. Attackers reverted malicious commits within a minute and usually deleted workflow logs.  Details → https://t.co/KKrozlXNoR](https://x.com/TheHackersNews/status/2120769833621180849) | TheHackersNews | media | X | 2026-11-12 12:15 | 140 |
+| [‼️ BREAKING - Critical Apache HTTP/2 flaw could allow unauthenticated remote code execution.  CVE-2026-119618 affects versions 2.4.55–2.4.70 with HTTP/2 enabled.  CVSS 9.8. Fixed in 2.4.71, but some #Linux distributions still await patches.  Read more → https://t.co/j5tXTo0WoN](https://x.com/TheHackersNews/status/2120746775455858849) | TheHackersNews | media | X | 2026-11-12 10:43 | 819 |
+| [Critical Xen Orchestra Flaws Exploited in Attacks https://t.co/5pMHlKQUNK](https://x.com/SecurityWeek/status/2120739362950234247) | SecurityWeek | media | X | 2026-11-12 10:14 | 3 |
+| [‼️ Hackers are abusing ScreenConnect to push rogue clients delivering SCKit malware.  At least 288 endpoints across 48 organizations were targeted, Huntress reports.  ConnectWise has disabled 5 third-party extensions.  Attack details + IoCs → https://t.co/zXnMQ5QVGY](https://x.com/TheHackersNews/status/2120738768806404225) | TheHackersNews | media | X | 2026-11-12 10:11 | 65 |
+| [🚨 Hackers are breaching MSPs through compromised ScreenConnect panels, deploying rogue remote access tools to customer devices.  @HuntressLabs  reports 6 compromised MSPs and 286 affected endpoints across 47 organizations, with the numbers rising.  Attackers can also reportedly](https://x.com/BleepinComputer/status/2120652762501275700) | BleepinComputer | media | X | 2026-11-12 04:29 | 263 |
+| [🚨 Hackers are breaching MSPs through compromised ScreenConnect panels, deploying rogue remote access tools to customer devices.  @HuntressLabs  reports 6 compromised MSPs and 286 affected endpoints across 47 organizations, with the numbers rising.  Attackers can also reportedly](https://x.com/BleepinComputer/status/2120652524491264479) | BleepinComputer | media | X | 2026-11-12 04:28 | 1 |
+| [Notion says Fireworks breach exposed customer AI chat transcripts https://t.co/oxC5ycwHf1  https://t.co/oxC5ycwHf1](https://x.com/BleepinComputer/status/2120621230147473546) | BleepinComputer | media | X | 2026-11-12 02:24 | 45 |
+| [November Patch Tuesday: An Overflowing Cornucopia of CVEs https://t.co/9AsuzV7L6l by Tara Seals](https://x.com/DarkReading/status/2120574287572504853) | DarkReading | media | X | 2026-11-11 23:18 | 4 |
+| [Artex: The AI Pen-Test Tool Hackers Turned Into a Weapon https://t.co/887H5fq9qz by Alexander Culafi](https://x.com/DarkReading/status/2120572499704389805) | DarkReading | media | X | 2026-11-11 23:10 | 42 |
+| [Critical Xen Orchestra Flaws Exploited in Attacks https://t.co/5pMHlKQUNK](https://x.com/SecurityWeek/status/2120543181414523111) | SecurityWeek | media | X | 2026-11-11 21:14 | 11 |
+| [‼️ Attackers accessed AWS production secrets in intrusions linked to AntiFox, an AI pentesting platform.  Arctic Wolf observed IIS web shells, abuse of valid AWS credentials, and successful AWS Secrets Manager requests.  Inside the attacks: https://t.co/7opSC1aThP](https://x.com/TheHackersNews/status/2120540829488197766) | TheHackersNews | media | X | 2026-11-11 21:05 | 222 |
+| [Hackers use AntiFox AI agents in AWS credential-theft attacks https://t.co/7h9H0jNcv4  https://t.co/7h9H0jNcv4](https://x.com/BleepinComputer/status/2120535346232365135) | BleepinComputer | media | X | 2026-11-11 20:43 | 47 |
+| [Microsoft’s November Patch Tuesday fixes over 1,200 vulnerabilities, including actively exploited Outlook zero-day CVE-2026-124194.   Opening a crafted file can silently leak NTLMv2 hashes.   Prioritize Office patches immediately.](https://x.com/Lumideezy/status/2120535773330145379) | Lumideezy | independent | X | 2026-11-11 20:45 | 239 |
+| [‼️ NEW WINDOWS ZERO-DAY EXPLOIT!  A security feature designed to stop attacks can be abused to gain SYSTEM privileges.  Dubbed SignDrop, the exploit targets Windows CLFS using Microsoft Defender. The code is now public.  No CVE. No patch. Microsoft has yet to confirm the flaw. https://t.co/duXk4epWMV](https://x.com/TheHackersNews/status/2120938288148316633) | TheHackersNews | media | X | 2026-11-12 23:24 | 504 |
+| [N-able Takes N-central Platform Offline After Discovery of 33 Flaws https://t.co/qtgYAG1Pyv by Elizabeth Montalbano](https://x.com/DarkReading/status/2120935624949502052) | DarkReading | media | X | 2026-11-12 23:13 | 3 |
+| [New Windows SignDrop zero-day gives hackers SYSTEM privileges https://t.co/9r7FyjnGo1  https://t.co/9r7FyjnGo1](https://x.com/BleepinComputer/status/2120910565698650391) | BleepinComputer | media | X | 2026-11-12 21:34 | 188 |
+| [Apify rotates API tokens, prompts 2FA resets after breach https://t.co/ismPovZmsI  https://t.co/ismPovZmsI](https://x.com/BleepinComputer/status/2120888612283662464) | BleepinComputer | media | X | 2026-11-12 20:07 | 21 |
+| [🚨 ScreenConnect attackers have a new target: IT support technicians.  SCKit malware exploits a patched 9.9-rated flaw and attempts to hijack technician sessions to spread across MSP customer networks.  The patch blocks the exploit but not session hijacking.  Details: https://t.co/qSg1Jd9ofT](https://x.com/TheHackersNews/status/2120866724543398276) | TheHackersNews | media | X | 2026-11-12 18:40 | 130 |
+| [‼️ The AI hacking agent China-linked hackers attacked 2,250 Microsoft 365 tenants with last month is now aimed at banks.  Microsoft says a Cambodia-based crime group has used ARTEX since October against financial firms in Southeast Asia and some big global banks.  Its agents https://t.co/nr7DCE7wIx](https://x.com/IntCyberDigest/status/2119229665391042897) | IntCyberDigest | independent | X | 2026-11-08 06:15 | 420 |
+| [Microsoft’s November Patch Tuesday fixed a record 1,235 vulnerabilities, including an actively exploited Outlook zero-day (CVE-2026-124194) that can leak Windows authentication data.   Prioritize this update immediately. https://t.co/SlnKoS2e0e](https://x.com/Lumideezy/status/2120891258692657182) | Lumideezy | independent | X | 2026-11-12 20:17 | 154 |
+| [Microsoft’s October 2026 Patch Tuesday updates fix over 1,000 vulnerabilities, including an exploited Outlook zero-day, CVE-2026-124194 https://t.co/FM4ADGln8y](https://x.com/SecurityWeek/status/2120357094188790129) | SecurityWeek | media | X | 2026-11-11 08:55 | 9 |
+| [SSH situation is insane](https://www.youtube.com/watch?v=ErB1SRcksDc) | Low Level | independent | YouTube | 2026-11-06 19:39 | 1,128,101 |
+| [The hole in OpenSSH - Password Bypass in Plain Sight](https://www.youtube.com/watch?v=HWYxNVugkCA) | Security Now | independent | YouTube | 2026-11-11 08:58 | 11,121 |
+| [CVE-2026-123158 Live Demo \| SSHole Explained: Critical OpenSSH Authentication Bypass](https://www.youtube.com/watch?v=7IFgZxRPjgA) | Safe Security, Inc. | independent | YouTube | 2026-11-06 17:43 | 840 |
+| [&#42;sshole: This Alpine SSH Bug Accepts Any Long Password](https://www.youtube.com/watch?v=47L6yVhX8jY) | HuseyinCodes | independent | YouTube | 2026-11-06 02:48 | 2,948 |
+| [A 257-Byte Password Opens Accounts With No Password (sshole)](https://www.youtube.com/watch?v=FJKDfD-_hOg) | Bartini | independent | YouTube | 2026-11-09 13:11 | 843 |
+| [Windows 10 11 Patch Tuesday security updates for November 2026 fix more than 1200 flaws](https://www.youtube.com/watch?v=EiJPupPZxLU) | Windows, computers and Technology | independent | YouTube | 2026-11-11 03:16 | 5,363 |
+| [The Patch Report for November 2026](https://www.youtube.com/watch?v=QJWm9rLVYrM) | TrendAI Zero Day Initiative | vendor | YouTube | 2026-11-11 02:51 | 559 |
+| [A Record Breaking Patch Tuesday](https://www.youtube.com/watch?v=J_CAHRzTzA0) | 5bytespodcast | independent | YouTube | 2026-11-11 19:54 | 559 |
+| [Patch Tuesday \| November 2026](https://www.youtube.com/watch?v=GfDivgsKm48) | PDQ | vendor | YouTube | 2026-11-11 03:55 | 474 |
+| [Outlook Zero-Day CVE-2026-124194 Explained: One File Can Leak Your Windows Login](https://www.youtube.com/watch?v=e3vfMa3oAfI) | Threatium | independent | YouTube | 2026-11-11 20:15 | 258 |
+| [Windows 11 KB5132061 Fails With 0x800f0993 Error For Many (Including Me!)](https://www.youtube.com/watch?v=Gh9eW902CKo) | BrenTech | independent | YouTube | 2026-11-11 15:06 | 17,592 |
+| [New CISA head, AI safety regulator, N-able's zero-day deluge](https://www.youtube.com/watch?v=WqSBsQN4kWw) | CISO Series | media | YouTube | 2026-11-11 14:30 | 534 |
+| [S0:E70: Researcher Drops 30+ Zero-Days, N-able Goes Dark](https://www.youtube.com/watch?v=PlCvR2ZeGB4) | Breach Please | independent | YouTube | 2026-11-10 16:30 | 433 |
+| [N-able N-central Shut Down Worldwide: Able2Shell Zero-Days Explained (What to Check)](https://www.youtube.com/watch?v=HfuS9VBn-3w) | Threatium | independent | YouTube | 2026-11-10 20:54 | 137 |
+| [France accuses Iran of supermarket fridge hacking \| BBC News](https://www.youtube.com/watch?v=I89V17wJ3L8) | BBC News | media | YouTube | 2026-11-10 05:15 | 152,463 |
+| [US on Alert After France Blames Iran for Supermarket Cyberattack](https://www.youtube.com/watch?v=2BRm5vv1gVM) | TODAY | media | YouTube | 2026-11-10 20:30 | 66,440 |
+| [France ACCUSES Iran of cyberattacks targeting supermarket fridges](https://www.youtube.com/watch?v=Dr6HLwafA10) | Fox News | media | YouTube | 2026-11-11 05:15 | 63,755 |
+| [France blames Iran for massive cyberattack on supermarkets \| DW News](https://www.youtube.com/watch?v=tKCyCGTGrSg) | DW News | media | YouTube | 2026-11-10 02:15 | 34,965 |
+| [France opens probe into Iranian cyber unit over fridge attacks • FRANCE 24 English](https://www.youtube.com/watch?v=JlHjsX-1QX4) | FRANCE 24 English | media | YouTube | 2026-11-10 00:54 | 21,167 |
+| ['Not Go Unpunished': France Blames Iran for Cyberattack on Supermarket Fridges \| FP Explains](https://www.youtube.com/watch?v=kWvcIOQm8D0) | Firstpost | media | YouTube | 2026-11-11 09:15 | 35,197 |
+| [France summons Iranian ambassador after MAJOR cyberattack](https://www.youtube.com/watch?v=PAUketbroMM) | Fox News | media | YouTube | 2026-11-11 17:00 | 63,034 |
+| [Your Chrome Has A Hole Hackers Already Use](https://www.youtube.com/watch?v=XL84k1SxVSo) | redteamed | independent | YouTube | 2026-11-10 19:30 | 732 |
+| [Google Chrome HACKED! Update Chrome NOW! CVE-2026-125350](https://www.youtube.com/watch?v=OQPntwCw1lI) | STARTUP HAKK | independent | YouTube | 2026-11-11 04:12 | 915 |
+| [How a Single React Bug Can Take Over Your Server: Next.js Security Update](https://www.youtube.com/watch?v=yj08ZnEDUtw) | Thapa Technical | independent | YouTube | 2026-11-12 16:00 | 1,205 |
+| [SANS Stormcast Thursday, November 12th, 2026: Apache mod&#95;http2 RCE (CVE-2026-119618); Fortinet …](https://www.youtube.com/watch?v=NWoM9JdTQ3I) | SANS Internet Storm Center | media | YouTube | 2026-11-12 07:12 | 513 |
+| [Grok-Built Apps Exposed… Even SpaceXSI. Whoops.](https://www.youtube.com/watch?v=VJ6rcz1zoMY) | SavvyNik | independent | YouTube | 2026-11-12 04:21 | 28,780 |
+| [Risky Business (859): ARTEX damage approaches crisis levels](https://www.youtube.com/watch?v=xqFGJc-nYQY) | Risky Business Media | media | YouTube | 2026-11-11 11:42 | 1,662 |
+| [ARTEX: AI Agents Found the Bank's Side Door \| Two Financial Attack Campaigns Explained](https://www.youtube.com/watch?v=QbsPddtgyDk) | Byte Theories | independent | YouTube | 2026-11-09 07:13 | 129 |
+| [The Most Dangerous AI Hacking Tool](https://www.youtube.com/watch?v=_JCFiFg17eg) | The Whole Mind | independent | YouTube | 2026-11-08 20:30 | 242 |
+| [Barracuda Email Gateways Are Being Rooted  Patch CVE 2026 116606 and CVE 2026 111560](https://www.youtube.com/watch?v=RYQQwEFAllU) | STARTUP HAKK | independent | YouTube | 2026-11-11 23:26 | 301 |
+| [React Server Components typed-array RCE](https://radar.cloudflare.com/zero-wire/rsc-typed-array-rce) | Cloudflare Radar Zero Wire | web | web | 2026-11-10 05:30 | 0 |
+| [&#42;sshole: OpenSSH password bypass on musl Linux](https://radar.cloudflare.com/zero-wire/sshole) | Cloudflare Radar Zero Wire | web | web | 2026-11-06 | 0 |
+| [php2shell](https://radar.cloudflare.com/zero-wire/php2shell) | Cloudflare Radar Zero Wire | web | web | 2026-11-09 | 0 |
+
+</GraphTable>
+
+## Method and access limits
+
+We convert source timestamps to IST and exclude items outside the window. We verify vendor and media handles before account searches. X searches cover vendor posts, media posts and security keywords. We page the main searches and add targeted searches. This is a sample, not a complete archive. We review every Cloudflare Radar Zero Wire RSS item. We keep an item when its publish date or its last-reviewed date falls in the window. Zero Wire items keep their published priority, CVEs, fixed versions and mitigations as exact text. We rank themes by distinct account and channel names first, then X engagement. Coverage from both vendors and media breaks remaining ties. X engagement adds likes, reposts, replies and quotes. YouTube reach uses watch-page view counts, not search-result estimates. We keep each item in one theme. Some themes group separate incidents by a shared operational concern. We do not add independent posts with fewer than 30 X interactions. We read replies and quotes on the two highest-engagement X posts in each theme. We sample one page per endpoint, with up to 25 results. We exclude out-of-window comments, reposts, empty text, unrelated text, abuse and product promotion. We use reviewed keyword rules for English clusters and sentiment. We leave other languages unclassified. Percentages describe the retained sample, not all readers. Samples use exact source fragments and omit usernames. Risk levels and actions come only from cited sources. Actions with the basis type generic are safe general steps, not vendor instructions. We preserve retrieved titles and post text. We do not independently verify every linked article. A source claim remains that source's claim.
+
+- X capture: 2026-11-13 09:04:14 IST to 2026-11-13 09:12:59 IST
+- YouTube capture: 2026-11-13 09:10:05 IST to 2026-11-13 09:10:12 IST
+- Zero Wire capture: 2026-11-13 09:07:10 IST to 2026-11-13 09:07:23 IST
+
+- YouTube comments remain unread. Watch-page retrieval does not provide a usable comment collection. Comment analysis uses X only.
+- Transcript fetches fail with HTTP 429 for TrendAI Zero Day Initiative, SavvyNik, Risky Business Media and STARTUP HAKK. Their titles and metadata remain available.
+- Thapa Technical has no English transcript track. A Hindi transcript fetch then fails with HTTP 429.
+- We retrieve transcripts for Low Level, Security Now, CISO Series, Breach Please, BBC News and DW News.
+- We also retrieve transcripts for redteamed, SANS Internet Storm Center and Windows, computers and Technology.
+- We retrieve the GIRIJESH VASHISTHA transcript in Hindi. We do not fetch every video transcript.
+- YouTube search results contain relative dates and inconsistent view snapshots. Only watch-page dates and views enter the source index.
+- Zero Wire RSS gives date-only publish times. Two in-window items qualify only by their last-reviewed date.
+- Comment sampling reaches different totals per theme. The source file records the real count for each theme.
+- Some X threads contain more pages. We do not claim complete reply or quote coverage.
+- X returns many replies without a language code. We use a short English word check for those replies.
+- X returns some post text as short fragments. We preserve those fragments and do not fill missing text.
+- We do not retrieve the full articles behind every X link. Claims remain attributed to the retrieved posts.
+
+- Ransomware and data theft reports form an eleventh cluster with five accounts. It covers Nitori, Maersk, Toyota, Vanderbilt University, Iris Ohyama, Frontline Education and DigiCert.
+- Espionage reports form a twelfth cluster with five accounts. It covers Turla Cereal malware, Bitter APT PapRAT, APT29 watering holes and the Sparrow malware links.
+- A Hindi video by GIRIJESH VASHISTHA reports AI-assisted attacks on Indian bank accounts. Its transcript does not name ARTEX, so it stays outside the AI attacks theme.
+- SavvyNik publishes a multi-topic news video that covers several themes. It stays outside the themes because it has no single primary subject.
+- Five Zero Wire RSS items fall outside the window by both publish date and last-reviewed date.
+- Some Zero Wire pages include an agent prompt for infrastructure checks. The brief does not copy that prompt text.
