@@ -153,16 +153,17 @@ The "Sources" table, the key sources and the by-day chart.
 | Field | Need | Notes |
 | --- | --- | --- |
 | `id` | required | Unique in the week. The pipeline uses `x<status id>` and `yt<video id>`. |
-| `platform` | required | `X` or `YouTube`. Case-sensitive. See [New platforms and types](#new-platforms-and-types). |
-| `type` | required | `vendor`, `media` or `independent`. Case-sensitive. |
+| `platform` | required | `X`, `YouTube` or `web`. Case-sensitive. See [New platforms and types](#new-platforms-and-types). |
+| `type` | required | `vendor`, `media` or `independent`. Case-sensitive. For a web page, use the kind of outlet that published it, for example `vendor` for a vendor advisory. |
 | `account` | required | Display name. |
 | `date_ist` | required | `YYYY-MM-DD HH:MM`, inside the window. The by-day chart skips other days. |
-| `text` | required | Post text or video title. Long text is clamped. |
-| `url` | required | The post or video. |
-| `engagement` | required | Interactions on X, views on YouTube. Sorts the table and sizes its bars. |
+| `text` | required | Post text, video title or page excerpt. Long text is clamped. |
+| `url` | required | The post, video or page. |
+| `engagement` | required | Interactions on X, views on YouTube. Sorts the table and sizes its bars. Web pages have no metric, so use 0. Their rows show "—" and no bar. |
 | `theme` | required | A theme key, or a ranking key for a storyline below the bar. |
 | `metrics` | required | Raw counts by name, for example `{"views": 826905}`. Shown in the engagement tooltip. Values that are not numbers are skipped. Can be `{}`. |
 | `image` | optional | Thumbnail, about 16:9, on key sources. Without it, a key source shows text only. |
+| `title` | optional | Page title, for web pages. The link shows it, and `text` follows as an excerpt. Without it, the link shows `text`. |
 | `video_id`, `org`, `date_utc`, `date_publish_raw` | record | |
 | `followers`, `language` | proposed | See [PROPOSED.md](PROPOSED.md). |
 
@@ -206,7 +207,7 @@ The checker also warns about these:
 - a source dated outside the window, a key post from another theme, or a `theme` that is not a key
 - `x_posts` or `youtube_videos` that differ from `sources`
 - a new or misspelled platform or type
-- more new platforms or types than spare colours: 3 platforms and 2 types. Past that, new values share a colour.
+- more new platforms or types than spare colours: 2 platforms and 2 types. Past that, new values share a colour.
 - a byte-order mark at the start of the file
 
 ## Keys and week-over-week
@@ -234,7 +235,7 @@ A new `platform` or `type` value renders without any code change:
 
 To pin a value:
 
-1. Add it to `PLATFORM_ORDER` or `TYPE_ORDER` in `lib/brief.mjs`. For a platform, also add its noun and metric to `PLATFORM_UNITS`, for example `{ noun: "posts", metric: "likes" }`.
+1. Add it to `PLATFORM_ORDER` or `TYPE_ORDER` in `lib/brief.mjs`. For a platform, also add its noun and metric to `PLATFORM_UNITS`, for example `{ noun: "posts", metric: "likes" }`. Use `metric: null` for a platform with no engagement count, like `web`.
 2. Give it a tone in `PLATFORM` or `TYPE` in `components/tones.ts`. Keep the red tone, `d`, for exploited CVEs and negative comments.
 3. Add it to `KNOWN_PLATFORMS` or `KNOWN_TYPES` in `lib/check.mjs`.
 4. For a platform, add a `meta.capture` key for its capture window.

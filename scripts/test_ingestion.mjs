@@ -26,6 +26,7 @@ import {
   shortLabel,
   sourceFacets,
   sourceRows,
+  sourceTitle,
   sparkSummary,
   themeActions,
   themeRows,
@@ -165,6 +166,7 @@ test("complete.json passes the gate with no warnings and uses every optional fie
   const cve = COMPLETE.themes.flatMap((theme) => theme.cve_details)
   assert.ok(cve.some((entry) => entry.cvss != null && entry.advisory_url && entry.basis))
   assert.ok(COMPLETE.sources.some((source) => source.image))
+  assert.ok(COMPLETE.sources.some((source) => source.title))
   assert.ok(COMPLETE.ranking.some((row) => !COMPLETE.themes.some((theme) => theme.key === row.key)))
   const funnel = funnelModel(COMPLETE)
   assert.equal(funnel.sources.length, 2)
@@ -497,13 +499,26 @@ test("a new platform gets counted, ordered last and given neutral units", () => 
   assert.equal(models.stats.sources, data.sources.length)
   assert.deepEqual(
     models.facets.platform.map((entry) => entry.key),
-    ["X", "YouTube", "Bluesky"],
+    ["X", "YouTube", "web", "Bluesky"],
   )
   const acme = models.rows.find((row) => row.key === "acmegw")
   assert.deepEqual(acme.platforms.at(-1), { key: "Bluesky", count: 1 })
   assert.deepEqual(platformUnits("Bluesky"), { noun: "sources", metric: "engagement" })
   assert.deepEqual(platformUnits("YouTube"), { noun: "videos", metric: "views" })
   assert.equal(gateErrors(data).length, 0)
+})
+
+test("a web page links its title, has no engagement metric and gets one filter", () => {
+  const page = COMPLETE.sources.find((source) => source.platform === "web")
+  assert.equal(sourceTitle(page), page.title)
+  for (const title of [undefined, null, "  ", 7]) assert.equal(sourceTitle({ ...page, title }), null)
+  assert.deepEqual(platformUnits("web"), { noun: "pages", metric: null })
+  const data = structuredClone(COMPLETE)
+  data.sources.push({ ...page, id: "web2", type: "web" })
+  assert.ok(sourceFacets(data).platform.some((entry) => entry.key === "web"))
+  assert.ok(!sourceFacets(data).type.some((entry) => entry.key === "web"), "type web repeats platform web")
+  data.sources.push({ ...data.sources[0], id: "x-web", type: "web" })
+  assert.ok(sourceFacets(data).type.some((entry) => entry.key === "web"), "type web is also on X")
 })
 
 test("weeks chain: the newest week compares with the one before it", () => {

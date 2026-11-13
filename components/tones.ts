@@ -8,8 +8,9 @@ import type { Tone } from "@/components/glyph"
  * Numbers use the same tones: a count takes the tone of the part it counts.
  */
 const TYPE: Record<string, Tone> = { vendor: "a", media: "b", independent: "m" }
-const PLATFORM: Record<string, Tone> = { X: "n", YouTube: "m" }
-const SPARE: Tone[] = ["b", "a", "f"]
+// Platforms use the neutral ramp (X █, YouTube ▒, web ░), so no platform shares an accent with a type next to it.
+const PLATFORM: Record<string, Tone> = { X: "n", YouTube: "m", web: "f" }
+const SPARE: Tone[] = ["b", "a"]
 
 function pick(map: Record<string, Tone>, key: string, index: number, spare: Tone[]): Tone {
   return map[key] ?? spare[Math.min(index, spare.length - 1)]

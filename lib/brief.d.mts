@@ -55,6 +55,7 @@ export type Source = {
   theme: string
   metrics: Record<string, number>
   image?: string | null
+  title?: string | null
 }
 
 export type WeekData = {
@@ -189,7 +190,8 @@ export function sentimentTotals(data: WeekData): Sentiment
 export function themeSentiment(theme: Theme): Sentiment
 export function themeRows(data: WeekData): ThemeRow[]
 export function sourceFacets(data: WeekData): { type: Facet[]; platform: Facet[] }
-export function platformUnits(platform: string): { noun: string; metric: string }
+export function platformUnits(platform: string): { noun: string; metric: string | null }
+export function sourceTitle(source: Source): string | null
 export function safeHref(url: unknown): string | null
 export function bottomLine(data: WeekData): string | null
 export function alsoObserved(data: WeekData): string[]

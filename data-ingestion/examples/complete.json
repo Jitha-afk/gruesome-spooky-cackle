@@ -10,7 +10,8 @@
     "bottom_line": "Patch Acme Gateway now and check for web shells: attackers used CVE-2026-120118 for four days before the advisory. Rotate npm tokens if your builds ran after 2 November.",
     "capture": {
       "x": "2026-11-06 20:05 IST to 2026-11-06 20:14 IST",
-      "youtube": "2026-11-06 20:10 IST to 2026-11-06 20:12 IST"
+      "youtube": "2026-11-06 20:10 IST to 2026-11-06 20:12 IST",
+      "web": "2026-11-06 20:15 IST to 2026-11-06 20:16 IST"
     },
     "counts": {
       "x_posts": 7,
@@ -469,6 +470,19 @@
       "image": "https://i.ytimg.com/vi/EXAMPLE0001/hqdefault.jpg",
       "followers": 42000,
       "language": "en"
+    },
+    {
+      "id": "webEXAMPLE0001",
+      "platform": "web",
+      "type": "vendor",
+      "account": "AcmeSecurity",
+      "date_ist": "2026-10-30 08:40",
+      "title": "ACME-2026-0042: Acme Gateway 9.x pre-auth command injection",
+      "text": "A remote attacker can run commands as root without a login. Acme has confirmed exploitation of CVE-2026-120118. Update to 9.4.2.",
+      "url": "https://security.example.com/advisories/ACME-2026-0042",
+      "engagement": 0,
+      "theme": "acmegw",
+      "metrics": {}
     },
     {
       "id": "x2116000000000000201",

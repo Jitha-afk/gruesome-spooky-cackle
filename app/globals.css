@@ -2625,6 +2625,20 @@ html.deep details[open] > * {
 :is(.item-text, .src-text):focus-visible {
   -webkit-line-clamp: unset;
 }
+/* A source with a title links the title. Its text follows as a short excerpt. */
+.item-excerpt,
+.src-excerpt {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-top: 0.25rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--muted-foreground);
+  unicode-bidi: isolate;
+  overflow-wrap: anywhere;
+}
 .item-eng {
   margin-top: 0.25rem;
   font: 0.75rem var(--font-mono);
