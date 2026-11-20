@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "meta": {
-    "title": "Weekly cybersecurity threat-intel brief",
+    "title": "Weekly cybersecurity threat-intel report",
     "window": {
       "start": "2026-11-13 00:00 IST",
       "end": "2026-11-19 23:59 IST",
@@ -98,7 +98,7 @@
         "Cloudflare Radar Zero Wire"
       ]
     },
-    "methodology": "We convert source timestamps to IST and exclude items outside the window. We verify vendor and media handles before account searches. X searches cover vendor posts, media posts and security keywords. We page the main searches and add targeted searches. This is a sample, not a complete archive. We review every Cloudflare Radar Zero Wire RSS item. We keep an item when its publish date or its last-reviewed date falls in the window. Zero Wire items keep their published priority, CVEs, fixed versions and mitigations as exact text. We rank themes by distinct account and channel names first, then X engagement. Coverage from both vendors and media breaks remaining ties. X engagement adds likes, reposts, replies and quotes. YouTube reach uses watch-page view counts, not search-result estimates. We keep each item in one theme. Some themes group separate incidents by a shared operational concern. We do not add independent posts with fewer than 30 X interactions. We read replies and quotes on the two highest-engagement X posts in each theme. We sample one page per endpoint, with up to 25 results. We exclude out-of-window comments, reposts, empty text, unrelated text, abuse and product promotion. We use reviewed keyword rules for English clusters and sentiment. We leave other languages unclassified. Percentages describe the retained sample, not all readers. Samples use exact source fragments and omit usernames. Risk levels and actions come only from cited sources. Actions with the basis type generic are safe general steps, not vendor instructions. We preserve retrieved titles and post text. We do not independently verify every linked article. A source claim remains that source's claim.",
+    "methodology": "We convert source timestamps to IST and exclude items outside the window. We verify vendor and media handles before account searches. X searches cover vendor posts, media posts and security keywords. We page the main searches and add targeted searches. This is a sample, not a complete archive. We review every Cloudflare Radar Zero Wire RSS item. We keep an item when its publish date or its last-reviewed date falls in the window. Zero Wire items keep their published priority, CVEs, fixed versions and mitigations as exact text. We rank themes by distinct account and channel names first, then X engagement. Coverage from both vendors and media breaks remaining ties. X engagement adds likes, reposts, replies and quotes. YouTube reach uses watch-page view counts, not search-result estimates. We keep each item in one theme. Some themes group separate incidents by a shared operational concern. We do not add independent posts with fewer than 30 X interactions. We read replies and quotes on the two or three X posts with the most replies and quotes per theme. We sample one page per endpoint, with up to 25 results. We exclude out-of-window comments, reposts, empty text, unrelated text, abuse and product promotion. We use reviewed keyword rules for English clusters and sentiment. We leave other languages unclassified. Percentages describe the retained sample, not all readers. Samples use exact source fragments and omit usernames. Risk levels and actions come only from cited sources. Actions with the basis type generic are safe general steps, not vendor instructions. We preserve retrieved titles and post text. We do not independently verify every linked article. A source claim remains that source's claim.",
     "inaccessible": [
       "YouTube comments remain unread. Watch-page retrieval does not provide a usable comment collection. Comment analysis uses X only.",
       "Transcript fetches fail with HTTP 429 for SavvyNik, Matt Johansen, Code Bear (two videos) and Windows, computers and Technology.",
@@ -122,7 +122,7 @@
       "Some multi-topic news videos cover several themes. They stay outside the themes because they have no single primary subject.",
       "One nginx post cites CVE-2026-12363. No other source names this ID, so the CVE list omits it.",
       "Eight Zero Wire RSS items fall outside the window by both publish date and last-reviewed date.",
-      "Some Zero Wire pages include an agent prompt for infrastructure checks. The brief does not copy that prompt text."
+      "Some Zero Wire pages include an agent prompt for infrastructure checks. The report does not copy that prompt text."
     ],
     "bottom_line": "Update Java runtimes and nginx now, because both flaws allow unauthenticated code execution. Patch the exploited Check Point, Apache Roller and Puppet Enterprise flaws.",
     "source_mix": {
@@ -147,7 +147,7 @@
       "short_name": "Java4Shell",
       "why_line": "A flaw in the Java runtime can let unauthenticated attackers run code in many Java applications.",
       "summary": "Calif reports Java4Shell, CVE-2026-114938, a memory-corruption flaw in the OpenJDK Base64 decoder. Oracle releases fixed Java SE builds on November 17. CISA urges organizations to patch the flaw immediately. Researchers show pre-auth code execution in Jenkins, Confluence, Jira and other Java applications. The Hacker News reports exploitation attempts in the wild on November 19.",
-      "why": "The flaw sits in the Java runtime, so many products carry it. Cloudflare says only x86-64 processors with AVX-512 VBMI trigger the bug.",
+      "why": "The flaw sits in the Java runtime, so many products carry it. CrowdStrike says not every environment is vulnerable.",
       "affected": {
         "products": "Oracle Java SE and OpenJDK builds, and Java applications such as Jenkins, Jira, Confluence, Keycloak and Kafka",
         "sectors": "All organizations that run Java services",
@@ -464,7 +464,7 @@
       "short_name": "AI attacks",
       "why_line": "The FBI and several vendors report that attackers use AI agents to find and exploit weak systems faster.",
       "summary": "The FBI warns that the ARTEX AI hacking tool powers attacks worldwide. SentinelOne counts at least five actors and clusters that use ARTEX after late August 2026. Barracuda links a cloud breach to an ARTEX-powered attack. Google warns that attackers use AI agents to turn security patches into working exploits. Amazon reports AI agents that hunt API keys in LiteLLM, Dify and other AI apps.",
-      "why": "Unit 42 says the AI-assisted breaches use familiar identity and patching gaps. Amazon says the reported results of its campaign remain unverified.",
+      "why": "Unit 42 says the AI-assisted breaches use familiar identity and patching gaps. The Hacker News says the reported results of the API key theft campaign remain unverified.",
       "affected": {
         "products": "Exposed AI gateways such as LiteLLM and Dify, cloud accounts and unpatched internet-facing systems",
         "sectors": "Defense, semiconductor, civil society and other sectors",
@@ -1085,7 +1085,7 @@
           "source_ids": [
             "zw-nginx2root"
           ],
-          "basis": "No retrieved source reports exploitation. Zero Wire states that none of the five nginx2root flaws is in the CISA catalog as of November 18."
+          "basis": "No retrieved source reports exploitation."
         },
         {
           "id": "CVE-2026-118899",
@@ -1093,7 +1093,7 @@
           "source_ids": [
             "zw-nginx2root"
           ],
-          "basis": "No retrieved source reports exploitation. Zero Wire states that none of the five nginx2root flaws is in the CISA catalog as of November 18."
+          "basis": "No retrieved source reports exploitation."
         },
         {
           "id": "CVE-2026-120993",
@@ -1101,7 +1101,7 @@
           "source_ids": [
             "zw-nginx2root"
           ],
-          "basis": "No retrieved source reports exploitation. Zero Wire states that none of the five nginx2root flaws is in the CISA catalog as of November 18."
+          "basis": "No retrieved source reports exploitation."
         },
         {
           "id": "CVE-2026-121810",
@@ -1109,7 +1109,7 @@
           "source_ids": [
             "zw-nginx2root"
           ],
-          "basis": "No retrieved source reports exploitation. Zero Wire states that none of the five nginx2root flaws is in the CISA catalog as of November 18."
+          "basis": "No retrieved source reports exploitation."
         },
         {
           "id": "CVE-2026-123007",
@@ -1124,7 +1124,7 @@
             "ytaXGjOt7ilDE",
             "ytowc7oq6RfVU"
           ],
-          "basis": "No retrieved source reports exploitation. Zero Wire states that none of the five nginx2root flaws is in the CISA catalog as of November 18."
+          "basis": "No retrieved source reports exploitation."
         },
         {
           "id": "CVE-2026-123633",
@@ -1134,7 +1134,7 @@
             "x2123078160077955574",
             "ytaXGjOt7ilDE"
           ],
-          "basis": "No retrieved source reports exploitation. Zero Wire states that none of the five nginx2root flaws is in the CISA catalog as of November 18."
+          "basis": "No retrieved source reports exploitation."
         },
         {
           "id": "CVE-2026-123634",
@@ -1142,7 +1142,7 @@
           "source_ids": [
             "x2123081308129870086"
           ],
-          "basis": "No retrieved source reports exploitation. Zero Wire states that none of the five nginx2root flaws is in the CISA catalog as of November 18."
+          "basis": "No retrieved source reports exploitation."
         }
       ],
       "exploitation_basis": "No retrieved source reports exploitation. Public proof-of-concept code exists."
@@ -2322,7 +2322,7 @@
       "short_name": "Web stack",
       "why_line": "Several widely used web runtimes and platforms release critical security fixes in the same week.",
       "summary": "PHP fixes 17 security advisories on November 19, including seven critical flaws such as phpAfterShell. Ruby fixes ruby2shell, CVE-2026-132825, a heap overflow that default Rails apps can reach. WordPress 7.1.5 fixes a flaw that can give an attacker an Administrator account. Drupal patches the installer flaw CVE-2026-132165, and a proof of concept exists. No source reports exploitation of these new flaws.",
-      "why": "PHP says the critical issues need non-default or uncommon setups. BleepingComputer counts 18 PHP flaws, and Zero Wire counts 17 advisories.",
+      "why": "PHP's advance notice says the critical issues need non-default or uncommon setups, but phpAfterShell is in the default session handler. BleepingComputer counts 18 PHP flaws, and Zero Wire counts 17 advisories.",
       "affected": {
         "products": "PHP 8.2 to 8.6, Ruby 3.3 to 4.0, WordPress and Drupal",
         "sectors": "Web hosting and all organizations that run these platforms",
