@@ -1,0 +1,1386 @@
+import { GraphRank } from "@/registry/default/graph-rank/graph-rank"
+import { GraphSpec } from "@/registry/default/graph-spec/graph-spec"
+import { GraphStack } from "@/registry/default/graph-stack/graph-stack"
+import { GraphTable } from "@/registry/default/graph-table/graph-table"
+
+# Weekly cybersecurity threat-intel brief
+
+2026-11-13 00:00 IST to 2026-11-19 23:59 IST
+
+**Java4Shell flaw in OpenJDK allows remote code execution**
+
+A flaw in the Java runtime can let unauthenticated attackers run code in many Java applications.
+
+## Act now
+
+**Update Java runtimes and nginx now, because both flaws allow unauthenticated code execution. Patch the exploited Check Point, Apache Roller and Puppet Enterprise flaws.**
+
+- Java4Shell (critical): Update every Java runtime to Oracle's November 17 build or to your vendor's fixed release.
+- Exploited (critical): Patch Check Point gateways against CVE-2026-123039 and PHP2Shell, and check them for backdoors.
+- AI attacks (high): Remove default credentials from AI gateways such as LiteLLM and Dify, and keep their admin panels off the internet.
+- nginx2root (high): Update nginx to 1.30.7 or 1.31.9, or to your vendor's fixed build, and restart it.
+- Optimizely (high): Review the Optimizely projects and scripts that your sites load, and remove injected code.
+- Dev supply (high): Check laptops, CI runners and container images for agent-framework 1.26.1 or 1.26.2, and remove them.
+- Web stack (high): Upgrade PHP to 8.2.36, 8.3.37, 8.4.28, 8.5.13 or 8.6.0, and restart workers.
+- MSP tools (high): Apply N-able's latest N-central patches, and update Agents and Probes as well.
+
+## Ranking
+
+<GraphRank title="ACCOUNTS PER THEME">
+
+- 22 Java4Shell
+- 18 AI attacks
+- 16 nginx2root
+- 14 M365 phish
+- 14 Optimizely
+- 14 Dev supply
+- 9 Exploited
+- 6 Web stack
+- 6 MSP tools
+- 5 Windows
+
+</GraphRank>
+
+## In numbers
+
+<GraphSpec title="THIS WEEK">
+
+- Candidates screened: 860
+- Sources in themes: 186
+- X posts: 138
+- YouTube videos: 43
+- Zero Wire items: 5
+- Comments retrieved: 846
+- Comments analysed: 552
+- Themes: 10
+
+</GraphSpec>
+
+## Source mix
+
+<GraphStack title="SOURCE TYPES">
+
+- Type: 15 vendor, 95 media, 71 independent, 5 web
+
+</GraphStack>
+
+<GraphStack title="SOURCE PLATFORMS">
+
+- Platform: 138 X, 43 YouTube, 5 Zero Wire
+
+</GraphStack>
+
+## Themes
+
+### 1. Java4Shell flaw in OpenJDK allows remote code execution
+
+**Why it matters:** A flaw in the Java runtime can let unauthenticated attackers run code in many Java applications.
+
+Calif reports Java4Shell, CVE-2026-114938, a memory-corruption flaw in the OpenJDK Base64 decoder. Oracle releases fixed Java SE builds on November 17. CISA urges organizations to patch the flaw immediately. Researchers show pre-auth code execution in Jenkins, Confluence, Jira and other Java applications. The Hacker News reports exploitation attempts in the wild on November 19.
+
+The flaw sits in the Java runtime, so many products carry it. Cloudflare says only x86-64 processors with AVX-512 VBMI trigger the bug.
+
+**Risk:** Critical. Unauthenticated attackers can run code in Java applications that use an affected runtime. CISA urges immediate patching. The Hacker News and SecurityWeek report exploitation attempts. Zero Wire rates the flaw Prioritize patching. [x2122986001085894991](https://x.com/TheHackersNews/status/2122986001085894991), [x2123372426839089273](https://x.com/TheHackersNews/status/2123372426839089273), [x2123344107179274742](https://x.com/SecurityWeek/status/2123344107179274742), [zw-java4shell](https://radar.cloudflare.com/zero-wire/java4shell)
+
+**Recommended actions**
+
+- Update every Java runtime to Oracle's November 17 build or to your vendor's fixed release. Priority: now. Audience: IT and application teams. [zw-java4shell](https://radar.cloudflare.com/zero-wire/java4shell), [x2122986001085894991](https://x.com/TheHackersNews/status/2122986001085894991)
+- Restart each updated service, and confirm that the running JVM reports the fixed build. Priority: now. Audience: IT and application teams. [zw-java4shell](https://radar.cloudflare.com/zero-wire/java4shell)
+- Find Java runtimes inside applications, appliances and container images, and include them in the update. Priority: this week. Audience: IT and asset owners (general step). [zw-java4shell](https://radar.cloudflare.com/zero-wire/java4shell), [x2122636443721830689](https://x.com/watchtowrcyber/status/2122636443721830689)
+- If you cannot patch yet, start x86-64 JVMs with -XX:UseAVX=2, as SentinelOne advises. Priority: now. Audience: IT and application teams. [x2122821277090250956](https://x.com/SentinelOne/status/2122821277090250956)
+
+<GraphSpec title="COVERAGE">
+
+- Accounts and channels: 22
+- X interactions: 9,155
+- YouTube views: 89,925
+- Zero Wire items: 1
+- Products: Oracle Java SE and OpenJDK builds, and Java applications such as Jenkins, Jira, Confluence, Keycloak and Kafka
+- Sectors: All organizations that run Java services
+- Regions: Global
+
+</GraphSpec>
+
+- Theme key: `java4shell`
+- Short name: Java4Shell
+- Exploited in wild: `true`
+
+The Hacker News and SecurityWeek report exploitation attempts. Zero Wire cites no exploitation reports as of November 17.
+
+| CVE | Exploited in wild | Basis | Evidence |
+| --- | --- | --- | --- |
+| CVE-2026-114938 | true | The Hacker News and SecurityWeek report exploitation attempts in the wild on November 19. Zero Wire cites no exploitation reports as of November 17. | [x2122724367654334810](https://x.com/calif_io/status/2122724367654334810), [x2122674442434379931](https://x.com/blackorbird/status/2122674442434379931), [x2122733612298838225](https://x.com/DarkWebInformer/status/2122733612298838225), [x2122702156667256920](https://x.com/Dinosn/status/2122702156667256920), [x2122663143625416792](https://x.com/cyberwar_15/status/2122663143625416792), [x2122683886102552912](https://x.com/EnclaveRadar/status/2122683886102552912), [x2122636443721830689](https://x.com/watchtowrcyber/status/2122636443721830689), [x2122986001085894991](https://x.com/TheHackersNews/status/2122986001085894991), [x2122910305504416213](https://x.com/TheHackersNews/status/2122910305504416213), [x2122711601447092667](https://x.com/TheHackersNews/status/2122711601447092667), [x2123258422925656416](https://x.com/CrowdStrike/status/2123258422925656416), [x2123031720316256264](https://x.com/TalosSecurity/status/2123031720316256264), [x2122828578064945650](https://x.com/orangeitems_/status/2122828578064945650), [x2122821277090250956](https://x.com/SentinelOne/status/2122821277090250956), [ytYOX2U6IsGkQ](https://www.youtube.com/watch?v=YOX2U6IsGkQ), [ytOnfHCFZy3i4](https://www.youtube.com/watch?v=OnfHCFZy3i4), [zw-java4shell](https://radar.cloudflare.com/zero-wire/java4shell) |
+
+**Cloudflare Radar Zero Wire:** [Java4Shell: remote code execution in OpenJDK](https://radar.cloudflare.com/zero-wire/java4shell). Priority: Prioritize patching.
+
+> Update Oracle Java SE to the patched build for each line: 8u513, 11.0.33.1, 17.0.21.1, 21.0.13.1, 25.0.5.1 or 27.0.1.1.
+
+> Update every Java runtime to Oracle's November 17 build or your vendor's fixed release, starting with Internet-facing services. Then verify the updated version is running.
+
+> Restart each updated service, because upgrading the package does not replace a JVM that is already running.
+
+> An unauthenticated attacker may be able to run code in a Java application before it can reject the input. Aikido had seen no reports of exploitation as of November 17.
+
+- Comments analysed: 50
+
+<GraphStack title="COMMENT CLUSTERS">
+
+- Patch scope and running versions (21; 42.0%): 20 neutral, 1 negative
+- Questions and reactions (15; 30.0%): 14 neutral, 1 negative
+- Other languages (8; 16.0%): 8 unclassified
+- Fatigue and comparison with PHP2Shell (6; 12.0%): 6 neutral
+
+</GraphStack>
+
+**Patch scope and running versions**
+
+> Oracle coordinates the main Java SE security schedule (their quarterly CPU), and Calif reported the bug to them as part of coordinated disclosure. The flaw lives in shared OpenJDK source, so once the upstream fix lands, other vendors (Azul [Source](https://x.com/i/status/2123002758697509165)
+
+> Not nearly as big. PHP2Shell hit ~70% of the web with confirmed pre-auth RCE in the core interpreter, active exploitation (including root chains), and real outages. This Java one (Java4Shell) is a serious memory corruption in the AVX-512 [Source](https://x.com/i/status/2122777987514819027)
+
+> Yes, it's the new monthly one. Oracle now ships Critical Security Patch Updates on the third Tuesday between the quarterly CPUs (Java got one Aug 18 too). Today's sits on the alerts page as a pre-release notice, full advisory isnt up yet. [Source](https://x.com/i/status/2122761532777939257)
+
+**Questions and reactions**
+
+> Technical details of the reported #Java4Shell flaw could emerge in nearly 3 hours.
+> 
+> Security firm Calif says it discovered and reported CVE-2026-114938 and plans to publish technical details by 1 p.m. Pacific time. [Source](https://x.com/i/status/2122752386703982992)
+
+> asked my ai if we use java. it said “no, javascript.” asked about dependencies. now it’s running commands and telling me to stay calm. [Source](https://x.com/i/status/2122868964808351804)
+
+> AI found a critical Java bug.
+> 
+> Good news: the good guys got there first this time.
+> Bad news: attackers have the same AI 👀 [Source](https://x.com/i/status/2123383260927398339)
+
+**Other languages**
+
+> Calma que piora rsrs [Source](https://x.com/i/status/2123042176238248361)
+
+> estoy cansado, jefe [Source](https://x.com/i/status/2122852055807082939)
+
+> さよなら俺の定時退社 [Source](https://x.com/i/status/2122911451484766582)
+
+**Fatigue and comparison with PHP2Shell**
+
+> Maybe the owners of the buggy code should stop writing buggy code 🤷&#x200D;♂️ [Source](https://x.com/i/status/2123104817690374376)
+
+> It's not #Java2Shell, but #Java2Hell. [Source](https://x.com/i/status/2122961701830316264)
+
+> Devs have had enough of CVEs. [Source](https://x.com/i/status/2122997189064716770)
+
+**Key sources**
+
+- [calif&#95;io](https://x.com/calif_io/status/2122724367654334810)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2122711601447092667)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2122910305504416213)
+
+### 2. Attackers use AI agent frameworks such as ARTEX to speed up intrusions
+
+**Why it matters:** The FBI and several vendors report that attackers use AI agents to find and exploit weak systems faster.
+
+The FBI warns that the ARTEX AI hacking tool powers attacks worldwide. SentinelOne counts at least five actors and clusters that use ARTEX after late August 2026. Barracuda links a cloud breach to an ARTEX-powered attack. Google warns that attackers use AI agents to turn security patches into working exploits. Amazon reports AI agents that hunt API keys in LiteLLM, Dify and other AI apps.
+
+Unit 42 says the AI-assisted breaches use familiar identity and patching gaps. Amazon says the reported results of its campaign remain unverified.
+
+**Risk:** High. Attackers with AI agents find and exploit weak identity, patch and key controls faster. The FBI warns of global ARTEX attacks, and Barracuda reports a breach. Unit 42 says the breaches use familiar gaps. Our sources name no exploited CVE. [x2122034446178140201](https://x.com/BleepinComputer/status/2122034446178140201), [x2122418803166310527](https://x.com/BleepinComputer/status/2122418803166310527), [x2122778054577541288](https://x.com/Unit42_Intel/status/2122778054577541288), [x2122434537560944801](https://x.com/SentinelOne/status/2122434537560944801)
+
+**Recommended actions**
+
+- Remove default credentials from AI gateways such as LiteLLM and Dify, and keep their admin panels off the internet. Priority: now. Audience: AI platform teams (general step). [x2122232175529766932](https://x.com/TheHackersNews/status/2122232175529766932)
+- Rotate the API keys that exposed AI gateways store. Priority: now. Audience: AI platform teams (general step). [x2122232175529766932](https://x.com/TheHackersNews/status/2122232175529766932)
+- Shorten patch times for internet-facing systems, because AI agents turn patches into exploits faster. Priority: this week. Audience: IT and security teams (general step). [x2122330337334464721](https://x.com/TheHackersNews/status/2122330337334464721)
+- Review the identity and patching gaps that Unit 42 links to AI-assisted breaches. Priority: this week. Audience: Security teams (general step). [x2122778054577541288](https://x.com/Unit42_Intel/status/2122778054577541288)
+
+<GraphSpec title="COVERAGE">
+
+- Accounts and channels: 18
+- X interactions: 3,578
+- YouTube views: 165,120
+- Zero Wire items: 0
+- Products: Exposed AI gateways such as LiteLLM and Dify, cloud accounts and unpatched internet-facing systems
+- Sectors: Defense, semiconductor, civil society and other sectors
+- Regions: Global
+
+</GraphSpec>
+
+- Theme key: `aiattack`
+- Short name: AI attacks
+- Exploited in wild: `null`
+
+Sources report intrusions with AI tools. Our sources name no exploited CVE.
+
+- CVE IDs: `[]`
+
+- Comments analysed: 57
+
+<GraphStack title="COMMENT CLUSTERS">
+
+- Exposed AI gateways and key hygiene (23; 40.4%): 21 neutral, 2 negative
+- Patch-to-exploit speed (17; 29.8%): 12 neutral, 4 negative, 1 positive
+- Other languages (7; 12.3%): 7 unclassified
+- Questions and reactions (5; 8.8%): 5 neutral
+- Blame and fear of AI (5; 8.8%): 5 neutral
+
+</GraphStack>
+
+**Exposed AI gateways and key hygiene**
+
+> The report is useful even with the results unverified.
+> 
+> A gateway that stores provider keys for many accounts is a root key with a web UI. Default master keys and unfinished installs just make it easier to find.
+> 
+> I don't leave identity [Source](https://x.com/i/status/2123019722190950642)
+
+> The scary part isn't the agent, it's where the keys live. I've seen this up close: LLM keys sitting in .env files on internet-facing boxes, no spend caps, no rotation. A leaked key there isn't just a data issue, it's a bill. Per-service [Source](https://x.com/i/status/2122303070851715470)
+
+> When proxying agent workflows through LiteLLM, the single setting that mitigates this campaign is mapping one virtual key per agent instance with an aggressive monthly spend cap. If an endpoint gets compromised by scanner tools, it hits a [Source](https://x.com/i/status/2122384032625201433)
+
+**Patch-to-exploit speed**
+
+> The framework continuously monitors popular web applications and compares code before and after security patches are released. 
+> 
+> By analyzing these code diffs alongside release notes, the AI identifies newly patched flaws much faster than [Source](https://x.com/i/status/2122362606522335638)
+
+> Netflix Chaos Monkey is what we used back in the day. It would randomly rip up network wiring, crash servers, etc on live production during business hours. The system was not deemed stable unless Chaos Monkey could tear it apart at random [Source](https://x.com/i/status/2122372223046447434)
+
+> AI is making hacking cheaper, faster, and scalable.
+> 
+> At this point, it’s not about IF systems get breached, but what attackers can actually steal when they do.
+> 
+> That’s why we built Untrace Network. Even if your system gets compromised, [Source](https://x.com/i/status/2123346556497838541)
+
+**Other languages**
+
+> 🛑 Google advierte que los hackers están utilizando agentes de IA autónomos para convertir parches de seguridad en exploits funcionales.
+> Los atacantes emplean marcos de trabajo multiagente para automatizar ataques, convertir [Source](https://x.com/i/status/2122558958162645101)
+
+> أخطر ما في هذا التحول هو اختصار دورة حياة الثغرة من أسابيع إلى دقائق. أنصح فرق العمليات بتسريع تطبيق التصحيحات الحرجة فور إصدارها، والاعتماد على العزل الشبكي للحد من حركة الوكلاء الذاتية داخل البيئة. [Source](https://x.com/i/status/2122418079582093775)
+
+> Les clés API sont devenues des identifiants à part entière. Stockage en coffre, rotation régulière, périmètre minimal et alertes sur la consommation : sans ça, une clé volée sert directement à financer l'attaque suivante. [Source](https://x.com/i/status/2122312431267402219)
+
+**Questions and reactions**
+
+> No one will ;) it’s boring. But I sleep safe and well…. Haha some others do not. [Source](https://x.com/i/status/2122445685819637952)
+
+> The study, with every case and its source: [Source](https://x.com/i/status/2122664825415192923)
+
+> is like 4 years too late [Source](https://x.com/i/status/2122605720889688446)
+
+**Blame and fear of AI**
+
+> blame all ai bros, companies and data center because of this [Source](https://x.com/i/status/2123118629025665036)
+
+> after this all people only want is eliminate the ai [Source](https://x.com/i/status/2122952711465238901)
+
+> Hackers using Ai says Google—- Article 👇🏼 [Source](https://x.com/i/status/2122486687079264742)
+
+**Key sources**
+
+- [fawadrehman](https://x.com/fawadrehman/status/2120976566008115666)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2122330337334464721)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2122232175529766932)
+
+### 3. nginx2root flaws put nginx servers at risk of remote code execution
+
+**Why it matters:** Memory flaws in nginx can let unauthenticated attackers run code, and public proof-of-concept code exists.
+
+F5 and nginx.org disclose ten nginx flaws on November 18, and fix them in nginx 1.30.7 and 1.31.9. Xint calls five of these flaws nginx2root. CVE-2026-123007 affects any server with HTTP/2 enabled, from nginx 1.9.5. F5 says code execution works only when ASLR is off or when the attacker bypasses it. F5 also warns of six critical BIG-IP flaws with engineering hotfixes only.
+
+nginx serves a large share of web traffic and sits inside many appliances. No source reports exploitation, but public proof-of-concept code exists.
+
+**Risk:** High. Unauthenticated attackers can crash nginx workers or run code on servers that the internet reaches directly. Public proof-of-concept code exists. F5 says code execution needs an ASLR bypass. No source reports exploitation. [zw-nginx2root](https://radar.cloudflare.com/zero-wire/nginx2root), [x2123122388644856164](https://x.com/TheHackersNews/status/2123122388644856164), [x2123071121553854545](https://x.com/brian_pak/status/2123071121553854545)
+
+**Recommended actions**
+
+- Update nginx to 1.30.7 or 1.31.9, or to your vendor's fixed build, and restart it. Priority: now. Audience: Web and platform teams. [zw-nginx2root](https://radar.cloudflare.com/zero-wire/nginx2root)
+- If you cannot update yet, set http2 off on nginx 1.25.1 and later for CVE-2026-123007 and CVE-2026-123633. Priority: now. Audience: Web and platform teams. [zw-nginx2root](https://radar.cloudflare.com/zero-wire/nginx2root), [x2123081308129870086](https://x.com/k_koyanagi_null/status/2123081308129870086)
+- Find nginx inside appliances, proxies and container images, and apply vendor updates there too. Priority: this week. Audience: IT and asset owners (general step). [zw-nginx2root](https://radar.cloudflare.com/zero-wire/nginx2root)
+- Apply F5's engineering hotfixes to affected BIG-IP systems, because no workaround exists. Priority: this week. Audience: Network administrators. [x2123118262179520553](https://x.com/TheHackersNews/status/2123118262179520553)
+
+<GraphSpec title="COVERAGE">
+
+- Accounts and channels: 16
+- X interactions: 8,468
+- YouTube views: 60,813
+- Zero Wire items: 1
+- Products: nginx open source, NGINX Plus and F5 BIG-IP
+- Sectors: All organizations that run web servers, proxies or load balancers
+- Regions: Global
+
+</GraphSpec>
+
+- Theme key: `nginx`
+- Short name: nginx2root
+- Exploited in wild: `null`
+
+No retrieved source reports exploitation. Public proof-of-concept code exists.
+
+| CVE | Exploited in wild | Basis | Evidence |
+| --- | --- | --- | --- |
+| CVE-2026-113425 | null | No retrieved source reports exploitation. Zero Wire states that none of the five nginx2root flaws is in the CISA catalog as of November 18. | [zw-nginx2root](https://radar.cloudflare.com/zero-wire/nginx2root) |
+| CVE-2026-118899 | null | No retrieved source reports exploitation. Zero Wire states that none of the five nginx2root flaws is in the CISA catalog as of November 18. | [zw-nginx2root](https://radar.cloudflare.com/zero-wire/nginx2root) |
+| CVE-2026-120993 | null | No retrieved source reports exploitation. Zero Wire states that none of the five nginx2root flaws is in the CISA catalog as of November 18. | [zw-nginx2root](https://radar.cloudflare.com/zero-wire/nginx2root) |
+| CVE-2026-121810 | null | No retrieved source reports exploitation. Zero Wire states that none of the five nginx2root flaws is in the CISA catalog as of November 18. | [zw-nginx2root](https://radar.cloudflare.com/zero-wire/nginx2root) |
+| CVE-2026-123007 | null | No retrieved source reports exploitation. Zero Wire states that none of the five nginx2root flaws is in the CISA catalog as of November 18. | [x2123168973348827258](https://x.com/CristiVlad25/status/2123168973348827258), [x2123087355989176376](https://x.com/lumin/status/2123087355989176376), [x2123085204420276481](https://x.com/XBToshi/status/2123085204420276481), [x2123081308129870086](https://x.com/k_koyanagi_null/status/2123081308129870086), [x2123078160077955574](https://x.com/jedisct1/status/2123078160077955574), [x2123122388644856164](https://x.com/TheHackersNews/status/2123122388644856164), [ytaXGjOt7ilDE](https://www.youtube.com/watch?v=aXGjOt7ilDE), [ytowc7oq6RfVU](https://www.youtube.com/watch?v=owc7oq6RfVU) |
+| CVE-2026-123633 | null | No retrieved source reports exploitation. Zero Wire states that none of the five nginx2root flaws is in the CISA catalog as of November 18. | [x2123098737631531504](https://x.com/AGTPinsights/status/2123098737631531504), [x2123078160077955574](https://x.com/jedisct1/status/2123078160077955574), [ytaXGjOt7ilDE](https://www.youtube.com/watch?v=aXGjOt7ilDE) |
+| CVE-2026-123634 | null | No retrieved source reports exploitation. Zero Wire states that none of the five nginx2root flaws is in the CISA catalog as of November 18. | [x2123081308129870086](https://x.com/k_koyanagi_null/status/2123081308129870086) |
+
+**Cloudflare Radar Zero Wire:** [nginx2root: remote code execution in nginx HTTP/2, HTTP/3, resolver and mail proxy](https://radar.cloudflare.com/zero-wire/nginx2root). Priority: Prioritize patching.
+
+> Update NGINX Open Source to 1.30.7 or 1.31.9, NGINX Plus to 37.0.8.1 or 37.3.0.1, or your distribution's patched package. Then restart nginx or complete a binary upgrade, because a configuration reload does not replace the running executable.
+
+> Update nginx to 1.30.7 or 1.31.9, or your vendor's fixed build, and restart it. Until then, keep nginx reachable only through Cloudflare's proxy and disable affected features you don't need.
+
+> For CVE-2026-123007 and CVE-2026-123633, set http2 off on nginx 1.25.1 and later, or remove http2 from listen directives on older versions.
+
+> Any nginx reachable directly from the Internet is at risk. Xint reports running commands as the nginx worker on HTTP/2 servers; F5 says that requires bypassing ASLR.
+
+- Comments analysed: 60
+
+<GraphStack title="COMMENT CLUSTERS">
+
+- Questions and reactions (20; 33.3%): 19 neutral, 1 negative
+- Patch and verify the running server (18; 30.0%): 16 neutral, 2 negative
+- Other languages (12; 20.0%): 12 unclassified
+- Disclosure debate and AI text (6; 10.0%): 6 neutral
+- Exploit conditions and real risk (4; 6.7%): 2 neutral, 2 negative
+
+</GraphStack>
+
+**Questions and reactions**
+
+> There is this too. I am a creature of habit, and the applications I still support don't use NGINX. I like it, and people should be aware of all of this going on. I just use other web servers that are unaffected currently. [Source](https://x.com/i/status/2123323599368933466)
+
+> at this point ... maybe internet dev work is the wrong career to be in. at least from a risk and danger pov. [Source](https://x.com/i/status/2123297864348729352)
+
+> FFS! I just want to enjoy my holidays! Stop releasing all these damn vulns. We are busy enough as it is! [Source](https://x.com/i/status/2123405864484663402)
+
+**Patch and verify the running server**
+
+> The public PoC is less scary than it sounds: its own notes say it only works against a freshly started Docker container on the same machine
+> 
+> The chain is the scary part. Xint went from NGINX worker to root through a separate kernel SCTP [Source](https://x.com/i/status/2123357225628430345)
+
+> Pretty bad. CVE-2026-123007 is unauthenticated RCE in NGINX's HTTP/2 code, present since 2015 (1.9.5–1.31.8). CVSS 9.2. Public PoC exists. Researchers chained it with a Linux SCTP kernel bug for root, even from Docker. Patches: 1.30.7 / [Source](https://x.com/i/status/2123237323340906908)
+
+> Plenty of nginx hides inside appliances: reverse proxies on edge gateways, HMI web UIs, NVRs. Those won't show up when you patch the OS, so check vendor firmware too. Until it's patched, keep those UIs off the internet and check the [Source](https://x.com/i/status/2123332924649161021)
+
+**Other languages**
+
+> برای اکسپلویت کردنش باید http/2 فعال باشه، یسری اینستراکشن های خاص سیپیو وجود داشته باشن، پشت یه پروکسی دیگه مثل cdn نباشه، ۱۲۸ گیگابایت ترافیک بتونی روی یه کانکشن بفرستی، heap خلوت باشه، و بتونی ASLR بایپس کنی
+> مشکل امنیتی حساسیه هرچه [Source](https://x.com/i/status/2123319707352633607)
+
+> Con PoC público y sin autenticación, esto pasa al primer lugar de la lista. Ojo que NGINX no solo está en tus servidores web: también vive en ingress de Kubernetes, proxies inversos y appliances. Si hoy no puedes actualizar todo, empieza [Source](https://x.com/i/status/2123233099060232344)
+
+> Butuh 128GB buat trigger RCE nya, traffic nya uda kena blok duluan kalau di prod (harusnya?) 🤣🤣🤣🤣 [Source](https://x.com/i/status/2123330198934520006)
+
+**Disclosure debate and AI text**
+
+> Yes: for projects w/open development: the moment code appears anywhere, even unreleased: is a kind of disclosure of where a bug is. You have to push the code down to public before downstream vendors even start working on their release. [Source](https://x.com/i/status/2123288648141725751)
+
+> We believe that this entire text is AI. [Source](https://x.com/i/status/2123422001146548506)
+
+> Write better code in the first place rather than relying on good will over and over. [Source](https://x.com/i/status/2123326356394283477)
+
+**Exploit conditions and real risk**
+
+> A flaw in NGINX's HTTP/2 support, CVE-2026-123007 ("nginx2root"), lets an attacker run code on servers with HTTP/2 enabled without logging in. 
+> 
+> Plain-words summary and what to do: [Source](https://x.com/i/status/2123313480476635184)
+
+> You do realise it needs an insane amount of traffic and very specific CPU instruction set? [Source](https://x.com/i/status/2123195193734373447)
+
+> how bad is this ? I didn’t see the NSA tweet about it. [Source](https://x.com/i/status/2123237188431163783)
+
+**Key sources**
+
+- [brian&#95;pak](https://x.com/brian_pak/status/2123071121553854545)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2123122388644856164)
+- [CristiVlad25](https://x.com/CristiVlad25/status/2123168973348827258)
+
+### 4. Phishing campaign exploits the global Microsoft 365 outage
+
+**Why it matters:** Attackers send fake Microsoft 365 service notices after a real outage to steal sign-in details.
+
+A global Microsoft 365 outage on November 12 disrupts Outlook, Teams and Copilot. Microsoft says a months-old bug causes the outage. Microsoft Threat Intelligence reports a phishing campaign that impersonates Microsoft 365 service health notices. The messages reference the real Exchange Online incident EX1550543. Kaspersky says the phishing continues after the service returns.
+
+The lures use a real incident ID, so users can trust them. Microsoft also shows that device code phishing can reach AI coding agents.
+
+**Risk:** Medium. Users who follow the fake notices can lose their passwords and sign-in codes. Microsoft Threat Intelligence reports an active campaign. Kaspersky reports a fake sign-in page. The outage itself is not an attack, per Microsoft. [x2121491564161581148](https://x.com/MsftSecIntel/status/2121491564161581148), [x2122694659277263186](https://x.com/kaspersky/status/2122694659277263186), [x2122370033472913754](https://x.com/BleepinComputer/status/2122370033472913754)
+
+**Recommended actions**
+
+- Warn users about fake outage emails that ask them to sign in or restore messages. Priority: now. Audience: IT and security awareness teams (general step). [x2121491564161581148](https://x.com/MsftSecIntel/status/2121491564161581148), [x2122694659277263186](https://x.com/kaspersky/status/2122694659277263186)
+- Check Microsoft 365 service status in the admin center, not through links in emails. Priority: now. Audience: IT administrators (general step). [x2121491564161581148](https://x.com/MsftSecIntel/status/2121491564161581148)
+- Use Microsoft Threat Intelligence's published analysis to tune mail filters and detections. Priority: this week. Audience: Security operations teams. [x2122484150770807014](https://x.com/MsftSecIntel/status/2122484150770807014)
+- Treat device code sign-in requests that you did not start as phishing. Priority: monitor. Audience: All users (general step). [x2122708091741286672](https://x.com/MsftSecIntel/status/2122708091741286672)
+
+<GraphSpec title="COVERAGE">
+
+- Accounts and channels: 14
+- X interactions: 7,102
+- YouTube views: 654,925
+- Zero Wire items: 0
+- Products: Microsoft 365, Exchange Online, Outlook, Teams and Copilot
+- Sectors: All Microsoft 365 customers
+- Regions: Global
+
+</GraphSpec>
+
+- Theme key: `m365`
+- Short name: M365 phish
+- Exploited in wild: `null`
+
+Sources report an active phishing campaign. Our sources name no software flaw.
+
+- CVE IDs: `[]`
+
+- Comments analysed: 43
+
+<GraphStack title="COMMENT CLUSTERS">
+
+- Phishing that follows the outage (15; 34.9%): 15 neutral
+- Questions and reactions (11; 25.6%): 11 neutral
+- Outage cause and continuity (10; 23.3%): 9 neutral, 1 negative
+- Other languages (7; 16.3%): 7 unclassified
+
+</GraphStack>
+
+**Phishing that follows the outage**
+
+> 24 hours. That's the deadline fake "messages held after the outage" emails gave people, quoting Microsoft's real incident number, EX1550543. Microsoft Threat Intelligence says the campaign rode the Nov 12 Microsoft 365 disruption. The real [Source](https://x.com/i/status/2122731498528797179)
+
+> Microsoft 365 is down across Outlook, Teams and Copilot. Microsoft says the servers were failing health checks.
+> 
+> While you wait:
+> 1. Post status in one place users actually check
+> 2. Point the help desk to EX1550543 and MO1550821
+> 3. Write [Source](https://x.com/i/status/2121010150286803142)
+
+> Last week's Microsoft 365 outage wasn't a hack. Microsoft says a July update had a hidden bug that only showed up under heavy load. At the low point it had more than 80% of the gateway servers in front of Exchange email [Source](https://x.com/i/status/2122349541030613078)
+
+**Questions and reactions**
+
+> To everyone reading this. I would still highly recommend checking logs for unknown authorization and logins. [Source](https://x.com/i/status/2121925955585282391)
+
+> This definitely affected a few people. [Source](https://x.com/i/status/2121075046047228257)
+
+> your bet missed · the call was 63x their usual views [Source](https://x.com/i/status/2121860635503845425)
+
+**Outage cause and continuity**
+
+> Separate from today's incident (EX1550543): Microsoft already resolved EX1545193, a Nov. 6-9 consumer [Source](https://x.com/i/status/2121073744168857675)
+
+> Microsoft says this wasn't a cyberattack. It rolled back a network change that lined up with when the trouble started, but it hasn't said that change was the cause. I go through what's actually known, and what isn't, here: [Source](https://x.com/i/status/2121344793355719009)
+
+> Outlook, Teams, and Copilot all wobbling at once is a reminder that the AI assistant still sits on the same cloud as the inbox. If Copilot is part of a workflow, treat it as impacted until Exchange is actually stable, not just 'mostly [Source](https://x.com/i/status/2121110532941873439)
+
+**Other languages**
+
+> “E-postalarınız 24 saat içinde silinecek” uyarısına dikkat!
+> 
+> Microsoft, 14 Kasım'da yeni bir dolandırıcılık girişimi konusunda uyardı. Saldırganlar, geçtiğimiz hafta yaşanan Microsoft 365 kesintisini fırsat bilerek sahte e-postalar [Source](https://x.com/i/status/2122337369906933977)
+
+> 🚨 Los ciberdelincuentes están aprovechando la caída de Microsoft 365 para lanzar una nueva campaña de phishing.
+> 
+> 📢 Compartí esta información para prevenir nuevas estafas [Source](https://x.com/i/status/2122854519373722043)
+
+> Mais fontes: [Source](https://x.com/i/status/2123181953327460461)
+
+**Key sources**
+
+- [MsftSecIntel](https://x.com/MsftSecIntel/status/2121491564161581148)
+- [MsftSecIntel](https://x.com/MsftSecIntel/status/2122484150770807014)
+- [BleepinComputer](https://x.com/BleepinComputer/status/2120973666661900321)
+
+### 5. Attackers hijack Optimizely scripts to serve malware on major websites
+
+**Why it matters:** One compromised vendor script serves card skimmers and crypto stealers to visitors of major sites.
+
+Attackers inject malicious JavaScript into Optimizely scripts that major websites load. The Hacker News reports at least 178 affected organizations, including CNN, BBC and Zoom. The payload targets card data, swaps crypto addresses and attempts iOS exploits. Researchers call the attack OPTIMJACK. Unit 42 says the attack hits nearly 180 websites.
+
+The affected sites are not the point of entry, because the code comes from a trusted vendor. Third-party scripts run with the privileges of the site.
+
+**Risk:** High. Visitors of affected sites can lose card data or crypto funds through injected scripts. The Hacker News and Unit 42 report about 180 affected sites. The payload includes a card skimmer and a crypto clipper. [x2122589269080596832](https://x.com/TheHackersNews/status/2122589269080596832), [x2122801967579759028](https://x.com/Unit42_Intel/status/2122801967579759028), [x2122446518502428782](https://x.com/coinspect/status/2122446518502428782)
+
+**Recommended actions**
+
+- Review the Optimizely projects and scripts that your sites load, and remove injected code. Priority: now. Audience: Website owners (general step). [x2122589269080596832](https://x.com/TheHackersNews/status/2122589269080596832), [x2122429413942014385](https://x.com/Amirul_Cyber/status/2122429413942014385)
+- Separate third-party scripts from sensitive pages, as Unit 42 advises. Priority: this week. Audience: Website owners. [x2122801967579759028](https://x.com/Unit42_Intel/status/2122801967579759028)
+- Review all third-party scripts on your sites, and remove scripts that you do not need. Priority: this week. Audience: Website owners (general step). [x2122446518502428782](https://x.com/coinspect/status/2122446518502428782)
+- Compare the full wallet address after you paste it, and before you send funds. Priority: monitor. Audience: Crypto users (general step). [x2122441184257982892](https://x.com/BitcoinNewsCom/status/2122441184257982892)
+
+<GraphSpec title="COVERAGE">
+
+- Accounts and channels: 14
+- X interactions: 4,913
+- YouTube views: 701,409
+- Zero Wire items: 0
+- Products: Optimizely web experimentation scripts
+- Sectors: Media, technology, retail and other website operators, and their visitors
+- Regions: Global
+
+</GraphSpec>
+
+- Theme key: `optimizely`
+- Short name: Optimizely
+- Exploited in wild: `true`
+
+Attackers inject malicious code into Optimizely scripts on live sites, per The Hacker News and Unit 42. Our sources name no CVE.
+
+- CVE IDs: `[]`
+
+- Comments analysed: 47
+
+<GraphStack title="COMMENT CLUSTERS">
+
+- Third-party scripts and site controls (17; 36.2%): 17 neutral
+- Wallet address swaps (11; 23.4%): 10 neutral, 1 negative
+- Questions and reactions (7; 14.9%): 7 neutral
+- Frequency and scale of attacks (7; 14.9%): 6 neutral, 1 negative
+- Other languages (5; 10.6%): 5 unclassified
+
+</GraphStack>
+
+**Third-party scripts and site controls**
+
+> Report URI's detail: the code went into each customer's Project JavaScript, so it still came from [Source](https://x.com/i/status/2122871054133838132)
+
+> Cleaning up the code isn't the same as closing the door. If the attacker can still write to your projects, it comes back. For #IncidentResponse: check every Optimizely user and API token, and keep watching what the script does after [Source](https://x.com/i/status/2122778553087586347)
+
+> For site owners: these companies weren't breached, their vendor was. It's a textbook #SupplyChainAttack: the script came from an approved domain, so most policies let it run. Watch what scripts do on your pages, not where they load from. [Source](https://x.com/i/status/2122777426501796034)
+
+**Wallet address swaps**
+
+> This is why U need to minimize ur digital footprint and avoid unnecessary interactions on random websites. The best move is to keep isolated environments for work, crypto, and general browsing. Ideally, use a separate computer or dual boot [Source](https://x.com/i/status/2122600852947193948)
+
+> the wallet swap is the scary part. you copy an address, paste it, and it's the hacker's. it's why i tell people to check the first and last characters after every paste. do you check the whole thing? [Source](https://x.com/i/status/2122697622331015313)
+
+> Cleaned fast, but whoever copied an address that day already paid. Another fix is no copy-paste in the money path: when you buy LOCK in our app, it pays the exact offer the network shows, never a pasted address. [Source](https://x.com/i/status/2122688126128894017)
+
+**Questions and reactions**
+
+> ARTEX is an open-source, autonomous, multi-agent penetration testing framework written in Go that translates high-level natural language tactical objectives into automated, machine-executable commands. &#91;1 ( [Source](https://x.com/i/status/2122764684998606862)
+
+> Optimizely is a tool big websites use to run experiments. 
+> 
+> Think of it like this: a company wants to know if a red "Buy Now" button gets more clicks than a blue one. Optimizely shows the red version to some visitors and the blue one to [Source](https://x.com/i/status/2122739719586852871)
+
+> I’m starting to think you Americans aren’t doing your annual cyber security training…. [Source](https://x.com/i/status/2122792271573880959)
+
+**Frequency and scale of attacks**
+
+> 178 more websites hacked.  The official US government response:  “Nothing to see here. “ And y’all dumbasses just voted in the party that wants even more government. 🤦🏻&#x200D;♂️ [Source](https://x.com/i/status/2123146959519142144)
+
+> Time to practice the online version of social distancing and stop visiting websites all together. Is this gonna be the new normal? Hacks every week. [Source](https://x.com/i/status/2122578378620649728)
+
+> Newbies understand plz: blockchain is not hacked, it’s just the companies. 
+> 
+> Put money into self custody :) [Source](https://x.com/i/status/2122535242145694116)
+
+**Other languages**
+
+> Por lo que sea ni un solo hacker con alma de Robin Hood que borré deudas, ni uno. [Source](https://x.com/i/status/2123021300759244912)
+
+> これめちゃくちゃ影響でかそう。普通にセキュリティコードも抜かれただろうし。 [Source](https://x.com/i/status/2123228547590520940)
+
+> もう、大手サイトみてるだけだから安心とかないのかよ、、、😣 [Source](https://x.com/i/status/2122579586383024220)
+
+**Key sources**
+
+- [BitcoinNewsCom](https://x.com/BitcoinNewsCom/status/2122441184257982892)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2122589269080596832)
+- [Amirul&#95;Cyber](https://x.com/Amirul_Cyber/status/2122429413942014385)
+
+### 6. Attackers poison Microsoft's Agent Framework on PyPI and a Claude Code extension
+
+**Why it matters:** Attackers use stolen keys and package hijacks to push credential stealers into developer tools.
+
+Attackers publish two malicious versions, 1.26.1 and 1.26.2, of Microsoft's Agent Framework package on PyPI. The versions steal cloud credentials and tokens on every Python startup. Cursor traces a breach to an access key that Fireworks AI exposed. The attacker pushes a trojanized Claude Code extension that installs an SSH backdoor. Up to 5,000 users may receive it, per The Hacker News.
+
+Developer tools hold cloud keys and tokens, so one bad update can expose many systems. Other reports cover leaked Docker Hub keys and a hijacked Hugging Face account.
+
+**Risk:** High. Developers who install the poisoned versions can lose cloud credentials, tokens and SSH access. The Hacker News and BleepingComputer report credential theft and a backdoor. Our sources name no CVE. [x2122944680317067366](https://x.com/TheHackersNews/status/2122944680317067366), [x2121881924348342477](https://x.com/TheHackersNews/status/2121881924348342477), [x2123098655393566922](https://x.com/BleepinComputer/status/2123098655393566922)
+
+**Recommended actions**
+
+- Check laptops, CI runners and container images for agent-framework 1.26.1 or 1.26.2, and remove them. Priority: now. Audience: Developers and DevOps teams. [x2122944680317067366](https://x.com/TheHackersNews/status/2122944680317067366), [x2123098655393566922](https://x.com/BleepinComputer/status/2123098655393566922)
+- Rotate cloud credentials and tokens on every system that installs the poisoned versions. Priority: now. Audience: Developers and DevOps teams (general step). [x2122944680317067366](https://x.com/TheHackersNews/status/2122944680317067366)
+- Check Cursor installations for the malicious Claude Code extension update and for unknown SSH access. Priority: now. Audience: Developers and IT teams (general step). [x2121881924348342477](https://x.com/TheHackersNews/status/2121881924348342477), [x2121656319383847234](https://x.com/BleepinComputer/status/2121656319383847234)
+- Remove cloud keys from container images before you publish them to Docker Hub. Priority: this week. Audience: DevOps teams (general step). [x2122803859982610699](https://x.com/BleepinComputer/status/2122803859982610699)
+
+<GraphSpec title="COVERAGE">
+
+- Accounts and channels: 14
+- X interactions: 2,234
+- YouTube views: 775
+- Zero Wire items: 0
+- Products: Microsoft Agent Framework on PyPI, the Claude Code extension in Cursor's marketplace, Docker Hub images and Hugging Face models
+- Sectors: Software development and AI teams
+- Regions: Global
+
+</GraphSpec>
+
+- Theme key: `devsupply`
+- Short name: Dev supply
+- Exploited in wild: `true`
+
+Attackers publish malicious package versions and a trojanized extension, per The Hacker News. Our sources name no CVE.
+
+- CVE IDs: `[]`
+
+- Comments analysed: 69
+
+<GraphStack title="COMMENT CLUSTERS">
+
+- Rotate credentials, not just uninstall (38; 55.1%): 30 neutral, 8 negative
+- Other languages (15; 21.7%): 15 unclassified
+- Pin versions and control updates (10; 14.5%): 8 neutral, 2 negative
+- Trust in AI vendors and other reactions (6; 8.7%): 4 neutral, 2 negative
+
+</GraphStack>
+
+**Rotate credentials, not just uninstall**
+
+> This is a serious wake-up call for the AI ecosystem.
+> 
+> AI tools are becoming part of developers’ daily workflows, but one compromised API key can put thousands of users at risk.
+> 
+> Convenience means nothing if security isn't built in from day [Source](https://x.com/i/status/2121891875657523256)
+
+> The Cursor breach started with a stolen key at Fireworks AI.
+> 
+> But here’s the detail developers should pay attention to:
+> 
+> Attackers found unredacted credentials in historical AI coding-agent traces.
+> 
+> They used those credentials to access [Source](https://x.com/i/status/2121944225755349168)
+
+> The vendor-key step is the part that scales to smaller teams. Once an inference provider holds a key that can read shared buckets of agent traces (even old ones), a single exposure can cascade into marketplace persistence. Worth [Source](https://x.com/i/status/2122222480022466907)
+
+**Other languages**
+
+> نسختين 1.26.1 و1.26.2 من agent-framework بتاع Microsoft على PyPI كانوا malware بيسرقوا credentials لـ Azure وAWS وGitHub.
+> 
+> الحيلة: ملف .pth بيشتغل مع كل Python startup، حتى من غير import.
+> 
+> دوّر على .pth غريب في site-packages، ثبّت 1.26.0 [Source](https://x.com/i/status/2123469347339518040)
+
+> microsoft'un agent framework'ünün python paketi dün gece pypi'de patladı. 1.26.1 ve 1.26.2 sürümleri resmi isimle yüklenmiş, içlerinde credential çalan bi kod var.
+> 
+> kod bi .pth dosyasıyla geliyor, yani paketi import etmene gerek yok. [Source](https://x.com/i/status/2123097723398193553)
+
+> Si administras servidores Java, lo útil es revisar tu versión y tu CPU, y actualizar a la versión corregida de tu distribución, ya que otras como Corretto, Temurin o Red Hat pueden lanzar sus parches en fechas distintas. ¿Esto lo quieres [Source](https://x.com/i/status/2123289998434636144)
+
+**Pin versions and control updates**
+
+> This is actually why I hate silent update methods like Windows &amp;amp; Cursor.
+> 
+> They download new updates and install silently in the background. 
+> 
+> What if an attacker gained access and pushes a malicious update?
+> 
+> Is it too much to ask for a [Source](https://x.com/i/status/2121987706297405780)
+
+> This is why our Docker images never pull floating versions: every dependency is pinned in a lockfile and baked into images we build ourselves. A hijacked release only gets in if someone updates the lock, and that diff gets reviewed like [Source](https://x.com/i/status/2123026597515035006)
+
+> Version 1.26.1 was uploaded at 20:35 UTC on November 17, followed 33 minutes later by a repackaged version 1.26.2 at 21:08 UTC. Both versions were live for under an hour before being pulled and quarantined by 21:30 UTC [Source](https://x.com/i/status/2123044708645752961)
+
+**Trust in AI vendors and other reactions**
+
+> This is the supply-chain nightmare in miniature: you didn't get hacked, your editor did. 11 hours live, up to 5,000 users, and the payload was an SSH backdoor. If you updated Claude Code in that window, check now — don't assume you're fine. [Source](https://x.com/i/status/2122421052332486927)
+
+> The cybersecurity issues of this AI era will be crazy insane. [Source](https://x.com/i/status/2123079601672814840)
+
+> At this point Microsoft IS malicious. They can’t do anything right. [Source](https://x.com/i/status/2123228431043498428)
+
+**Key sources**
+
+- [TheHackersNews](https://x.com/TheHackersNews/status/2122944680317067366)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2121881924348342477)
+- [The&#95;Cyber&#95;News](https://x.com/The_Cyber_News/status/2121533646553149478)
+
+### 7. Attackers exploit Check Point, Apache Roller, Puppet and other server flaws
+
+**Why it matters:** CISA and vendors confirm active attacks on several gateway and server flaws this week.
+
+Attackers exploit PHP2Shell flaws and a zero-day in unpatched Check Point gateways to gain root access. The attackers also wipe files on VMware ESXi hosts. CISA adds the Check Point flaw CVE-2026-123039 and the UnrealIRCd flaw CVE-2026-114713 to its exploited list. Attackers also exploit Apache Roller CVE-2026-129448 and Puppet Enterprise CVE-2026-115731. VMware patches a critical vCenter authentication bypass, CVE-2026-123890.
+
+These systems sit at the network edge or manage many hosts. CISA also reports attacks on Synology DSM, LiteLLM, Apache Axis and REDCap flaws.
+
+**Risk:** Critical. Attackers can get root access or run code on unpatched gateways and management servers. CISA lists the Check Point, UnrealIRCd and Puppet flaws as exploited. The Check Point attacks wipe ESXi hosts. [x2121330894912799090](https://x.com/CISACyber/status/2121330894912799090), [x2121153267644436507](https://x.com/TheHackersNews/status/2121153267644436507), [x2122969572332503392](https://x.com/TheHackersNews/status/2122969572332503392), [x2123102102302109896](https://x.com/TheHackersNews/status/2123102102302109896)
+
+**Recommended actions**
+
+- Patch Check Point gateways against CVE-2026-123039 and PHP2Shell, and check them for backdoors. Priority: now. Audience: Network administrators. [x2121330894912799090](https://x.com/CISACyber/status/2121330894912799090), [x2121153267644436507](https://x.com/TheHackersNews/status/2121153267644436507)
+- Upgrade Apache Roller to 6.1.6 or later, because disabling XML-RPC in the admin UI does not protect it. Priority: now. Audience: Application administrators. [x2123102102302109896](https://x.com/TheHackersNews/status/2123102102302109896)
+- Patch Puppet Enterprise, UnrealIRCd and the other flaws in CISA's exploited list. Priority: now. Audience: IT and server administrators. [x2122969572332503392](https://x.com/TheHackersNews/status/2122969572332503392), [x2121583887499542810](https://x.com/TheHackersNews/status/2121583887499542810), [x2123345678793597271](https://x.com/TheHackersNews/status/2123345678793597271)
+- Apply the VMware vCenter patches for CVE-2026-123890, because no workaround exists. Priority: this week. Audience: Virtualization administrators. [x2123438652575608980](https://x.com/TheHackersNews/status/2123438652575608980)
+
+<GraphSpec title="COVERAGE">
+
+- Accounts and channels: 9
+- X interactions: 3,874
+- YouTube views: 676
+- Zero Wire items: 0
+- Products: Check Point gateways, UnrealIRCd, Apache Roller, Puppet Enterprise, VMware vCenter, Cisco Expressway, Synology DSM, LiteLLM, Apache Axis and REDCap
+- Sectors: Enterprises, research and healthcare organizations
+- Regions: Global
+
+</GraphSpec>
+
+- Theme key: `exploited`
+- Short name: Exploited
+- Exploited in wild: `true`
+
+CISA or The Hacker News confirm exploitation for Check Point, UnrealIRCd, Puppet and Apache Roller. The vCenter flaw has no exploitation claim.
+
+| CVE | Exploited in wild | Basis | Evidence |
+| --- | --- | --- | --- |
+| CVE-2026-114713 | true | CISA adds the flaw to its Known Exploited Vulnerabilities catalog, per CISA and The Hacker News. | [x2121583887499542810](https://x.com/TheHackersNews/status/2121583887499542810), [x2121330894912799090](https://x.com/CISACyber/status/2121330894912799090) |
+| CVE-2026-115731 | true | The Hacker News reports that CISA confirms active exploitation. | [x2122969572332503392](https://x.com/TheHackersNews/status/2122969572332503392) |
+| CVE-2026-123039 | true | CISA adds the flaw to its Known Exploited Vulnerabilities catalog. | [x2121330894912799090](https://x.com/CISACyber/status/2121330894912799090) |
+| CVE-2026-123890 | null | The Hacker News reports patches and no workaround. No retrieved source reports exploitation. | [x2123438652575608980](https://x.com/TheHackersNews/status/2123438652575608980), [ytRUAAd2vCNbI](https://www.youtube.com/watch?v=RUAAd2vCNbI) |
+| CVE-2026-129448 | true | The Hacker News reports active exploitation. | [x2123102102302109896](https://x.com/TheHackersNews/status/2123102102302109896), [ytHTY294pc0C8](https://www.youtube.com/watch?v=HTY294pc0C8) |
+| CVE-2026-76466 | null | Dark Web Informer reports a public exploit. SecurityWeek reports exploitation of a Cisco Expressway flaw but does not name the CVE. | [x2120964606533271853](https://x.com/DarkWebInformer/status/2120964606533271853) |
+
+- Comments analysed: 43
+
+<GraphStack title="COMMENT CLUSTERS">
+
+- KEV listing and patch speed (19; 44.2%): 19 neutral
+- vCenter patch and isolation (12; 27.9%): 12 neutral
+- Other languages (6; 14.0%): 6 unclassified
+- Questions and reactions (6; 14.0%): 5 neutral, 1 negative
+
+</GraphStack>
+
+**KEV listing and patch speed**
+
+> The weakness sits in the server's handling of IRCv3 message labels
+> 
+> Here's the problem
+> 
+> When UnrealIRCd processes a labelled message, its labelled-response module echoes the supplied label into replies without properly escaping special [Source](https://x.com/i/status/2121978256635187451)
+
+> Lesson for any system with internal trust links: a client-supplied label tag was echoed into server-to-server traffic unescaped, so one newline let any user run commands as the server. Fix: ./unrealircd hot-patch bundle-20261107, then [Source](https://x.com/i/status/2121628038928781748)
+
+> &#91; CYBERSECURITY &amp;amp; SERVER INFRASTRUCTURE EXPLOITATION &#93;
+> 
+> • INCIDENT VECTOR: On November 13, 2026, the Cybersecurity and Infrastructure Security Agency (CISA) added CVE-2026-114713 to its Known Exploited Vulnerabilities (KEV) catalog. [Source](https://x.com/i/status/2121614016036430078)
+
+**vCenter patch and isolation**
+
+> An authentication bypass in vCenter is not a single server problem. vCenter is the control plane for the whole virtual estate, so one bypass can become every workload it manages. With no workaround available, the only real cover until the [Source](https://x.com/i/status/2123459915885002997)
+
+> Worth adding: this was a zero-day. Mandiant/GTIG say China-linked ARMORY CASTLE (ex-UNC5221) exploited CVE-2026-123890 since early Sept, creating SSO admin accounts. Fixed: 9.1.1.0200, 9.0.2.0200, 8.0 U3m, VCF 5.2.5. On 7.0? Only via [Source](https://x.com/i/status/2123483267944853667)
+
+> vCenter CVE-2026-123890 (9.8): no workaround, patch now. Fixed: 9.1.1.0200, 9.0.2.0200, 8.0 U3m, VCF 5.x 5.2.5. Also restrict vCenter mgmt access to admin networks only. Caution: 8.0U3m/9.0.2.0200 can block a later move to 9.1.1; check [Source](https://x.com/i/status/2123462064618311873)
+
+**Other languages**
+
+> แฮกเกอร์กำลังใช้ประโยชน์จากช่องโหว่ความรุนแรงระดับสูงใน UnrealIRCd
+> 
+> ช่องโหว่ CVE-2026-114713 (คะแนน CVSS 8.6) เปิดทางให้ผู้โจมตีสามารถแทรกคำสั่งโดยใช้สิทธิ์ระดับเซิร์ฟเวอร์ได้
+> 
+> CISA [Source](https://x.com/i/status/2121611103373574332)
+
+> Pou pi senp: UnrealIRCd se yon pwogram gratis ki fè sèvè chat IRC mache. Lè plizyè sèvè konekte ansanm, nenpòt moun sou chat la te ka voye yon kòmand sèvè a egzekite ak tout pouvwa li. Si ou jere youn, mete l nan vèsyon 6.2.7.1 oswa pi [Source](https://x.com/i/status/2121648651445641410)
+
+> UnrealIRCdの重大脆弱性(CVE-2026-114713)が悪用され米CISAが緊急警告。パッチ待ちのイタチごっこはもう限界だ。ゼータトラストをサーバーの出入り口に設置するだけで、未認証の攻撃コマンドは本体に1ミリも届かない。4桁PIN×数万桁バイナリの鉄壁がゼロデイ侵入を100%阻止。 [Source](https://x.com/i/status/2121918154859479083)
+
+**Questions and reactions**
+
+> How many more vulnerabilities exist bro 😭
+> DevOps guys haven’t slept since Tuesday 😅😂 [Source](https://x.com/i/status/2123482892877910490)
+
+> Get your hacker news here! These routers have been under attack for weeks [Source](https://x.com/i/status/2121635608183648552)
+
+> Remebering dalnet and undernet and efnet back in early 2000 and late 90's [Source](https://x.com/i/status/2121711989747744898)
+
+**Key sources**
+
+- [TheHackersNews](https://x.com/TheHackersNews/status/2123438652575608980)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2121583887499542810)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2121153267644436507)
+
+### 8. PHP, Ruby, WordPress and Drupal fix critical web flaws
+
+**Why it matters:** Several widely used web runtimes and platforms release critical security fixes in the same week.
+
+PHP fixes 17 security advisories on November 19, including seven critical flaws such as phpAfterShell. Ruby fixes ruby2shell, CVE-2026-132825, a heap overflow that default Rails apps can reach. WordPress 7.1.5 fixes a flaw that can give an attacker an Administrator account. Drupal patches the installer flaw CVE-2026-132165, and a proof of concept exists. No source reports exploitation of these new flaws.
+
+PHP says the critical issues need non-default or uncommon setups. BleepingComputer counts 18 PHP flaws, and Zero Wire counts 17 advisories.
+
+**Risk:** High. Attackers can run code on unpatched PHP, Ruby, WordPress and Drupal sites under specific conditions. Zero Wire rates PHP and Ruby Prioritize patching. Proofs of concept exist for Ruby and Drupal. No source reports exploitation of the new flaws. [zw-php-november-2026-security-release-phpaftershell](https://radar.cloudflare.com/zero-wire/php-november-2026-security-release-phpaftershell), [zw-ruby2shell](https://radar.cloudflare.com/zero-wire/ruby2shell), [zw-wordpress-7-1-5-template-part-privilege-escalation](https://radar.cloudflare.com/zero-wire/wordpress-7-1-5-template-part-privilege-escalation), [x2123425316421210312](https://x.com/TheHackersNews/status/2123425316421210312)
+
+**Recommended actions**
+
+- Upgrade PHP to 8.2.36, 8.3.37, 8.4.28, 8.5.13 or 8.6.0, and restart workers. Priority: now. Audience: Web and hosting teams. [zw-php-november-2026-security-release-phpaftershell](https://radar.cloudflare.com/zero-wire/php-november-2026-security-release-phpaftershell)
+- Upgrade Ruby to 3.3.14, 3.4.13 or 4.0.10, and restart Ruby processes. Priority: now. Audience: Web and hosting teams. [zw-ruby2shell](https://radar.cloudflare.com/zero-wire/ruby2shell)
+- Until you upgrade PHP, disable session upload progress and FastCGI connection reuse. Priority: now. Audience: Web and hosting teams. [zw-php-november-2026-security-release-phpaftershell](https://radar.cloudflare.com/zero-wire/php-november-2026-security-release-phpaftershell)
+- Update WordPress to 7.1.5 or the fixed release for its branch, and apply the Drupal patch. Priority: this week. Audience: Site administrators. [zw-wordpress-7-1-5-template-part-privilege-escalation](https://radar.cloudflare.com/zero-wire/wordpress-7-1-5-template-part-privilege-escalation), [x2123425316421210312](https://x.com/TheHackersNews/status/2123425316421210312)
+
+<GraphSpec title="COVERAGE">
+
+- Accounts and channels: 6
+- X interactions: 3,560
+- YouTube views: 6
+- Zero Wire items: 3
+- Products: PHP 8.2 to 8.6, Ruby 3.3 to 4.0, WordPress and Drupal
+- Sectors: Web hosting and all organizations that run these platforms
+- Regions: Global
+
+</GraphSpec>
+
+- Theme key: `webrt`
+- Short name: Web stack
+- Exploited in wild: `true`
+
+Only the two October php2shell CVEs have exploitation evidence. No source reports exploitation of the new PHP, Ruby, WordPress or Drupal flaws.
+
+| CVE | Exploited in wild | Basis | Evidence |
+| --- | --- | --- | --- |
+| CVE-2026-109618 | true | Zero Wire states that CISA lists CVE-2026-109618 and CVE-2026-109619 from the October php2shell release. | [zw-php-november-2026-security-release-phpaftershell](https://radar.cloudflare.com/zero-wire/php-november-2026-security-release-phpaftershell) |
+| CVE-2026-109619 | true | Zero Wire states that CISA lists CVE-2026-109618 and CVE-2026-109619 from the October php2shell release. | [zw-php-november-2026-security-release-phpaftershell](https://radar.cloudflare.com/zero-wire/php-november-2026-security-release-phpaftershell) |
+| CVE-2026-115560 | null | Zero Wire states that no source reviewed on November 19 reports exploitation of the PHP flaws in this release. | [zw-php-november-2026-security-release-phpaftershell](https://radar.cloudflare.com/zero-wire/php-november-2026-security-release-phpaftershell) |
+| CVE-2026-126714 | null | Zero Wire states that no source reviewed on November 19 reports exploitation of the PHP flaws in this release. | [zw-php-november-2026-security-release-phpaftershell](https://radar.cloudflare.com/zero-wire/php-november-2026-security-release-phpaftershell) |
+| CVE-2026-129182 | null | Zero Wire states that no source reviewed on November 19 reports exploitation of the PHP flaws in this release. | [zw-php-november-2026-security-release-phpaftershell](https://radar.cloudflare.com/zero-wire/php-november-2026-security-release-phpaftershell) |
+| CVE-2026-129289 | null | Zero Wire states that no source reviewed on November 19 reports exploitation of the PHP flaws in this release. | [zw-php-november-2026-security-release-phpaftershell](https://radar.cloudflare.com/zero-wire/php-november-2026-security-release-phpaftershell) |
+| CVE-2026-129474 | null | Zero Wire states that no source reviewed on November 19 reports exploitation of the PHP flaws in this release. | [zw-php-november-2026-security-release-phpaftershell](https://radar.cloudflare.com/zero-wire/php-november-2026-security-release-phpaftershell) |
+| CVE-2026-129481 | null | Zero Wire states that no source reviewed on November 19 reports exploitation of the PHP flaws in this release. | [zw-php-november-2026-security-release-phpaftershell](https://radar.cloudflare.com/zero-wire/php-november-2026-security-release-phpaftershell) |
+| CVE-2026-129496 | null | Zero Wire states that no source reviewed on November 19 reports exploitation of the PHP flaws in this release. | [zw-php-november-2026-security-release-phpaftershell](https://radar.cloudflare.com/zero-wire/php-november-2026-security-release-phpaftershell) |
+| CVE-2026-132165 | null | The Hacker News reports a proof of concept. No retrieved source reports exploitation. | [x2123425316421210312](https://x.com/TheHackersNews/status/2123425316421210312) |
+| CVE-2026-132825 | null | The Ruby team knows of proofs of concept, per Zero Wire. No retrieved source reports exploitation in the wild. | [zw-ruby2shell](https://radar.cloudflare.com/zero-wire/ruby2shell) |
+
+**Cloudflare Radar Zero Wire:** [phpAfterShell and six other PHP critical flaws](https://radar.cloudflare.com/zero-wire/php-november-2026-security-release-phpaftershell). Priority: Prioritize patching.
+
+> Upgrade to PHP 8.2.36, 8.3.37, 8.4.28 or 8.5.13, or move 8.6.0 release candidates to 8.6.0.
+
+> Upgrade PHP to 8.2.36, 8.3.37, 8.4.28, 8.5.13 or 8.6.0 and restart workers. Until then, disable session upload progress and FastCGI connection reuse to remove some attack paths.
+
+> Until you can upgrade, apply PHP's interim mitigations in the configuration your web workers use, not only the CLI.
+
+> No source reviewed on November 19, 2026 reports exploitation in the wild. PHP says phpAfterShell affects its default session handler; CVE-2026-129289 allows unauthenticated code execution with FastCGI connection reuse.
+
+**Cloudflare Radar Zero Wire:** [ruby2shell: heap overflow in Ruby string case conversion](https://radar.cloudflare.com/zero-wire/ruby2shell). Priority: Prioritize patching.
+
+> Upgrade Ruby to 3.3.14, 3.4.13 or 4.0.10. Move applications on Ruby 3.2 or earlier to a supported series, because those releases will not be fixed.
+
+> Upgrade Ruby to 3.3.14, 3.4.13 or 4.0.10 and restart Ruby processes. For self-hosted products that bundle Ruby, install the vendor's update; several had none on November 19, 2026.
+
+> Restart application servers and background workers, then verify that each running process reports a fixed Ruby version.
+
+> The Ruby team is aware of proofs of concept achieving code execution in some scenarios. Veria Labs reports that default Rails and classic Sinatra apps reach the overflow without authentication.
+
+**Cloudflare Radar Zero Wire:** [WordPress 7.1.5: Template Part flaw can turn an administrator's click into code execution](https://radar.cloudflare.com/zero-wire/wordpress-7-1-5-template-part-privilege-escalation). Priority: Update affected systems.
+
+> Update each site to WordPress 7.1.5. If a site must stay on an older branch, install the fixed release for that branch, such as 7.0.9 or 6.9.12; HelpHub lists the fixed release for every branch back to 4.7.
+
+> Confirm every site runs WordPress 7.1.5 or the fixed release for its branch, such as 7.0.9 or 6.9.12, and update sites where automatic background updates are off.
+
+> Until a site is updated, ask Administrators not to open editor links they did not expect. After updating, review the site's Administrator accounts and installed plugins for any you did not add.
+
+> No source reviewed on November 19, 2026 reports exploitation in the wild. The flaw needs no attacker account, but an Administrator must open the attacker's link while signed in.
+
+- Comments analysed: 61
+
+<GraphStack title="COMMENT CLUSTERS">
+
+- Upgrade steps and exposure conditions (22; 36.1%): 21 neutral, 1 negative
+- Other languages (16; 26.2%): 16 unclassified
+- Patch fatigue (12; 19.7%): 12 neutral
+- Questions and reactions (11; 18.0%): 10 neutral, 1 positive
+
+</GraphStack>
+
+**Upgrade steps and exposure conditions**
+
+> ⚠️ More on #phpAfterShell (CVE-2026-126714):
+> 
+> The critical PHP flaw (CVSS 9.2) affects its default file-based session storage.
+> 
+> Interrupted writes can enable unsafe deserialization and potential RCE if a suitable gadget chain [Source](https://x.com/i/status/2123433836566761513)
+
+> Let me be clear. It is impossible to completely prevent the threat of hacking AI on old sites built with PHP.
+> 
+> All we’ve been doing so far is repeatedly rewriting patch code for existing sites whenever an issue arises, merely applying [Source](https://x.com/i/status/2123415167392452708)
+
+> PHP is the engine under a huge part of the web, WordPress included, so this reaches a lot of sites that never think about their PHP version. Shared hosting is the tricky part, because many people can't upgrade PHP themselves and have to [Source](https://x.com/i/status/2123478274042949715)
+
+**Other languages**
+
+> 🚨 PHP 官方发布严重安全预警！
+> 
+> 所有受支持的 PHP 版本均涉及本轮安全修复，最高漏洞等级为 CRITICAL。
+> 
+> ⚠️ 核心信息：
+> 
+> 影响范围：所有受支持的 PHP 版本
+> 最高等级：CRITICAL
+> 潜在风险：特定条件下远程代码执行（RCE）
+> 修复计划：11 月 19 日 22:00–22:30（北京时间）
+> 
+> 已公开的相关漏洞： [Source](https://x.com/i/status/2123415668074946856)
+
+> Ya salieron: 8.5.13, 8.4.28, 8.3.37 y 8.2.36. Si hoy no puedes actualizar, el aviso sugiere session.upload&#95;progress.enabled=0 y reiniciar el worker de PHP mientras tanto. [Source](https://x.com/i/status/2123478105574551943)
+
+> PHP又爆高危漏洞了。遭殃的不是大厂，PHP旧站才是重灾区。
+> 
+> 据The Hacker News，这次影响所有受支持版本，其中一个预期为严重级别，修复定在11月19日发布。上一轮PHP2Shell，就让大批老服务被迫连夜升级。
+> 
+> 这回还敢拖着不升？ [Source](https://x.com/i/status/2123421935107485709)
+
+**Patch fatigue**
+
+> PHP is preparing another critical security update, weeks after emergency patches for its PHP2Shell vulnerabilities
+> 
+> The November 19 release will cover all supported PHP versions, with the highest severity rated CRITICAL
+> 
+> One expected fix [Source](https://x.com/i/status/2123476782770692486)
+
+> iam just saying nuke nodejs npm next.js php stays but need to find a solution i guess before sum other bs pops up java rce is announced this morning all these findings in general  everything here comes back to "ai assisted" [Source](https://x.com/i/status/2123361305394561439)
+
+> Oh FFS! Can I be allowed to breathe???
+> 
+> This week has been so hellish, that I'm actually looking forward to watching Spurs [Source](https://x.com/i/status/2123427719077679557)
+
+**Questions and reactions**
+
+> seven criticals and every single one is a 9.2. php even ships vulnerabilities in bulk [Source](https://x.com/i/status/2123435174767603797)
+
+> Thanks for covering.
+> RCE overview: [Source](https://x.com/i/status/2123430135852605655)
+
+> What makes you think they haven't been using mythos to get after troves of entirely new vulns. [Source](https://x.com/i/status/2123407891554029670)
+
+**Key sources**
+
+- [TheHackersNews](https://x.com/TheHackersNews/status/2123274064446017575)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2123433016861270101)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2123463167741456864)
+
+### 9. Attackers target N-able and ScreenConnect tools at managed service providers
+
+**Why it matters:** Attackers exploit N-central flaws, breach an N-able email security server and spread SCKit through ScreenConnect.
+
+Hackers breach 21 N-able N-central servers, and 19 of them already run Hotfix 2. N-able patches 17 more N-central flaws and retires legacy APIs. N-able confirms a breach of a cloud server behind Mail Assure and SpamExperts. Microsoft details a campaign that uses ScreenConnect to deploy the SCKit worm at MSPs. ConnectWise reports 205 hosts across 41 organizations in a recent spike.
+
+One MSP tool can reach many customer networks. N-able reports no evidence of customer data theft from the Mail Assure breach so far.
+
+**Risk:** High. Attackers can get root access on N-central servers and reach MSP customer networks. The Hacker News reports breaches of patched servers. ConnectWise reports an active SCKit spike. N-able reports no customer data theft so far. [x2121116969432957070](https://x.com/TheHackersNews/status/2121116969432957070), [x2122578077301784897](https://x.com/TheHackersNews/status/2122578077301784897), [x2123349362525044792](https://x.com/TheHackersNews/status/2123349362525044792)
+
+**Recommended actions**
+
+- Apply N-able's latest N-central patches, and update Agents and Probes as well. Priority: now. Audience: MSPs and IT teams. [x2122556224076140967](https://x.com/TheHackersNews/status/2122556224076140967), [x2122668816849113486](https://x.com/SecurityWeek/status/2122668816849113486)
+- Patch ScreenConnect servers, and look for unauthorized ScreenConnect clients. Priority: now. Audience: MSPs. [x2122578077301784897](https://x.com/TheHackersNews/status/2122578077301784897), [x2121357112009732242](https://x.com/MsftSecIntel/status/2121357112009732242)
+- Watch for phishing in inboxes while Mail Assure and SpamExperts portals stay offline. Priority: this week. Audience: Mail Assure and SpamExperts customers (general step). [x2123349362525044792](https://x.com/TheHackersNews/status/2123349362525044792)
+
+<GraphSpec title="COVERAGE">
+
+- Accounts and channels: 6
+- X interactions: 865
+- YouTube views: 330
+- Zero Wire items: 0
+- Products: N-able N-central, N-able Mail Assure and SpamExperts, and ConnectWise ScreenConnect
+- Sectors: Managed service providers and their customers
+- Regions: Global
+
+</GraphSpec>
+
+- Theme key: `rmm`
+- Short name: MSP tools
+- Exploited in wild: `true`
+
+The Hacker News reports exploitation of N-central flaws and ScreenConnect attacks. Our sources name no CVE IDs.
+
+- CVE IDs: `[]`
+
+- Comments analysed: 60
+
+<GraphStack title="COMMENT CLUSTERS">
+
+- Patch and verify MSP tools (28; 46.7%): 28 neutral
+- Email filtering outage and phishing risk (14; 23.3%): 12 neutral, 1 negative, 1 positive
+- Questions and reactions (9; 15.0%): 9 neutral
+- Other languages (6; 10.0%): 6 unclassified
+- Trust in MSP vendors (3; 5.0%): 3 neutral
+
+</GraphStack>
+
+**Patch and verify MSP tools**
+
+> N-able N-central servers just got hit by new zero-day exploits, even ones running Hotfix 2. Here's what you need to know.
+> 
+> Hackers breached 21 N-able N-central servers. 19 of them were already running Hotfix 2. Attackers used critical [Source](https://x.com/i/status/2121166512278917602)
+
+> This is two checks, not one: disable Labtech Plus, RMM Plus, RMM+, and the Password Link extensions, and confirm every support/staff client is on 26.6.5 or later. Updating the cloud console or server does not update the techs own apps used [Source](https://x.com/i/status/2122645670804983979)
+
+> Hotfix 2 wasn't the whole fix. N-able says upgrade both Agents and Probes to 2026.4 HF1 and make sure Legacy API is off (hosted is off by default now, on-prem has to check). and root on the box that manages your customers' endpoints is a [Source](https://x.com/i/status/2121902461166211088)
+
+**Email filtering outage and phishing risk**
+
+> Hackers have breached the email security service itself 🛡️❌
+> 
+> Mail Assure and SpamExperts filter spam and phishing for thousands of businesses. When the tools built to protect you become the target, every company that relies on them is [Source](https://x.com/i/status/2123351207570030912)
+
+> N-able initially thought its email security platform was experiencing an operational failure
+> 
+> It later discovered that hackers had gained unauthorized access to one of its cloud servers
+> 
+> The incident affects Mail Assure and SpamExperts [Source](https://x.com/i/status/2123443595092832761)
+
+> Timeline from N-able's status updates: first posted Nov 17 03:00 UTC as a disruption blamed on "platform configuration and service dependencies", later reclassified as a security incident. Inbound/outbound filtering still runs; portal, [Source](https://x.com/i/status/2123350313822535925)
+
+**Questions and reactions**
+
+> A miner is the lucky outcome. That server can push scripts to every endpoint it manages, so I'd read its own task and script history back to the first PoC date and compare it with what your techs actually scheduled. Cleaning the box says [Source](https://x.com/i/status/2121152761152590094)
+
+> Hunting tips from Huntback's findings: look for requests to /dms/services/ServerUI referencing jline.internal.TerminalLineSettings, unexpected xvd.service units, and files under /tmp/.xvd or /var/tmp/.xvd. Attacker IP seen: [Source](https://x.com/i/status/2121177128938938369)
+
+> the nov 13 wave also left a portproxy rule from 127.0.0.1:88 to the attacker's server and edited the hosts file, so run netsh interface portproxy show all on cleaned endpoints too [Source](https://x.com/i/status/2122583201365528850)
+
+**Other languages**
+
+> لو عندك N-central: الـ Hotfix 2 لوحده مش كفاية. 19 من 21 server اتخترقوا وهم متحدّثين عليه.
+> الـ chain الجديد محتاج Legacy API شغال ومكشوف على الإنترنت، فاقفله دلوقتي.
+> ولو لقيت miner اسمه nc&#95;، ده root على box بيدير endpoints العملاء: اعتبره [Source](https://x.com/i/status/2121169607100969430)
+
+> يُظهر هذا الحادث أهمية تحديث البرمجيات الأمنية بشكل مستمر، حتى مع وجود تصحيحات سابقة. ففي حين أن 19 خادمًا كان محميًا بالفعل بواسطة Hotfix 2، تمكن المهاجمون من استغلال ثغرات حرجة أخرى للحصول على وصول جذري وتثبيت عملاء التعدين السري. يسلط [Source](https://x.com/i/status/2121117348543320234)
+
+> في ظل استمرار هجمات ScreenConnect، تُبرز هذه التطورات الأخيرة أهمية التصدي السريع للتهديدات السيبرانية. مع استهداف القراصنة لأنظمة غير محمية عبر مالوير SCKit، يصبح من الضروري أكثر من أي وقت مضى أن تقوم شركات إدارة خدمات تكنولوجيا المعلومات [Source](https://x.com/i/status/2122578275113308664)
+
+**Trust in MSP vendors**
+
+> Treat the management server as a high-trust control plane: review admin changes and remote-job history, and inspect managed hosts for new services or mining processes. Apply the complete vendor remediation, then rotate service credentials [Source](https://x.com/i/status/2121171001627275396)
+
+> MSP remote access tools that sit outside classification and residency controls become the shortest path from one tenant to the next regulated dataset. [Source](https://x.com/i/status/2122639865070407838)
+
+> Another reminder that cybersecurity isn't just about protecting data. Operational resilience matters just as much. [Source](https://x.com/i/status/2123383669037371670)
+
+**Key sources**
+
+- [MsftSecIntel](https://x.com/MsftSecIntel/status/2121357112009732242)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2121116969432957070)
+- [TheHackersNews](https://x.com/TheHackersNews/status/2123349362525044792)
+
+### 10. Hello Again attack cracks Windows PINs, and November updates cause faults
+
+**Why it matters:** A hardware attack speeds up PIN cracking, and November updates break activation, printing and app installs.
+
+TU Berlin researchers show a hardware attack called Hello Again that bypasses TPM lockout protections. The attack cuts brute-force times for Windows Hello and BitLocker PINs from years to days on affected PCs. The attack needs physical access to the device. Microsoft confirms activation failures and printing issues after November updates, and app issues after a hotpatch. Nightmare Eclipse publishes a Windows zero-day exploit called SignDrop.
+
+The PIN attack needs the device in hand, so lost and stolen laptops carry the risk. Microsoft pushes emergency updates for the activation failures.
+
+**Risk:** Medium. Attackers with physical access can crack Windows Hello and BitLocker PINs faster on affected PCs. TU Berlin demonstrates the attack. The attack needs physical access. Our sources show no SignDrop fix. [x2123036603379757356](https://x.com/TheHackersNews/status/2123036603379757356), [x2123115681260478721](https://x.com/DarkWebInformer/status/2123115681260478721), [x2121586947965558805](https://x.com/SecurityWeek/status/2121586947965558805)
+
+**Recommended actions**
+
+- Install Microsoft's emergency updates for the November activation failures. Priority: this week. Audience: IT and endpoint teams. [x2122245066999628077](https://x.com/BleepinComputer/status/2122245066999628077)
+- Treat lost or stolen laptops as exposed, and wipe them remotely when you can. Priority: this week. Audience: IT and endpoint teams (general step). [x2123115681260478721](https://x.com/DarkWebInformer/status/2123115681260478721)
+- Test November updates on a small group of devices before a full rollout. Priority: this week. Audience: IT and endpoint teams (general step). [x2121218507115282773](https://x.com/BleepinComputer/status/2121218507115282773), [x2123364715086708946](https://x.com/BleepinComputer/status/2123364715086708946)
+- Monitor Microsoft for a SignDrop fix, because our sources show no vendor fix. Priority: monitor. Audience: Windows administrators (general step). [x2121586947965558805](https://x.com/SecurityWeek/status/2121586947965558805)
+
+<GraphSpec title="COVERAGE">
+
+- Accounts and channels: 5
+- X interactions: 2,684
+- YouTube views: 82
+- Zero Wire items: 0
+- Products: Windows Hello, BitLocker, TPMs on affected AMD and Intel PCs, and Windows CLFS
+- Sectors: All organizations that use Windows devices
+- Regions: Global
+
+</GraphSpec>
+
+- Theme key: `windows`
+- Short name: Windows
+- Exploited in wild: `null`
+
+TU Berlin reports research, not attacks. No source reports exploitation of SignDrop in the wild.
+
+- CVE IDs: `[]`
+
+- Comments analysed: 62
+
+<GraphStack title="COMMENT CLUSTERS">
+
+- Questions and reactions (22; 35.5%): 21 neutral, 1 positive
+- Physical access and lost laptops (18; 29.0%): 15 neutral, 2 negative, 1 positive
+- Update rollout and activation faults (17; 27.4%): 14 neutral, 3 negative
+- Other languages (5; 8.1%): 5 unclassified
+
+</GraphStack>
+
+**Questions and reactions**
+
+> Dots are connecting: "A brief drop in the chip's power supply, called a voltage glitch, can cause the chip to reveal the secret key that signs its counter values. With that key, which took about a second to extract with their best [Source](https://x.com/i/status/2123173631660302496)
+
+> ..........   I’m not a programmer, but servers are protected by so-called "robots" that examine the code of the programs connecting to them. If they detect a flaw in the code, they shut down the entire server. I once encountered this [Source](https://x.com/i/status/2121248018322116924)
+
+> Ah, the special team in Microsoft that imports failures so that things break and we all have jobs in IT has done it again! Thanks guys! [Source](https://x.com/i/status/2121216105565855782)
+
+**Physical access and lost laptops**
+
+> tell me about it; the search was on when eufi boot was compromised and had to get in and turn off tpm, which i did.  still have to update the certificates but refuse to go into china dev site for the app, driver.  i will one day, maybe. [Source](https://x.com/i/status/2123259399527395560)
+
+> What an awesome technique against firmware TPM!
+> 
+> The longer term solution is still file level encryption so that FDE matters less
+> 
+> But the quickest solution for this flaw is to increase your minimum BitLocker PIN length to 8, or just don't [Source](https://x.com/i/status/2123151315157352619)
+
+> The part that matters for fleets is the patch window. Firmware fixes rolling out through February means for the next few months the protection on a lost or stolen laptop is custody, PIN length, and how fast you can revoke its access, not [Source](https://x.com/i/status/2123138477332320498)
+
+**Update rollout and activation faults**
+
+> Seems that #Microsoft is trying to be like #Sony . Windows updates have no limits and all their other services they just pulled their own licenses since they didn't buy it. I wonder what other services at Microsoft offer is going to be [Source](https://x.com/i/status/2121218440778174717)
+
+> If you're a home user, this probably isn't your problem. It hits IT folks running activation commands, and Microsoft says already-activated PCs stay that way.
+> 
+> Don't let a scary headline turn into a scam call. Microsoft won't cold-call you [Source](https://x.com/i/status/2121293574750838928)
+
+> Activation breaking right after Patch Tuesday is a good reminder to stage updates in rings before they hit the whole fleet. In the SOC I watch for the auth failure spike that follows a bad rollout, because users blame the password first [Source](https://x.com/i/status/2121180040302084560)
+
+**Other languages**
+
+> Dato clave del paper de TU Berlín: afecta al TPM de firmware (el que vive dentro del procesador), que guarda el contador de intentos fallidos en la memoria flash de la placa. Hay que abrir el equipo, así que el escenario real es una laptop [Source](https://x.com/i/status/2123083135583711743)
+
+> Proprio oggi ne parlavo con cliente: 'e Bitlocker l'è bòn dà frèzar!
+> 
+> ("Il Bitlocker è adatto al massimo per la frittura") [Source](https://x.com/i/status/2123144149822316901)
+
+> Περιμένουμε πότε θα αποκαλυφθεί πως υπάρχει και #update2shell [Source](https://x.com/i/status/2121231212375322833)
+
+**Key sources**
+
+- [TheHackersNews](https://x.com/TheHackersNews/status/2123036603379757356)
+- [BleepinComputer](https://x.com/BleepinComputer/status/2121176042266099880)
+- [DarkWebInformer](https://x.com/DarkWebInformer/status/2123115681260478721)
+
+## Source index
+
+<GraphTable title="EVERY RETAINED SOURCE">
+
+| Source | Account or channel | Type | Platform | Published IST | Interactions or views |
+| --- | --- | --- | --- | --- | ---: |
+| [Meet Artex: The agentic AI pen-testing tool fueling a wave of attacks.   Published to GitHub as a legitimate framework in July, a swath of attackers have abused Artex, from Chinese state-linked Storm-0940 to a financially motivated Cambodia-based cluster, Storm-3358.   None of](https://x.com/DarkReading/status/2121288250224476360) | DarkReading | media | X | 2026-11-13 22:35 | 113 |
+| [Check Point gateways hacked via PHP2Shell to deploy VMware ESXi wiper https://t.co/DgqByN4BFq  https://t.co/DgqByN4BFq](https://x.com/BleepinComputer/status/2121277422100177137) | BleepinComputer | media | X | 2026-11-13 21:52 | 172 |
+| [🤔 Disabling the vulnerable feature could reopen older Windows attack paths.  SignDrop targets CLFS log authentication, but turning it off lets Windows parse tampered logs again—exposing the memory corruption risks the protection was built to prevent. https://t.co/y9aIJS4F5O](https://x.com/TheHackersNews/status/2121263044273844391) | TheHackersNews | media | X | 2026-11-13 20:54 | 113 |
+| [Microsoft says November security updates cause printing issues https://t.co/Ooc8X4WDMO  https://t.co/Ooc8X4WDMO](https://x.com/BleepinComputer/status/2121218507115282773) | BleepinComputer | media | X | 2026-11-13 17:57 | 213 |
+| [Hackers Exploit New N-central Zero-Day Hours After PoC Publication https://t.co/6SC3SJd0au](https://x.com/SecurityWeek/status/2121217513706914060) | SecurityWeek | media | X | 2026-11-13 17:54 | 7 |
+| [Check Point warns of zero-day flaw exploited for root access https://t.co/PZrS2pjqq5  https://t.co/PZrS2pjqq5](https://x.com/BleepinComputer/status/2121192507849539914) | BleepinComputer | media | X | 2026-11-13 16:14 | 96 |
+| [Microsoft confirms Windows activation failures after November updates https://t.co/UEeOPaPGk9  https://t.co/UEeOPaPGk9](https://x.com/BleepinComputer/status/2121176042266099880) | BleepinComputer | media | X | 2026-11-13 15:09 | 340 |
+| [🚨 Public exploit released for critical Cisco Expressway flaw allowing attackers to gain root access without authentication; CVE-2026-76466  https://t.co/Wv5rP7iaiX  A public proof-of-concept (PoC) exploit has been released for a critical Cisco Expressway vulnerability that could https://t.co/wm4yp7E9Ir](https://x.com/DarkWebInformer/status/2120964606533271853) | DarkWebInformer | independent | X | 2026-11-13 01:09 | 78 |
+| [Nightmare Eclipse Drops Windows Zero-Day Exploit ‘SignDrop’ https://t.co/hEpQpLC7nk](https://x.com/SecurityWeek/status/2121164340850258256) | SecurityWeek | media | X | 2026-11-13 14:22 | 5 |
+| [🚨 Hackers are exploiting #PHP2Shell flaws in unpatched Check Point gateways to gain root access, deploy stealthy backdoors, and wipe files on VMware ESXi hosts.  Attacks have targeted organizations worldwide.  Details: https://t.co/8eOVlgiOBC](https://x.com/TheHackersNews/status/2121153267644436507) | TheHackersNews | media | X | 2026-11-13 13:38 | 464 |
+| [PHP2Shell Exploited in Destructive Check Point Gateway Attacks https://t.co/pCoW7g5Yi6](https://x.com/SecurityWeek/status/2121146159687500105) | SecurityWeek | media | X | 2026-11-13 13:10 | 34 |
+| [Hackers Exploit New N-central Zero-Day Hours After PoC Publication https://t.co/6SC3SJdy02](https://x.com/SecurityWeek/status/2121142035931603260) | SecurityWeek | media | X | 2026-11-13 12:54 | 11 |
+| [🚨 Hackers breached 21 N-able N-central servers. 19 were already running Hotfix 2.  Attackers exploited critical flaws to gain root access and deploy crypto miners.  The alarming part? Hotfix 2 alone wasn't enough.  What admins need to know ↓ https://t.co/NVpGauIYkw](https://x.com/TheHackersNews/status/2121116969432957070) | TheHackersNews | media | X | 2026-11-13 11:14 | 133 |
+| [Hackers Deploy Malware in Fresh ScreenConnect Campaign https://t.co/Y7H3GH1lkw](https://x.com/SecurityWeek/status/2121085644697166228) | SecurityWeek | media | X | 2026-11-13 09:10 | 2 |
+| [Microsoft 365 Outage Update - A process that establishes secure connections was becoming overwhelmed, causing affected servers to stop handling requests. Microsoft began rolling back a recent network configuration change that coincided with the start of the disruption and was](https://x.com/SecurityWeek/status/2121063631546995191) | SecurityWeek | media | X | 2026-11-13 07:42 | 48 |
+| [Notion Customer Data Compromised in Fireworks AI Hack https://t.co/KWhCLToAKg](https://x.com/SecurityWeek/status/2121058968793444668) | SecurityWeek | media | X | 2026-11-13 07:24 | 3 |
+| [Hackers Target N-central Zero-Days as N-able Rushes Patches https://t.co/AwYnU1UZko](https://x.com/SecurityWeek/status/2121040597758693726) | SecurityWeek | media | X | 2026-11-13 06:11 | 4 |
+| [Since the vulnerability has leaked: Calif discovered and reported Java4Shell (CVE-2026-114938).  We're publishing technical details by 1 PM Pacific today, after Oracle releases a patch.  Stay tuned! https://t.co/No5hJXK1Zx](https://x.com/calif_io/status/2122724367654334810) | calif&#95;io | independent | X | 2026-11-17 21:41 | 4,150 |
+| [CVE-2026-114938: Pre-Auth RCE Flaw in Java 17 Puts Servers at Risk CVE-2026-114938 is a 9.2-rated unauthenticated RCE flaw in OpenJDK 17.0.6 and later, due to be patched in Oracle's November Java update. https://t.co/RYb9b3pB6Q](https://x.com/blackorbird/status/2122674442434379931) | blackorbird | independent | X | 2026-11-17 18:23 | 42 |
+| [🚨 Critical Java 17 vulnerability reportedly allows hackers to execute code remotely without authentication; CVE-2026-114938  Checker: https://t.co/kKzr7JdS52  A critical vulnerability in OpenJDK 17 has emerged, with early reports warning that attackers could remotely execute https://t.co/DHxZsBqMJT](https://x.com/DarkWebInformer/status/2122733612298838225) | DarkWebInformer | independent | X | 2026-11-17 22:18 | 596 |
+| [CVE-2026-114938: Pre-Auth RCE Flaw in Java 17 Puts Servers at Risk https://t.co/u7s4vf6ZTV](https://x.com/Dinosn/status/2122702156667256920) | Dinosn | independent | X | 2026-11-17 20:13 | 139 |
+| [CVE-2026-114938: Pre-Auth RCE Flaw in Java 17 Puts Servers at Risk  https://t.co/GmERJcIX1h](https://x.com/cyberwar_15/status/2122663143625416792) | cyberwar&#95;15 | independent | X | 2026-11-17 17:38 | 119 |
+| [🆕 New CVE: CVE-2026-114938 (CVSS 9.2) Java 17 pre-auth remote code execution  Unauthenticated remote code execution in Java 17, reported to affect OpenJDK 17.0.6 and every later Java 17 update.  https://t.co/Z0uN9vV0Vc](https://x.com/EnclaveRadar/status/2122683886102552912) | EnclaveRadar | independent | X | 2026-11-17 19:00 | 40 |
+| [watchTowr Intel is aware of public reports of an unauthenticated RCE in Java, CVE-2026-114938, affecting OpenJDK 17.0.6 and later. Details are still unconfirmed. Review your Java environments now and monitor for vendor announcements.](https://x.com/watchtowrcyber/status/2122636443721830689) | watchtowrcyber | independent | X | 2026-11-17 15:52 | 598 |
+| [🚨 A stolen Fireworks AI key triggered a breach at Cursor—and a trojanized Claude Code extension.  Attackers pushed a malicious update designed to install an SSH backdoor. Up to 5,000 users may have received it.  How the attack unfolded: https://t.co/xZdNkKbCmT](https://x.com/TheHackersNews/status/2121881924348342477) | TheHackersNews | media | X | 2026-11-15 13:54 | 444 |
+| [Cursor confirms security breach led to malicious Claude Code extension https://t.co/eh8ZYXoblH  https://t.co/eh8ZYXoblH](https://x.com/BleepinComputer/status/2121656319383847234) | BleepinComputer | media | X | 2026-11-14 22:57 | 174 |
+| [Nightmare Eclipse Drops Windows Zero-Day Exploit ‘SignDrop’ https://t.co/hEpQpLBzxM](https://x.com/SecurityWeek/status/2121586947965558805) | SecurityWeek | media | X | 2026-11-14 18:22 | 19 |
+| [🚨 Hackers are actively exploiting a high-severity UnrealIRCd flaw.  CVE-2026-114713 (CVSS 8.6) lets attackers inject commands with server-level privileges.  CISA has added it to its exploited vulnerabilities list. Patch now.  Details: https://t.co/7j56ImJr0c](https://x.com/TheHackersNews/status/2121583887499542810) | TheHackersNews | media | X | 2026-11-14 18:09 | 477 |
+| [PHP2Shell Exploited in Destructive Check Point Gateway Attacks https://t.co/pCoW7g5qsy](https://x.com/SecurityWeek/status/2121448032415744463) | SecurityWeek | media | X | 2026-11-14 09:10 | 10 |
+| [Cyber Experts Weigh In: How to Fight Artex &amp;amp; AntiFox https://t.co/Kxtpo5l36d by Nate Nelson](https://x.com/DarkReading/status/2121302285816938530) | DarkReading | media | X | 2026-11-13 23:30 | 62 |
+| [‼️ #phpAfterShell EXPLAINED: A critical PHP flaw (CVSS 9.2) could let attackers turn corrupted session files into remote code execution.  The October #PHP2Shell patches didn't fix the underlying issue.  How does the attack work, who's affected, and what's the fix?  Learn here → https://t.co/DKhDlYG9VH](https://x.com/TheHackersNews/status/2123463167741456864) | TheHackersNews | media | X | 2026-11-19 22:37 | 320 |
+| [PHP security updates fix 18 flaws, including critical RCE bugs https://t.co/0XH8omStTR  https://t.co/0XH8omStTR](https://x.com/BleepinComputer/status/2123453406664655088) | BleepinComputer | media | X | 2026-11-19 21:58 | 43 |
+| [PHP Patches Seven Critical RCE Vulnerabilities https://t.co/iHihnBdHcl](https://x.com/SecurityWeek/status/2123445347502510285) | SecurityWeek | media | X | 2026-11-19 21:26 | 4 |
+| [🚨 A critical 9.8-rated VMware vCenter flaw lets attackers bypass authentication with network access.  CVE-2026-123890 affects vCenter 8.0, 9.0 &amp;amp; 9.1.  Patches are out. No workaround available.  What admins need to know: https://t.co/eXnX41wqDB](https://x.com/TheHackersNews/status/2123438652575608980) | TheHackersNews | media | X | 2026-11-19 21:00 | 1,155 |
+| [‼️ BREAKING -- PHP patches 7 critical vulnerabilities, all rated CVSS 9.2.   The flaws could enable remote code execution, memory corruption &amp;amp; server crashes on affected systems.   Security fixes released for PHP 8.2–8.6.   Details &amp;amp; affected versions → https://t.co/RVpSYrEvvw](https://x.com/TheHackersNews/status/2123433016861270101) | TheHackersNews | media | X | 2026-11-19 20:37 | 336 |
+| [Critical NGINX ‘NGINX2Root’ bugs let attackers hijack servers https://t.co/2W1SbPUHvR  https://t.co/2W1SbPUHvR](https://x.com/BleepinComputer/status/2123430507517985218) | BleepinComputer | media | X | 2026-11-19 20:27 | 48 |
+| [⚠️ Drupal sites at risk of takeover.  Drupal has patched CVE-2026-132165, an installer flaw that could let unauthenticated attackers take control of vulnerable sites or execute code remotely.  A PoC already exists. Patches are out.  Check Now ↓ https://t.co/9Fa9gSv3F5](https://x.com/TheHackersNews/status/2123425316421210312) | TheHackersNews | media | X | 2026-11-19 20:07 | 67 |
+| [Hackers Exploit Cisco Expressway Vulnerability Soon After PoC Release https://t.co/nJZiDwXOj5](https://x.com/SecurityWeek/status/2123404655715836390) | SecurityWeek | media | X | 2026-11-19 18:44 | 13 |
+| [Drupal patches critical RCE flaw, warns exploits may surface quickly https://t.co/0RRnJHbt3R  https://t.co/0RRnJHbt3R](https://x.com/BleepinComputer/status/2123403224996630884) | BleepinComputer | media | X | 2026-11-19 18:39 | 58 |
+| [Critical Apache Roller, Axis Vulnerabilities Exploited in Attacks https://t.co/uJanB2wX1f](https://x.com/SecurityWeek/status/2123389947704950893) | SecurityWeek | media | X | 2026-11-19 17:46 | 2 |
+| [Your firewall is a web application. And that changes how you need to defend it.  #PHP2Shell shows why network appliances are attractive targets: predictable software, complex HTTP behavior, and defenses that aren't always enough.  What defenders need to understand → https://t.co/IaUpdwlWLr](https://x.com/TheHackersNews/status/2123384704506503335) | TheHackersNews | media | X | 2026-11-19 17:25 | 69 |
+| [⚡ UPDATE → #Java4Shell exploitation attempts are now being detected in the wild.  Cloudflare spotted #ARTEX, an AI-powered attack framework, and Java4Shell activity from the same IP.  Previdian reports 9 exploitation attempts from 6 IPs across 4 countries.  Details: https://t.co/zPEImiPAhw](https://x.com/TheHackersNews/status/2123372426839089273) | TheHackersNews | media | X | 2026-11-19 16:36 | 258 |
+| [‼️ BREAKING - Hackers hijacked Optimizely scripts to serve malicious code to visitors of CNN, BBC, Zoom and other major sites.  At least 178 organizations affected. The payload targeted card data, swapped crypto addresses and attempted iOS exploits.  Full story ↓ https://t.co/ubaQFx95Ww](https://x.com/TheHackersNews/status/2122589269080596832) | TheHackersNews | media | X | 2026-11-17 12:44 | 1,987 |
+| [🚨 ScreenConnect attacks are still underway.  ConnectWise warns hackers are targeting unpatched systems with SCKit malware, putting MSP networks at risk.  205 hosts across 41 organizations hit in a recent spike. A critical 9.9 CVSS flaw adds to the threat.  What you need to know https://t.co/ECq9dHzQnc](https://x.com/TheHackersNews/status/2122578077301784897) | TheHackersNews | media | X | 2026-11-17 12:00 | 115 |
+| [🚨 Hackers are already exploiting N-central flaws to deploy crypto miners.  Now, N-able has patched 17 more vulnerabilities, including authentication bypass and remote code execution risks.  ⚠️ Agents and Probes need updating too.  Full details: https://t.co/3b8dW7Tw4s](https://x.com/TheHackersNews/status/2122556224076140967) | TheHackersNews | media | X | 2026-11-17 10:33 | 100 |
+| [Optimizely supply chain attack infects major brands' sites with malware https://t.co/oxa4ISpDXE  https://t.co/oxa4ISpDXE](https://x.com/BleepinComputer/status/2122513188742648318) | BleepinComputer | media | X | 2026-11-17 07:42 | 220 |
+| [Gemini AI agents repeatedly bypassed safeguards to attack real website https://t.co/CVkH4a49gt  https://t.co/CVkH4a49gt](https://x.com/BleepinComputer/status/2122463279079469148) | BleepinComputer | media | X | 2026-11-17 04:24 | 144 |
+| [Barracuda links cloud breach to ARTEX AI-powered cyberattack https://t.co/ZVZbGw5Gxy  https://t.co/ZVZbGw5Gxy](https://x.com/BleepinComputer/status/2122418803166310527) | BleepinComputer | media | X | 2026-11-17 01:27 | 96 |
+| [China-Nexus Actors Breach 10 Organizations in AI-Driven Attacks https://t.co/Vu3UuOK69a by Elizabeth Montalbano](https://x.com/DarkReading/status/2122386735543816515) | DarkReading | media | X | 2026-11-16 23:20 | 52 |
+| [Microsoft says months-old bug caused global Microsoft 365 outage https://t.co/dGRFcx9Bqx  https://t.co/dGRFcx9Bqx](https://x.com/BleepinComputer/status/2122370033472913754) | BleepinComputer | media | X | 2026-11-16 22:13 | 403 |
+| [Cursor Supply Chain Attack Started at Fireworks AI https://t.co/D0gzFo1G40](https://x.com/SecurityWeek/status/2122355607604691300) | SecurityWeek | media | X | 2026-11-16 21:16 | 13 |
+| [Barracuda Hacked Amid Surge in Artex-Powered Cyberattacks https://t.co/12A1eRSB0F](https://x.com/SecurityWeek/status/2122346514668490844) | SecurityWeek | media | X | 2026-11-16 20:40 | 45 |
+| [🛑 Google warns hackers are using autonomous AI agents to turn security patches into working exploits.  Attackers are deploying multi-agent frameworks to automate hacking, weaponize known flaws, and speed up intrusions.  Here's what Google uncovered: https://t.co/4LYuPonBzW](https://x.com/TheHackersNews/status/2122330337334464721) | TheHackersNews | media | X | 2026-11-16 19:35 | 652 |
+| [Google warns that fully-automated AI attacks are coming soon https://t.co/Rst8y3wKOm  https://t.co/Rst8y3wKOm](https://x.com/BleepinComputer/status/2122328904836829643) | BleepinComputer | media | X | 2026-11-16 19:30 | 236 |
+| [Recent UnrealIRCd Vulnerability Exploited in Attacks https://t.co/Di4tW3QzZz](https://x.com/SecurityWeek/status/2122299141686751353) | SecurityWeek | media | X | 2026-11-16 17:32 | 2 |
+| [Microsoft pushes Windows emergency updates to fix activation failures https://t.co/LuJvLbIWiA  https://t.co/LuJvLbIWiA](https://x.com/BleepinComputer/status/2122245066999628077) | BleepinComputer | media | X | 2026-11-16 13:57 | 173 |
+| [🚨 Amazon uncovers AI agents hunting API keys across LiteLLM, Dify, and other AI apps.  Captured logs reveal the playbook: exploit weak spots → steal API keys → use those keys to power more attacks.  The campaign's reported results remain unverified.  Full story: https://t.co/y0RG68SeLI](https://x.com/TheHackersNews/status/2122232175529766932) | TheHackersNews | media | X | 2026-11-16 13:05 | 302 |
+| [🚨 Hackers exploited Log4Shell in VMware vCenter to breach a Russian software developer.  BO Team gained root access, planted backdoors, and compromised its code-signing server—raising fears of a software supply chain attack.  Read: https://t.co/onp3jkxxAO](https://x.com/TheHackersNews/status/2122221831893794898) | TheHackersNews | media | X | 2026-11-16 12:24 | 368 |
+| [FBI warns ARTEX AI hacking tool is powering global cyberattacks https://t.co/1K8BnanRLc  https://t.co/1K8BnanRLc](https://x.com/BleepinComputer/status/2122034446178140201) | BleepinComputer | media | X | 2026-11-16 00:00 | 276 |
+| [Microsoft 365 is back up. The phishing that used the outage as cover is still going.  Emails titled “Outlook is disconnected after the Microsoft 365 outage” send people to a fake sign-in page that steals their codes and passwords.  How it works 👇 https://t.co/NrERPyjNGb](https://x.com/kaspersky/status/2122694659277263186) | kaspersky | independent | X | 2026-11-17 19:43 | 55 |
+| [🚨 New attack bypasses Windows Hello and BitLocker security, cracking PINs in hours instead of months  Security researchers at TU Berlin have demonstrated a hardware attack dubbed "Hello Again" that bypasses TPM lockout protections, allowing attackers with physical access to https://t.co/p267sRppUR](https://x.com/DarkWebInformer/status/2123115681260478721) | DarkWebInformer | independent | X | 2026-11-18 23:36 | 323 |
+| [‼️ BREAKING - Researchers bypassed TPM lockout protections to Windows Hello and BitLocker PINs.  A flash-chip attack cuts brute-force times from YEARS to DAYS on affected AMD and Intel PCs.  Here's how it works → https://t.co/eQ3yEBGnpQ https://t.co/NG5cBXHZPH](https://x.com/TheHackersNews/status/2123036603379757356) | TheHackersNews | media | X | 2026-11-18 18:22 | 1,389 |
+| [🛑 CISA urges immediate patching of Java4Shell (CVE-2026-114938).  The critical Oracle Java flaw (CVSS 8.1) could allow unauthenticated remote code execution, putting apps like Jenkins, Jira, and Confluence at risk.  Patches are out.  Here's what to know ↓ https://t.co/kwpYIFLr73](https://x.com/TheHackersNews/status/2122986001085894991) | TheHackersNews | media | X | 2026-11-18 15:01 | 598 |
+| [⚠️ Hackers are actively exploiting a critical 9.4-severity flaw in Puppet Enterprise.  CVE-2026-115731 allows remote code execution on central management servers, potentially putting entire fleets of systems at risk.  CISA confirms active exploitation.  What you need to know: https://t.co/E5OW30hWUS](https://x.com/TheHackersNews/status/2122969572332503392) | TheHackersNews | media | X | 2026-11-18 13:56 | 162 |
+| [Java4Shell Vulnerability Puts Many Enterprise Applications at Risk of Takeover https://t.co/9AjKmiIFAX](https://x.com/SecurityWeek/status/2122959652732154290) | SecurityWeek | media | X | 2026-11-18 13:16 | 12 |
+| [‼️ ALERT - Microsoft's AI Agent Framework package has been hijacked on PyPI.  Attackers pushed two malicious versions (1.26.1 and 1.26.2) that steal cloud credentials and tokens—silently, on EVERY Python startup.  Check NOW ↓ https://t.co/Asljd1PtjN](https://x.com/TheHackersNews/status/2122944680317067366) | TheHackersNews | media | X | 2026-11-18 12:17 | 714 |
+| [‼️#Java4Shell exploit details are FINALLY OUT.  Researchers reveal how CVE-2026-114938 can enable pre-auth RCE in Jira, Jenkins, Keycloak &amp;amp; more on vulnerable Java servers.  Independent labs confirm memory corruption and data leaks.  Full details here: https://t.co/gxcFutqgIS](https://x.com/TheHackersNews/status/2122910305504416213) | TheHackersNews | media | X | 2026-11-18 10:00 | 698 |
+| [MSP ScreenConnect Servers Targeted in Month-Long Campaign https://t.co/2lncLpDXT0](https://x.com/SecurityWeek/status/2122879212826587212) | SecurityWeek | media | X | 2026-11-18 07:57 | 2 |
+| [Critical Java4Shell flaw allows RCE attacks on major Java applications https://t.co/jAbMX7Jfoi  https://t.co/jAbMX7Jfoi](https://x.com/BleepinComputer/status/2122828312313524522) | BleepinComputer | media | X | 2026-11-18 04:34 | 226 |
+| [Cloud keys leaked in Docker Hub images are stolen within seconds https://t.co/Ep1CsEWJpk  https://t.co/Ep1CsEWJpk](https://x.com/BleepinComputer/status/2122803859982610699) | BleepinComputer | media | X | 2026-11-18 02:57 | 107 |
+| [Cursor Traces Malicious Claude Code Extension to Third-Party Breach https://t.co/tngJYdfGGi by Jai Vijayan](https://x.com/DarkReading/status/2122763164043321701) | DarkReading | media | X | 2026-11-18 00:15 | 13 |
+| [Researchers hijack Hugging Face account for popular Kokoro AI model https://t.co/JdmCg5IOTr  https://t.co/JdmCg5IOTr](https://x.com/BleepinComputer/status/2122757077588205811) | BleepinComputer | media | X | 2026-11-17 23:51 | 44 |
+| [🚨 Hackers are impersonating nearly 50 AI and blockchain brands to infect developers with infostealers.  Dubbed "Trigram," the campaign uses fake job offers, malicious code repositories, and clipboard tricks to steal credentials, crypto wallets, and SSH keys.  How it works ⬇️ https://t.co/E74TY32KmI](https://x.com/TheHackersNews/status/2122717648786186364) | TheHackersNews | media | X | 2026-11-17 21:15 | 159 |
+| [‼️ BREAKING: Oracle is set to patch 11 Java vulnerabilities today — all potentially exploitable remotely without authentication.  Meanwhile, reports of a critical OpenJDK RCE flaw (CVE-2026-114938, CVSS 9.2) are raising alarms. Details remain unconfirmed.  What Java users need to https://t.co/I4N2W1OkHh](https://x.com/TheHackersNews/status/2122711601447092667) | TheHackersNews | media | X | 2026-11-17 20:50 | 1,485 |
+| [MSP ScreenConnect Servers Targeted in Month-Long Campaign https://t.co/2lncLpDXT0](https://x.com/SecurityWeek/status/2122682914244571158) | SecurityWeek | media | X | 2026-11-17 18:56 | 15 |
+| [N-able Kills Legacy APIs, Patches 17 N-central Zero-Days https://t.co/J6DcV6EJ4o](https://x.com/SecurityWeek/status/2122668816849113486) | SecurityWeek | media | X | 2026-11-17 18:00 | 18 |
+| [Optimizely Vulnerability Exploited to Serve Malware on Major Websites https://t.co/wR3PKh65vJ](https://x.com/SecurityWeek/status/2122636805644394830) | SecurityWeek | media | X | 2026-11-17 15:53 | 12 |
+| [ARTEX marks a change in the threat landscape: agentic offensive frameworks have moved from experiments to operational use by state-aligned and financially motivated actors alike.  Since late August 2026, at least five actors and clusters have used ARTEX. One China-nexus espionage](https://x.com/SentinelOne/status/2122434537560944801) | SentinelOne | vendor | X | 2026-11-17 02:30 | 104 |
+| [New GTIG AI Threat Tracker:  As 2027 nears, human latency is leaving the attack chain—from autonomous patch-to-exploit pipelines to hijacked cloud quotas &amp;amp; backdoored configs.  📄 Full report: https://t.co/lNcURijizF  ▶️ 2027 insights: https://t.co/fBbsskkBuG https://t.co/uuiJN76nZd](https://x.com/GoogleCloudSec/status/2122369113594966244) | GoogleCloudSec | vendor | X | 2026-11-16 22:10 | 70 |
+| [Microsoft Threat Intelligence observed an active phishing campaign exploiting the Microsoft 365 service disruption on November 12. The messages impersonate Microsoft 365 service health notifications and reference the legitimate Exchange Online incident EX1550543.  Some of the https://t.co/NBvBf2mRFn](https://x.com/MsftSecIntel/status/2121491564161581148) | MsftSecIntel | vendor | X | 2026-11-14 12:02 | 4,873 |
+| [Microsoft Threat Intelligence’s analysis of the active campaign abusing ScreenConnect to target managed service providers (MSPs) details how the remote support application is used to deploy the worm SCKit and install additional unauthorized clients. https://t.co/o00TuZt5la  SCKit](https://x.com/MsftSecIntel/status/2121357112009732242) | MsftSecIntel | vendor | X | 2026-11-14 03:08 | 183 |
+| [OPTIMJACK: malicious JavaScript delivered through Optimizely on major websites.  • Crypto clipper that replaces blockchain addresses • iOS second-stage exploit payload. • Magecart card skimmer.  Third-party marketing scripts run with your website's privileges. https://t.co/62rBjOUue6](https://x.com/coinspect/status/2122446518502428782) | coinspect | independent | X | 2026-11-17 03:17 | 90 |
+| [🚨 OPTIMJACK alert (Nov 2026) Attackers injected a crypto clipper + card skimmer into Optimizely. Major sites including CNN, Zoom, Fox News, BBC, Salesforce, GitLab, American Eagle &amp;amp; Hootsuite are serving it to visitors.  If your site loads Optimizely →https://t.co/QVRzCSsco6](https://x.com/Amirul_Cyber/status/2122429413942014385) | Amirul&#95;Cyber | independent | X | 2026-11-17 02:09 | 373 |
+| [🚨 BREAKING: HUNDREDS OF MAJOR WEBSITES COMPROMISED IN CRYPTO-FOCUSED MALWARE ATTACK  A supply-chain attack dubbed “OPTIMJACK” has reportedly compromised Optimizely, an A/B testing platform used by major websites.  Attackers injected malicious JavaScript designed to steal https://t.co/Sqba2CoPyV](https://x.com/BitcoinNewsCom/status/2122441184257982892) | BitcoinNewsCom | independent | X | 2026-11-17 02:56 | 2,185 |
+| [🚨BREAKING : Two US senators are warning the White House that AI powered cyberattacks are evolving faster than America's defenses.  Their biggest concern ? Autonomous AI agents that can discover and exploit software vulnerabilities.  Hey @grok, are we entering an era where AI can](https://x.com/chanduuu_cs/status/2123128606159450327) | chanduuu&#95;cs | independent | X | 2026-11-19 00:28 | 94 |
+| [How hackers are using AI to attack companies:  0. A software company releases a security update.  1. Autonomous AI agents compare the old code with the updated version.  2. They identify the vulnerability the update fixed.  3. They generate attack scripts targeting that](https://x.com/akshaymarch7/status/2123002351376355381) | akshaymarch7 | independent | X | 2026-11-18 16:06 | 189 |
+| [🚨 ARTEX : le FBI alerte sur l’utilisation massive d’un outil de pentest IA détourné  Le FBI Cyber Branch a publié un FLASH (13/11/2026) sur ARTEX, un framework open-source d’agents IA initialement conçu pour automatiser les tests d’intrusion.  Depuis au moins août 2026, des](https://x.com/justabreach/status/2121327840440340507) | justabreach | independent | X | 2026-11-14 01:12 | 85 |
+| [nginx2Root explained (CVE-2026-123007) https://t.co/KJ89cTU7hG](https://x.com/CristiVlad25/status/2123168973348827258) | CristiVlad25 | independent | X | 2026-11-19 03:08 | 883 |
+| [NGINX just got hit with critical HTTP/2 vulnerabilities that allow remote code execution, disclosed today. Here's what you need to know.  Wiz Research, Xint, Metnir AI, Rapid7 and Ikotas Labs independently found two critical memory-safety flaws in NGINX, CVE-2026-123633 and https://t.co/zuoavLFB5u](https://x.com/AGTPinsights/status/2123098737631531504) | AGTPinsights | independent | X | 2026-11-18 22:29 | 54 |
+| [Massive Microsoft 365 outage disrupts Outlook, Teams, Copilot worldwide: Microsoft is investigating a widespread outage affecting multiple Microsoft 365… www.&#x200B;bleepingcomputer.&#x200B;com/news/microsoft/massive-microsoft-365-outage-disrupts-outlook-teams-copilot-worldwide/ #Microsoft https://t.co/P22TjH5LeM](https://x.com/TheCyberSecHub/status/2120973714796003458) | TheCyberSecHub | independent | X | 2026-11-13 01:45 | 121 |
+| [Microsoft outlook 365 outage – troubleshooting steps.  1. Visit the official Microsoft 365 Service Health page: https://t.co/v5ZBldgrR4&#x2060;  2. Check the status of: Outlook / Exchange Online Microsoft Teams Microsoft 365 Apps Microsoft Copilot Microsoft Entra ID (authentication)](https://x.com/akokc_/status/2120973018134368583) | akokc&#95; | independent | X | 2026-11-13 01:42 | 59 |
+| [‼️ BREAKING: N-able confirms hackers breached a cloud server behind Mail Assure and SpamExperts.  Management portals, APIs, quarantine, and logging remain offline across multiple regions.  No evidence of customer data theft so far.  Read → https://t.co/TTgva6Jc8N](https://x.com/TheHackersNews/status/2123349362525044792) | TheHackersNews | media | X | 2026-11-19 15:05 | 125 |
+| [‼️ Cursor Reveals How a Leaked Fireworks AI Key Led to a Backdoored Claude Code Extension  Details: https://t.co/vZxZELCrQg  Cursor has traced its October security breach to an access key exposed by Fireworks AI. The attacker used that key to steal historical coding agent https://t.co/kHbYT6abwV](https://x.com/The_Cyber_News/status/2121533646553149478) | The&#95;Cyber&#95;News | independent | X | 2026-11-14 14:50 | 222 |
+| [The Cursor security incident shows why securing coding agent traces matters  Here’s how the attacker reached the Claude Code extension:  - Obtained a Cursor credential exposed through Fireworks AI  - Accessed historical agent traces containing unredacted API keys  - Used those https://t.co/xp4cAanIuF https://t.co/YPFBVMBaOS](https://x.com/dani_avila7/status/2121612394937917487) | dani&#95;avila7 | independent | X | 2026-11-14 20:03 | 102 |
+| [Cursor's security incident is a reminder of how fragile AI infra can get  the TL;DR: &amp;gt; Fireworks AI exposed an access key issued by Cursor. &amp;gt; attackers used it to access historical coding-agent traces. &amp;gt; some traces contained unredacted credentials. &amp;gt; those credentials opened https://t.co/ZNdxB1N9CK](https://x.com/prasad_pilla/status/2121661532560073000) | prasad&#95;pilla | independent | X | 2026-11-14 23:18 | 31 |
+| [Cursor's 13 Nov incident update traces its breach to a key it issued to Fireworks AI and confirms a tampered Claude Code extension sat in its marketplace cache for about 11 hours.   Also: Dokploy keys, ChatGPT Wallet. 👇 https://t.co/tCe5khY8kK](https://x.com/wifeydoteth/status/2121513694882324898) | wifeydoteth | independent | X | 2026-11-14 13:30 | 30 |
+| [New worm-like 'SCKit' malware targets MSPs in ScreenConnect attacks https://t.co/ZfJxD9r5em  https://t.co/ZfJxD9r5em](https://x.com/BleepinComputer/status/2121013528765055381) | BleepinComputer | media | X | 2026-11-13 04:23 | 63 |
+| [Microsoft 365 Outage Disrupts Outlook, Exchange Online and Teams. Was the Microsoft outage caused by a cyberattack?https://t.co/j6lTRvympa](https://x.com/SecurityWeek/status/2120984241181737070) | SecurityWeek | media | X | 2026-11-13 02:27 | 37 |
+| [Microsoft 365 Outage Disrupts Outlook, Exchange Online and Teams. Was the Microsoft outage caused by a cyberattack https://t.co/j6lTRvyUeI](https://x.com/SecurityWeek/status/2120984187926892980) | SecurityWeek | media | X | 2026-11-13 02:26 | 0 |
+| [Massive Microsoft 365 outage disrupts Outlook, Teams, Copilot worldwide https://t.co/57AIUsFxjV  https://t.co/57AIUsFxjV](https://x.com/BleepinComputer/status/2120973666661900321) | BleepinComputer | media | X | 2026-11-13 01:45 | 522 |
+| [New N-able "4EverAble2Shell" zero-day exploited hours after PoC released https://t.co/UdaWAryJ58  https://t.co/UdaWAryJ58](https://x.com/BleepinComputer/status/2120967754446516278) | BleepinComputer | media | X | 2026-11-13 01:21 | 87 |
+| [Java4Shell (CVE-2026-114938) shows why defenders need to look past the CVE score.   Disclosed November 17 by researchers at Calif. with a Critical rating (CVSS 4.0: 9.2).  While Java is widely deployed, not every environment is vulnerable. Exploitation depends on specific https://t.co/huG1fnX2YO](https://x.com/CrowdStrike/status/2123258422925656416) | CrowdStrike | vendor | X | 2026-11-19 09:03 | 68 |
+| [It’s time for another Talos TL;DR, this one on Java4Shell. For more information, guidance, mitigations, and Snort coverage, check out the full blog: https://t.co/sd9pimhlJQ https://t.co/Vm6uOBaNH2](https://x.com/TalosSecurity/status/2123141871828406583) | TalosSecurity | vendor | X | 2026-11-19 01:20 | 4 |
+| [Cisco Talos is closely tracking the disclosure of Java4Shell (CVE-2026-114938) in OpenJDK Java, which may lead to unauthenticated remote code execution. Find more details and coverage in our blog: https://t.co/5HdtNI8wD3 https://t.co/ndJDXxfAlA](https://x.com/TalosSecurity/status/2123031720316256264) | TalosSecurity | vendor | X | 2026-11-18 18:03 | 13 |
+| [Stolen Fireworks AI Key Led to Cursor Data Breach and Trojanized Claude Code Extension: The compromise of Anthropic's official Claude Code extension on Cursor's extension marketplace was the result of the… thehackernews.&#x200B;com/2026/11/stolen-fireworks-ai-key-led-to-cursor.&#x200B;html https://t.co/ex0CigdTKo](https://x.com/TheCyberSecHub/status/2121895614267208192) | TheCyberSecHub | independent | X | 2026-11-15 14:48 | 52 |
+| [nginx2shell nginx2root (CVE-2026-123007, CVE-2026-12363)の確認方法は、 curl -I -k -v --http2 https://&#91;hostname&#93; で HTTP/2 と出て Server: nginx  となれば対象です。](https://x.com/lumin/status/2123087355989176376) | lumin | independent | X | 2026-11-18 21:44 | 254 |
+| [Pre-auth RCE in nginx is the bug every hacker dreams of finding. It almost never happens.  Today we’re disclosing nginx2root: five nginx vulnerabilities, and an exploit that takes an unauthenticated attacker all the way to root.  One of themhits the default config.  If you run](https://x.com/brian_pak/status/2123071121553854545) | brian&#95;pak | independent | X | 2026-11-18 20:39 | 4,062 |
+| [Apache only? Now it’s Nginx’s turn.  The nightmare scenario just keeps dropping: nginx2root by Xint.  Pre-auth RCE in NGINX to host root:  - 5 NGINX vulnerabilities + 1 Linux SCTP kernel 0-day (bypasses Docker to root).  - CVE-2026-123007 hits the default config: integer https://t.co/uiueiUaIdf https://t.co/PbK1K5Ezmt](https://x.com/XBToshi/status/2123085204420276481) | XBToshi | independent | X | 2026-11-18 21:35 | 46 |
+| [NGINX2Rootの緩和策を軽く整理してみました  ◼️CVE-2026-123007 / 123633（HTTP/2）  ・HTTP/2を無効化：http2 off; ・旧バージョンは listen から http2 を削除  ◼️CVE-2026-123634（DNS Resolver）  ・proxy&#95;pass で変数による動的DNS解決を使わない ・固定の upstream を使用 ・mirror off;](https://x.com/k_koyanagi_null/status/2123081308129870086) | k&#95;koyanagi&#95;null | independent | X | 2026-11-18 21:20 | 212 |
+| [Unauthenticated Remote Code Execution in NGINX: CVE-2026-123633 and CVE-2026-123007 https://t.co/ung2Zjquk2](https://x.com/jedisct1/status/2123078160077955574) | jedisct1 | independent | X | 2026-11-18 21:07 | 32 |
+| [‼️ CISA Warns of Puppet Enterprise Vulnerability Actively Exploited in Attacks  Details: https://t.co/HwHIT011jT  The U.S. Cybersecurity and Infrastructure Security Agency (CISA) has warned that attackers are exploiting a critical vulnerability in Perforce Puppet Enterprise. https://t.co/ImScXGLDA0](https://x.com/The_Cyber_News/status/2123024450417549750) | The&#95;Cyber&#95;News | independent | X | 2026-11-18 17:34 | 98 |
+| [🛡️ We added UnrealIRCd vulnerability CVE-2026-114713 &amp;amp; Check Point vulnerability CVE-2026-123039 to our Known Exploited Vulnerabilities Catalog. Visit https://t.co/myxOwap1Tf &amp;amp; apply mitigations to protect your org. #Cybersecurity #InfoSec https://t.co/3h9hriq8Mw](https://x.com/CISACyber/status/2121330894912799090) | CISACyber | independent | X | 2026-11-14 01:24 | 60 |
+| [CVE-2026-114938（Java4Shell）はめんどくさいことになりそうだな・・。](https://x.com/orangeitems_/status/2122828578064945650) | orangeitems&#95; | independent | X | 2026-11-18 04:35 | 58 |
+| [Microsoft confirms app installation, launch issues after hotpatch https://t.co/SyHPjQSqph  https://t.co/SyHPjQSqph](https://x.com/BleepinComputer/status/2123364715086708946) | BleepinComputer | media | X | 2026-11-19 16:06 | 109 |
+| [F5 Patches Critical NGINX2Root Flaws as PoC Exploits Go Public https://t.co/3b9C0XqLbS](https://x.com/SecurityWeek/status/2123362724428104115) | SecurityWeek | media | X | 2026-11-19 15:58 | 6 |
+| [⚠️ CISA ALERT: 4 vulnerabilities are under active attack.  Hackers are exploiting flaws in Synology DSM, LiteLLM, Apache Axis, and REDCap to deploy ransomware, mine crypto, and hijack AI infrastructure.  3 flaws carry critical 9.8 CVSS scores.  Read → https://t.co/nIRJSmJjsd](https://x.com/TheHackersNews/status/2123345678793597271) | TheHackersNews | media | X | 2026-11-19 14:50 | 351 |
+| [#Java4Shell Exploitation Attempts Begin as Vendors Rush Out Advisories https://t.co/vL5UsYzOcv](https://x.com/SecurityWeek/status/2123344107179274742) | SecurityWeek | media | X | 2026-11-19 14:44 | 5 |
+| [‼️WARNING: Ruby releases patches for 7 security flaws — 5 already have proof-of-concept exploits demonstrating remote code execution (RCE).  3 are rated CRITICAL. The flaws affect regex processing and string handling.  Check the details → https://t.co/g1TvgDU4Ek](https://x.com/TheHackersNews/status/2123337568469373104) | TheHackersNews | media | X | 2026-11-19 14:18 | 224 |
+| [PHP Readies Critical Security Updates to Patch Another RCE Flaw https://t.co/Yj9ZRINlNj](https://x.com/SecurityWeek/status/2123322066506072204) | SecurityWeek | media | X | 2026-11-19 13:16 | 6 |
+| [‼️ ALERT -- PHP warns of CRITICAL security flaws affecting ALL supported versions.  Security fixes are scheduled for TODAY, November 19.  One expected fix addresses another RCE flaw under specific configurations.  Details here ↓ https://t.co/2XCvPkX5KD](https://x.com/TheHackersNews/status/2123274064446017575) | TheHackersNews | media | X | 2026-11-19 10:06 | 2,432 |
+| [Microsoft Agent Framework Releases Poisoned With Credential Stealer https://t.co/4qygOisWPm](https://x.com/SecurityWeek/status/2123212160025170411) | SecurityWeek | media | X | 2026-11-19 06:00 | 5 |
+| [#Java4Shell Vulnerability Puts Many Enterprise Applications at Risk of Takeover https://t.co/9AjKmiIFAX](https://x.com/SecurityWeek/status/2123159317767397766) | SecurityWeek | media | X | 2026-11-19 02:30 | 18 |
+| [‼️ BREAKING: A 10-year-old flaw in #NGINX could let attackers execute code on servers — no login required.  Dubbed #nginx2root (CVE-2026-123007), the critical HTTP/2 vulnerability scores 9.2/10.  Public PoC available. Patches released.  Full details ↓ https://t.co/kNq60Lv5zx](https://x.com/TheHackersNews/status/2123122388644856164) | TheHackersNews | media | X | 2026-11-19 00:03 | 2,265 |
+| [🚨 F5 warns of 6 critical BIG-IP vulnerabilities (CVSS 9.8) that could let unauthenticated attackers crash network traffic and potentially execute code remotely.  Specific configurations are vulnerable. No workarounds available. Engineering hotfixes only.  Details → https://t.co/9uyggUa45A](https://x.com/TheHackersNews/status/2123118262179520553) | TheHackersNews | media | X | 2026-11-18 23:46 | 606 |
+| [Java4Shell Flaw Threatens Global Enterprises, Java Application Ecosystem https://t.co/hEHOKzU5Fv by Elizabeth Montalbano](https://x.com/DarkReading/status/2123116539670937904) | DarkReading | media | X | 2026-11-18 23:40 | 10 |
+| [Optimizely Malware Attacks Highlight Third-Party Vendor Risks https://t.co/fXosG4KD1p by Jai Vijayan](https://x.com/DarkReading/status/2123111506518716460) | DarkReading | media | X | 2026-11-18 23:20 | 5 |
+| [🛑 WARNING - Hackers are actively exploiting a critical Apache Roller flaw to execute code remotely — no login required.  ⮞ CVE-2026-129448 \| CVSS 9.8 ⮞ Disabling XML-RPC in the admin UI won't protect you. ⮞ Upgrade to 6.1.6+.  Details: https://t.co/2JvQDpm1bC](https://x.com/TheHackersNews/status/2123102102302109896) | TheHackersNews | media | X | 2026-11-18 22:42 | 263 |
+| [Microsoft’s Agent Framework PyPI package compromised to steal credentials https://t.co/Qvkxgk9CoQ  https://t.co/Qvkxgk9CoQ](https://x.com/BleepinComputer/status/2123098655393566922) | BleepinComputer | media | X | 2026-11-18 22:28 | 108 |
+| [Microsoft Agent Framework Releases Poisoned With Credential Stealer https://t.co/4qygOisWPm](https://x.com/SecurityWeek/status/2123010229986054318) | SecurityWeek | media | X | 2026-11-18 16:37 | 13 |
+| [Wjechał nowy WordPress 7.1.5 z łatką na 20 podatności. https://t.co/5bkZ22ewEv](https://x.com/Sekurak/status/2123162861115740171) | Sekurak | independent | X | 2026-11-19 02:44 | 70 |
+| [Java4Shell (CVE-2026-114938) is a memory-corruption flaw in OpenJDK's Base64 decoder. @calif&#95;io demonstrated pre-auth RCE in Jenkins, Confluence, Jira, Kafka and more. Patch, or start x86-64 JVMs with -XX:UseAVX=2. How we defend against what comes next 👇 https://t.co/vSboILI03K](https://x.com/SentinelOne/status/2122821277090250956) | SentinelOne | vendor | X | 2026-11-18 04:06 | 18 |
+| [The OPTIMJACK supply chain attack hit nearly 180 websites, showing how dynamic web assembly can put visitors at risk for crypto wallet swapping, card skimming and exploit kits. Learn why segmentation is your strongest defense against this threat: https://t.co/WiPpizHM8u https://t.co/x4yi7QxLnn](https://x.com/Unit42_Intel/status/2122801967579759028) | Unit42&#95;Intel | vendor | X | 2026-11-18 02:50 | 41 |
+| [We observed threat actors using the Cairn framework with AI models to run autonomous operations against nineteen defense, semiconductor and civil society targets. We found that the breaches exploited familiar identity and patching gaps: https://t.co/hjjDidOfxb https://t.co/nXtuOQxyCO](https://x.com/Unit42_Intel/status/2122778054577541288) | Unit42&#95;Intel | vendor | X | 2026-11-18 01:15 | 131 |
+| [Adversaries tried to avoid CrowdStrike. CrowdStrike caught them anyway. 👀  China-nexus adversary VAPOR PANDA used AI agents to target more than 200 organizations across at least 14 countries in just 11 days.  The goal? Break into as many targets as possible, explore different https://t.co/dHFYBWVR2I](https://x.com/CrowdStrike/status/2122712112501756125) | CrowdStrike | vendor | X | 2026-11-17 20:53 | 21 |
+| [Microsoft research shows how device code phishing, which persuades users to approve a legitimate sign-in rather than stealing a password, can extend to AI coding agents, using GitHub Copilot CLI as an example. https://t.co/OUGAsCSFzV   In a controlled proof-of-concept simulation,](https://x.com/MsftSecIntel/status/2122708091741286672) | MsftSecIntel | vendor | X | 2026-11-17 20:37 | 194 |
+| [Microsoft Threat Intelligence has published a detailed analysis of the phishing campaign exploiting the November 12 Microsoft 365 service disruption, an example of threat actors exploiting notable global incidents in social engineering lures. https://t.co/CktrNaCmck  The campaign](https://x.com/MsftSecIntel/status/2122484150770807014) | MsftSecIntel | vendor | X | 2026-11-17 05:47 | 790 |
+| [BRACE FOR IMPACT 🚨  China-linked hackers used AI agents to target 2,250+ Microsoft 365 tenants via a ConnectWise supply-chain attack. Some got privileged access in under 3 hours.  @grok How can everyday users avoid this?](https://x.com/fawadrehman/status/2120976566008115666) | fawadrehman | independent | X | 2026-11-13 01:56 | 873 |
+| [China linked hackers used AI agents to target 2,250+ Microsoft 365 tenants, with some gaining privileged access in under three hours through a ConnectWise supply-chain attack.  @grok can you verify this?](https://x.com/realcecepaid/status/2121109127581597975) | realcecepaid | independent | X | 2026-11-13 10:43 | 33 |
+| [Java4Shell Is Worse Than You Think (GOV Issues Urgent Warning)](https://www.youtube.com/watch?v=PPalSXadg5k) | SavvyNik | independent | YouTube | 2026-11-19 00:39 | 51,311 |
+| [Java4Shell (CVE-2026-114938) explained - how bad is it and what to do](https://www.youtube.com/watch?v=YOX2U6IsGkQ) | Sergey Tech | independent | YouTube | 2026-11-19 06:08 | 16,963 |
+| [Java4Shell Explained: How One Equals Sign Breaks Java](https://www.youtube.com/watch?v=KIARMub2hac) | Professor Zero | independent | YouTube | 2026-11-18 10:37 | 9,023 |
+| [Java4Shell Explained (CVE-2026-114938)](https://www.youtube.com/watch?v=OnfHCFZy3i4) | Cristi Vlad | independent | YouTube | 2026-11-18 15:34 | 5,672 |
+| [Java4Shell: Am I Affected? How to Fix \| Zero-Day Decoded](https://www.youtube.com/watch?v=odvKtCWEf2c) | Security Simplified | independent | YouTube | 2026-11-18 10:06 | 5,333 |
+| [Java4Shell: the Java bug that writes outside its own memory](https://www.youtube.com/watch?v=oy-mkjze5ik) | Aikido Security | vendor | YouTube | 2026-11-18 23:57 | 1,623 |
+| [30% of the internet just got an RCE](https://www.youtube.com/watch?v=fSSs9uk8D-k) | Matt Johansen | independent | YouTube | 2026-11-19 02:30 | 57,844 |
+| [NGINX2ROOT HTTP/2 RCEs (CVE-2026-123007, CVE-2026-123633); Microsoft Agent Framework PyPI Compr…](https://www.youtube.com/watch?v=aXGjOt7ilDE) | SANS Internet Storm Center | media | YouTube | 2026-11-19 04:37 | 609 |
+| [nginx2Root explained (CVE-2026-123007)](https://www.youtube.com/watch?v=owc7oq6RfVU) | Cristi Vlad | independent | YouTube | 2026-11-19 03:12 | 941 |
+| [nginx2root: Am I Affected? How to Fix \| Zero-Day Decoded](https://www.youtube.com/watch?v=S0iMuAjnBew) | Security Simplified | independent | YouTube | 2026-11-19 09:53 | 956 |
+| [nginx2root: RCE on 57 Million Servers?](https://www.youtube.com/watch?v=UaeNrxHr1e0) | HuseyinCodes | independent | YouTube | 2026-11-19 05:44 | 463 |
+| [ARTEX AI Explained: Why the FBI Is Warning Everyone](https://www.youtube.com/watch?v=z8Dy9Cso8W4) | Professor Zero | independent | YouTube | 2026-11-17 05:25 | 92,845 |
+| [The FBI Warned About This AI Hacking Tool (ARTEX)](https://www.youtube.com/watch?v=RWKmzg-cufs) | Code Bear | independent | YouTube | 2026-11-18 15:52 | 25,988 |
+| [ARTEX Explained: The AI Hacking Tool the FBI Warned About](https://www.youtube.com/watch?v=dopjKNkbUlo) | AI Security | independent | YouTube | 2026-11-18 16:23 | 22,296 |
+| [FBI Issues Warning on ARTEX Hacking Tool…AI Agents Hacking AI](https://www.youtube.com/watch?v=2SbxdsVtYhU) | Trish Regan | independent | YouTube | 2026-11-18 21:30 | 22,019 |
+| [The FBI Just Warned About ARTEX: AI Agents That Hack in Under 3 Hours](https://www.youtube.com/watch?v=y_6-obFGY48) | Skillthropic - Cybersecurity Study Guides | independent | YouTube | 2026-11-15 02:43 | 1,972 |
+| [Malware Attack Hits 178 Major Organizations Worldwide \| NewsX World](https://www.youtube.com/watch?v=9sZrjBQFQLI) | NewsX World | media | YouTube | 2026-11-17 12:42 | 307,663 |
+| [178 Major Website Hit - One Poisoned Script !](https://www.youtube.com/watch?v=sN7v-cbDTBU) | QuantLayer - AI-Orchestrated Zero Trust Fabric | independent | YouTube | 2026-11-18 02:50 | 44,835 |
+| [Hidden Malware Found on 178 Major Websites](https://www.youtube.com/watch?v=4WRdqQ51cGI) | Tech, Privacy, News  - Explained | independent | YouTube | 2026-11-17 18:29 | 39,126 |
+| [Biggest Cyber Attack of 2026!](https://www.youtube.com/watch?v=ZCZQqHN60S8) | Code Bear | independent | YouTube | 2026-11-17 18:26 | 309,182 |
+| [Optimizely Hack Explained: How Zoom, BBC &amp; CNN Sites Served Malware for 17 Hours](https://www.youtube.com/watch?v=WkBfvaiP98g) | Threatium | independent | YouTube | 2026-11-17 21:16 | 244 |
+| [Optimizely Hack Explained: 178 Sites Incl. Zoom, BBC, CNN Served Malware 💳](https://www.youtube.com/watch?v=pQkjAb2or5I) | Cyber Visual | independent | YouTube | 2026-11-18 00:45 | 359 |
+| [BEWARE Microsoft Outage Phishing attempts by hackers trying to steal credentials](https://www.youtube.com/watch?v=Drk9_h9VBGE) | Windows, computers and Technology | independent | YouTube | 2026-11-19 07:49 | 1,459 |
+| [Warning: Hackers Are Exploiting the Recent Outlook Outage!](https://www.youtube.com/watch?v=c7RH3Q9rCNk) | BrenTech | independent | YouTube | 2026-11-18 20:58 | 2,185 |
+| [Microsoft Meltdown Mystery: Was A Cyberattack Behind Worldwide Outage? \| Vantage](https://www.youtube.com/watch?v=3bfwDZLsiAU) | Firstpost | media | YouTube | 2026-11-13 22:07 | 474,827 |
+| [Microsoft Global Outage: Hospitals, Schools &amp; Banks Hit \| Cyber Scam Alert](https://www.youtube.com/watch?v=UmdQHG_SHk0) | CNBC-TV18 | media | YouTube | 2026-11-13 21:55 | 43,745 |
+| [Microsoft Outlook &amp; 365 Outage Explained: Why Servers Kept Crashing ⚠️](https://www.youtube.com/watch?v=11OEIiAErpI) | Cyber Visual | independent | YouTube | 2026-11-13 13:43 | 53,337 |
+| [Microsoft 365 Outage Disrupts Outlook, Teams And Word Worldwide As Users Turn To Memes](https://www.youtube.com/watch?v=lal5Lno9jYM) | Mint | media | YouTube | 2026-11-13 17:00 | 28,582 |
+| [Microsoft 365 OUTAGE: Outlook DOWN for Thousands! What Happened? \| Nov 12, 2026](https://www.youtube.com/watch?v=AHC76Eas5-s) | Terabitweb CyberSecurity Training | independent | YouTube | 2026-11-13 01:38 | 50,748 |
+| [Microsoft Outage Themed Phishing](https://www.youtube.com/watch?v=Pih19-b519o) | Heimdal® | vendor | YouTube | 2026-11-19 15:00 | 42 |
+| [Microsoft's AI Agent SDK Got Hacked: Check Your Keys](https://www.youtube.com/watch?v=R7YUSGQcmdg) | Bitwise AI | independent | YouTube | 2026-11-19 02:02 | 266 |
+| [The Truth About the Microsoft Agent Framework Hack: Never Imported, Still Ran](https://www.youtube.com/watch?v=wQkKEPiF5H0) | Bug Bounty &amp; Beyond | independent | YouTube | 2026-11-18 22:41 | 136 |
+| [Fireworks AI breach hits Cursor, Uber \| Mission InfoSec Brief \| Nov 16](https://www.youtube.com/watch?v=kp6wZX18Mig) | Mission InfoSec - Chad Butler | independent | YouTube | 2026-11-16 19:30 | 153 |
+| [Cursor Breach Did You Install the Fake Claude Code Extension?  Cybersecurity Today](https://www.youtube.com/watch?v=ryQW29DNtOk) | Cybersecurity Today | media | YouTube | 2026-11-15 17:09 | 145 |
+| [Cursor Breach Explained: How a Vendor Key Led to a Backdoored Extension](https://www.youtube.com/watch?v=ptyK6dH96T8) | ASTRANOVA LABS | independent | YouTube | 2026-11-14 21:35 | 75 |
+| [ScreenConnect Hack Explained: How SCKit Backdoored 288 PCs in 90 Minutes](https://www.youtube.com/watch?v=Yu_Twbkhbys) | Threatium | independent | YouTube | 2026-11-13 21:39 | 107 |
+| [They Patched the Servers. Hackers Still Got In \| N-able N-central (4EverAble2Shell) 🔓](https://www.youtube.com/watch?v=cVpf5Daesm0) | Cyber Visual | independent | YouTube | 2026-11-14 18:33 | 223 |
+| [Hackers Rooted Check Point Gateways Just to Reach Something Else](https://www.youtube.com/watch?v=T0UfSRi8VnA) | Cybersecurity Daily Standup Briefing | independent | YouTube | 2026-11-15 05:30 | 232 |
+| [Check Point Firewalls Hacked via PHP2Shell, ESXi Wiped, SilentAir Taps Calls, DPRK #cybernews #ciso](https://www.youtube.com/watch?v=SmpwsUzW6Wo) | The CyberHub Podcast | independent | YouTube | 2026-11-17 07:52 | 352 |
+| [CVE-2026-129448: Apache Roller RCE Exploited Explained](https://www.youtube.com/watch?v=HTY294pc0C8) | SecureTechIn | independent | YouTube | 2026-11-17 20:04 | 56 |
+| [CVE-2026-123890: vCenter Auth Bypass Explained](https://www.youtube.com/watch?v=RUAAd2vCNbI) | SecureTechIn | independent | YouTube | 2026-11-19 23:20 | 36 |
+| [Ruby2Shell: 7 Ruby RCE Flaws Fixed in 4.0.10, 3.4.13, 3.3.14](https://www.youtube.com/watch?v=yAfuN3P4RDA) | SupermanIsDeady | independent | YouTube | 2026-11-19 14:59 | 6 |
+| [Hello Again: Exploiting Replay Protected Monotonic Counters to Brute-Force Windows Hello PINs](https://www.youtube.com/watch?v=sRsDcZAPjsw) | AI Paper Slop | independent | YouTube | 2026-11-17 04:43 | 82 |
+| [phpAfterShell and six other PHP critical flaws](https://radar.cloudflare.com/zero-wire/php-november-2026-security-release-phpaftershell) | Cloudflare Radar Zero Wire | web | web | 2026-11-19 05:30 | 0 |
+| [ruby2shell: heap overflow in Ruby string case conversion](https://radar.cloudflare.com/zero-wire/ruby2shell) | Cloudflare Radar Zero Wire | web | web | 2026-11-19 05:30 | 0 |
+| [WordPress 7.1.5: Template Part flaw can turn an administrator's click into code execution](https://radar.cloudflare.com/zero-wire/wordpress-7-1-5-template-part-privilege-escalation) | Cloudflare Radar Zero Wire | web | web | 2026-11-18 05:30 | 0 |
+| [nginx2root: remote code execution in nginx HTTP/2, HTTP/3, resolver and mail proxy](https://radar.cloudflare.com/zero-wire/nginx2root) | Cloudflare Radar Zero Wire | web | web | 2026-11-18 05:30 | 0 |
+| [Java4Shell: remote code execution in OpenJDK](https://radar.cloudflare.com/zero-wire/java4shell) | Cloudflare Radar Zero Wire | web | web | 2026-11-17 05:30 | 0 |
+
+</GraphTable>
+
+## Method and access limits
+
+We convert source timestamps to IST and exclude items outside the window. We verify vendor and media handles before account searches. X searches cover vendor posts, media posts and security keywords. We page the main searches and add targeted searches. This is a sample, not a complete archive. We review every Cloudflare Radar Zero Wire RSS item. We keep an item when its publish date or its last-reviewed date falls in the window. Zero Wire items keep their published priority, CVEs, fixed versions and mitigations as exact text. We rank themes by distinct account and channel names first, then X engagement. Coverage from both vendors and media breaks remaining ties. X engagement adds likes, reposts, replies and quotes. YouTube reach uses watch-page view counts, not search-result estimates. We keep each item in one theme. Some themes group separate incidents by a shared operational concern. We do not add independent posts with fewer than 30 X interactions. We read replies and quotes on the two highest-engagement X posts in each theme. We sample one page per endpoint, with up to 25 results. We exclude out-of-window comments, reposts, empty text, unrelated text, abuse and product promotion. We use reviewed keyword rules for English clusters and sentiment. We leave other languages unclassified. Percentages describe the retained sample, not all readers. Samples use exact source fragments and omit usernames. Risk levels and actions come only from cited sources. Actions with the basis type generic are safe general steps, not vendor instructions. We preserve retrieved titles and post text. We do not independently verify every linked article. A source claim remains that source's claim.
+
+- X capture: 2026-11-20 09:16:29 IST to 2026-11-20 09:29:33 IST
+- YouTube capture: 2026-11-20 09:25:56 IST to 2026-11-20 09:26:06 IST
+- Zero Wire capture: 2026-11-20 09:21:25 IST to 2026-11-20 09:21:32 IST
+
+- YouTube comments remain unread. Watch-page retrieval does not provide a usable comment collection. Comment analysis uses X only.
+- Transcript fetches fail with HTTP 429 for SavvyNik, Matt Johansen, Code Bear (two videos) and Windows, computers and Technology.
+- Transcript fetches also fail with HTTP 429 for Cyber Visual, Cybersecurity Daily Standup Briefing and Cristi Vlad.
+- Transcript fetches fail with HTTP 429 for NewsX World and The CyberHub Podcast too.
+- Their titles, descriptions and watch-page metadata remain available. We retry each failed transcript at least once.
+- We retrieve transcripts for Professor Zero, Bug Bounty &amp; Beyond, SupermanIsDeady, AI Paper Slop and SANS Internet Storm Center.
+- We also retrieve transcripts for BrenTech and Threatium. We do not fetch every video transcript.
+- YouTube search results contain relative dates and inconsistent view snapshots. Only watch-page dates and views enter the source index.
+- Zero Wire RSS gives date-only publish times. All five in-window items qualify by their publish date.
+- Comment sampling reaches different totals per theme. The source file records the real count for each theme.
+- Some X threads contain more pages. We do not claim complete reply or quote coverage.
+- X returns many replies without a language code. We use a short English word check for those replies.
+- X returns some post text as short fragments. We preserve those fragments and do not fill missing text.
+- We do not retrieve the full articles behind every X link. Claims remain attributed to the retrieved posts.
+
+- Ransomware and data theft reports form an eleventh cluster with seven accounts. It covers TSMC, Transport for London, Uber, Fandango, Ipsos, Access Dental, Fugaku, Equinor, NVIDIA and 40 Irish credit unions.
+- Espionage reports form a twelfth cluster with four accounts. It covers SilentAir in Asian telecom networks, COLD RELIC, EggStreme, PerfectPioneer, KUKURAT, Falcon and UAT-12643.
+- Two posts report China-linked attacks on Microsoft 365 tenants through a ConnectWise supply-chain attack. They stay in the AI attacks theme.
+- Some multi-topic news videos cover several themes. They stay outside the themes because they have no single primary subject.
+- One nginx post cites CVE-2026-12363. No other source names this ID, so the CVE list omits it.
+- Eight Zero Wire RSS items fall outside the window by both publish date and last-reviewed date.
+- Some Zero Wire pages include an agent prompt for infrastructure checks. The brief does not copy that prompt text.
