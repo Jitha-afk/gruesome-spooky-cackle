@@ -6,6 +6,9 @@ on:
       - main
   pull_request:
   workflow_dispatch:
+  schedule:
+    # Recover undeployed commits on main (e.g. when a push run is held as action_required).
+    - cron: '*/30 * * * *'
 
 permissions:
   contents: read
@@ -17,7 +20,57 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  check-deploy:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      deployments: read
+    outputs:
+      needs_deploy: ${{ steps.check.outputs.needs_deploy }}
+    steps:
+      - name: Check whether main is already deployed
+        id: check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          deployed_sha=""
+          while read -r id sha; do
+            [ -n "$id" ] || continue
+            state=$(gh api "repos/${GITHUB_REPOSITORY}/deployments/${id}/statuses?per_page=1" --jq '.[0].state // ""')
+            if [ "$state" = "success" ]; then
+              deployed_sha="$sha"
+              break
+            fi
+          done < <(gh api "repos/${GITHUB_REPOSITORY}/deployments?environment=github-pages&per_page=5" --jq '.[] | "\(.id) \(.sha)"')
+
+          if [ "$deployed_sha" = "$GITHUB_SHA" ]; then
+            echo "main (${GITHUB_SHA}) is already deployed to github-pages."
+            echo "needs_deploy=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          other_active_or_failed=$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/pages.yml/runs?head_sha=${GITHUB_SHA}&per_page=10" \
+            --jq "[.workflow_runs[] | select(.id != ${GITHUB_RUN_ID}) | select(.status == \"in_progress\" or .status == \"queued\" or .status == \"waiting\" or .conclusion == \"failure\")] | length")
+
+          if [ "$other_active_or_failed" -gt 0 ]; then
+            echo "Skipping scheduled deploy: another run for ${GITHUB_SHA} is active or already failed."
+            echo "needs_deploy=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "main (${GITHUB_SHA}) is not deployed (latest successful: ${deployed_sha:-none}); triggering build and deploy."
+          echo "needs_deploy=true" >> "$GITHUB_OUTPUT"
+
   build:
+    needs: check-deploy
+    if: |
+      !cancelled() && (
+        github.event_name != 'schedule' ||
+        (needs.check-deploy.result == 'success' && needs.check-deploy.outputs.needs_deploy == 'true')
+      )
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
